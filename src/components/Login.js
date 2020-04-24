@@ -19,7 +19,7 @@ const Login = (props) => {
         <Fragment>
             <Form  >
 
-                <h3>Iniciar sesión</h3>
+                <h3 className="text-center mb-4">Iniciar sesión</h3>
                 <img src={Logo} className="rounded mx-auto d-block  mb-5  mt-3" alt="aligment" />
 
                 <div className="form-group">
@@ -39,10 +39,11 @@ const Login = (props) => {
                 </div>
 
 
-                <Button type="submit" className="btn btn-primary btn-block" >Iniciar</Button>
-                <Button type="submit" className="btn btn-primary btn-block" /*onClick={signInWithGoogle} */>Iniciar con Google</Button>
-                <p className="forgot-password text-right">
-                    ¿Has olvidado tu <Link  to={"/change-password"}>contraseña?</Link>
+                <Button type="submit" className="btn btn-primary btn-block button1" ><Link className="nav-link" to={"/sign-in"}>Iniciar</Link> </Button>
+                <Button type="submit" className="btn btn-primary btn-block button1" ><Link className="nav-link" to={"/sign-up"}>Registrarse</Link> </Button>
+                
+                <p className="forgot-password text-right mt-4">
+                    ¿Has olvidado tu <Link className="enlace" to={"/change-password"}>contraseña?</Link>
                 </p>
             </Form>
         </Fragment>

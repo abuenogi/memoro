@@ -11,7 +11,12 @@ const SignUp = (props) => {
     return (
         <Fragment>
             <Form >
-                <h3>Formulario de registro</h3>
+                <h3 className="text-center mb-4">Formulario de registro</h3>
+
+                <div className="form-group">
+                    <Label>Nombre completo</Label>
+                    <Input type="text" className="form-control" placeholder="" />
+                </div>
 
                 <div className="form-group">
                     <Label>Usuario</Label>
@@ -50,10 +55,8 @@ const SignUp = (props) => {
                     <Input type="text" className="form-control" placeholder="" />
                 </div>
 
-                <Button type="submit" className="btn btn-primary btn-block">Registrarse</Button>
-                <p className="forgot-password text-right">
-                    ¿Ya tienes cuenta? <Link to={'/sign-in'}> Iniciar sesión</Link>
-                </p>
+                <Button type="submit" className="btn btn-primary btn-block button1" ><Link className="nav-link" to={"/sign-up"}>Registrarse</Link> </Button>
+                <Button type="submit" className="btn btn-primary btn-block button1" ><Link className="nav-link" to={"/sign-in"}>Volver</Link> </Button>
 
             </Form>
         </Fragment>

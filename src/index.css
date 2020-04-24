@@ -5,11 +5,8 @@
 }
 body {
   
-  background: rgb(54,67,180);
- background: linear-gradient(219deg, rgba(54,67,180,1) 0%, rgba(118,40,207,1) 48%, rgba(54,67,180,1) 100%);
   min-height: 100vh;
-  display: flex;
-  font-weight: 400;
+  font-weight: 600;
   font-family: 'Nunito', sans-serif;
 }
 
@@ -18,30 +15,29 @@ h1,h2,h3,h4,h5,h6,label,span {
   font-family: 'Nunito', sans-serif;
 }
 
-body, html, .App, #root, .auth-wrapper {
+body, html, .App, #root {
+ 
+  background: linear-gradient(90deg, rgb(111, 112, 190) 0%, #5082c4 100%);
   width: 100%;
   height: 100%;
-
-}
-.nav-link{
-  
-}
-
-.navbar-light {
-  background-color: #fff;
-  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-  display: flex;
-}
-
-.auth-wrapper {
+  position: absolute;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  text-align: left;
+ 
+}
+.button1{
+  background:rgb(42, 78, 133);
 }
 
+.nav-link {
+  color: #FFF;
+}
+.nav-link:hover {
+   color: #FFF;
+}
 .auth-inner {
-  width: 450px;
+  width: 500px;
   margin: auto;
   background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
@@ -50,31 +46,23 @@ body, html, .App, #root, .auth-wrapper {
   transition: all .3s;
 }
 
-.auth-wrapper .form-control:focus {
-  border-color: #3643b4;
+ .form-control:focus {
+  border-color:  rgb(42, 78, 133);
   box-shadow: none;
-}
-
-.auth-wrapper h3 {
-  text-align: center;
-  margin: 0;
-  line-height: 1;
-  padding-bottom: 20px;
 }
 
 .custom-control-label {
   font-weight: 400;
 }
 
-.forgot-password,
-.forgot-password a {
+.forgot-password {
   text-align: right;
   font-size: 13px;
   padding-top: 10px;
-  color: #7f7d7d;
+  color:  rgb(42, 78, 133);
   margin: 0;
 }
 
-.forgot-password a {
-  color: #3643b4;
+.enlace {
+  color:rgb(25, 121, 169);
 }
