@@ -10,6 +10,7 @@ import "./index.css";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import ChangePassword from "./components/ChangePassword";
+import Menu from "./components/Menu";
 
 
 ReactDOM.render(
@@ -22,6 +23,7 @@ ReactDOM.render(
                     <Route path="/sign-in" component={Login} />
                     <Route path="/sign-up" component={SignUp} />
                     <Route path="/change-password" component={ChangePassword} />
+                    <Route path="/menu" component={Menu} />
                 </Switch>
             </div>
 
