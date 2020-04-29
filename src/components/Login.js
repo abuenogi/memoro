@@ -41,6 +41,7 @@ const Login = (props) => {
 
                 <Button type="submit" className="btn btn-primary btn-block button1" ><Link className="nav-link" to={"/sign-in"}>Iniciar</Link> </Button>
                 <Button type="submit" className="btn btn-primary btn-block button1" ><Link className="nav-link" to={"/sign-up"}>Registrarse</Link> </Button>
+                <Button type="submit" className="btn btn-primary btn-block button1" ><Link className="nav-link" to={"/menu"}>Menu</Link> </Button>
                 
                 <p className="forgot-password text-right mt-4">
                     ¿Has olvidado tu <Link className="enlace" to={"/change-password"}>contraseña?</Link>
