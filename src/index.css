@@ -30,12 +30,6 @@ body, html, .App, #root {
   background:rgb(42, 78, 133);
 }
 
-.nav-link {
-  color: #FFF;
-}
-.nav-link:hover {
-   color: #FFF;
-}
 .auth-inner {
   width: 500px;
   margin: auto;
@@ -55,14 +49,10 @@ body, html, .App, #root {
   font-weight: 400;
 }
 
-.forgot-password {
-  text-align: right;
+.enlace {
   font-size: 13px;
   padding-top: 10px;
-  color:  rgb(42, 78, 133);
+  color:  rgb(25, 121, 169);
   margin: 0;
 }
 
-.enlace {
-  color:rgb(25, 121, 169);
-}
