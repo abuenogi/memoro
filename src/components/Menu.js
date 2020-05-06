@@ -16,10 +16,9 @@ const Menu = ({onClickBotonSignOut}) => {
             <p>{user_context.user_id}</p>
             <p>{user_context.email}</p>
             <Button type="submit" className="btn btn-primary btn-block button1" onClick={ onClickBotonSignOut}  >Cerrar sesión</Button>
-
             </Form>
         </Fragment>
-    );
 
-}
+    )
+};
 export default withRouter(Menu);
