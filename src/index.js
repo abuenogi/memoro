@@ -51,7 +51,7 @@ ReactDOM.render(
                     <Route path="/sign-in" component={Login} />
                     <Route path="/sign-up" component={SignUp} />
                     <Route path="/change-password" component={ChangePassword} />
-                    <Route path="/home" component={Home} />
+                    <Route path="/home" component={App} />
                 </Switch>
             </div>
 
