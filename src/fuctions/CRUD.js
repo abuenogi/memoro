@@ -15,7 +15,7 @@ export const createData = (data, collection_name) => {
 }
 
 
-export const DeleteData = (id, collection_name) => {
+export const deleteData = (id, collection_name) => {
     
 
             try {
@@ -30,7 +30,7 @@ export const DeleteData = (id, collection_name) => {
 }
 
 
-export const useUpdateData = (id, data, collection_name) => {
+export const updateData = (id, data, collection_name) => {
 
             try {
                 return db
