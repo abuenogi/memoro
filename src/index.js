@@ -5,14 +5,17 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import "./index.css";
+import "./App.css";
 
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import ChangePassword from "./components/ChangePassword";
-import Menu from "./components/Menu";
+
+import App from './App';
 
 
+ReactDOM.render(<App />, document.getElementById('root'));
+/**
 ReactDOM.render(
 
     <BrowserRouter >
@@ -23,7 +26,7 @@ ReactDOM.render(
                     <Route path="/sign-in" component={Login} />
                     <Route path="/sign-up" component={SignUp} />
                     <Route path="/change-password" component={ChangePassword} />
-                    <Route path="/menu" component={Menu} />
+                    <Route path="/home" component={Home} />
                 </Switch>
             </div>
 
@@ -31,6 +34,7 @@ ReactDOM.render(
     </BrowserRouter>,
     document.getElementById("root")
 );
+*/
 
 
 serviceWorker.register();
