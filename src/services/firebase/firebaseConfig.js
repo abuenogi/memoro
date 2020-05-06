@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 
 
-const config = {
+const  firebaseConfig =  {
     apiKey: "AIzaSyDO1lla7rlMq5zVMe--XnCH_OUr_MzRng4",
     authDomain: "memoro-e03d4.firebaseapp.com",
     databaseURL: "https://memoro-e03d4.firebaseio.com",
@@ -13,8 +13,7 @@ const config = {
 };
 
 
-
-firebase.initializeApp(config);
+firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
 export const db = firebase.firestore();

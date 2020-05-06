@@ -1,11 +1,10 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { withRouter } from 'react-router-dom';
 import { Button, Form, Label, Input } from 'reactstrap';
-import { Link } from 'react-router-dom';
 
-const CangePassword = (props) => {
+const ChangePassword = ({ onClickBotonChangePassword, onClickVolverLogin}) => {
 
-    //const { user,signInWithGoogle}  =props;
+    const [correo, setCorreo] = useState('');
 
     return (
 
@@ -14,17 +13,15 @@ const CangePassword = (props) => {
                 <h3 className="text-center mb-4" >Cambiar contraseña</h3>
                 <div className="form-group" >
                     <Label>Correo electrónico</Label>
-                    <Input type="email" className="form-control" placeholder="" />
+                    <Input type="email" className="form-control" placeholder="" onChange={e => setCorreo(e.target.value)} />
                 </div>
-                <Button type="submit" className="btn btn-primary btn-block mt-3  button1" ><Link className="nav-link" to={"/change-password"}>Enviar correo</Link> </Button>
-                
+                <Button type="submit" className="btn btn-primary btn-block mt-5 button1" onClick={() => onClickBotonChangePassword(correo)}> Enviar correo </Button>
+
                 <p className=" text-center mt-5" >Te enviará un correo con tu nueva contraseña</p>
-                <p className="forgot-password text-right mt-4">
-                    Volver a <Link className="enlace"  to={"/sign-in"}>iniciar sesión</Link>
-                </p>
+                <p className="enlace text-right mt-4" onClick={onClickVolverLogin}> Volver a iniciar sesión</p>
             </Form>
         </Fragment>
     );
 
 }
-export default withRouter(CangePassword);
+export default withRouter(ChangePassword);

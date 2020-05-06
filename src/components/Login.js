@@ -1,35 +1,31 @@
-import React, { Fragment } from "react";
-import { withRouter, Link } from 'react-router-dom';
+import React, { Fragment , useState} from "react";
+import { withRouter } from 'react-router-dom';
 import Logo from '../images/logo192.png';
-import { Button, Form, Label, Input } from 'reactstrap';
+import { Button, Form, Label, Input} from 'reactstrap';
 
 
-/*
-import withFirebaseAuth from 'react-with-firebase-auth'
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import firebaseConfig from '../firebaseConfig';
-*/
-const Login = (props) => {
+const Login = ({ onClickBotonLogin, onLoadUser,onClickChangePass, onClickReg}) => {
 
-    //const { user,signInWithGoogle}  =props;
+    const [correo, setCorreo] = useState('');
+    const [pass, setPass] = useState('');
+
 
     return (
 
         <Fragment>
-            <Form  >
+            <Form  onLoad= { e => onLoadUser}  >
 
                 <h3 className="text-center mb-4">Iniciar sesión</h3>
                 <img src={Logo} className="rounded mx-auto d-block  mb-5  mt-3" alt="aligment" />
 
                 <div className="form-group">
                     <Label>Correo electrónico</Label>
-                    <Input type="email" className="form-control" placeholder="" />
+                    <Input type="email" className="form-control" placeholder=""  onChange={e => setCorreo(e.target.value)}/>
                 </div>
 
                 <div className="form-group">
                     <Label>Contraseña</Label>
-                    <Input type="password" className="form-control" placeholder="" />
+                    <Input type="password" className="form-control" placeholder="" onChange={e => setPass(e.target.value)}/>
                 </div>
 
                 <div className="form-group">
@@ -39,22 +35,16 @@ const Login = (props) => {
                 </div>
 
 
-                <Button type="submit" className="btn btn-primary btn-block button1" ><Link className="nav-link" to={"/sign-in"}>Iniciar</Link> </Button>
-                <Button type="submit" className="btn btn-primary btn-block button1" ><Link className="nav-link" to={"/sign-up"}>Registrarse</Link> </Button>
-                <Button type="submit" className="btn btn-primary btn-block button1" ><Link className="nav-link" to={"/menu"}>Menu</Link> </Button>
+                <Button type="submit" className="btn btn-primary btn-block button1" onClick={() =>  onClickBotonLogin (correo,pass)} >Iniciar sesión </Button>
                 
-                <p className="forgot-password text-right mt-4">
-                    ¿Has olvidado tu <Link className="enlace" to={"/change-password"}>contraseña?</Link>
+                <Button type="submit" className="btn btn-primary btn-block button1" onClick={onClickReg}  >Registrate</Button>
+                
+                <p className="enlace text-right mt-4" onClick={onClickChangePass} >
+                    ¿Has olvidado tu Contraseña?
                 </p>
             </Form>
         </Fragment>
     );
-    /*
-    const firebaseAppAuth = firebaseApp.auth();
 
-    const providers = {
-        googleProvider: new firebase.auth.GoogleAuthProvider(),
-    };
-    */
 }
 export default withRouter(Login);
