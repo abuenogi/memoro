@@ -6,10 +6,10 @@ import mapaImagen from '../images/mapa.svg';
 import rompecabezasImagen from '../images/rompecabezas.svg';
 import telefonoImagen from '../images/telefono.svg';
 
-export const Home = () => (
+export const HomeLinks = () => (
 
     <Container>
-        <Navbar expand="lg">
+        <Navbar expand="sl">
             <Nav.Item><Nav.Link href="/calendario"><Imagen src={calendarioImagen} alt="agenda de medicaciones y recordatorios" with="100" height="100" /></Nav.Link></Nav.Item>
             <Nav.Item><Nav.Link href="/mapa"><Imagen src={mapaImagen} alt="geolocalizacion y posicionamiento en el mapa" with="100" height="100" /></Nav.Link></Nav.Item>
             <Nav.Item><Nav.Link href="/entretenimiento"><Imagen src={rompecabezasImagen} alt="entretenimiento y juegos" with="100" height="100" /></Nav.Link></Nav.Item>

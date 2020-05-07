@@ -15,9 +15,12 @@ h1,h2,h3,h4,h5,h6,label,span {
   font-family: 'Nunito', sans-serif;
 }
 
-body, html, .App, #root {
+body, html, #root {
  
-  background: linear-gradient(90deg, rgb(111, 112, 190) 0%, #5082c4 100%);
+  /*background: linear-gradient(90deg, rgb(111, 112, 190) 0%, #5082c4 100%);*/
+  /*background-color: #4c96d7;*/
+  background-color: #083b66;
+  
   width: 100%;
   height: 100%;
   position: absolute;
@@ -29,7 +32,6 @@ body, html, .App, #root {
 .button1{
   background:rgb(42, 78, 133);
 }
-
 .auth-inner {
   width: 500px;
   margin: auto;
@@ -56,3 +58,39 @@ body, html, .App, #root {
   margin: 0;
 }
 
+
+/**
+.App {
+    text-align: center;
+  }
+  
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  */
