@@ -9,7 +9,7 @@ const style = {
 // function component
 export const Footer = () => (
     <footer style={style}>
-      <p>Memoro Copyright ©</p>
+      <p>Memoro 2020 Copyright ©</p>
     </footer>
     
 );

@@ -23,7 +23,7 @@ const Login_container = ({ history }) => {
         });
       
       debugger;
-      history.push('/menu');
+      history.push('/app');
 
     } catch (error) {
       debugger;
