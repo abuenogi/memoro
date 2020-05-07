@@ -56,3 +56,12 @@ body, html, .App, #root {
   margin: 0;
 }
 
+.error {
+  color:  rgb(25, 121, 169);
+  font-size: 13px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.inputError {
+  color:  rgb(202, 96, 26);
+}

@@ -3,15 +3,18 @@ import { withRouter } from 'react-router-dom';
 import { Button, Form, Label, Input } from 'reactstrap';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
+import useForm from "../fuctions/useFormLogin";
+import validate from "../fuctions/validateInput";
+
 const SignUp = ({ onClickBotonCreateUser, onClickVolver }) => {
 
-    const [nombre, setNombre] = useState('');
-    const [correo, setCorreo] = useState('');
-    const [contraseya, setContraseya] = useState('');
-    const [telefono, setTelefono] = useState('');
-    const [domicilio, setDomicilio] = useState('');
-    const [ciudad, setCiudad] = useState('');
-    const [pais, setPais] = useState('');
+    
+    const { handleChange, handleSubmit, values, errors } = useForm(submit, validate);
+
+    function submit() {
+        console.log("Submitted Succesfully");
+        onClickBotonCreateUser(values);
+    }
 
 
     return (
@@ -22,6 +25,15 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver }) => {
                 <div className="form-group">
                     <Label>Nombre completo</Label>
                     <Input type="text" className="form-control" placeholder="" onChange={e => setNombre(e.target.value)} />
+
+                    <Input
+                        className={`${errors.email && "inputError"}`}
+                        name="nombre"
+                        type="text"
+                        value={values.}
+                        onChange={handleChange}
+                    />
+                    {errors.email && <p className="error">{errors.email}</p>}
                 </div>
 
                 <div className="form-group">
@@ -62,7 +74,7 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver }) => {
                     <Input type="text" className="form-control" placeholder="" onChange={e => setDomicilio(e.target.value)} />
                 </div>
 
-                <Button type="submit" className="btn btn-primary btn-block mt-5 button1" onClick={() => onClickBotonCreateUser(nombre, correo, contraseya, telefono, domicilio, ciudad, pais)} >Registrarse </Button>
+                <Button type="submit" className="btn btn-primary btn-block mt-5 button1" >Registrarse </Button>
                 <Button type="submit" className="btn btn-primary btn-block button1" onClick={onClickVolver}> Volver </Button>
 
             </Form>

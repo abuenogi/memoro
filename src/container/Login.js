@@ -10,11 +10,11 @@ const Login_container = ({ history }) => {
   const user_context = useContext(UserContext);
 
   debugger;
-  function onClickBotonLogin(correo, pass) {
+  function onClickBotonLogin(credeciales) {
     debugger;
     try {
 
-      auth.signInWithEmailAndPassword(correo, pass)
+      auth.signInWithEmailAndPassword(credeciales.email, credeciales.password)
         .catch(function (error) {
           debugger;
           var errorCode = error.code;

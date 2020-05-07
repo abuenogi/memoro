@@ -19,7 +19,7 @@ auth.onAuthStateChanged(
   
   function (user) {
 
-    console.log("usuario: " + user.uid);
+    console.log("usuario-> " + user.uid);
 
   if (user) {
     user_auth.user_id = user.uid;
