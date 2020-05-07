@@ -28,7 +28,7 @@ const Signup_container = ({ history }) => {
         });
 
       loggerUser(nombre, correo, telefono, domicilio, ciudad, pais);
-      history.push('/app');
+      history.push('/home');
 
     } catch (error) {
       debugger;

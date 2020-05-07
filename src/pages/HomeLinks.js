@@ -6,7 +6,7 @@ import mapaImagen from '../images/mapa.svg';
 import rompecabezasImagen from '../images/rompecabezas.svg';
 import telefonoImagen from '../images/telefono.svg';
 
-export const Home = () => (
+export const HomeLinks = () => (
 
     <Container>
         <Navbar expand="sl">

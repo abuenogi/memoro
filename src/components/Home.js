@@ -3,16 +3,16 @@ import { Footer} from "./Footer";
 import { Layout} from "./Layout";
 import { NavigationBar} from "./NavigationBar";
 import { Jumbotron} from "./Jumbotron";
-import { Home} from "../pages/Home";
+import { HomeLinks } from "../pages/HomeLinks";
 
-class App extends Component {
+class Home extends Component {
     render(){
         return (
             <React.Fragment> 
                 <Layout>
                     <NavigationBar/> 
                     <Jumbotron/> 
-                    <Home/>
+                    <HomeLinks/>
                 </Layout>
                 <Footer/>
             </React.Fragment>
@@ -21,4 +21,4 @@ class App extends Component {
 }
 
 
-export default App;
+export default Home;

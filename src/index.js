@@ -11,8 +11,8 @@ import "./index.css";
 import Login from "./container/Login";
 import SignUp from "./container/Signup";
 import ChangePassword from "./container/ChangePassword";
-import App from "./components/App";
-import { Home } from "./pages/Home";
+import Home from "./components/Home";
+import { HomeLinks } from "./pages/HomeLinks";
 import { MiPerfil } from "./pages/MiPerfil";
 import { Memorenyos } from "./pages/Memorenyos";
 import { Desconectar } from "./pages/Desconectar";
@@ -38,10 +38,10 @@ ReactDOM.render((
               <Route exact path="/sign-in" component={Login} />
               <Route exact path="/sign-up" component={SignUp} />
               <Route exact path="/change-password" component={ChangePassword} />
-              <Route exact path="/app" component={App} />
+              <Route exact path="/home" component={Home} />
 
               /** PATHS de las páginas del menú superior derecho - barra de navegación*/
-              <Route  path="/home" component={Home} />
+              <Route  path="/homelinks" component={HomeLinks} />
               <Route  path="/miperfil" component={MiPerfil} />
               <Route  path="/memorenyos" component={Memorenyos} />
               <Route  path="/desconectar" component={Desconectar} />
@@ -57,7 +57,7 @@ ReactDOM.render((
           </div>
         </UserContext.Provider>
       </BrowserRouter>),
-  document.getElementById('root') 
+  document.getElementById('root')
 );
 
 

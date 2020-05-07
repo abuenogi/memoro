@@ -9,24 +9,21 @@ const Login_container = ({ history }) => {
 
   const user_context = useContext(UserContext);
 
-  debugger;
+
   function onClickBotonLogin(correo, pass) {
-    debugger;
+    
     try {
 
       auth.signInWithEmailAndPassword(correo, pass)
         .catch(function (error) {
-          debugger;
           var errorCode = error.code;
           var errorMessage = error.message;
           console.log(errorCode + " " + errorMessage);
         });
-      
-      debugger;
-      history.push('/app');
+
+      history.push('/home');
 
     } catch (error) {
-      debugger;
       console.log(error);
     }
 
@@ -35,7 +32,7 @@ const Login_container = ({ history }) => {
   function onLoadUser() {
 
     if (!user_context) {
-      history.push('/menu');
+      history.push('/home');
     }
   }
 
@@ -48,19 +45,15 @@ const Login_container = ({ history }) => {
 
   }
 
-  debugger;
+
   function onClickReg() {
-    debugger;
     try {
-      debugger;
       history.push('/sign-up');
     } catch (error) {
-      debugger;
       console.log(error);
     }
 
   }
-
 
 
   return <Login
