@@ -51,7 +51,7 @@ export const Jumbotron = () => (
     <Jumbo fluid className="jumbo">
       <div className="overlay">
         <div className="cntNombre"> <h2>Bienvenido</h2><p>Pepito de los Palotes</p></div>
-        <div className="cntImg"> <Imagen src={usuarioImagen} alt="Usuario" with="100" height="140" /></div>
+        <div className="cntImg"> <Imagen src={usuarioImagen} alt="Usuario" with="80" height="110" /></div>
     </div>
     </Jumbo>
   </Styles>
