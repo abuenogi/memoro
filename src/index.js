@@ -15,10 +15,9 @@ import Home from "./components/Home";
 import { HomeLinks } from "./pages/HomeLinks";
 import { MiPerfil } from "./pages/MiPerfil";
 import { Memorenyos } from "./pages/Memorenyos";
-import { Desconectar } from "./pages/Desconectar";
 import { NoMatch } from "./pages/NoMatch";
 import { Calendario } from "./pages/Calendario";
-import { Mapa } from "./pages/Mapa";
+import  Mapa  from "./components/Mapa";
 import { Entretenimiento } from "./pages/Entretenimiento";
 import { Contactos } from "./pages/Contactos";
 
@@ -44,7 +43,6 @@ ReactDOM.render((
               <Route  path="/homelinks" component={HomeLinks} />
               <Route  path="/miperfil" component={MiPerfil} />
               <Route  path="/memorenyos" component={Memorenyos} />
-              <Route  path="/desconectar" component={Desconectar} />
 
               /** PATHS de las páginas del menú del Home */
               <Route  path="/calendario" component={Calendario} />

@@ -1,57 +1,120 @@
 import React, { Fragment, useState } from "react";
 import { withRouter } from 'react-router-dom';
 import { Button, Form, Label, Input } from 'reactstrap';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
-const SignUp = ( {onClickBotonCreateUser, onClickVolver}) => {
+import useForm from "../fuctions/useFormSignUp";
+import { validateSignUp } from "../fuctions/validateInput";
 
-    const [nombre, setNombre] = useState('');
-    const [correo, setCorreo] = useState('');
-    const [contraseya, setContraseya] = useState('');
-    const [telefono, setTelefono] = useState('');
-    const [domicilio, setDomicilio] = useState('');
+const SignUp = ({ onClickBotonCreateUser, onClickVolver }) => {
+
+
+    const { handleChange, handleSubmit, values, errors } = useForm(submit, validateSignUp);
+
     const [ciudad, setCiudad] = useState('');
     const [pais, setPais] = useState('');
 
 
+    function submit() {
+        console.log("Submitted Succesfully");
+        onClickBotonCreateUser(values.nombre, values.email, values.password, values.telefono, values.fechaNac, pais, ciudad, values.domicilio);
+
+    }
+
 
     return (
         <Fragment>
-            <Form >
+            <Form onSubmit={handleSubmit} noValidate>
                 <h3 className="text-center mb-4">Crear usuario</h3>
 
                 <div className="form-group">
                     <Label>Nombre completo</Label>
-                    <Input type="text" className="form-control" placeholder="" onChange={e => setNombre(e.target.value)}/>
+                    <Input
+                        className={`${errors.nombre && "inputError"}`}
+                        name="nombre"
+                        type="text"
+                        value={values.nombre}
+                        onChange={handleChange}
+                    />
+                    {errors.nombre && <p className="error">{errors.nombre}</p>}
                 </div>
 
                 <div className="form-group">
                     <Label>Correo electronico</Label>
-                    <Input type="email" className="form-control" placeholder="" onChange={e => setCorreo(e.target.value)} />
+                    <Input
+                        className={`${errors.email && "inputError"}`}
+                        name="email"
+                        type="email"
+                        value={values.email}
+                        onChange={handleChange}
+                    />
+                    {errors.email && <p className="error">{errors.email}</p>}
                 </div>
-                
+
                 <div className="form-group">
                     <Label>Contraseña</Label>
-                    <Input type="password" className="form-control" placeholder="" onChange={e => setContraseya(e.target.value)} />
+                    <Input
+                        className={`${errors.password && "inputError"}`}
+                        name="password"
+                        type="password"
+                        value={values.password}
+                        onChange={handleChange}
+                    />
+                    {errors.password && <p className="error">{errors.password}</p>}
                 </div>
 
                 <div className="form-group">
                     <Label>Teléfono movil</Label>
-                    <Input type="text" className="form-control" placeholder="" onChange={e => setTelefono(e.target.value)}/>
-                </div>
-                <div className="form-group">
-                    <Label>Domicilio</Label>
-                    <Input type="text" className="form-control" placeholder="" onChange={e => setDomicilio(e.target.value)} />
-                </div>
-                <div className="form-group">
-                    <Label>Ciudad</Label>
-                    <Input type="text" className="form-control" placeholder=""  onChange={e => setCiudad(e.target.value)}/>
-                </div>
-                <div className="form-group">
-                    <Label>Pais</Label>
-                    <Input type="text" className="form-control" placeholder="" onChange={e => setPais(e.target.value)}/>
+                    <Input
+                        className={`${errors.telefono && "inputError"}`}
+                        name="telefono"
+                        type="number"
+                        value={values.telefono}
+                        onChange={handleChange}
+                    />
+                    {errors.telefono && <p className="error">{errors.telefono}</p>}
                 </div>
 
-                <Button type="submit" className="btn btn-primary btn-block mt-5 button1" onClick={ () => onClickBotonCreateUser(nombre, correo, contraseya, telefono, domicilio, ciudad, pais)} >Registrarse </Button>
+                <div className="form-group">
+                    <Label>Fecha de nacimiento</Label>
+                    <Input
+                        className={`${errors.fechaNac && "inputError"}`}
+                        name="fechaNac"
+                        type="date"
+                        value={values.fechaNac}
+                        onChange={handleChange}
+                    />
+                    {errors.fechaNac && <p className="error">{errors.fechaNac}</p>}
+                </div>
+
+                <div className="form-group">
+                    <Label>Pais</Label>
+                    <CountryDropdown type="selector" className="form-control"
+                        value={pais}
+                        onChange={(val) => setPais(val)} />
+                </div>
+
+                <div className="form-group">
+                    <Label >Ciudad</Label>
+                    <RegionDropdown type="selector" className="form-control"
+                        country={pais}
+                        value={ciudad}
+                        onChange={(val) => setCiudad(val)} />
+                </div>
+
+                <div className="form-group">
+                    <Label>Domicilio</Label>
+                    <Input
+                        className={`${errors.domicilio && "inputError"}`}
+                        name="domicilio"
+                        type="text"
+                        value={values.domicilio}
+                        onChange={handleChange}
+                    />
+                    {errors.domicilio && <p className="error">{errors.domicilio}</p>}
+                </div>
+
+                <Button type="submit" className="btn btn-primary btn-block mt-5 button1"> Registrarse </Button>
                 <Button type="submit" className="btn btn-primary btn-block button1" onClick={onClickVolver}> Volver </Button>
 
             </Form>
@@ -60,3 +123,4 @@ const SignUp = ( {onClickBotonCreateUser, onClickVolver}) => {
 
 }
 export default withRouter(SignUp);
+

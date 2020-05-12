@@ -1,6 +1,8 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import {Nav, Navbar} from 'react-bootstrap';
 import styled from 'styled-components';
+
 
 const Styles = styled.div`
 
@@ -17,8 +19,9 @@ const Styles = styled.div`
  
  `;
  
- export const NavigationBar = () => (
-     <styles>
+ const NavigationBar = ({cerrarSesion}) => (
+
+
          <Navbar expand="lg">
             <Navbar.Brand href="#home">
                 <img
@@ -33,11 +36,12 @@ const Styles = styled.div`
              <Navbar.Collapse id="basic-navbar-nav">
                  <Nav className="ml-auto">
                     <Nav.Item><Nav.Link href="/miperfil">Mi perfil</Nav.Link></Nav.Item>
-                    <Nav.Item><Nav.Link href="/memorenyos">Memoreños</Nav.Link></Nav.Item>
-                    <Nav.Item><Nav.Link href="/desconectar">Desconectar</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link   href="/memorenyos">Memoreños</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link  onClick={cerrarSesion}  >Desconectar</Nav.Link></Nav.Item>
+                  
                 </Nav>
              </Navbar.Collapse>
          </Navbar>
-     </styles>
+     
  )
- export default NavigationBar;
+ export default withRouter(NavigationBar);
