@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment , useEffect } from "react";
 import { withRouter } from 'react-router-dom';
 import Logo from '../images/logo192.png';
 import { Button, Form, Label, Input } from 'reactstrap';
@@ -17,6 +17,7 @@ const Login = ({ onClickBotonLogin, onLoadUser, onClickChangePass, onClickReg })
         onClickBotonLogin(values);
     }
 
+    
     return (
 
         <Fragment>
@@ -40,7 +41,7 @@ const Login = ({ onClickBotonLogin, onLoadUser, onClickChangePass, onClickReg })
                 <div className="form-group">
                     <Label>Contraseña</Label>
                     <Input
-                        className={`${errors.email && "inputError"}`}
+                        className={`${errors.password && "inputError"}`}
                         name="password"
                         type="password"
                         value={values.password}

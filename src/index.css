@@ -15,9 +15,12 @@ h1,h2,h3,h4,h5,h6,label,span {
   font-family: 'Nunito', sans-serif;
 }
 
-body, html, .App, #root {
+body, html, #root {
  
   background: linear-gradient(90deg, rgb(111, 112, 190) 0%, #5082c4 100%);
+  /*background-color: #4c96d7;*/
+  /*background-color: #083b66;*/
+  
   width: 100%;
   height: 100%;
   position: absolute;
@@ -29,7 +32,6 @@ body, html, .App, #root {
 .button1{
   background:rgb(42, 78, 133);
 }
-
 .auth-inner {
   width: 500px;
   margin: auto;
@@ -55,6 +57,9 @@ body, html, .App, #root {
   color:  rgb(25, 121, 169);
   margin: 0;
 }
+.overlay{
+  background: linear-gradient(90deg, rgb(111, 112, 190) 0%, #5082c4 100%);
+}
 
 .error {
   color:  rgb(25, 121, 169);
@@ -64,4 +69,21 @@ body, html, .App, #root {
 
 .inputError {
   color:  rgb(202, 96, 26);
+}
+
+.cntNombre{
+
+  font-family: 'Nunito', sans-serif;
+}
+
+.cnav_item{
+
+  color: rgb(25, 121, 169); 
+  
+  
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 40vh;
 }
