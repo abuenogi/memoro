@@ -18,6 +18,8 @@ const Menu_container = ({ history }) => {
  
 //`/api/resource/${id}`
 
+
+
     fetch(url)
       .then(res => res.json())
       .then(data => {

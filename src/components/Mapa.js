@@ -1,50 +1,49 @@
 
-import React, { useState, useEffect } from "react";
-import { Map, Marker, Popup, TileLayer , Circle} from "react-leaflet";
+import React, { useState, Fragment } from "react";
+import { Map, Marker, Popup, TileLayer, Circle } from "react-leaflet";
+import { Button, Spinner} from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import {usePosition} from '../fuctions/usePosition';
+
+import  NavigationBar from "../container/NavigationBar";
+import FatalError from './500';
+
+
+
+import { usePosition } from '../fuctions/usePosition';
+import useFetch from '../fuctions/useFetch'
+import useDropdown from '../fuctions/SelectMemo';
+
 
 
 
 
 const Mapa = () => {
 
-  
-    const {latitude, longitude, error} = usePosition();
+    const shoe_list = ["Ana Bueno", "Tamara Montero", "Mateo"]
 
-
-    const url = 'https://eu1.locationiq.com/v1/search.php?key=c7392af2aaffbc&q=España,Valencia,Torrent,Montreal 76, 14B&format=json';
-
-    var point = new Object();
-
-    point.lat = 39.470240
-    point.lon = -0.376800
-
-    useEffect(() => {
-    
-        fetch(url)
-        .then(res => res.json())
-        .then(data => {
-            data.forEach(function (doc) {
-                point = Object.assign(doc);
-            })
-        })
-        .catch(error => {
-            console.log(error);
-        })
+    const [shoe, ShoeDropdown ] = useDropdown("Shoes", shoe_list);
       
-      },
-        [url]
-      )
-
-    //`/api/resource/${id}`
 
     const [activePoint, setActivePoint] = useState(null);
 
+    const url = 'https://eu1.locationiq.com/v1/search.php?key=c7392af2aaffbc&q=España,Valencia,Torrent,Montreal 76, 14B&format=json';
+
+    const { data, loading, error } = useFetch(url);
+    const { latitude, longitude, error_position } = usePosition();
+
     debugger;
+
+    if (loading)
+        return <Spinner animation="grow" variant="info" />
+
+    if (error || error_position)
+        return <FatalError />
 
     return (
 
+        <Fragment>
+        <NavigationBar/> 
+        <ShoeDropdown />  
         <Map center={[39.436250, -0.434350]} zoom={12}>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -52,11 +51,11 @@ const Mapa = () => {
             />
 
             <Marker
-                position={[point.lat, point.lon]}
+                position={[39.436250, -0.434350]}
                 onClick={() => {
-                    console.log(point.lat + ' ' + point.lon);
+                    console.log(data.lat + ' ' + data.lon);
                     console.log('Ubicación' + latitude + ' ' + longitude);
-                    setActivePoint(point);
+                    setActivePoint(data);
                     debugger;
                 }}
             />
@@ -77,7 +76,12 @@ const Mapa = () => {
                 </Popup>
             )}
         </Map>
-    );
+
+        <Button color="secondary mt-4" size="lg">Volver a casa</Button>{' '}
+        <Button color="secondary mt-4" size="lg">Lamar cuidar</Button>
+
+        </Fragment>
+    )
 
 };
 export default withRouter(Mapa);

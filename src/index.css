@@ -87,3 +87,32 @@ body, html, #root {
   width: 100%;
   height: 40vh;
 }
+
+
+
+/* The container must be positioned relative: */
+
+.custom_select {
+  width: auto;
+  background-color:  rgba(222, 222, 226, 0.973);
+  
+  border-radius: 9px;
+}
+
+.custom_select select {
+  font-family: 'Nunito', sans-serif;
+  padding: 5px 5px;
+  border-radius: 9px;
+  text-align: center;
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgb(78, 80, 82);
+  -moz-border-radius: 9px 9px 9px 9px;
+   -webkit-border-radius: 9px 9px 9px 9px;
+   border-radius: 9px 9px 9px 9px;
+   box-shadow: 1px 1px 11px #b5b4f0;
+
+
+ 
+}
+

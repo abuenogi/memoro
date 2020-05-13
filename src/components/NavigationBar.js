@@ -23,7 +23,7 @@ const Styles = styled.div`
 
 
          <Navbar expand="lg">
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="/home">
                 <img
                     src="/logo192.png"
                     width="60"
