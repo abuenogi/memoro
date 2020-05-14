@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Footer} from "./Footer";
 import { Layout} from "./Layout";
-import { NavigationBar} from "./NavigationBar";
+import  NavigationBar from "../container/NavigationBar";
 import { Jumbotron} from "./Jumbotron";
 import { HomeLinks } from "../pages/HomeLinks";
 
-class Home extends Component {
-    render(){
+const Home = ()  =>{
+ 
         return (
             <React.Fragment> 
                 <Layout>
@@ -17,8 +18,8 @@ class Home extends Component {
                 <Footer/>
             </React.Fragment>
         );
-    }
+    
 }
 
 
-export default Home;
+export default withRouter(Home);

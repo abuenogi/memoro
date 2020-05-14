@@ -19,12 +19,10 @@ import ChangePassword from "./container/ChangePassword";
 import Home from "./components/Home";
 import { HomeLinks } from "./pages/HomeLinks";
 import { MiPerfil } from "./pages/MiPerfil";
-import Memorenyos from "./components/Memorenyos";
-import { MemorenyosForm } from "./components/MemorenyosForm";
-import { Desconectar } from "./pages/Desconectar";
+import { Memorenyos } from "./pages/Memorenyos";
 import { NoMatch } from "./pages/NoMatch";
 import { Calendario } from "./pages/Calendario";
-import { Mapa } from "./pages/Mapa";
+import  Mapa  from "./components/Mapa";
 import { Entretenimiento } from "./pages/Entretenimiento";
 import { Contactos } from "./pages/Contactos";
 import { user_auth, UserContext } from './context/UserContext';
@@ -47,7 +45,6 @@ ReactDOM.render((
               <Route  path="/homelinks" component={HomeLinks} />
               <Route  path="/miperfil" component={MiPerfil} />
               <Route  path="/memorenyos" component={Memorenyos} />
-              <Route  path="/desconectar" component={Desconectar} />
 
               /** PATHS formularios */
               <Route  path="/memorenyosForm" component={MemorenyosForm}/>

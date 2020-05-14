@@ -5,6 +5,8 @@ import boatImage from '../images/calendario.svg';
 import usuarioImagen from '../images/person.svg';
 import Imagen from './Imagen';
 
+import { UserContext } from '../context/UserContext';
+
 
 
 const Styles = styled.div`
@@ -46,13 +48,20 @@ const Styles = styled.div`
   }
 `;
 
-export const Jumbotron = (props) => (
+export const Jumbotron = () => {
+
+  const user_context = useContext(UserContext);
+
+  return (
   <Styles>
     <Jumbo fluid className="jumbo">
       <div className="overlay">
-        <div className="cntNombre"> <h2>{props.titulo}</h2><p>Pepito de los Palotes</p></div>
-        <div className="cntImg"> <Imagen src={usuarioImagen} alt="Usuario" with="80" height="110" /></div>
-    </div>
+  <div className="cntNombre"> <h2>Hola</h2><p>{user_context.displayName}</p></div>
+        <div className="cntImg"> <Imagen src={usuarioImagen} alt="Usuario" with="80" height="80" /></div>
+      </div>
     </Jumbo>
   </Styles>
-)
+  );
+
+
+}
