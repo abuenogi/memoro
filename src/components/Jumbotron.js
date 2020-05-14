@@ -46,11 +46,11 @@ const Styles = styled.div`
   }
 `;
 
-export const Jumbotron = () => (
+export const Jumbotron = (props) => (
   <Styles>
     <Jumbo fluid className="jumbo">
       <div className="overlay">
-        <div className="cntNombre"> <h2>Bienvenido</h2><p>Pepito de los Palotes</p></div>
+        <div className="cntNombre"> <h2>{props.titulo}</h2><p>Pepito de los Palotes</p></div>
         <div className="cntImg"> <Imagen src={usuarioImagen} alt="Usuario" with="80" height="110" /></div>
     </div>
     </Jumbo>

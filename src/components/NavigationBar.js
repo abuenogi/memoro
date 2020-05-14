@@ -1,24 +1,8 @@
 import React from 'react';
 import {Nav, Navbar} from 'react-bootstrap';
-import styled from 'styled-components';
 
-const Styles = styled.div`
-
-.navbar{
- background-color:#bbb;
- }
- 
- .navbar-brand, .navbar-nav . nav-link {
- color:#f07 ;
-    &:hover {
-    color:black;
-    }
- }
- 
- `;
- 
  export const NavigationBar = () => (
-     <styles>
+
          <Navbar expand="lg">
             <Navbar.Brand href="#home">
                 <img
@@ -38,6 +22,5 @@ const Styles = styled.div`
                 </Nav>
              </Navbar.Collapse>
          </Navbar>
-     </styles>
  )
  export default NavigationBar;

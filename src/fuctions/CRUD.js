@@ -7,13 +7,15 @@ export const getData = (collection_name) => {
             if (doc.exists) {
                 console.log("Document data:", doc.data());
             } else {
-                // doc.data() will be undefined in this case
+                doc.data(); //will be undefined in this case
+                console.log(doc.data());
                 console.log("No such document!");
             }
         }).catch(function(error) {
             console.log("Error getting document:", error);
         });
 }
+
 
 export const createData = (data, collection_name) => {
 
@@ -23,7 +25,7 @@ export const createData = (data, collection_name) => {
                     .doc()
                     .set(data);
             } catch (error) {
-                console.log(error);
+                console.log("createData: " +error);
             }
 }
 

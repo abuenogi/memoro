@@ -3,8 +3,13 @@ import ReactDOM from "react-dom";
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from "./serviceWorker";
 
+/** USO DE Font Awesome 5 React component using SVG with JS
+ * https://www.npmjs.com/package/@fortawesome/react-fontawesome#build-a-library-to-reference-icons-throughout-your-app-more-conveniently
+ * */
 
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-confirm-alert/src/react-confirm-alert.css'
 import "./index.css";
 
 
@@ -14,17 +19,15 @@ import ChangePassword from "./container/ChangePassword";
 import Home from "./components/Home";
 import { HomeLinks } from "./pages/HomeLinks";
 import { MiPerfil } from "./pages/MiPerfil";
-import { Memorenyos } from "./pages/Memorenyos";
+import Memorenyos from "./components/Memorenyos";
+import { MemorenyosForm } from "./components/MemorenyosForm";
 import { Desconectar } from "./pages/Desconectar";
 import { NoMatch } from "./pages/NoMatch";
 import { Calendario } from "./pages/Calendario";
 import { Mapa } from "./pages/Mapa";
 import { Entretenimiento } from "./pages/Entretenimiento";
 import { Contactos } from "./pages/Contactos";
-
 import { user_auth, UserContext } from './context/UserContext';
-
-
 
 ReactDOM.render((
   
@@ -46,12 +49,17 @@ ReactDOM.render((
               <Route  path="/memorenyos" component={Memorenyos} />
               <Route  path="/desconectar" component={Desconectar} />
 
+              /** PATHS formularios */
+              <Route  path="/memorenyosForm" component={MemorenyosForm}/>
+
               /** PATHS de las páginas del menú del Home */
               <Route  path="/calendario" component={Calendario} />
               <Route  path="/mapa" component={Mapa} />
               <Route  path="/entretenimiento" component={Entretenimiento} />
               <Route  path="/contactos" component={Contactos} />
               <Route component={NoMatch}/>
+
+             
 
             </Switch>
           </div>

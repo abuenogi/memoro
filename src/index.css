@@ -8,6 +8,7 @@ body {
   min-height: 100vh;
   font-weight: 600;
   font-family: 'Nunito', sans-serif;
+  font-size: 14px;
 }
 
 h1,h2,h3,h4,h5,h6,label,span {
@@ -28,6 +29,9 @@ body, html, #root {
   display: flex;
   justify-content: center;
  
+}
+.btn-lg{
+  font-size: 14px;
 }
 .button1{
   background:rgb(42, 78, 133);
@@ -58,6 +62,72 @@ body, html, #root {
   color:  rgb(25, 121, 169);
   margin: 0;
 }
+
+.jumboshading {
+  background-color: #4c96d7;
+  opacity: 0.9;
+  /**position: absolute;*/
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  width: 100%; 
+  border-radius: 1px;
+  padding-left: 10px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #4c96d7;
+  border-color: #4c96d7;
+}
+
+.text-primary {
+  color: #000!important;
+}
+
+.navbar{
+  /**background-color:#bbb;*/
+  }
+  
+  .navbar-brand, .navbar-nav .nav-link {
+     color:#083b66 ;
+  }
+
+
+  .react-confirm-alert-button-group {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .react-confirm-alert-button-group > button {
+    outline: none;
+    background: #4c96d7;
+    border: none;
+    display: inline-block;
+    padding: 6px 18px;
+    color: #eee;
+    margin-right: 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .react-confirm-alert-overlay {
+    justify-content: center;
+  }
+
+  .react-confirm-alert-body {
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    box-shadow: 0 20px 30px #666;
+  }
 
 
 /**
