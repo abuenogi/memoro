@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import  NavigationBar from "../container/NavigationBar";
 import FatalError from './500';
 
-
+//import Linking from 'expo-linking'
 
 import { usePosition } from '../fuctions/usePosition';
 import useFetch from '../fuctions/useFetch'
@@ -77,8 +77,16 @@ const Mapa = () => {
             )}
         </Map>
 
-        <Button color="secondary mt-4" size="lg">Volver a casa</Button>{' '}
-        <Button color="secondary mt-4" size="lg">Lamar cuidar</Button>
+        <Button color="secondary ml-2 mt-4 mr-5" size="lg"
+        onClick={() => {
+          // Linking.openURL('https://www.google.com');
+        }}
+        >Volver a casa   </Button>
+        <Button color="secondary mt-4" size="lg"
+         onClick={() => {
+            //Linking.openURL('tel:+680980409');
+        }}
+        >Llamar cuidador</Button>
 
         </Fragment>
     )
