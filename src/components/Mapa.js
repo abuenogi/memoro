@@ -1,35 +1,60 @@
 
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment , useContext} from "react";
 import { Map, Marker, Popup, TileLayer, Circle } from "react-leaflet";
-import { Button, Spinner} from 'reactstrap';
+
+import L from 'leaflet';
+import { Button, Spinner } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 
-import  NavigationBar from "../container/NavigationBar";
+import NavigationBar from "../container/NavigationBar";
 import FatalError from './500';
 
-//import Linking from 'expo-linking'
-
+import { UserContext } from '../context/UserContext';
 import { usePosition } from '../fuctions/usePosition';
 import useFetch from '../fuctions/useFetch'
 import useDropdown from '../fuctions/SelectMemo';
 
 
-
-
-
 const Mapa = () => {
 
-    const shoe_list = ["Ana Bueno", "Tamara Montero", "Mateo"]
 
-    const [shoe, ShoeDropdown ] = useDropdown("Shoes", shoe_list);
-      
+    const casaIcon = new L.Icon({
+        iconUrl: require('../images/home-solid.svg'),
+        iconRetinaUrl: require('../images/home-solid.svg'),
+        iconAnchor: [15, 15],
+        popupAnchor: [15, -15],
+        iconSize: [30, 30],
+        shadowUrl: require('../images/home-solid.svg'),
+        shadowSize: [30, 30],
+        shadowAnchor: [15, 15],
+    })
 
-    const [activePoint, setActivePoint] = useState(null);
+    const personIcon = new L.Icon({
+        iconUrl: require('../images/walking-solid.svg'),
+        iconRetinaUrl: require('../images/walking-solid.svg'),
+        iconAnchor: [15, 15],
+        popupAnchor: [15, -15],
+        iconSize: [30, 30],
+        shadowUrl: require('../images/walking-solid.svg'),
+        shadowSize: [30, 30],
+        shadowAnchor: [15, 15],
+    })
 
-    const url = 'https://eu1.locationiq.com/v1/search.php?key=c7392af2aaffbc&q=España,Valencia,Torrent,Montreal 76, 14B&format=json';
+    const center = [39.436250, -0.434350]
+    const center_ubi = [39.436932, -0.465240]
+
+    const user_context = useContext(UserContext);
+    const memo_list = ["Ana Bueno", "Tamara Montero", "Mateo"]
+    const [memo, MemoDropdown] = useDropdown("Memo", memo_list);
+
+ 
+    const url = 'https://eu1.locationiq.com/v1/search.php?key=c7392af2aaffbc&q=España,Valencia,Torrent,Montreal 76, 14B&format=json'; 
+    //const url = `https://eu1.locationiq.com/v1/search.php?key=c7392af2aaffbc&q=${user_context.pais},${user_context.ciudad},${user_context.domicilio}&format=json`;
 
     const { data, loading, error } = useFetch(url);
     const { latitude, longitude, error_position } = usePosition();
+    const [activePoint, setActivePoint] = useState(null);
+
 
     debugger;
 
@@ -42,51 +67,59 @@ const Mapa = () => {
     return (
 
         <Fragment>
-        <NavigationBar/> 
-        <ShoeDropdown />  
-        <Map center={[39.436250, -0.434350]} zoom={12}>
-            <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            />
+            <NavigationBar />
+            <MemoDropdown />
+            <Map center={center} zoom={15}>
+                <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
 
-            <Marker
-                position={[39.436250, -0.434350]}
-                onClick={() => {
-                    console.log(data.lat + ' ' + data.lon);
-                    console.log('Ubicación' + latitude + ' ' + longitude);
-                    setActivePoint(data);
-                    debugger;
-                }}
-            />
-
-            {activePoint && (
-                <Popup
-                    position={[
-                        activePoint.lat,
-                        activePoint.lon
-                    ]}
-                    onClose={() => {
-                        setActivePoint(null);
+                <Marker
+                    position={center}
+                    icon={casaIcon}
+                    onClick={() => {
+                        console.log(data.lat + ' ' + data.lon);
+                        console.log('Ubicación' + latitude + ' ' + longitude);
+                        //setActivePoint(data);
+                        debugger;
                     }}
-                >
-                    <div>
-                        <p>{activePoint.display_name}</p>
-                    </div>
-                </Popup>
-            )}
-        </Map>
+                />
 
-        <Button color="secondary ml-2 mt-4 mr-5" size="lg"
-        onClick={() => {
-          // Linking.openURL('https://www.google.com');
-        }}
-        >Volver a casa   </Button>
-        <Button color="secondary mt-4" size="lg"
-         onClick={() => {
-            //Linking.openURL('tel:+680980409');
-        }}
-        >Llamar cuidador</Button>
+                <Marker
+                    position={center_ubi}
+                    icon={personIcon}
+                    onClick={() => {
+                        console.log(data.lat + ' ' + data.lon);
+                        console.log('Ubicación' + latitude + ' ' + longitude);
+                        //setActivePoint(data);
+                        debugger;
+                    }}
+                />
+
+                <Circle center={center} fillColor="blue" radius={600} fillColor='blue' />
+
+                {activePoint && (
+                    <Popup
+                        position={[
+                            activePoint.lat,
+                            activePoint.lon
+                        ]}
+                        onClose={() => {
+                            setActivePoint(null);
+                        }}
+                    >
+                        <div>
+                            <p>{activePoint.display_name}</p>
+                        </div>
+                    </Popup>
+                )}
+            </Map>
+
+            <div  className="d-flex justify-content-around mt-4">                
+            <Button href="https://maps.google.com/?q=39.436250,-0.434350" color="secondary mr-3" size="lg">Volver a casa </Button>
+
+            <Button href="tel://+34680980409" color="secondary" size="lg">Llamar cuidador</Button>
+            </div>
 
         </Fragment>
     )
@@ -94,61 +127,3 @@ const Mapa = () => {
 };
 export default withRouter(Mapa);
 
-
-/*
-
-//import useSwr from "swr";
-import { Icon } from "leaflet";
-
-//const fetcher = (...args) => fetch(...args).then(response => response.json());
-
-
-const icon = new Icon({
-    iconUrl: "../images/skateboarding.svg",
-    iconSize: [25, 25]
-});
-
-
-const url =
-        "https://data.police.uk/api/crimes-street/all-crime?lat=52.629729&lng=-1.131592&date=2019-10";
-    const { data, error } = useSwr(url, fetcher);
-    const points = data && !error ? data.slice(0, 100) : [];
-    const [activePoint, setActivePoint] = useState(null);
-
-    return (
-        <Map center={[52.6376, -1.135171]} zoom={12}>
-            <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            />
-
-            {points.map(point => (
-                <Marker
-                    key={point.id}
-                    position={[point.location.latitude, point.location.longitude]}
-                    icon={icon}
-                    onClick={() => {
-                        setActivePoint(point);
-                    }}
-                />
-            ))}
-
-            {activePoint && (
-                <Popup
-                    position={[
-                        activePoint.location.latitude,
-                        activePoint.location.longitude
-                    ]}
-                    onClose={() => {
-                        setActivePoint(null);
-                    }}
-                >
-                    <div>
-                        <h2>{activePoint.category}</h2>
-                    </div>
-                </Popup>
-            )}
-        </Map>
-    );
-
-*/

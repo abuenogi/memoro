@@ -19,7 +19,7 @@ import { NoMatch } from "./pages/NoMatch";
 import { Calendario } from "./pages/Calendario";
 import  Mapa  from "./components/Mapa";
 import { Entretenimiento } from "./pages/Entretenimiento";
-import { Contactos } from "./pages/Contactos";
+import  Contactos  from "./components/Contactos";
 
 import { user_auth, UserContext } from './context/UserContext';
 
