@@ -3,8 +3,13 @@ import ReactDOM from "react-dom";
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from "./serviceWorker";
 
+/** USO DE Font Awesome 5 React component using SVG with JS
+ * https://www.npmjs.com/package/@fortawesome/react-fontawesome#build-a-library-to-reference-icons-throughout-your-app-more-conveniently
+ * */
 
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-confirm-alert/src/react-confirm-alert.css'
 import "./index.css";
 
 
@@ -20,10 +25,7 @@ import { Calendario } from "./pages/Calendario";
 import  Mapa  from "./components/Mapa";
 import { Entretenimiento } from "./pages/Entretenimiento";
 import { Contactos } from "./pages/Contactos";
-
 import { user_auth, UserContext } from './context/UserContext';
-
-
 
 ReactDOM.render((
   
@@ -44,12 +46,17 @@ ReactDOM.render((
               <Route  path="/miperfil" component={MiPerfil} />
               <Route  path="/memorenyos" component={Memorenyos} />
 
+              /** PATHS formularios */
+              <Route  path="/memorenyosForm" component={MemorenyosForm}/>
+
               /** PATHS de las páginas del menú del Home */
               <Route  path="/calendario" component={Calendario} />
               <Route  path="/mapa" component={Mapa} />
               <Route  path="/entretenimiento" component={Entretenimiento} />
               <Route  path="/contactos" component={Contactos} />
               <Route component={NoMatch}/>
+
+             
 
             </Switch>
           </div>

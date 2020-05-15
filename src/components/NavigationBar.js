@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import {Nav, Navbar} from 'react-bootstrap';
-import styled from 'styled-components';
 
 
 const Styles = styled.div`

@@ -8,6 +8,7 @@ body {
   min-height: 100vh;
   font-weight: 600;
   font-family: 'Nunito', sans-serif;
+  font-size: 14px;
 }
 
 h1,h2,h3,h4,h5,h6,label,span {
@@ -29,6 +30,9 @@ body, html, #root {
   justify-content: center;
  
 }
+.btn-lg{
+  font-size: 14px;
+}
 .button1{
   background:rgb(42, 78, 133);
 }
@@ -37,7 +41,8 @@ body, html, #root {
   margin: auto;
   background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-  padding: 40px 55px 45px 55px;
+  /**padding: 40px 55px 45px 55px;*/
+  padding: 20px 20px 20px 20px;
   border-radius: 15px;
   transition: all .3s;
 }
