@@ -1,19 +1,6 @@
 import { db } from '../services/firebase/firebaseConfig';
 
-export const getData = (collection_name) => {
-    return db.collection(collection_name).doc().get()
-        .then(function(doc) {
-            if (doc.exists) {
-                console.log("Document data:", doc.data());
-            } else {
-                doc.data(); //will be undefined in this case
-                console.log(doc.data());
-                console.log("No such document!");
-            }
-        }).catch(function(error) {
-            console.log("Error getting document:", error);
-        });
-}
+
 
 
 export const createData = (data, collection_name) => {
@@ -58,7 +45,22 @@ export const updateData = (id, data, collection_name) => {
 
 }
 
-
+/*
+export const getData = (collection_name) => {
+    return db.collection(collection_name).doc().get()
+        .then(function (doc) {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+            } else {
+                doc.data(); //will be undefined in this case
+                console.log(doc.data());
+                console.log("No such document!");
+            }
+        }).catch(function (error) {
+            console.log("Error getting document:", error);
+        });
+}
+*/
 export const getData = (collection_name) => {
 
     return db.collection(collection_name).get()
@@ -72,13 +74,7 @@ export const getData = (collection_name) => {
 }
 
 
-export  function getDataElement(collection_name, data, value) {
-   
-
-    return  db.collection(collection_name).where(data, "==", value)
-        .get()
-        
-    ;
-
+export function getDataElement(collection_name, data, value) {
+    return db.collection(collection_name).where(data, "==", value).get();
 }
 

@@ -2,12 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from "./serviceWorker";
-
-/** USO DE Font Awesome 5 React component using SVG with JS
- * https://www.npmjs.com/package/@fortawesome/react-fontawesome#build-a-library-to-reference-icons-throughout-your-app-more-conveniently
- * */
-
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import "./index.css";
@@ -19,7 +13,8 @@ import ChangePassword from "./container/ChangePassword";
 import Home from "./components/Home";
 import { HomeLinks } from "./pages/HomeLinks";
 import { MiPerfil } from "./pages/MiPerfil";
-import { Memorenyos } from "./pages/Memorenyos";
+import Memorenyos from "./components/Memorenyos";
+import { MemorenyosForm } from "./components/MemorenyosForm";
 import { NoMatch } from "./pages/NoMatch";
 import { Calendario } from "./pages/Calendario";
 import  Mapa  from "./components/Mapa";
