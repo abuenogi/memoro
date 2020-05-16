@@ -1,23 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import {Nav, Navbar} from 'react-bootstrap';
-import styled from 'styled-components';
-
-
-const Styles = styled.div`
-
-.navbar{
- background-color:#bbb;
- }
- 
- .navbar-brand, .navbar-nav . nav-link {
- color:#f07 ;
-    &:hover {
-    color:black;
-    }
- }
- 
- `;
  
  const NavigationBar = ({cerrarSesion}) => (
 

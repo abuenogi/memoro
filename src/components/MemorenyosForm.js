@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,8 +12,12 @@ import { Container } from 'react-bootstrap';
 import { useLocation, useHistory} from 'react-router-dom';
 import { db } from '../services/firebase/firebaseConfig';
 import { auth } from '../services/firebase/firebaseConfig';
+import { UserContext } from '../context/UserContext';
+
 
 const MemorenyosForm = (props) => {
+
+    const cuidador = useContext(UserContext);
 
     const location = useLocation();
     const history = useHistory();
@@ -27,7 +32,9 @@ const MemorenyosForm = (props) => {
         direccion: '',
         imagen: '',
         radioSeguridad: '',
-        cuidador: '6bzL3lDiF7hHPo1eNshw'
+
+        cuidador: cuidador.user_id
+        //cuidador: '6bzL3lDiF7hHPo1eNshw'
     }
     //Variable de carga de los valores del objeto memorenyo
     var [values, setValues] = useState(initialMemoObjetValues);
@@ -188,3 +195,4 @@ const MemorenyosForm = (props) => {
     );
 }
 export default withRouter(MemorenyosForm);
+

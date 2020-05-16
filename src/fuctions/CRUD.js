@@ -1,7 +1,5 @@
 import { db } from '../services/firebase/firebaseConfig';
 
-
-
 export const createData = (data, collection_name) => {
 
     debugger;
@@ -44,8 +42,6 @@ export const updateData = (id, data, collection_name) => {
 
 }
 
-
-
 export const getData = (collection_name) => {
 
     return db.collection(collection_name).get()
@@ -59,13 +55,7 @@ export const getData = (collection_name) => {
 }
 
 
-export  function getDataElement(collection_name, data, value) {
-   
-
-    return  db.collection(collection_name).where(data, "==", value)
-        .get()
-        
-    ;
-
+export function getDataElement(collection_name, data, value) {
+    return db.collection(collection_name).where(data, "==", value).get();
 }
 

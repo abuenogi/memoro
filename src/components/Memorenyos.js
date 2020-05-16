@@ -7,7 +7,7 @@ import  NavigationBar from "../container/CNT_NavigationBar";
 import  Jumbotron from "./Jumbotron";
 import {db} from '../services/firebase/firebaseConfig';
 import { Container, Row, Col, Button, Nav, Navbar} from 'reactstrap';
-import {createData, useUpdateData, getData} from '../fuctions/CRUD';
+import {createData, useUpdateData, getDataElement} from '../fuctions/CRUD';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, fas} from '@fortawesome/free-solid-svg-icons'
 
@@ -18,8 +18,9 @@ const Memorenyos = () => {
   
     React.useEffect(() => {
       const fetchData = async () => {
-        const data = await db.collection("usuarios").get();
-        setMemorenyos(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+          const data = await getDataElement('usuarios','rol','memorenyo');
+          setMemorenyos(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+
       };
       fetchData();
     }, []);

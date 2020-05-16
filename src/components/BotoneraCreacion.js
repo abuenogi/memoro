@@ -1,10 +1,11 @@
-  
+ 
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import {Nav, Navbar, Button} from 'react-bootstrap';
 
  
   const BotoneraCreacion = (props) => (
+
 
      <Nav className="justify-content-center">
          <Nav.Item><Nav.Link href="/home"><Button variant="primary" size="lg">Volver</Button></Nav.Link></Nav.Item>
@@ -13,3 +14,4 @@ import {Nav, Navbar, Button} from 'react-bootstrap';
      
 
  );export default withRouter(BotoneraCreacion);
+

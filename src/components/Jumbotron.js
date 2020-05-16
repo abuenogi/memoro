@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { withRouter } from 'react-router-dom';
+
 import { Jumbotron as Jumbo, Container } from 'react-bootstrap';
 import styled from 'styled-components';
 import boatImage from '../images/calendario.svg';
@@ -54,14 +55,14 @@ const Styles = styled.div`
   const user_context = useContext(UserContext);
 
   return (
-  <Styles>
-    <Jumbo fluid className="jumbo">
-      <div className="overlay">
-  <div className="cntNombre"> <h2>Hola</h2><p>{user_context.displayName}</p></div>
-        <div className="cntImg"> <Imagen src={usuarioImagen} alt="Usuario" with="80" height="80" /></div>
-      </div>
-    </Jumbo>
-  </Styles>
+    <Styles>
+      <Jumbo fluid className="jumbo">
+        <div className="overlay">
+          <div className="cntNombre"> <h2>Hola</h2><p>{user_context.displayName}</p></div>
+          <div className="cntImg"> <Imagen src={usuarioImagen} alt="Usuario" with="80" height="80" /></div>
+        </div>
+      </Jumbo>
+    </Styles>
   );
 
 

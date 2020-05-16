@@ -2,17 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from "./serviceWorker";
-
-/** USO DE Font Awesome 5 React component using SVG with JS
- * https://www.npmjs.com/package/@fortawesome/react-fontawesome#build-a-library-to-reference-icons-throughout-your-app-more-conveniently
- * */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-confirm-alert/src/react-confirm-alert.css'
-
-
-//import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import "./index.css";
-
 
 import Login from "./container/CNT_Login";
 import SignUp from "./container/CNT_Signup";
@@ -29,8 +21,6 @@ import { Entretenimiento } from "./pages/Entretenimiento";
 import  Contactos  from "./components/Contactos";
 
 import { user_auth, UserContext } from './context/UserContext';
-
-
 
 ReactDOM.render((
   
@@ -51,7 +41,8 @@ ReactDOM.render((
               <Route  path="/miperfil" component={MiPerfil} />
               <Route  path="/memorenyos" component={Memorenyos} />
 
-              <Route  path="/memorenyosForm" component={MemorenyosForm} />
+              /** PATHS formularios */
+              <Route  path="/memorenyosForm" component={MemorenyosForm}/>
 
               /** PATHS de las páginas del menú del Home */
               <Route  path="/calendario" component={Calendario} />
@@ -59,6 +50,8 @@ ReactDOM.render((
               <Route  path="/entretenimiento" component={Entretenimiento} />
               <Route  path="/contactos" component={Contactos} />
               <Route component={NoMatch}/>
+
+             
 
             </Switch>
           </div>
