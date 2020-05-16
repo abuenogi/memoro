@@ -18,9 +18,8 @@ h1,h2,h3,h4,h5,h6,label,span {
 
 body, html, #root {
  
-  background: linear-gradient(90deg, rgb(111, 112, 190) 0%, #5082c4 100%);
-  /*background-color: #4c96d7;*/
-  /*background-color: #083b66;*/
+  
+  background-color: #083b66;
   
   width: 100%;
   height: 100%;
@@ -30,11 +29,13 @@ body, html, #root {
   justify-content: center;
  
 }
-.btn-lg{
-  font-size: 14px;
-}
+.btn-lg{	
+    font-size: 14px;
+	
+  }
+
 .button1{
-  background:rgb(42, 78, 133);
+  background:#083b66;
 }
 .auth-inner {
   width: 500px;
@@ -48,7 +49,7 @@ body, html, #root {
 }
 
  .form-control:focus {
-  border-color:  rgb(42, 78, 133);
+  border-color: #083b66;
   box-shadow: none;
 }
 
@@ -59,15 +60,18 @@ body, html, #root {
 .enlace {
   font-size: 13px;
   padding-top: 10px;
-  color:  rgb(25, 121, 169);
+  color: #083b66;
   margin: 0;
 }
 .overlay{
-  background: linear-gradient(90deg, rgb(111, 112, 190) 0%, #5082c4 100%);
+ 
+  font-family: 'Nunito', sans-serif;
+  color:   rgb(255, 255, 255);
+  background: #083b66;
 }
 
 .error {
-  color:  rgb(25, 121, 169);
+  color:  rgba(79,148,212,1);
   font-size: 13px;
   font-family: 'Nunito', sans-serif;
 }
@@ -83,7 +87,7 @@ body, html, #root {
 
 .cnav_item{
 
-  color: rgb(25, 121, 169); 
+  color: #083b66;
   
   
 }
@@ -93,64 +97,45 @@ body, html, #root {
   height: 40vh;
 }
 
-.jumboshading {
-  background-color: #4c96d7;
-  opacity: 0.9;
-  /**position: absolute;*/
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: -1;
-  width: 100%; 
-  border-radius: 1px;
-  padding-left: 10px;
+.item_menu{
+  box-shadow: 1px 1px 3pxrgba(79,148,212,1);
+  border: 2px solid #083b66;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  text-align: center;
+  margin: 2px 2px;
+  }
+
+.cuadro_menu{
+  box-shadow: 1px 1px 3px  #083b66;
+  color: rgb(255, 249, 249);
+  background-color: rgb(255, 255, 255);
+  border: 2px solid #083b66;
+  border-radius: 5px;
+  margin-bottom: 6px;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #4c96d7;
-  border-color: #4c96d7;
+/* The container must be positioned relative: */
+
+.custom_select {
+  width: auto;
+  background-color:  rgb(236, 236, 236);
+  border-radius: 10px;
 }
 
-.text-primary {
-  color: #000!important;
+.custom_select select {
+  font-family: 'Nunito', sans-serif;
+  padding: 5px 5px;
+  border-radius: 9px;
+
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgb(119, 113, 133);
+  -moz-border-radius: 9px 9px 9px 9px;
+   -webkit-border-radius: 9px 9px 9px 9px;
+   border-radius: 9px 9px 9px 9px;
+   box-shadow: 1px 1px 5px rgba(222, 222, 226, 0.973);
+
 }
 
-.navbar-brand, .navbar-nav .nav-link {
-  color:#083b66 ;
-}
 
-
-.react-confirm-alert-button-group {
- display: -webkit-flex;
- display: -moz-flex;
- display: -ms-flex;
- display: -o-flex;
- display: flex;
- justify-content: center;
- margin-top: 20px;
-}
-
-.react-confirm-alert-button-group > button {
- outline: none;
- background: #4c96d7;
- border: none;
- display: inline-block;
- padding: 6px 18px;
- color: #eee;
- margin-right: 15px;
- border-radius: 5px;
- font-size: 14px;
- cursor: pointer;
-}
-
-.react-confirm-alert-overlay {
- justify-content: center;
-}
-
-.react-confirm-alert-body {
- font-family: 'Nunito', sans-serif;
- font-size: 14px;
- box-shadow: 0 20px 30px #666;
-}

@@ -1,12 +1,13 @@
 import React, { useState, useEffect }  from 'react'
 import MemorenyosActions from './MemorenyosActions';
-import {BotoneraCreacion} from './BotoneraCreacion';
-import { Footer} from "./Footer";
-import { Layout} from "./Layout";
-import  NavigationBar from "../container/NavigationBar";
-import { Jumbotron} from "./Jumbotron";
-import { Container, Row, Col} from 'reactstrap';
-import { getDataElement} from '../fuctions/CRUD';
+import BotoneraCreacion from './BotoneraCreacion';
+import  Footer from "./Footer";
+import  Layout from "./Layout";
+import  NavigationBar from "../container/CNT_NavigationBar";
+import  Jumbotron from "./Jumbotron";
+import {db} from '../services/firebase/firebaseConfig';
+import { Container, Row, Col, Button, Nav, Navbar} from 'reactstrap';
+import {createData, useUpdateData, getDataElement} from '../fuctions/CRUD';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, fas} from '@fortawesome/free-solid-svg-icons'
 
@@ -19,6 +20,7 @@ const Memorenyos = () => {
       const fetchData = async () => {
           const data = await getDataElement('usuarios','rol','memorenyo');
           setMemorenyos(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+
       };
       fetchData();
     }, []);

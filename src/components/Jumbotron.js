@@ -1,4 +1,6 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import { Jumbotron as Jumbo, Container } from 'react-bootstrap';
 import styled from 'styled-components';
 import boatImage from '../images/calendario.svg';
@@ -48,7 +50,7 @@ const Styles = styled.div`
   }
 `;
 
-export const Jumbotron = () => {
+ const Jumbotron = () => {
 
   const user_context = useContext(UserContext);
 
@@ -64,4 +66,4 @@ export const Jumbotron = () => {
   );
 
 
-}
+};export default withRouter(Jumbotron);
