@@ -1,11 +1,12 @@
-import React, { useState, useEffect,useContext } from 'react';
+
+import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fas, faUser, faMobile, faEnvelope, faMapMarkedAlt, faImage, faStreetView, faKey } from '@fortawesome/free-solid-svg-icons'
-import { Footer } from "./Footer";
-import { Layout } from "./Layout";
-//import { NavigationBar } from "./NavigationBar";
-import  NavigationBar from "../container/NavigationBar";
-import { Jumbotron } from "./Jumbotron";
+import  Footer from "./Footer";
+import Layout  from "./Layout";
+import  NavigationBar  from "../container/CNT_NavigationBar";
+import  Jumbotron  from "./Jumbotron";
 import { createData } from '../fuctions/CRUD';
 import { Container } from 'react-bootstrap';
 import { useLocation, useHistory} from 'react-router-dom';
@@ -13,9 +14,11 @@ import { db } from '../services/firebase/firebaseConfig';
 import { auth } from '../services/firebase/firebaseConfig';
 import { UserContext } from '../context/UserContext';
 
-export const MemorenyosForm = (props) => {
+
+const MemorenyosForm = (props) => {
 
     const cuidador = useContext(UserContext);
+
     const location = useLocation();
     const history = useHistory();
     var memorenyoId = '';
@@ -29,6 +32,7 @@ export const MemorenyosForm = (props) => {
         direccion: '',
         imagen: '',
         radioSeguridad: '',
+
         cuidador: cuidador.user_id
         //cuidador: '6bzL3lDiF7hHPo1eNshw'
     }
@@ -44,7 +48,6 @@ export const MemorenyosForm = (props) => {
         else {
             setValues({...memorenyo })
         }
-        console.log("values.cuidador "+values.cuidador);
 
     }, [memorenyoId, memoObject])
 
@@ -191,3 +194,5 @@ export const MemorenyosForm = (props) => {
         </React.Fragment>
     );
 }
+export default withRouter(MemorenyosForm);
+
