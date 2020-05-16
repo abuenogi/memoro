@@ -1,6 +1,7 @@
 import { db } from '../services/firebase/firebaseConfig';
 
 
+
 export const createData = (data, collection_name) => {
 
     debugger;
@@ -42,6 +43,7 @@ export const updateData = (id, data, collection_name) => {
     }
 
 }
+
 
 
 export const getData = (collection_name) => {

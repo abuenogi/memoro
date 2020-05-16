@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from 'react-router-dom';
 
 const style = {
   textAlign: "center",
@@ -12,6 +13,6 @@ export const Footer = () => (
       <p>Memoro 2020 Copyright ©</p>
     </footer>
     
-);
+);export default withRouter(Footer);
 
 

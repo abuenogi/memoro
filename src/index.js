@@ -3,19 +3,26 @@ import ReactDOM from "react-dom";
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from "./serviceWorker";
 
+/** USO DE Font Awesome 5 React component using SVG with JS
+ * https://www.npmjs.com/package/@fortawesome/react-fontawesome#build-a-library-to-reference-icons-throughout-your-app-more-conveniently
+ * */
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
+
+//import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import "./index.css";
 
 
-import Login from "./container/Login";
-import SignUp from "./container/Signup";
-import ChangePassword from "./container/ChangePassword";
+import Login from "./container/CNT_Login";
+import SignUp from "./container/CNT_Signup";
+import ChangePassword from "./container/CNT_ChangePassword";
 import Home from "./components/Home";
+import MemorenyosForm from "./components/MemorenyosForm";
 import { HomeLinks } from "./pages/HomeLinks";
 import { MiPerfil } from "./pages/MiPerfil";
-import { Memorenyos } from "./pages/Memorenyos";
-import { NoMatch } from "./pages/NoMatch";
+import  Memorenyos  from "./components/Memorenyos";
+import NoMatch  from "./pages/NoMatch";
 import { Calendario } from "./pages/Calendario";
 import  Mapa  from "./components/Mapa";
 import { Entretenimiento } from "./pages/Entretenimiento";
@@ -43,6 +50,8 @@ ReactDOM.render((
               <Route  path="/homelinks" component={HomeLinks} />
               <Route  path="/miperfil" component={MiPerfil} />
               <Route  path="/memorenyos" component={Memorenyos} />
+
+              <Route  path="/memorenyosForm" component={MemorenyosForm} />
 
               /** PATHS de las páginas del menú del Home */
               <Route  path="/calendario" component={Calendario} />

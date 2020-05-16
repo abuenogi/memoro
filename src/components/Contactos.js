@@ -3,9 +3,9 @@ import React, { useState, Fragment , useContext} from "react";
 import { Button } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 
-
-import NavigationBar from "../container/NavigationBar";
-import useDropdown from '../fuctions/SelectMemo';
+import  Footer from "./Footer";
+import NavigationBar from "../container/CNT_NavigationBar";
+import useDropdown from '../fuctions/useDropdown';
 import CardMemo from './CardMemo';
 import { UserContext } from '../context/UserContext';
 
@@ -30,9 +30,10 @@ const Contactos = () => {
             memo={memo}
             />
             <div  className="d-flex justify-content-around mt-4">
-            <Button  href="tel://+34680980409" color="secondary mr-3" size="lg">Llamar cuidador</Button>
-            <Button href={enviar_whatsApp} color="secondary" size="lg">Enviar WhatsApp</Button>
-            </div>    
+            <Button  href="tel://+34680980409" className="button1 mr-3" size="lg">Llamar cuidador</Button>
+            <Button href={enviar_whatsApp}  className="button1" size="lg">Enviar WhatsApp</Button>
+            </div>   
+            <Footer /> 
             </Fragment>
     )
 

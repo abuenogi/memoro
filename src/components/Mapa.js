@@ -6,13 +6,14 @@ import L from 'leaflet';
 import { Button, Spinner } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 
-import NavigationBar from "../container/NavigationBar";
-import FatalError from './500';
+import NavigationBar from "../container/CNT_NavigationBar";
+import FatalError from '../pages/NoMatch';
+import  Footer from "./Footer";
 
 import { UserContext } from '../context/UserContext';
 import { usePosition } from '../fuctions/usePosition';
 import useFetch from '../fuctions/useFetch'
-import useDropdown from '../fuctions/SelectMemo';
+import useDropdown from '../fuctions/useDropdown';
 
 
 const Mapa = () => {
@@ -96,7 +97,7 @@ const Mapa = () => {
                     }}
                 />
 
-                <Circle center={center} fillColor="blue" radius={600} fillColor='blue' />
+                <Circle center={center} fillColor="#4f94d4" radius={600} fillColor='blue' />
 
                 {activePoint && (
                     <Popup
@@ -116,11 +117,11 @@ const Mapa = () => {
             </Map>
 
             <div  className="d-flex justify-content-around mt-4">                
-            <Button href="https://maps.google.com/?q=39.436250,-0.434350" color="secondary mr-3" size="lg">Volver a casa </Button>
+            <Button href="https://maps.google.com/?q=39.436250,-0.434350" className="button1 mr-3"  size="lg">Volver a casa </Button>
 
-            <Button href="tel://+34680980409" color="secondary" size="lg">Llamar cuidador</Button>
+            <Button  href="tel://+34680980409" className="button1" size="lg">Llamar cuidador</Button>
             </div>
-
+            <Footer />                
         </Fragment>
     )
 
