@@ -6,20 +6,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import "./index.css";
 
-
-import Login from "./container/Login";
-import SignUp from "./container/Signup";
-import ChangePassword from "./container/ChangePassword";
+import Login from "./container/CNT_Login";
+import SignUp from "./container/CNT_Signup";
+import ChangePassword from "./container/CNT_ChangePassword";
 import Home from "./components/Home";
+import MemorenyosForm from "./components/MemorenyosForm";
 import { HomeLinks } from "./pages/HomeLinks";
 import { MiPerfil } from "./pages/MiPerfil";
-import Memorenyos from "./components/Memorenyos";
-import { MemorenyosForm } from "./components/MemorenyosForm";
-import { NoMatch } from "./pages/NoMatch";
+import  Memorenyos  from "./components/Memorenyos";
+import NoMatch  from "./pages/NoMatch";
 import { Calendario } from "./pages/Calendario";
 import  Mapa  from "./components/Mapa";
 import { Entretenimiento } from "./pages/Entretenimiento";
-import { Contactos } from "./pages/Contactos";
+import  Contactos  from "./components/Contactos";
+
 import { user_auth, UserContext } from './context/UserContext';
 
 ReactDOM.render((
