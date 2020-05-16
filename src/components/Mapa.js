@@ -1,5 +1,5 @@
 
-import React, { useState, Fragment , useContext} from "react";
+import React, { useState, Fragment ,useEffect, useContext} from "react";
 import { Map, Marker, Popup, TileLayer, Circle } from "react-leaflet";
 
 import L from 'leaflet';
@@ -56,7 +56,14 @@ const Mapa = () => {
     const { latitude, longitude, error_position } = usePosition();
     const [activePoint, setActivePoint] = useState(null);
 
-
+    
+    useEffect(() => {
+    
+     console.log(latitude + ' ' + longitude );
+      },
+        [latitude,longitude ]
+      )
+    
     debugger;
 
     if (loading)
@@ -76,7 +83,7 @@ const Mapa = () => {
                 />
 
                 <Marker
-                    position={center}
+                    position={[data[0].lat ,data[0].lon ]}
                     icon={casaIcon}
                     onClick={() => {
                         console.log(data.lat + ' ' + data.lon);
@@ -87,7 +94,7 @@ const Mapa = () => {
                 />
 
                 <Marker
-                    position={center_ubi}
+                    position={[ latitude, longitude]}
                     icon={personIcon}
                     onClick={() => {
                         console.log(data.lat + ' ' + data.lon);
@@ -97,7 +104,7 @@ const Mapa = () => {
                     }}
                 />
 
-                <Circle center={center} fillColor="#4f94d4" radius={600} fillColor='blue' />
+                <Circle center={[data[0].lat ,data[0].lon ]} fillColor="#4f94d4" radius={600} fillColor='blue' />
 
                 {activePoint && (
                     <Popup

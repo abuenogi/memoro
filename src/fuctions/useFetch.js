@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react'
 
 const useFetch = (url) => {
-    const [ data, setData ] = useState([])
-    const [ loading, setLoading ] = useState(true)
-    const [ error, setError ] = useState(null)
+    const [data, setData] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
 
     useEffect(() => {
-        
+
         debugger;
+
+        let error_result = false;
 
         const fetchResource = async () => {
             try {
@@ -15,16 +17,25 @@ const useFetch = (url) => {
                 let data = await res.json()
 
                 debugger;
-                setData(data)
-                setLoading(false)
+                if (!error_result) {
+                    setData(data)
+                    setLoading(false)
+                }
             } catch (error) {
                 console.log(error);
-                setLoading(false)
-                setError(error)
+
+                if (!error_result) {
+                    setLoading(false)
+                    setError(error)
+                }
             }
         }
         fetchResource()
+        return () => {
+            error_result = true;
+        }
     }, [url])
+
 
     return { data, loading, error }
 }
