@@ -1,24 +1,22 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { fas, faUser, faMobile, faEnvelope, faMapMarkedAlt, faImage, faStreetView, faKey } from '@fortawesome/free-solid-svg-icons'
+import { fas, faUser, faMobile, faEnvelope, faMapMarkedAlt, faImage, faStreetView, faKey, faGlobe, faGlobeEurope, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import  Footer from "./Footer";
 import Layout  from "./Layout";
 import  NavigationBar  from "../container/CNT_NavigationBar";
-import  Jumbotron  from "./Jumbotron";
-import { createData } from '../fuctions/CRUD';
+import { createData, updateData } from '../fuctions/CRUD';
 import { Container } from 'react-bootstrap';
 import { useLocation, useHistory} from 'react-router-dom';
-import { db } from '../services/firebase/firebaseConfig';
 import { auth } from '../services/firebase/firebaseConfig';
 import { UserContext } from '../context/UserContext';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
 
 const MemorenyosForm = (props) => {
 
     const cuidador = useContext(UserContext);
-
     const location = useLocation();
     const history = useHistory();
     var memorenyoId = '';
@@ -29,21 +27,23 @@ const MemorenyosForm = (props) => {
         telefono: '',
         correo: '',
         contrasenya: '',
+        pais: '',
+        ciudad: '',
         direccion: '',
         imagen: '',
         radioSeguridad: '',
-
         cuidador: cuidador.user_id
-        //cuidador: '6bzL3lDiF7hHPo1eNshw'
     }
     //Variable de carga de los valores del objeto memorenyo
     var [values, setValues] = useState(initialMemoObjetValues);
     var [memorenyoId, setMemorenyoId] = useState('');
     var [memoObject, setMemoObject] = useState({})
+    var styleDisplay = {display:'none'}
 
     useEffect(() => {
          if (!memorenyo) {
             setValues({ ...initialMemoObjetValues })
+            styleDisplay = {display: 'yes'}
         }
         else {
             setValues({...memorenyo })
@@ -52,8 +52,16 @@ const MemorenyosForm = (props) => {
     }, [memorenyoId, memoObject])
 
     const handleInputChange = e => {
-
+        console.log("Valor en handleInputChange", e)
         var { name, value } = e.target;
+        setValues({
+            ...values,
+            [name]: value
+        })
+    }
+
+    const handleInputSelect = (name,value) => {
+        console.log("Valor en handleInputSelect", name, value);
         setValues({
             ...values,
             [name]: value
@@ -66,22 +74,20 @@ const MemorenyosForm = (props) => {
     }
 
     const addOrEdit = (obj) => {
-        if (memorenyoId == '') {
+
+        if (obj.id == '') {
+            console.log("Voy a crear al memoreño", obj);
             auth.createUserWithEmailAndPassword(obj.correo, obj.contrasenya)
             .catch(function (error) {
-                console.log(error);
+                console.log('Error añadiendo el memorenyo en auth addOrEdit ', error);
             });
             obj.rol = 'memorenyo';
             delete obj.contrasenya;
             createData(obj, 'usuarios');
         }
         else {
-            db.child(`memorenyos/${memorenyoId}`).set(
-                obj,
-                err => {
-                    if (err)
-                        console.log(err)
-                })
+            console.log("Voy a actualizar los datos del memoreño ", obj);
+            updateData(obj.id, obj, 'usuarios');
         }
         history.push({
             pathname: '/memorenyos'
@@ -94,7 +100,6 @@ const MemorenyosForm = (props) => {
         <React.Fragment>
             <Layout>
                 <NavigationBar />
-                <Jumbotron />
                 <Container fluid>
                     <div>
                         <h3>{!memorenyo? "Crear memoreño" : "Actualizar memoreño"}</h3>
@@ -136,7 +141,7 @@ const MemorenyosForm = (props) => {
                                         onChange={handleInputChange}
                                     />
                                 </div>
-                                <div className="form-group input-group col-md-6">
+                                <div className="form-group input-group col-md-6" style={styleDisplay}>
                                     <div className="input-group-prepend">
                                         <div className="input-group-text">
                                             <FontAwesomeIcon icon={fas, faKey} />
@@ -147,6 +152,7 @@ const MemorenyosForm = (props) => {
                                         onChange={handleInputChange}
                                     />
                                 </div>
+                               
                                 <div className="form-group input-group col-md-6">
                                     <div className="input-group-prepend">
                                         <div className="input-group-text">
@@ -173,6 +179,39 @@ const MemorenyosForm = (props) => {
                                 <div className="form-group input-group">
                                     <div className="input-group-prepend">
                                         <div className="input-group-text">
+                                            <FontAwesomeIcon icon={fas, faGlobe} />
+                                        </div>
+                                    </div>
+                                    {/*
+                                      <CountryDropdown className="form-control" type="selector" name="pais" placeholder="País" 
+                                        value={values.pais}
+                                        onChange={(value) => {alert(value) ; setValues(value); alert (this);}} />
+                                
+                                    */}
+                                    <CountryDropdown className="form-control" type="selector" name="pais" placeholder="País" 
+                                        value={values.pais}
+                                        onChange={(value) => handleInputSelect('pais', value)}/>
+                                </div>
+                                <div className="form-group input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">
+                                            <FontAwesomeIcon icon={fas, faCaretDown} />
+                                        </div>
+                                    </div>
+                                    {/*}
+                                    <input className="form-control" name="ciudad" placeholder="Ciudad"
+                                        value={values.ciudad}
+                                        onChange={handleInputChange}
+                                    />*/}
+                                    <RegionDropdown type="selector" className="form-control" name="ciudad" placeholder="Ciudad"
+                                        country={values.pais}
+                                        value={values.ciudad}
+                                        onChange={(value) => handleInputSelect('ciudad', value)} />
+                                </div>
+                                </div>
+                                <div className="form-group input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">
                                             <FontAwesomeIcon icon={fas, faMapMarkedAlt} />
                                         </div>
                                     </div>
@@ -181,7 +220,6 @@ const MemorenyosForm = (props) => {
                                         onChange={handleInputChange}
                                     />
                                 </div>
-                            </div>
                             <div className="form-group">
                                 <input type="submit" value={!memorenyoId? "Guardar" : "Actualizar"} className="btn btn-primary btn-block" />
         
