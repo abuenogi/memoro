@@ -1,13 +1,12 @@
-import React, { useState, useEffect }  from 'react'
+import React, { useState}  from 'react'
 import MemorenyosActions from './MemorenyosActions';
 import BotoneraCreacion from './BotoneraCreacion';
 import  Footer from "./Footer";
 import  Layout from "./Layout";
 import  NavigationBar from "../container/CNT_NavigationBar";
-import  Jumbotron from "./Jumbotron";
-import {db} from '../services/firebase/firebaseConfig';
-import { Container, Row, Col, Button, Nav, Navbar} from 'reactstrap';
-import {createData, useUpdateData, getDataElement} from '../fuctions/CRUD';
+import { withRouter } from 'react-router-dom';
+import { Container, Row, Col } from 'reactstrap';
+import { getDataElement } from '../fuctions/CRUD';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, fas} from '@fortawesome/free-solid-svg-icons'
 
@@ -30,10 +29,9 @@ const Memorenyos = () => {
            <React.Fragment>
                <Layout>
                    <NavigationBar />
-                   <Jumbotron />
                    <Container fluid>
                        <div>
-                               <h3>Memoreños</h3>
+                               <h3>Listado de memoreños</h3>
                        </div>
                        <Row>
                            <Col>
@@ -66,4 +64,4 @@ const Memorenyos = () => {
 );
 }
 
-export default Memorenyos; 
+export default withRouter(Memorenyos); 
