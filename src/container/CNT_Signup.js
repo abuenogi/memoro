@@ -51,7 +51,8 @@ const Signup_container = ({ history }) => {
       "pais": pais,
       "ciudad": ciudad,
       "domicilio": domicilio,
-      "rol": "cuidador"
+      "rol": "cuidador",
+      "location":[0 , 0]
     }
 
     debugger;
