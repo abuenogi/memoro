@@ -3,14 +3,15 @@ import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fas, faUser, faMobile, faEnvelope, faMapMarkedAlt, faImage, faStreetView, faKey, faGlobe, faGlobeEurope, faCaretDown } from '@fortawesome/free-solid-svg-icons'
-import  Footer from "./Footer";
+import Footer from "./Footer";
 import Layout  from "./Layout";
-import  NavigationBar  from "../container/CNT_NavigationBar";
+import NavigationBar  from "../container/CNT_NavigationBar";
+import CNT_NavigationBarMemoLower  from "../container/CNT_NavigationBarMemoLower";
 import { createData, updateData } from '../fuctions/CRUD';
 import { Container } from 'react-bootstrap';
 import { useLocation, useHistory} from 'react-router-dom';
 import { auth } from '../services/firebase/firebaseConfig';
-import { UserContext } from '../context/UserContext';
+import { UserContext, memoSelected } from '../context/UserContext';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
 
@@ -20,8 +21,8 @@ const MemorenyosForm = (props) => {
     const location = useLocation();
     const history = useHistory();
     var memorenyoId = '';
-    var memorenyo = location.memorenyo;    
-    
+    var memorenyo = location.memorenyo;  
+        
     const initialMemoObjetValues = {
         nombre: '',
         telefono: '',
@@ -34,6 +35,7 @@ const MemorenyosForm = (props) => {
         radioSeguridad: '',
         cuidador: cuidador.user_id
     }
+
     //Variable de carga de los valores del objeto memorenyo
     var [values, setValues] = useState(initialMemoObjetValues);
     var [memorenyoId, setMemorenyoId] = useState('');
@@ -41,6 +43,8 @@ const MemorenyosForm = (props) => {
     var styleDisplay = {display:'none'}
 
     useEffect(() => {
+        console.log("useEffect (MemorenyosForm)--> El memoreño seleccionado y almacenado en el contexto es: ", memoSelected);
+        console.log("useEffect (MemorenyosForm)--> El memoreño seleccionado y pasado en el location: ", memorenyo);
          if (!memorenyo) {
             setValues({ ...initialMemoObjetValues })
             styleDisplay = {display: 'yes'}
@@ -52,7 +56,6 @@ const MemorenyosForm = (props) => {
     }, [memorenyoId, memoObject])
 
     const handleInputChange = e => {
-        console.log("Valor en handleInputChange", e)
         var { name, value } = e.target;
         setValues({
             ...values,
@@ -61,7 +64,6 @@ const MemorenyosForm = (props) => {
     }
 
     const handleInputSelect = (name,value) => {
-        console.log("Valor en handleInputSelect", name, value);
         setValues({
             ...values,
             [name]: value
@@ -73,8 +75,8 @@ const MemorenyosForm = (props) => {
         addOrEdit(values);
     }
 
+    
     const addOrEdit = (obj) => {
-
         if (obj.id == '') {
             console.log("Voy a crear al memoreño", obj);
             auth.createUserWithEmailAndPassword(obj.correo, obj.contrasenya)
@@ -89,6 +91,7 @@ const MemorenyosForm = (props) => {
             console.log("Voy a actualizar los datos del memoreño ", obj);
             updateData(obj.id, obj, 'usuarios');
         }
+        //Revisar si mostrar un alert confirmando la actualización o llevarlo al listado de memoreños
         history.push({
             pathname: '/memorenyos'
           });
@@ -100,9 +103,9 @@ const MemorenyosForm = (props) => {
         <React.Fragment>
             <Layout>
                 <NavigationBar />
-                <Container fluid>
-                    <div>
-                        <h3>{!memorenyo? "Crear memoreño" : "Actualizar memoreño"}</h3>
+                <Container fluid className="form-style">
+                    <div className="divTitle">
+                        <h3>{!memorenyo? "Crear memoreño" : "Detalle del memoreño"}</h3>
                     </div>
                     <div>
                         <form autoComplete="off" onSubmit={handleFormSubmit}>
@@ -227,6 +230,7 @@ const MemorenyosForm = (props) => {
                         </form>
                     </div>
                 </Container>
+                <CNT_NavigationBarMemoLower memorenyo={memorenyo}/>
             </Layout>
             <Footer />
         </React.Fragment>

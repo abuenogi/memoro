@@ -23,6 +23,10 @@ const Memorenyos = () => {
       };
       fetchData();
     }, []);
+
+
+    console.log ("Los memoreños están escritos de esta forma "+memorenyos);
+    console.log ("Los memoreños están escritos de esta forma ", memorenyos);
   
    return (
        <>
@@ -31,18 +35,17 @@ const Memorenyos = () => {
                    <NavigationBar />
                    <Container fluid>
                        <div>
-                               <h3>Listado de memoreños</h3>
+                               <h4>Listado de memoreños</h4>
                        </div>
                        <Row>
-                           <Col>
+                           <Col className="memoColList">
                                <table className="table table-borderless">
                                    <tbody>
                                        {memorenyos.map(memorenyo => (
-                                           
                                            <tr key={memorenyo.id}>
-                                               <td><FontAwesomeIcon icon={fas, faUser} /></td>
-                                               <td>{memorenyo.nombre}</td>
-                                               <td>
+                                               <td className="memoIconList"><FontAwesomeIcon icon={fas, faUser} /></td>
+                                               <td className="memoNameList">{memorenyo.nombre}</td>
+                                               <td className="memoButtonsList">
                                                    <MemorenyosActions memorenyo={memorenyo} />
                                                </td>
                                            </tr>

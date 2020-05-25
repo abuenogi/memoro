@@ -1,36 +1,28 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, fas } from '@fortawesome/free-solid-svg-icons'
+import { withRouter } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import { deleteData } from '../fuctions/CRUD';
 import { db } from '../services/firebase/firebaseConfig';
-import { memoSelected} from "../context/UserContext";
 
 
-const MemorenyosActions = ({ memorenyo }) => {
+const MemoContactsActions = ({ memorenyo }) => {
 
-  //Constantes necesarias en el componente
-  //const memoSelected = useContext(memoSelected);
-   const history = useHistory();
+  const history = useHistory();
 
-  //Se redirige a la pantalla del formuario de actualización/creación del memoreño
+
   const onUpdate = value => () => {
-    //Se almacena el memoreño seleccionado del listado en el contexto del usuario
-    console.log("onUpdate => memoreño seleccionado y almacenado en el contexto: ",memoSelected);
-    console.log("onUpdate => memoreño seleccionado y pasado al componente: ",memorenyo);
-
-    //Se redirige a la página de detalle del memoreño y modificación
     history.push({
       pathname: '/memorenyosForm',
       state: memorenyo.id,
-      memorenyo: memorenyo //> Se va a almacenar en el contexto del usuario para evitar problemas de seguirdad ya que puede accederse al location y ver la información del memoreño
+      memorenyo: memorenyo
     });
 
   }
 
-  //Se borran los datos del memoreño, se solicita confirmación para ello, al confirmar 
-  //se redirige al listado de memoreños 
+  //Delete objet
   const onDelete = () => {
     console.log("Borrar memorenyo " + memorenyo.id);
     confirmAlert({
@@ -59,14 +51,14 @@ const MemorenyosActions = ({ memorenyo }) => {
   return (
     <>
 
-      <a className="btn text-primary" onClick={onUpdate()}>
+      <a className="btn text-primary" onClick={onUpdate(memorenyo)}>
         <FontAwesomeIcon icon={fas, faEdit} />
       </a>
-      <a className="btn text-danger" onClick={() => { onDelete() }}>
+      <a className="btn text-danger" onClick={() => { onDelete(memorenyo) }}>
         <FontAwesomeIcon icon={fas, faTrashAlt} />
       </a>
     </>
   );
 }
 
-export default MemorenyosActions; 
+export default withRouter(MemoContactsActions); 
