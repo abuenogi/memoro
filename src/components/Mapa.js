@@ -11,7 +11,6 @@ import FatalError from '../pages/NoMatch';
 import  Footer from "./Footer";
 
 import { UserContext } from '../context/UserContext';
-import { usePosition } from '../fuctions/usePosition';
 import useFetch from '../fuctions/useFetch'
 import useDropdown from '../fuctions/useDropdown';
 
@@ -41,9 +40,7 @@ const Mapa = () => {
         shadowAnchor: [15, 15],
     })
 
-    const center = [39.436250, -0.434350]
-    const center_ubi = [39.436932, -0.465240]
-
+  
     const user_context = useContext(UserContext);
     const memo_list = ["Ana Bueno", "Tamara Montero", "Mateo"]
     const [memo, MemoDropdown] = useDropdown("Memo", memo_list);
@@ -53,15 +50,17 @@ const Mapa = () => {
     //const url = `https://eu1.locationiq.com/v1/search.php?key=c7392af2aaffbc&q=${user_context.pais},${user_context.ciudad},${user_context.domicilio}&format=json`;
 
     const { data, loading, error } = useFetch(url);
-    const { latitude, longitude, error_position } = usePosition();
     const [activePoint, setActivePoint] = useState(null);
 
     
+
     useEffect(() => {
-    
-     console.log(latitude + ' ' + longitude );
+        
+        //calcular la diferencia de distancia entre ambos puntos
+        updateDataElement('usuarios', user_context.user_id ,'location', user_context.location);
+     
       },
-        [latitude,longitude ]
+        [user_context.location]
       )
     
     debugger;
@@ -69,7 +68,7 @@ const Mapa = () => {
     if (loading)
         return <Spinner animation="grow" variant="info" />
 
-    if (error || error_position)
+    if (error )
         return <FatalError />
 
     return (
@@ -77,7 +76,7 @@ const Mapa = () => {
         <Fragment>
             <NavigationBar />
             <MemoDropdown />
-            <Map center={center} zoom={15}>
+            <Map center={memo.location} zoom={15}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
@@ -88,18 +87,16 @@ const Mapa = () => {
                     onClick={() => {
                         console.log(data.lat + ' ' + data.lon);
                         console.log('Ubicación' + latitude + ' ' + longitude);
-                        //setActivePoint(data);
+                        setActivePoint(data);
                         debugger;
                     }}
                 />
 
                 <Marker
-                    position={[ latitude, longitude]}
+                    position={memo.location}
                     icon={personIcon}
                     onClick={() => {
-                        console.log(data.lat + ' ' + data.lon);
-                        console.log('Ubicación' + latitude + ' ' + longitude);
-                        //setActivePoint(data);
+                        console.log(memo.location);
                         debugger;
                     }}
                 />

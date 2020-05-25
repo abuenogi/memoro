@@ -69,6 +69,7 @@ const Login_container = ({ history }) => {
 
 
   return <Login
+  
     onClickBotonLogin={onClickBotonLogin}
     onClickChangePass={onClickChangePass}
     onClickReg={onClickReg}

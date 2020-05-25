@@ -8,7 +8,7 @@ import { validateSignUp } from "../fuctions/validateInput";
 
 const SignUp = ({ onClickBotonCreateUser, onClickVolver }) => {
 
-
+    
     const { handleChange, handleSubmit, values, errors } = useForm(submit, validateSignUp);
 
     const [ciudad, setCiudad] = useState('');
@@ -95,7 +95,7 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver }) => {
                 </div>
 
                 <div className="form-group">
-                    <Label >Ciudad</Label>
+                    <Label >Provincia</Label>
                     <RegionDropdown type="selector" className="form-control"
                         country={pais}
                         value={ciudad}

@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
 import { auth } from '../services/firebase/firebaseConfig';
-
+import { usePosition } from '../fuctions/usePosition';
 import { getDataElement, getData } from '../fuctions/CRUD';
 
 
@@ -16,11 +16,15 @@ export var user_auth = {
   pais: '',
   ciudad: '',
   domicilio: '',
-  rol: ''
+  rol: '',
+  location: ''
 
 };
 
 try {
+
+  const { latitude, longitude, error_position } = usePosition();
+
   auth.onAuthStateChanged(
 
     async function (user) {
@@ -38,7 +42,7 @@ try {
 
         user_result.forEach(function (doc) {
           // doc.data() is never undefined for query doc snapshots
-          console.log('Usuario => ' + doc.data().nombre);
+          console.log('Usuario => ', doc.data());
 
           user_auth.telefono =  doc.data().telefono;
           user_auth.fechaNac =  doc.data().fechaNac;
@@ -46,6 +50,7 @@ try {
           user_auth.ciudad =  doc.data().ciudad;
           user_auth.domicilio =  doc.data().domicilio;
           user_auth.displayName =  doc.data().nombre;
+          user_auth.longitude = [latitude, longitude]
         });
 
         user_auth.rol = 'cuidador';
