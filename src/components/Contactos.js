@@ -25,7 +25,6 @@ const Contactos = () => {
         <Fragment>
             <NavigationBar />
             <MemoDropdown />
-            
             <CardMemo
             memo={memo}
             />

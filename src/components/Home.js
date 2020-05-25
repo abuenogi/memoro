@@ -18,8 +18,6 @@ const Home = ()  =>{
                 <Footer/>
             </React.Fragment>
         );
-    
 }
-
 
 export default withRouter(Home);
