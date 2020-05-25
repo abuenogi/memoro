@@ -76,7 +76,6 @@ ________________________________________________________________________________
         <Fragment>
             <NavigationBar />
             <MemoDropdown />
-            
             <CardMemo
             memo={memo}
             />

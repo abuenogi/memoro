@@ -1,9 +1,7 @@
 import { createContext } from 'react';
-
 import { auth } from '../services/firebase/firebaseConfig';
 import { usePosition } from '../fuctions/usePosition';
 import { getDataElement, getData } from '../fuctions/CRUD';
-
 
 export var user_auth = {
 
@@ -19,6 +17,20 @@ export var user_auth = {
   rol: '',
   location: ''
 
+};
+
+export const memoSelected = {
+  photoURL: '',
+  user_id: '',
+  displayName: '',
+  email: '',
+  telefono: '',
+  fechaNac: '',
+  pais: '',
+  ciudad: '',
+  domicilio: '',
+  rol: '',
+  contactos: ''
 };
 
 try {
@@ -41,9 +53,7 @@ try {
         var user_result = await getDataElement('usuarios', 'email', user.email);
 
         user_result.forEach(function (doc) {
-          // doc.data() is never undefined for query doc snapshots
           console.log('Usuario => ', doc.data());
-
           user_auth.telefono =  doc.data().telefono;
           user_auth.fechaNac =  doc.data().fechaNac;
           user_auth.pais =  doc.data().pais;

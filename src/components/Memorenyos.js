@@ -1,13 +1,12 @@
-import React, { useState, useEffect }  from 'react'
+import React, { useState}  from 'react'
 import MemorenyosActions from './MemorenyosActions';
 import BotoneraCreacion from './BotoneraCreacion';
 import  Footer from "./Footer";
 import  Layout from "./Layout";
 import  NavigationBar from "../container/CNT_NavigationBar";
-import  Jumbotron from "./Jumbotron";
-import {db} from '../services/firebase/firebaseConfig';
-import { Container, Row, Col, Button, Nav, Navbar} from 'reactstrap';
-import {createData, useUpdateData, getDataElement} from '../fuctions/CRUD';
+import { withRouter } from 'react-router-dom';
+import { Container, Row, Col } from 'reactstrap';
+import { getDataElement } from '../fuctions/CRUD';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, fas} from '@fortawesome/free-solid-svg-icons'
 
@@ -24,27 +23,29 @@ const Memorenyos = () => {
       };
       fetchData();
     }, []);
+
+
+    console.log ("Los memoreños están escritos de esta forma "+memorenyos);
+    console.log ("Los memoreños están escritos de esta forma ", memorenyos);
   
    return (
        <>
            <React.Fragment>
                <Layout>
                    <NavigationBar />
-                   <Jumbotron />
                    <Container fluid>
                        <div>
-                               <h3>Memoreños</h3>
+                               <h4>Listado de memoreños</h4>
                        </div>
                        <Row>
-                           <Col>
+                           <Col className="memoColList">
                                <table className="table table-borderless">
                                    <tbody>
                                        {memorenyos.map(memorenyo => (
-                                           
                                            <tr key={memorenyo.id}>
-                                               <td><FontAwesomeIcon icon={fas, faUser} /></td>
-                                               <td>{memorenyo.nombre}</td>
-                                               <td>
+                                               <td className="memoIconList"><FontAwesomeIcon icon={fas, faUser} /></td>
+                                               <td className="memoNameList">{memorenyo.nombre}</td>
+                                               <td className="memoButtonsList">
                                                    <MemorenyosActions memorenyo={memorenyo} />
                                                </td>
                                            </tr>
@@ -66,4 +67,4 @@ const Memorenyos = () => {
 );
 }
 
-export default Memorenyos; 
+export default withRouter(Memorenyos); 
