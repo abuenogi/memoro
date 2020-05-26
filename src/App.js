@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useContext} from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Login from "./container/CNT_Login";
 import SignUp from "./container/CNT_Signup";
@@ -19,11 +19,11 @@ import { user_auth, memoSelected, UserContext } from "./context/UserContext";
 
 const App = () => {
 
- const [memorenyoSelected, setMemorenyoSelected] = useState(memoSelected);
+ const [memorenyoSelected, setMemorenyoSelected] = useState(memoSelected); 
 
   return (
     <BrowserRouter>
-      <UserContext.Provider value={(user_auth, memorenyoSelected, setMemorenyoSelected)}>
+      <UserContext.Provider value={user_auth, [memorenyoSelected, setMemorenyoSelected]}>
         <div className="auth-inner">
           <Switch>
             /** PATHS de las páginas del inicio de sesion/registro*/

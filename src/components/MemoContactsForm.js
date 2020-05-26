@@ -30,11 +30,6 @@ const MemoContactsForm = (props) => {
     //Variable de carga de los valores del objeto memorenyo y sus contactos
 
     useEffect(() => {
-        console.log("useEffect de MemoContactsForm memo: ", memo);
-        console.log("useEffect de MemoContactsForm memorenyo: ", memorenyo);
-        console.log("useEffect de MemoContactsForm memo.contactos: ", memo.contactos);
-        console.log("useEffect de MemoContactsForm contactos: ", contactos);
-        console.log("useEffect de MemoContactsForm contactoSelected: ", contactoSelected);
         
         //Se trata de una creación
         if(!contactoSelected){
@@ -81,6 +76,7 @@ const MemoContactsForm = (props) => {
     }, [memorenyo.contactos]) 
 
     const addOrEdit = (contactValue) => {
+        
          if (contactValue) {
            const clave = Object.keys(memorenyo.contactos).length;
            setMemorenyo({...memorenyo, contactos: {...memorenyo.contactos, [clave]: contactValue}});

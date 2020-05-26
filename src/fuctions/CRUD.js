@@ -4,7 +4,8 @@ import {
 
 export const createData = (data, collection_name) => {
 
-    debugger;
+    console.log("CREATEDATA del CRUD data: ", data);
+    console.log("CREATEDATA del CRUD collection_name: ", collection_name);
     try {
         return db
             .collection(collection_name)
@@ -68,7 +69,7 @@ export const getData = (collection_name) => {
 
 
 export function getDataElement(collection_name, data, value) {
-    debugger;
+    //debugger;
     return db.collection(collection_name).where(data, "==", value).get();
 }
 

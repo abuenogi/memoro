@@ -14,6 +14,7 @@ const MemoContactsActions = ({ memorenyo }) => {
 
 
   const onUpdate = value => () => {
+
     history.push({
       pathname: '/memorenyosForm',
       state: memorenyo.id,
