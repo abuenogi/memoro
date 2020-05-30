@@ -52,13 +52,14 @@ const Styles = styled.div`
 
  const Jumbotron = () => {
 
-  const user_context = useContext(UserContext);
+  const {user_auth} = useContext(UserContext);
+  console.log('Usuario => user_auth: ', user_auth);
 
   return (
     <Styles>
       <Jumbo fluid className="jumbo">
         <div className="overlay">
-          <div className="cntNombre"> <h2>Hola</h2><p>{user_context.displayName}</p></div>
+          <div className="cntNombre"> <h2>Hola</h2><p>{user_auth.displayName}</p></div>
           <div className="cntImg"> <Imagen src={usuarioImagen} alt="Usuario" with="80" height="80" /></div>
         </div>
       </Jumbo>

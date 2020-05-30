@@ -1,5 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
+import firebase from "firebase";
+import produce from 'immer';
+import "firebase/messaging";
+import { auth } from './services/firebase/firebaseConfig';
+import { usePosition } from './fuctions/usePosition';
+import { getDataElement, getData } from './fuctions/CRUD';
 import Login from "./container/CNT_Login";
 import SignUp from "./container/CNT_Signup";
 import ChangePassword from "./container/CNT_ChangePassword";
@@ -16,13 +22,51 @@ import Mapa from "./components/Mapa";
 import { Entretenimiento } from "./pages/Entretenimiento";
 import Contactos from "./components/Contactos";
 import { user_auth, memoSelected, UserContext } from "./context/UserContext";
-import firebase from "firebase";
-import "firebase/messaging";
 import { sendTokenToServer, updateUIForPushEnabled, updateUIForPushPermissionRequired, showToken, setTokenSentToServer } from './fuctions/messageUtilities';
 
 const App = () => {
   const [memorenyoSelected, setMemorenyoSelected] = useState(memoSelected);
+  const [userAuth, setUserAuth] = useState(user_auth);
 
+  useEffect(() => {
+    const updateUser = async user => {
+      setUserAuth(await produce(userAuth, async(draft) => {
+        if (user) {
+          console.log("usuario-> " + user.uid);
+          draft.photoURL = user.photoURL;
+          draft.user_id = user.uid;
+          draft.displayName = user.displayName;
+          draft.email = user.email;
+    
+          var user_result = await getDataElement('usuarios', 'email', user.email);
+    
+          user_result.forEach(function (doc) {
+            
+            draft.telefono =  doc.data().telefono;
+            draft.fechaNac =  doc.data().fechaNac;
+            draft.pais =  doc.data().pais;
+            draft.ciudad =  doc.data().ciudad;
+            draft.domicilio =  doc.data().domicilio;
+            draft.displayName =  doc.data().nombre;
+            //user_auth.longitude = [latitude, longitude]
+          });
+    
+          draft.rol = 'cuidador';
+          return draft;      
+  
+        } else {
+          console.log('El usuario no existe');
+        }
+  
+      }))
+      //función de immer que se encarga de hacer el objeto inmutable
+      ;
+    }
+
+    auth.onAuthStateChanged(updateUser);
+  }, [])
+
+    
   /*
    *
    * MENSAJERIA
@@ -72,7 +116,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <UserContext.Provider
-        value={{ user_auth, memorenyoSelected, setMemorenyoSelected }}
+        value={{ user_auth: userAuth, memorenyoSelected, setMemorenyoSelected }}
       >
         <div className="auth-inner">
           <Switch>
