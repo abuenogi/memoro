@@ -17,6 +17,7 @@ var firebaseDB = firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
 export const db = firebase.firestore();
+export const geo = firebase.firestore;
 
 db.settings({
     timestampsInSnapshots: true,

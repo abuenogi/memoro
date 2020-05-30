@@ -12,11 +12,56 @@ import  Footer from "./Footer";
 
 import { UserContext } from '../context/UserContext';
 import useFetch from '../fuctions/useFetch'
+import { usePosition } from '../fuctions/usePosition';
 import useDropdown from '../fuctions/useDropdown';
+import { updateDataElement , getDataElement} from '../fuctions/CRUD';
+import { Dist} from '../fuctions/calculaDistancias';
 
 
 const Mapa = () => {
 
+
+    const [ubiPersona, setubiPersona] = useState([]);
+    const { latitude, longitude, error_position } = usePosition();
+    const user_context = useContext(UserContext);
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+        
+        const ubicacion  = [latitude, longitude]
+
+        updateDataElement('usuarios', user_context.user_id ,'ubicacion', ubicacion);
+
+            if (user_context.rol === 'memoreyo') {
+                debugger;
+                const data = await getDataElement('usuarios', 'id', user_context.user_id);
+                setubiPersona(data.docs.map(doc => ({ ...doc.data() })));
+            } else if (user_context.rol === 'cuidador') {
+                debugger;
+                const data = await getDataElement('usuarios', 'cuidador', user_context.user_id);
+                setubiPersona(data.docs.map(doc => ({ ...doc.data() })));
+            }
+
+        };
+        fetchData();
+
+
+    }, [user_context]);
+
+
+    const url = 'https://eu1.locationiq.com/v1/search.php?key=c7392af2aaffbc&q=España,Valencia,Torrent,Montreal 76, 14B&format=json'; 
+    //const url = `https://eu1.locationiq.com/v1/search.php?key=c7392af2aaffbc&q=${user_context.pais},${user_context.ciudad},${user_context.domicilio}&format=json`;
+
+    
+    //const memo_list = ["Ana Bueno", "Tamara Montero", "Mateo"]
+    const [personas, PersonaDropdown] = useDropdown("Buscar usuarios", ubiPersona);
+    const { data, loading, error } = useFetch(url);
+    const [activePoint, setActivePoint] = useState(null);
+
+    var center = [personas.ubicacion.Pc, personas.ubicacion.Vc];
+    var distanciaKM = Dist(data[0].lat ,data[0].lon, 
+                            personas.ubicacion.Pc, personas.ubicacion.Vc);  
 
     const casaIcon = new L.Icon({
         iconUrl: require('../images/home-solid.svg'),
@@ -40,31 +85,6 @@ const Mapa = () => {
         shadowAnchor: [15, 15],
     })
 
-  
-    const user_context = useContext(UserContext);
-    const memo_list = ["Ana Bueno", "Tamara Montero", "Mateo"]
-    const [memo, MemoDropdown] = useDropdown("Memo", memo_list);
-
- 
-    const url = 'https://eu1.locationiq.com/v1/search.php?key=c7392af2aaffbc&q=España,Valencia,Torrent,Montreal 76, 14B&format=json'; 
-    //const url = `https://eu1.locationiq.com/v1/search.php?key=c7392af2aaffbc&q=${user_context.pais},${user_context.ciudad},${user_context.domicilio}&format=json`;
-
-    const { data, loading, error } = useFetch(url);
-    const [activePoint, setActivePoint] = useState(null);
-
-    
-
-    useEffect(() => {
-        
-        //calcular la diferencia de distancia entre ambos puntos
-        updateDataElement('usuarios', user_context.user_id ,'location', user_context.location);
-     
-      },
-        [user_context.location]
-      )
-    
-    debugger;
-
     if (loading)
         return <Spinner animation="grow" variant="info" />
 
@@ -75,8 +95,8 @@ const Mapa = () => {
 
         <Fragment>
             <NavigationBar />
-            <MemoDropdown />
-            <Map center={memo.location} zoom={15}>
+            <PersonaDropdown />
+            <Map center={center} zoom={15}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
@@ -85,18 +105,19 @@ const Mapa = () => {
                     position={[data[0].lat ,data[0].lon ]}
                     icon={casaIcon}
                     onClick={() => {
-                        console.log(data.lat + ' ' + data.lon);
-                        console.log('Ubicación' + latitude + ' ' + longitude);
+                        //console.log(data.lat + ' ' + data.lon);
+                        //console.log('Ubicación' + latitude + ' ' + longitude);
                         setActivePoint(data);
                         debugger;
                     }}
                 />
 
                 <Marker
-                    position={memo.location}
+                    position={center}
                     icon={personIcon}
                     onClick={() => {
-                        console.log(memo.location);
+                        //console.log([ latitude, longitude]);
+                        //setActivePoint(data);
                         debugger;
                     }}
                 />
