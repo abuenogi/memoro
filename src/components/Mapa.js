@@ -10,9 +10,11 @@ import NavigationBar from "../container/CNT_NavigationBar";
 import FatalError from '../pages/NoMatch';
 import  Footer from "./Footer";
 
+
 import { UserContext } from '../context/UserContext';
 import useFetch from '../fuctions/useFetch'
 import useDropdown from '../fuctions/useDropdown';
+import  {updateDataElement} from "../fuctions/CRUD";
 
 
 const Mapa = () => {
@@ -44,6 +46,7 @@ const Mapa = () => {
     const user_context = useContext(UserContext);
     const memo_list = ["Ana Bueno", "Tamara Montero", "Mateo"]
     const [memo, MemoDropdown] = useDropdown("Memo", memo_list);
+
 
  
     const url = 'https://eu1.locationiq.com/v1/search.php?key=c7392af2aaffbc&q=España,Valencia,Torrent,Montreal 76, 14B&format=json'; 
@@ -86,7 +89,7 @@ const Mapa = () => {
                     icon={casaIcon}
                     onClick={() => {
                         console.log(data.lat + ' ' + data.lon);
-                        console.log('Ubicación' + latitude + ' ' + longitude);
+                        //console.log('Ubicación' + latitude + ' ' + longitude);
                         setActivePoint(data);
                         debugger;
                     }}

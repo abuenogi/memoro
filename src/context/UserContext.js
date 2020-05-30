@@ -19,32 +19,34 @@ export var user_auth = {
 
 };
 
+//Valores por defecto del memoreño seleccionado, la primera vez que entra en la aplicación no tiene valores.
 export const memoSelected = {
-  photoURL: '',
-  user_id: '',
-  displayName: '',
-  email: '',
-  telefono: '',
-  fechaNac: '',
-  pais: '',
   ciudad: '',
-  domicilio: '',
+  contactos: '',
+  correo: '',
+  cuidador: '',
+  direccion:'',
+  id:'',
+  imagen:'',
+  nombre:'',
+  pais:'',
+  radioSeguridad:'',
   rol: '',
-  contactos: ''
+  telefono:'',
+  ubicacion: '' 
 };
 
 try {
 
-  const { latitude, longitude, error_position } = usePosition();
+  //const { latitude, longitude, error_position } = usePosition();
 
   auth.onAuthStateChanged(
 
     async function (user) {
 
-      //console.log("usuario-> " + user.uid);
-
+      
       if (user) {
-
+        console.log("usuario-> " + user.uid);
         user_auth.photoURL = user.photoURL;
         user_auth.user_id = user.uid;
         user_auth.displayName = user.displayName;
@@ -60,7 +62,7 @@ try {
           user_auth.ciudad =  doc.data().ciudad;
           user_auth.domicilio =  doc.data().domicilio;
           user_auth.displayName =  doc.data().nombre;
-          user_auth.longitude = [latitude, longitude]
+          //user_auth.longitude = [latitude, longitude]
         });
 
         user_auth.rol = 'cuidador';
@@ -73,6 +75,7 @@ try {
   console.log(error);
 }
 
-export const UserContext = createContext(user_auth);
+//Creo el contexto con los valores del usuario autenticado y el memoreño seleccionado.
+export const UserContext = createContext({user_auth, memoSelected});
 
 
