@@ -15,12 +15,14 @@ import { useHistory } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import {UserContext} from '../context/UserContext';
 
+
+
 const MemoContacts = ({}) => {
   const location = useLocation();
   const history = useHistory();
   //var memorenyo = location.memorenyo;
   const [contactos, setContactos] = useState([]);
-  let [memorenyoSelected, setMemorenyoSelected] = useContext(UserContext);
+  const {memorenyoSelected, setMemorenyoSelected} = useContext(UserContext);
   
 
   useEffect(() => {
@@ -38,15 +40,17 @@ const MemoContacts = ({}) => {
      * ****************
      */
     //Recuperamos los contactos del memoreño en forma de objeto y lo recorremos (El memoreño tiene un array de contactos)
-    const contactosData = Object.keys(memorenyoSelected.contactos).map(
-      (key) => memorenyoSelected.contactos[key]
-    );
+    if(memorenyoSelected.contactos){
+      const contactosData = Object.keys(memorenyoSelected.contactos).map(
+        (key) => memorenyoSelected.contactos[key]
+      );
 
-    setContactos(
-      contactosData.map((doc) => ({
-        ...doc,
-      }))      
-    );
+      setContactos(
+        contactosData.map((doc) => ({
+          ...doc,
+        }))      
+      );
+    }
 
     console.log("setContactos en useEffect ", contactos);
     //opcion recuperar datos en tabla de referencia (El memoreño tiene un array de referencias a otra tabla)

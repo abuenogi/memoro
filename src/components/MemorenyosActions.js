@@ -11,7 +11,8 @@ const MemorenyosActions = ({ memorenyo }) => {
 
   //Constantes necesarias en el componente
    const history = useHistory();   
-   let [memorenyoSelected, setMemorenyoSelected] = useContext(UserContext);  
+   //let [memorenyoSelected, setMemorenyoSelected] = useContext(UserContext);  
+   const {memorenyoSelected, setMemorenyoSelected} = useContext(UserContext);
    
    
    /*
@@ -19,7 +20,9 @@ const MemorenyosActions = ({ memorenyo }) => {
   Se procede a almacenar el memoreño seleccionado del listado en el contexto del usuario
   */
   const onUpdate  = () => {
+    
     console.log("Datos del memoreyo a actualizar: ", memorenyo);
+
     setMemorenyoSelected(memorenyo);
     
     history.push({

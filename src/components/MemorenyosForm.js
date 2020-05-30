@@ -10,19 +10,20 @@ import CNT_NavigationBarMemoLower  from "../container/CNT_NavigationBarMemoLower
 import { createData, updateData } from '../fuctions/CRUD';
 import { Container } from 'react-bootstrap';
 import { useLocation, useHistory} from 'react-router-dom';
-import { auth } from '../services/firebase/firebaseConfig';
+import { auth, db, geo } from '../services/firebase/firebaseConfig';
 import { UserContext, memoSelected } from '../context/UserContext';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
 
 const MemorenyosForm = (props) => {
 
-    const user_auth = useContext(UserContext);
     //const location = useLocation();
     const history = useHistory();
     //var memorenyoId = '';
     //const memorenyoSelected = useContext(UserContext);
-    let [memorenyoSelected, setMemorenyoSelected] = useContext(UserContext);
+    const {user_auth, memorenyoSelected, setMemorenyoSelected} = useContext(UserContext);
+    var oUbicacion = new geo.GeoPoint(39.4704799,-0.3770681);
+  
         
     const initialMemoObjetValues = {
         nombre: '',
@@ -34,12 +35,12 @@ const MemorenyosForm = (props) => {
         direccion: '',
         imagen: '',
         radioSeguridad: '',
-        cuidador: user_auth.user_id
+        cuidador: user_auth.user_id,
+        ubicacion: oUbicacion
     }
 
     //Variable de carga de los valores del objeto memorenyo
     var [values, setValues] = useState(initialMemoObjetValues);
-    //var [memorenyoId, setMemorenyoId] = useState('');
     var [memoObject, setMemoObject] = useState({})
 
     useEffect(() => {
@@ -75,17 +76,20 @@ const MemorenyosForm = (props) => {
 
     
     const addOrEdit = (obj) => {
-        console.log('Que vale el objeto que voy a actualizar/crear ', obj);
-        console.log('Que vale el objeto que voy a actualizar/crear ', obj.id);
-        console.log('Que vale el objeto que voy a actualizar/crear  user_auth ', user_auth);
-        console.log('Que vale el objeto que voy a actualizar/crear  user_auth.user_id ', user_auth.user_id);
-        
+
+        console.log('Usuario logado  ', user_auth);
+         
         if (!obj.id || obj.id == '') {
             auth.createUserWithEmailAndPassword(obj.correo, obj.contrasenya)
             .catch(function (error) {
                 console.log('Error añadiendo el memorenyo en auth addOrEdit ', error);
             });
+            //Se actualizan los datos del cuidador, el rol y la ubicación
             obj.rol = 'memorenyo';
+            //obj.cuidador = user_auth.user_id;
+            obj.cuidador = user_auth.user_id;
+            obj.ubicacion = oUbicacion;
+            obj.contactos = '';
             delete obj.contrasenya;
             createData(obj, 'usuarios');
         }

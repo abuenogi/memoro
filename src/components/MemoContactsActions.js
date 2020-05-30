@@ -8,27 +8,24 @@ import { deleteData } from '../fuctions/CRUD';
 import { db } from '../services/firebase/firebaseConfig';
 
 
-const MemoContactsActions = ({ memorenyo }) => {
+const MemoContactsActions = ({contacto}) => {
 
   const history = useHistory();
-
-
-  const onUpdate = value => () => {
+  const onUpdate =  () => {
 
     history.push({
-      pathname: '/memorenyosForm',
-      state: memorenyo.id,
-      memorenyo: memorenyo
+      pathname: '/memoContactsForm',
+      contacto: contacto
     });
 
   }
 
   //Delete objet
   const onDelete = () => {
-    console.log("Borrar memorenyo " + memorenyo.id);
+    console.log("Borrar contacto " + contacto);
     confirmAlert({
-      title: 'Borrar memoreñ@',
-      message: '¿Realmente quiere eliminar los datos de '+ memorenyo.nombre +'?',
+      title: 'Borrar contacto',
+      message: '¿Realmente quiere eliminar los datos del contacto? ',
       buttons: [
         {
           label: 'No',
@@ -38,8 +35,8 @@ const MemoContactsActions = ({ memorenyo }) => {
         {
           label: 'Si',
           onClick: () => {
-            db.collection('usuarios').doc(memorenyo.id).delete();
-            history.push('/memorenyos');
+            //Tengo que borrar el contacto del array
+            history.push('/memoContacts');
           }
         }
       ]
@@ -52,10 +49,10 @@ const MemoContactsActions = ({ memorenyo }) => {
   return (
     <>
 
-      <a className="btn text-primary" onClick={onUpdate(memorenyo)}>
+      <a className="btn text-primary" onClick={() => { onUpdate(contacto) }}>
         <FontAwesomeIcon icon={fas, faEdit} />
       </a>
-      <a className="btn text-danger" onClick={() => { onDelete(memorenyo) }}>
+      <a className="btn text-danger" onClick={() => { onDelete(contacto) }}>
         <FontAwesomeIcon icon={fas, faTrashAlt} />
       </a>
     </>

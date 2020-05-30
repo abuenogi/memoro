@@ -43,7 +43,7 @@ const Memorenyos = () => {
                                                <td className="memoIconList"><FontAwesomeIcon icon={fas, faUser} /></td>
                                                <td className="memoNameList">{memorenyo.nombre}</td>
                                                <td className="memoButtonsList">
-                                                   <MemorenyosActions />
+                                                   <MemorenyosActions memorenyo={memorenyo} />
                                                </td>
                                            </tr>
                                        ))}
