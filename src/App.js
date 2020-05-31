@@ -30,7 +30,7 @@ import { sendTokenToServer, updateUIForPushEnabled, updateUIForPushPermissionReq
 const App = () => {
   const [memorenyoSelected, setMemorenyoSelected] = useState(memoSelected);
   const [userAuth, setUserAuth] = useState(user_auth);
-
+  //Sólo se ejecutará este useEffect al principio de la aplicación
   useEffect(() => {
     const updateUser = async user => {
       setUserAuth(await produce(userAuth, async(draft) => {
@@ -74,7 +74,8 @@ const App = () => {
       ;
     }
 
-    auth.onAuthStateChanged(updateUser);
+    const unsuscribe = auth.onAuthStateChanged(updateUser);
+    return () => unsuscribe();
   }, [])
 
     
