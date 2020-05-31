@@ -59,4 +59,4 @@ const MemoContactsActions = ({contacto}) => {
   );
 }
 
-export default withRouter(MemoContactsActions); 
+export default withRouter(MemoContactsActions);

@@ -64,4 +64,4 @@ const Memorenyos = () => {
 );
 }
 
-export default withRouter(Memorenyos); 
+export default withRouter(Memorenyos);

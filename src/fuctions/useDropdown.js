@@ -6,6 +6,8 @@ const useDropdown = (label, options) => {
  
   const [valor, setValor] = useState('');
 
+  
+  console.log(options);
 
   const Dropdownmaker = () => (
 
@@ -17,9 +19,9 @@ const useDropdown = (label, options) => {
         onBlur={e=> setValor(e.target.value)}
         disabled={!options.length}
           >
-          <option className="select_items">  Memoreños  </option>
-          {options.map(item=>
-          <option className="select_items" key={item} value={item}>{item}</option>)}
+          <option className="select_items">{label}</option>
+          {options.map( value=>
+          <option className="select_items" value={value.nombre}>{value.nombre}</option>)}
         </select>
   </div>
   );

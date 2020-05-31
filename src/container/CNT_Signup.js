@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 
-import { auth } from '../services/firebase/firebaseConfig';
+import { auth, db } from '../services/firebase/firebaseConfig';
+
 
 import { createData } from '../fuctions/CRUD';
 
@@ -52,7 +53,8 @@ const Signup_container = ({ history }) => {
       "ciudad": ciudad,
       "domicilio": domicilio,
       "rol": "cuidador",
-      "location":[0 , 0]
+      "ubicacion": new db.GeoPoint(0, 0)
+   
     }
 
     debugger;

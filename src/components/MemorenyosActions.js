@@ -71,4 +71,4 @@ const MemorenyosActions = ({ memorenyo }) => {
   );
 }
 
-export default MemorenyosActions; 
+export default MemorenyosActions;
