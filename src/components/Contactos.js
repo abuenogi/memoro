@@ -14,7 +14,7 @@ import { getDataElement } from '../fuctions/CRUD';
 const Contactos = () => {
 
 
-    const user_context = useContext(UserContext);
+    const {user_auth} = useContext(UserContext);
 
     const [contactosResult, setContactosResult] = useState([]);
 
@@ -22,27 +22,24 @@ const Contactos = () => {
     useEffect(() => {
 
         const fetchData = async () => {
-            
-            alert('info: ' ,user_context.user_id );
-            if (user_context.rol === 'memoreyo') {
+            debugger
+            if (user_auth.rol === 'memorenyo') {
+                //setContactosResult(data.docs.map(doc => ({ ...doc.data().contactos })));
+                setContactosResult(Object.values(user_auth.contactos));     
+            } else if (user_auth.rol === 'cuidador') {
                 debugger;
-                const data = await getDataElement('usuarios', 'id', user_context.user_id);
-                alert(data);
-                setContactosResult(data.docs.map(doc => ({ ...doc.data().contactos })));
-            } else if (user_context.rol === 'cuidador') {
-                debugger;
-                alert(data);
-                const data = await getDataElement('usuarios', 'cuidador', user_context.user_id);
-                setContactosResult(data.docs.map(doc => ({ ...doc.data().nombre, ...doc.data().telefono })));
+                const data = await getDataElement('usuarios', 'cuidador', user_auth.user_id);
+                //setContactosResult(data.docs.map(doc => ({ ...doc.data().nombre, ...doc.data().telefono })));
+                setContactosResult(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
             }
+            console.log('contactosResult: ', contactosResult);
 
         };
         fetchData();
 
 
-    }, [user_context.user_id]);
-
-    console.log('Los contactos: ', contactosResult);
+    }, [user_auth.user_id]);
+    
     const [contacto_selected, ContactoDropdown] = useDropdown("Selecciona un contacto...", contactosResult);
 
     const llamar_contacto = `tel://${contacto_selected.telefono}`

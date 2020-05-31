@@ -4,7 +4,8 @@ import {
 
 export const createData = (data, collection_name) => {
 
-    debugger;
+    console.log("CREATEDATA del CRUD data: ", data);
+    console.log("CREATEDATA del CRUD collection_name: ", collection_name);
     try {
         return db
             .collection(collection_name)
@@ -32,9 +33,9 @@ export const deleteData = (id, collection_name) => {
 
 
 
-export const updateDataElement = (collection_name,id, data, value) => { 
+export const updateDataElement = (collection_name,id, data, value) => {
+try {
 
-    try {
         const field = `${data}`;
         return db
             .collection(collection_name)
@@ -43,15 +44,12 @@ export const updateDataElement = (collection_name,id, data, value) => {
     } catch (error) {
         console.log(error);
     }
-
-
 }
 
 
-export const updateData = (id, data, collection_name) => {
-    
-    try {
-     
+export const updateData = (id, data, collection_name) => { 
+try {
+
         return db
             .collection(collection_name)
             .doc(id)
@@ -76,7 +74,7 @@ export const getData = (collection_name) => {
 
 
 export function getDataElement(collection_name, data, value) {
-    debugger;
+    //debugger;
     return db.collection(collection_name).where(data, "==", value).get();
 }
 

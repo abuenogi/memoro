@@ -10,10 +10,12 @@ import NavigationBar from "../container/CNT_NavigationBar";
 import FatalError from '../pages/NoMatch';
 import  Footer from "./Footer";
 
+
 import { UserContext } from '../context/UserContext';
 import useFetch from '../fuctions/useFetch'
 import { usePosition } from '../fuctions/usePosition';
 import useDropdown from '../fuctions/useDropdown';
+
 import { updateDataElement , getDataElement} from '../fuctions/CRUD';
 import { Dist} from '../fuctions/calculaDistancias';
 
@@ -23,7 +25,7 @@ const Mapa = () => {
 
     const [ubiPersona, setubiPersona] = useState([]);
     const { latitude, longitude, error_position } = usePosition();
-    const user_context = useContext(UserContext);
+    const {user_auth} = useContext(UserContext);
 
     useEffect(() => {
 
@@ -31,15 +33,15 @@ const Mapa = () => {
         
         const ubicacion  = [latitude, longitude]
 
-        updateDataElement('usuarios', user_context.user_id ,'ubicacion', ubicacion);
+        updateDataElement('usuarios', user_auth.user_id ,'ubicacion', ubicacion);
 
-            if (user_context.rol === 'memoreyo') {
+            if (user_auth.rol === 'memoreyo') {
                 debugger;
-                const data = await getDataElement('usuarios', 'id', user_context.user_id);
+                const data = await getDataElement('usuarios', 'id', user_auth.user_id);
                 setubiPersona(data.docs.map(doc => ({ ...doc.data() })));
-            } else if (user_context.rol === 'cuidador') {
+            } else if (user_auth.rol === 'cuidador') {
                 debugger;
-                const data = await getDataElement('usuarios', 'cuidador', user_context.user_id);
+                const data = await getDataElement('usuarios', 'cuidador', user_auth.user_id);
                 setubiPersona(data.docs.map(doc => ({ ...doc.data() })));
             }
 
@@ -47,17 +49,14 @@ const Mapa = () => {
         fetchData();
 
 
-    }, [user_context]);
+    }, [user_auth]);
 
 
-    const url = 'https://eu1.locationiq.com/v1/search.php?key=c7392af2aaffbc&q=España,Valencia,Torrent,Montreal 76, 14B&format=json'; 
-    //const url = `https://eu1.locationiq.com/v1/search.php?key=c7392af2aaffbc&q=${user_context.pais},${user_context.ciudad},${user_context.domicilio}&format=json`;
 
     
     //const memo_list = ["Ana Bueno", "Tamara Montero", "Mateo"]
     const [personas, PersonaDropdown] = useDropdown("Buscar usuarios", ubiPersona);
-    const { data, loading, error } = useFetch(url);
-    const [activePoint, setActivePoint] = useState(null);
+    
 
     var center = [personas.ubicacion.Pc, personas.ubicacion.Vc];
     var distanciaKM = Dist(data[0].lat ,data[0].lon, 
@@ -85,6 +84,32 @@ const Mapa = () => {
         shadowAnchor: [15, 15],
     })
 
+  
+    const memo_list = ["Ana Bueno", "Tamara Montero", "Mateo"]
+    const [memo, MemoDropdown] = useDropdown("Memo", memo_list);
+
+
+ 
+    const url = 'https://eu1.locationiq.com/v1/search.php?key=c7392af2aaffbc&q=España,Valencia,Torrent,Montreal 76, 14B&format=json'; 
+    //const url = `https://eu1.locationiq.com/v1/search.php?key=c7392af2aaffbc&q=${user_context.pais},${user_context.ciudad},${user_context.domicilio}&format=json`;
+
+    const { data, loading, error } = useFetch(url);
+    const [activePoint, setActivePoint] = useState(null);
+
+    
+
+    useEffect(() => {
+        
+        //calcular la diferencia de distancia entre ambos puntos
+        updateDataElement('usuarios', user_auth.user_id ,'ubicacion', user_auth.ubicacion);
+     
+      },
+        [user_auth.ubicacion]
+      )
+    
+    debugger;
+
+
     if (loading)
         return <Spinner animation="grow" variant="info" />
 
@@ -106,6 +131,7 @@ const Mapa = () => {
                     icon={casaIcon}
                     onClick={() => {
                         //console.log(data.lat + ' ' + data.lon);
+
                         //console.log('Ubicación' + latitude + ' ' + longitude);
                         setActivePoint(data);
                         debugger;

@@ -6,6 +6,8 @@ const useDropdown = (label, options) => {
  
   const [valor, setValor] = useState('');
 
+  
+  console.log(options);
 
   const Dropdownmaker = () => (
 
@@ -18,8 +20,8 @@ const useDropdown = (label, options) => {
         disabled={!options.length}
           >
           <option className="select_items">{label}</option>
-          {options.map(item=>
-          <option className="select_items" key={item} value={item}>{item}</option>)}
+          {options.map( value=>
+          <option className="select_items" value={value.nombre}>{value.nombre}</option>)}
         </select>
   </div>
   );

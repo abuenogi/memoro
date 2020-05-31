@@ -5,27 +5,29 @@ import { useHistory } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import { deleteData } from '../fuctions/CRUD';
 import { db } from '../services/firebase/firebaseConfig';
-//import { memoSelected} from "../context/UserContext";
-
+import {UserContext} from '../context/UserContext';
 
 const MemorenyosActions = ({ memorenyo }) => {
 
   //Constantes necesarias en el componente
-  //const memoSelected = useContext(memoSelected);
-   const history = useHistory();
+   const history = useHistory();   
+   //let [memorenyoSelected, setMemorenyoSelected] = useContext(UserContext);  
+   const {memorenyoSelected, setMemorenyoSelected} = useContext(UserContext);
+   
+   
+   /*
+  Se redirige a la pantalla del formuario de actualización/creación del memoreño
+  Se procede a almacenar el memoreño seleccionado del listado en el contexto del usuario
+  */
+  const onUpdate  = () => {
+    
+    console.log("Datos del memoreyo a actualizar: ", memorenyo);
 
-  //Se redirige a la pantalla del formuario de actualización/creación del memoreño
-  const onUpdate = value => () => {
-    //Se almacena el memoreño seleccionado del listado en el contexto del usuario
-    //console.log("onUpdate => memoreño seleccionado y almacenado en el contexto: ",memoSelected);
-    console.log("onUpdate => memoreño seleccionado y pasado al componente: ",memorenyo);
-
-    //Se redirige a la página de detalle del memoreño y modificación
+    setMemorenyoSelected(memorenyo);
+    
     history.push({
-      pathname: '/memorenyosForm',
-      state: memorenyo.id,
-      memorenyo: memorenyo //> Se va a almacenar en el contexto del usuario para evitar problemas de seguirdad ya que puede accederse al location y ver la información del memoreño
-    });
+      pathname: '/memorenyosForm'
+      });
 
   }
 
@@ -59,7 +61,7 @@ const MemorenyosActions = ({ memorenyo }) => {
   return (
     <>
 
-      <a className="btn text-primary" onClick={onUpdate()}>
+      <a className="btn text-primary" onClick={() => { onUpdate() }}>
         <FontAwesomeIcon icon={fas, faEdit} />
       </a>
       <a className="btn text-danger" onClick={() => { onDelete() }}>
@@ -69,4 +71,4 @@ const MemorenyosActions = ({ memorenyo }) => {
   );
 }
 
-export default MemorenyosActions; 
+export default MemorenyosActions;

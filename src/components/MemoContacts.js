@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useContext } from "react";
 import { withRouter, useLocation } from "react-router-dom";
 import { Container, Row, Col, Button, Nav } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,23 +10,26 @@ import Layout from "./Layout";
 import MemoContactsActions from "./MemoContactsActions";
 import BotoneraCreacion from "./BotoneraCreacion";
 import { getDataWithRef } from "../fuctions/CRUD";
-//import { memoSelected } from "../context/UserContext";
+import { memoSelected } from "../context/UserContext";
 import { useHistory } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
+import {UserContext} from '../context/UserContext';
 
-const MemoContacts = ({history}) => {
+
+
+const MemoContacts = ({}) => {
   const location = useLocation();
- // const history = useHistory();
-  var memorenyo = location.memorenyo;
+  const history = useHistory();
+  //var memorenyo = location.memorenyo;
   const [contactos, setContactos] = useState([]);
+  const {memorenyoSelected, setMemorenyoSelected} = useContext(UserContext);
   
 
   useEffect(() => {
     //Los datos que me llegan en el location y en el contexto
-   
     console.log(
-      "useEffect (MemoContacts)--> El memoreño seleccionado y pasado en el location: ",
-      memorenyo
+      "useEffect (MemoContacts)--> El memoreño seleccionado y almacenado en el contexto es: ",
+      memorenyoSelected
     );
 
     /******************
@@ -37,43 +40,29 @@ const MemoContacts = ({history}) => {
      * ****************
      */
     //Recuperamos los contactos del memoreño en forma de objeto y lo recorremos (El memoreño tiene un array de contactos)
-    const contactosData = Object.keys(memorenyo.contactos).map(
-      (key) => memorenyo.contactos[key]
-    );
+    if(memorenyoSelected.contactos){
+      const contactosData = Object.keys(memorenyoSelected.contactos).map(
+        (key) => memorenyoSelected.contactos[key]
+      );
 
-    setContactos(
-      contactosData.map((doc) => ({
-        ...doc,
-      }))      
-    );
+      setContactos(
+        contactosData.map((doc) => ({
+          ...doc,
+        }))      
+      );
+    }
 
     console.log("setContactos en useEffect ", contactos);
     //opcion recuperar datos en tabla de referencia (El memoreño tiene un array de referencias a otra tabla)
     /*
-        const contactosId = memorenyo.contactos.map( contacto => contacto.id);
+        const contactosId = memorenyoSelected.contactos.map( contacto => contacto.id);
          const fetchData = async () => {
              const data = await getDataWithRef ('contactos', contactosId );
-             debugger;
-             console.log("En MemoContacts data vale" , data);
-             console.log("En MemoContacts data vale" , data.docs);
               setContactos(data.map(doc => ({ ...doc.data()}))); };
          fetchData();
          */
   }, []);
 
-  if (memorenyo) {
-    console.log("En MemoContacts contactos vale ", contactos);
-  }
-
-  /*
-  const newContact = {
-    nombre: '',
-    telefono: ''
-}
-  const addRow = () => {    
-    setContactos([ ...contactos, newContact])
-  }
-*/
 
   const onCreate = (value) => {
     //Se almacena el memoreño seleccionado del listado en el contexto del usuario
@@ -81,32 +70,32 @@ const MemoContacts = ({history}) => {
     //Se redirige a la página de detalle del memoreño y modificación
     history.push({
       pathname: '/memoContactsForm',
-      memorenyo: memorenyo //> Se va a almacenar en el contexto del usuario para evitar problemas de seguirdad ya que puede accederse al location y ver la información del memoreño
+      //memorenyo: memorenyo //> Se va a almacenar en el contexto del usuario para evitar problemas de seguirdad ya que puede accederse al location y ver la información del memoreño
     });
 
   }
 
 
+
   const onUpdate = value => () => {
     //Se almacena el memoreño seleccionado del listado en el contexto del usuario
-    //console.log("onUpdate => memoreño seleccionado y almacenado en el contexto: ",memoSelected);
-    console.log("onUpdate => memoreño seleccionado y pasado al componente: ",memorenyo);
+    console.log("onUpdate => memoreño seleccionado y almacenado en el contexto: ",memorenyoSelected);
 
     //Se redirige a la página de detalle del memoreño y modificación
     history.push({
       pathname: '/memorenyosForm',
-      state: memorenyo.id,
-      memorenyo: memorenyo //> Se va a almacenar en el contexto del usuario para evitar problemas de seguirdad ya que puede accederse al location y ver la información del memoreño
+      //state: memorenyo.id,
+      //memorenyo: memorenyo //> Se va a almacenar en el contexto del usuario para evitar problemas de seguirdad ya que puede accederse al location y ver la información del memoreño
     });
 
   }
 
 
   const onDelete = () => {
-    console.log("Borrar memorenyo " + memorenyo.id);
+    console.log("Borrar memorenyo " + memorenyoSelected.id);
     confirmAlert({
       title: 'Borrar memoreñ@',
-      message: '¿Realmente quiere eliminar los datos de '+ memorenyo.nombre +'?',
+      message: '¿Realmente quiere eliminar los datos de '+ memorenyoSelected.nombre +'?',
       buttons: [
         {
           label: 'No',
@@ -132,7 +121,7 @@ const MemoContacts = ({history}) => {
         <NavigationBar />
         <Container fluid>
           <div className="divTitle">
-            <h4> Contactos de {memorenyo.nombre} </h4>
+            <h4> Contactos de {memorenyoSelected.nombre} </h4>
           </div>
           <Row>
             <Col className="memoColList">
@@ -162,7 +151,7 @@ const MemoContacts = ({history}) => {
             </Col>
           </Row>
         </Container>
-        <CNT_NavigationBarMemoLower memorenyo={memorenyo} />
+        <CNT_NavigationBarMemoLower />
       </Layout>
       <Footer />
     </Fragment>
