@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -124,4 +123,3 @@ const MemoContactsForm = (props) => {
     );
 }
 export default withRouter(MemoContactsForm);
-

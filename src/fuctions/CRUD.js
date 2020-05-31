@@ -32,8 +32,10 @@ export const deleteData = (id, collection_name) => {
 }
 
 
+
 export const updateDataElement = (collection_name,id, data, value) => {
 try {
+
         const field = `${data}`;
         return db
             .collection(collection_name)
@@ -44,8 +46,10 @@ try {
     }
 }
 
+
 export const updateData = (id, data, collection_name) => { 
 try {
+
         return db
             .collection(collection_name)
             .doc(id)
@@ -53,6 +57,7 @@ try {
     } catch (error) {
         console.log(error);
     }
+
 }
 
 export const getData = (collection_name) => {

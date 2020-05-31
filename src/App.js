@@ -1,3 +1,4 @@
+
 import React, { useState, useContext, useEffect } from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import firebase from "firebase";
@@ -21,6 +22,8 @@ import { Calendario } from "./pages/Calendario";
 import Mapa from "./components/Mapa";
 import { Entretenimiento } from "./pages/Entretenimiento";
 import Contactos from "./components/Contactos";
+
+
 import { user_auth, memoSelected, UserContext } from "./context/UserContext";
 import { sendTokenToServer, updateUIForPushEnabled, updateUIForPushPermissionRequired, showToken, setTokenSentToServer } from './fuctions/messageUtilities';
 
@@ -32,7 +35,7 @@ const App = () => {
     const updateUser = async user => {
       setUserAuth(await produce(userAuth, async(draft) => {
         if (user) {
-          console.log("usuario-> " + user.uid);
+        
           draft.photoURL = user.photoURL;
           draft.user_id = user.uid;
           draft.displayName = user.displayName;
@@ -40,6 +43,7 @@ const App = () => {
     
           var user_result = await getDataElement('usuarios', 'email', user.email);
     
+          debugger;
           user_result.forEach(function (doc) {
             
             draft.telefono =  doc.data().telefono;
@@ -48,15 +52,22 @@ const App = () => {
             draft.ciudad =  doc.data().ciudad;
             draft.domicilio =  doc.data().domicilio;
             draft.displayName =  doc.data().nombre;
-            //user_auth.longitude = [latitude, longitude]
+            draft.ubicacion =  doc.data().ubicacion;
+            draft.rol =  doc.data().rol;
+
+            if (doc.data().contactos){
+              draft.contactos =  doc.data().contactos;
+            }
+          
+  
           });
     
-          draft.rol = 'cuidador';
           return draft;      
   
         } else {
           console.log('El usuario no existe');
         }
+        //console.log("usuario-> " + updateUser);
   
       }))
       //función de immer que se encarga de hacer el objeto inmutable

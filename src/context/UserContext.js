@@ -12,7 +12,8 @@ export const user_auth = {
   ciudad: '',
   domicilio: '',
   rol: '',
-  location: ''
+  ubicacion: '',
+  contactos: ''
 
 };
 
@@ -35,5 +36,3 @@ export const memoSelected = {
 
 //Creo el contexto con los valores del usuario autenticado y el memoreño seleccionado.
 export const UserContext = createContext({user_auth, memoSelected});
-
-
