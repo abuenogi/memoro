@@ -42,6 +42,10 @@ const Contactos = () => {
     
     const [contacto_selected, ContactoDropdown] = useDropdown("Selecciona un contacto...", contactosResult);
 
+    debugger;
+    console.log('contacto_selected:' , contacto_selected);
+    console.log('contacto_selected:' , contacto_selected.telefono);
+    
     const llamar_contacto = `tel://${contacto_selected.telefono}`
     const enviar_whatsApp = `https://api.whatsapp.com/send?phone=${contacto_selected.telefono}&text=Llamame%20por%20favor`
 

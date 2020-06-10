@@ -26,30 +26,27 @@ const Mapa = () => {
     const [ubiPersona, setubiPersona] = useState([]);
     const { latitude, longitude, error_position } = usePosition();
     const {user_auth} = useContext(UserContext);
+    const ubicacion  = [latitude, longitude]
 
     useEffect(() => {
 
         const fetchData = async () => {
-        
-        const ubicacion  = [latitude, longitude]
 
         updateDataElement('usuarios', user_auth.user_id ,'ubicacion', ubicacion);
 
             if (user_auth.rol === 'memoreyo') {
-                debugger;
-                const data = await getDataElement('usuarios', 'id', user_auth.user_id);
-                setubiPersona(data.docs.map(doc => ({ ...doc.data() })));
+                
+                setubiPersona(Object.values(user_auth)); 
             } else if (user_auth.rol === 'cuidador') {
                 debugger;
                 const data = await getDataElement('usuarios', 'cuidador', user_auth.user_id);
-                setubiPersona(data.docs.map(doc => ({ ...doc.data() })));
+                setubiPersona(data.docs.map(doc => ({ ...doc.data(),  id: doc.id })));
             }
-
         };
         fetchData();
 
 
-    }, [user_auth]);
+    }, [user_auth.user_id]);
 
 
 
@@ -96,18 +93,7 @@ const Mapa = () => {
     const { data, loading, error } = useFetch(url);
     const [activePoint, setActivePoint] = useState(null);
 
-    
 
-    useEffect(() => {
-        
-        //calcular la diferencia de distancia entre ambos puntos
-        updateDataElement('usuarios', user_auth.user_id ,'ubicacion', user_auth.ubicacion);
-     
-      },
-        [user_auth.ubicacion]
-      )
-    
-    debugger;
 
 
     if (loading)

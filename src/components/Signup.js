@@ -1,29 +1,33 @@
 import React, { Fragment, useState } from "react";
-import { withRouter } from 'react-router-dom';
+import { withRouter, useLocation } from 'react-router-dom';
 import { Button, Form, Label, Input } from 'reactstrap';
-import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
+import ModalMapa from './ModalMapa'
+import Layout from './Layout'
+
 
 import useForm from "../fuctions/useFormSignUp";
 import { validateSignUp } from "../fuctions/validateInput";
 
-const SignUp = ({ onClickBotonCreateUser, onClickVolver }) => {
-
+const SignUp = ({ onClickBotonCreateUser, onClickVolver, history }) => {
     
+    const location = useLocation();
+    let ubicacion_casa =location.casa
+   
     const { handleChange, handleSubmit, values, errors } = useForm(submit, validateSignUp);
-
-    const [ciudad, setCiudad] = useState('');
-    const [pais, setPais] = useState('');
-
+    const [open , setOpen] = useState(false);
+   
 
     function submit() {
         console.log("Submitted Succesfully");
-        onClickBotonCreateUser(values.nombre, values.email, values.password, values.telefono, values.fechaNac, pais, ciudad, values.domicilio);
+        debugger;
+        onClickBotonCreateUser(values.nombre, values.email, values.password, values.telefono, values.fechaNac, ubicacion_casa.lat, ubicacion_casa.lng );
+       
 
     }
 
 
     return (
-        <Fragment>
+        <Layout>
             <Form onSubmit={handleSubmit} noValidate>
                 <h3 className="text-center mb-4">Crear usuario</h3>
 
@@ -88,37 +92,35 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver }) => {
                 </div>
 
                 <div className="form-group">
-                    <Label>Pais</Label>
-                    <CountryDropdown type="selector" className="form-control"
-                        value={pais}
-                        onChange={(val) => setPais(val)} />
-                </div>
-
-                <div className="form-group">
-                    <Label >Provincia</Label>
-                    <RegionDropdown type="selector" className="form-control"
-                        country={pais}
-                        value={ciudad}
-                        onChange={(val) => setCiudad(val)} />
-                </div>
-
-                <div className="form-group">
-                    <Label>Domicilio</Label>
-                    <Input
-                        className={`${errors.domicilio && "inputError"}`}
-                        name="domicilio"
+                    <Label>Dirección casa</Label>
+                    <div  className="d-flex justify-content-around">
+                    <Input className="mr-3"
+                        className={`${errors.casa && "inputError"}`}
+                        name="casa"
                         type="text"
-                        value={values.domicilio}
+                        value={values.casa || ubicacion_casa || ''}
                         onChange={handleChange}
                     />
-                    {errors.domicilio && <p className="error">{errors.domicilio}</p>}
+                    <Button className="button1 ml-3" size="lg"
+                        onClick={e => {setOpen(true)}}
+                    >Mapa </Button>
+                    <Button className="button1 ml-3" size="lg"
+                        onClick={e => {history.push('/BuscaMapa')}}
+                    >Buscar </Button>
+                    </div>
+                    {errors.casa && <p className="error">{errors.casa}</p>}
                 </div>
 
                 <Button type="submit" className="btn btn-primary btn-block mt-5 button1"> Registrarse </Button>
                 <Button type="submit" className="btn btn-primary btn-block button1" onClick={onClickVolver}> Volver </Button>
-
             </Form>
-        </Fragment>
+    
+           
+            <ModalMapa
+            open= {open}
+            />
+           
+        </Layout>
     );
 
 }

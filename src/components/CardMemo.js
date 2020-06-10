@@ -13,7 +13,7 @@ const CardMemo = ({memo}) => {
         <div>
             <Card>
                 <CardBody>
-                    <CardTitle>{memo}</CardTitle>
+                    <CardTitle>{memo.nombre}</CardTitle>
                 </CardBody>
                 <Imagen src={usuarioImagen} alt="Usuario" with="80" height="80" />
                 <CardBody>

@@ -5,8 +5,7 @@ import firebase from "firebase";
 import produce from 'immer';
 import "firebase/messaging";
 import { auth } from './services/firebase/firebaseConfig';
-import { usePosition } from './fuctions/usePosition';
-import { getDataElement, getData } from './fuctions/CRUD';
+import { getDataElement } from './fuctions/CRUD';
 import Login from "./container/CNT_Login";
 import SignUp from "./container/CNT_Signup";
 import ChangePassword from "./container/CNT_ChangePassword";
@@ -20,6 +19,7 @@ import MemoContactsForm from "./components/MemoContactsForm";
 import NoMatch from "./pages/NoMatch";
 import { Calendario } from "./pages/Calendario";
 import Mapa from "./components/Mapa";
+import CampoMapa from "./components/CampoMapa";
 import { Entretenimiento } from "./pages/Entretenimiento";
 import Contactos from "./components/Contactos";
 
@@ -54,7 +54,7 @@ const App = () => {
             draft.displayName =  doc.data().nombre;
             draft.ubicacion =  doc.data().ubicacion;
             draft.rol =  doc.data().rol;
-
+        
             if (doc.data().contactos){
               draft.contactos =  doc.data().contactos;
             }
@@ -153,6 +153,8 @@ const App = () => {
             <Route path="/mapa" component={Mapa} />
             <Route path="/entretenimiento" component={Entretenimiento} />
             <Route path="/contactos" component={Contactos} />
+            /** Otros PATHS */
+            <Route path="/BuscaMapa" component={CampoMapa} />
             <Route component={NoMatch} />
           </Switch>
         </div>

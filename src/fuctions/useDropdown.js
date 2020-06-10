@@ -20,8 +20,8 @@ const useDropdown = (label, options) => {
         disabled={!options.length}
           >
           <option className="select_items">{label}</option>
-          {options.map( value=>
-          <option className="select_items" value={value.nombre}>{value.nombre}</option>)}
+          {options.map(( value, key )=>
+          <option className="select_items" key = {key} value={JSON.stringify(value)}>{value.nombre}</option>)}
         </select>
   </div>
   );
