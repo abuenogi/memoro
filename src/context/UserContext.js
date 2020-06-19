@@ -4,7 +4,7 @@ export const user_auth = {
 
   photoURL: '',
   user_id: '',
-  displayName: '',
+  nombre: '',
   email: '',
   telefono: '',
   fechaNac: '',
@@ -13,7 +13,10 @@ export const user_auth = {
   domicilio: '',
   rol: '',
   ubicacion: '',
-  contactos: ''
+  contactos: '',
+  cuidador: '',
+  casa: '',
+  radioSeguridad : ''
 
 };
 

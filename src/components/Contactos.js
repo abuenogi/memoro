@@ -14,7 +14,7 @@ import { getDataElement } from '../fuctions/CRUD';
 const Contactos = () => {
 
 
-    const {user_auth} = useContext(UserContext);
+    const { user_auth } = useContext(UserContext);
 
     const [contactosResult, setContactosResult] = useState([]);
 
@@ -22,12 +22,12 @@ const Contactos = () => {
     useEffect(() => {
 
         const fetchData = async () => {
-            debugger
+
             if (user_auth.rol === 'memorenyo') {
                 //setContactosResult(data.docs.map(doc => ({ ...doc.data().contactos })));
-                setContactosResult(Object.values(user_auth.contactos));     
+                setContactosResult(Object.values(user_auth.contactos));
             } else if (user_auth.rol === 'cuidador') {
-                debugger;
+
                 const data = await getDataElement('usuarios', 'cuidador', user_auth.user_id);
                 //setContactosResult(data.docs.map(doc => ({ ...doc.data().nombre, ...doc.data().telefono })));
                 setContactosResult(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
@@ -39,15 +39,20 @@ const Contactos = () => {
 
 
     }, [user_auth.user_id]);
-    
-    const [contacto_selected, ContactoDropdown] = useDropdown("Selecciona un contacto...", contactosResult);
 
-    debugger;
-    console.log('contacto_selected:' , contacto_selected);
-    console.log('contacto_selected:' , contacto_selected.telefono);
-    
-    const llamar_contacto = `tel://${contacto_selected.telefono}`
-    const enviar_whatsApp = `https://api.whatsapp.com/send?phone=${contacto_selected.telefono}&text=Llamame%20por%20favor`
+    const [contacto_selected, ContactoDropdown] = useDropdown( contactosResult);
+
+    let obj_contacto ,llamar_contacto, enviar_whatsApp, nombre_contacto ,telefono_contacto;
+
+    if (contacto_selected) {
+        obj_contacto = JSON.parse(contacto_selected);
+
+        nombre_contacto = obj_contacto.nombre
+        telefono_contacto = obj_contacto.telefono
+        llamar_contacto = `tel://${telefono_contacto}`
+        enviar_whatsApp = `https://api.whatsapp.com/send?phone=${telefono_contacto}&text=Llamame%20por%20favor`
+        
+    }
 
     return (
 
@@ -55,7 +60,8 @@ const Contactos = () => {
             <NavigationBar />
             <ContactoDropdown />
             <CardMemo
-                memo={contacto_selected}
+                memo={nombre_contacto}
+                telefono = {telefono_contacto}
             />
             <div className="d-flex justify-content-around mt-4">
                 <Button href={llamar_contacto} className="button1 mr-3" size="lg">Llamar cuidador</Button>

@@ -59,7 +59,7 @@ const Styles = styled.div`
     <Styles>
       <Jumbo fluid className="jumbo">
         <div className="overlay">
-          <div className="cntNombre"> <h2>Hola</h2><p>{user_auth.displayName}</p></div>
+          <div className="cntNombre"> <h2>Hola</h2><p>{user_auth.nombre}</p></div>
           <div className="cntImg"> <Imagen src={usuarioImagen} alt="Usuario" with="80" height="80" /></div>
         </div>
       </Jumbo>

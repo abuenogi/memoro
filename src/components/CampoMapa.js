@@ -1,15 +1,16 @@
 
-import React, { useState, Fragment, useEffect, useContext } from "react";
-import { Map, Marker, Popup, TileLayer, Circle } from "react-leaflet";
+import React, { useState, Fragment} from "react";
+import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import { Button } from 'reactstrap';
 import L from 'leaflet';
 
 import { withRouter, useLocation } from 'react-router-dom';
 import { usePosition } from '../fuctions/usePosition';
+import FatalError from '../pages/NoMatch';
 
 
 
-const CampoMapa = ({ history }) => {
+const CampoMapa = ({ history}) => {
 
     const location = useLocation();
     const { latitude, longitude, error_position } = usePosition();
@@ -19,7 +20,6 @@ const CampoMapa = ({ history }) => {
         longitude: longitude,
     }
     const [ubiCasa, setUbiCasa] = useState([center.latitude,center.longitude]);
-    //const [ubiCasa, setUbiCasa] = useState(center);
     const [activePoint, setActivePoint] = useState(null);
 
     const personIcon = new L.Icon({
@@ -45,12 +45,15 @@ const CampoMapa = ({ history }) => {
         shadowAnchor: [15, 15],
     })
 
+    if (error_position)
+    return <FatalError />
+
     return (
 
         <Fragment>
-            <h3 className="text-center mb-5">Buscar ubicación casa</h3>
+            <h3 className="text-center mb-5">Buscar casa en el mapa</h3>
 
-            <Map center={[center.latitude, center.longitude]} zoom={15}
+            <Map center={[center.latitude, center.longitude]} zoom={30}
                 onClick={(e) => {
                     setUbiCasa(e.latlng);
                     //setActivePoint(e.latlng);
@@ -95,6 +98,11 @@ const CampoMapa = ({ history }) => {
             </Map>
             <Button type="submit" className="btn-block mt-5 button1"
                 onClick={e => { 
+
+                    //const modalContainer = document.querySelector("#modal-root"); 
+                    //modalContainer.removeChild(modalContainer.childNodes[0]);
+                   
+                    document.querySelector("#modal-root").style.display = 'none';
                     history.push(
                     {
                         pathname: '/sign-up',
