@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Footer} from "./Footer";
+import  Footer from "./Footer";
 import { Layout} from "./Layout";
 import  NavigationBar from "../container/CNT_NavigationBar";
 import  Jumbotron from "./Jumbotron";

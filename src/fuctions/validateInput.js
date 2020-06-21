@@ -16,7 +16,7 @@ export function validateLogin(values) {
 
 
 
-  export function validateSignUp(values) {
+  export function validateSignUp(values, casa) {
     let errors = {};
 
     if (!values.nombre) {
@@ -38,14 +38,12 @@ export function validateLogin(values) {
     if (!values.fechaNac) {
       errors.fechaNac = "Complete este campo";
     }
-    if (!values.pais) {
-      errors.pais = "Complete este campo";
+
+    /*
+    if (!values.casa) {
+      errors.casa = "Complete este campo";
     }
-    if (!values.ciudad) {
-      errors.ciudad = "Complete este campo";
-    }
-    if (!values.domicilio) {
-      errors.domicilio = "Complete este campo";
-    }
+    */
+
     return errors;
   }

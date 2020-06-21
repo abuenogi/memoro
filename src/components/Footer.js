@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { withRouter } from 'react-router-dom';
 
 const style = {
@@ -7,12 +7,27 @@ const style = {
   marginTop: "50px"
 };
 
+
 // function component
-export const Footer = () => (
-    <footer style={style}>
-      <p>Memoro 2020 Copyright ©</p>
-    </footer>
-    
-);export default withRouter(Footer);
+const Footer = ({history}) => {
 
+  function onClickAbout() {
+    try {
+      history.push('/about');
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
+    return (
+      <footer style={style}>
+        <Fragment>
+          <p>Memoro 2020 Copyright ©</p>
+          <p className="enlace text-center" onClick={onClickAbout} >About</p>
+        </Fragment>
+      </footer>
+
+    )
+
+  };
+  export default withRouter(Footer);

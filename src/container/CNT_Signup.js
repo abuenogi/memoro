@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { auth, db } from '../services/firebase/firebaseConfig';
+import { auth, db, geo } from '../services/firebase/firebaseConfig';
 
 
 import { createData } from '../fuctions/CRUD';
@@ -14,7 +14,7 @@ const Signup_container = ({ history }) => {
 
   debugger;
 
-  function onClickBotonCreateUser(nombre, email, password, telefono, fechaNac, pais, ciudad, domicilio) {
+  function onClickBotonCreateUser(nombre, email, password, telefono, fechaNac, lat, lon) {
 
     debugger;
 
@@ -28,7 +28,7 @@ const Signup_container = ({ history }) => {
           alert('El usuario no se ha podido crear');
         });
         
-        loggerUser(nombre, email, telefono, fechaNac, pais, domicilio, ciudad);
+        loggerUser(nombre, email, telefono, fechaNac, lat, lon);
         history.push('/sign-in');
 
         debugger;
@@ -41,19 +41,17 @@ const Signup_container = ({ history }) => {
   }
 
 
-  const loggerUser = (nombre, email, telefono, fechaNac, pais, domicilio, ciudad, ) => {
+  const loggerUser = (nombre, email, telefono, fechaNac, lat, lon ) => {
 
     var obj_user = {
-
+      "id": '',
       "nombre": nombre,
       "email": email,
       "telefono": telefono,
       "fechaNac": fechaNac,
-      "pais": pais,
-      "ciudad": ciudad,
-      "domicilio": domicilio,
       "rol": "cuidador",
-      "ubicacion": new db.GeoPoint(0, 0)
+      "ubicacion": new geo.GeoPoint(1,1),
+      "casa": new geo.GeoPoint(lat, lon)
    
     }
 

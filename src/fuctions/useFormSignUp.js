@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const useForm = (callback, validate) => {
   
-  const [values, setValues] = useState({nombre: "",email: "", password: "" , telefono: "", fechaNac: "", domicilio: ""});
+  const [values, setValues] = useState({nombre: "",email: "", password: "" , telefono: "", fechaNac: "", casa: ""});
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -24,7 +24,7 @@ const useForm = (callback, validate) => {
   useEffect(() => {
     console.log( 'errors' +Object.keys(errors) + ' errores: ' + Object.keys(errors).length );
     
-    if (Object.keys(errors).length <=2 && isSubmitting) {
+    if (Object.keys(errors).length ==0 && isSubmitting) {
       callback();
     }
   }, [errors]);

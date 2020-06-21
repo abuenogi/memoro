@@ -5,11 +5,12 @@ import firebase from "firebase";
 import produce from 'immer';
 import "firebase/messaging";
 import { auth } from './services/firebase/firebaseConfig';
-import { usePosition } from './fuctions/usePosition';
-import { getDataElement, getData } from './fuctions/CRUD';
+import { getDataElement, updateDataElement } from './fuctions/CRUD';
+
 import Login from "./container/CNT_Login";
 import SignUp from "./container/CNT_Signup";
 import ChangePassword from "./container/CNT_ChangePassword";
+import About from "./components/About";
 import Home from "./components/Home";
 import { HomeLinks } from "./pages/HomeLinks";
 import { MiPerfil } from "./pages/MiPerfil";
@@ -18,8 +19,10 @@ import MemorenyosForm from "./components/MemorenyosForm";
 import MemoContacts from "./components/MemoContacts";
 import MemoContactsForm from "./components/MemoContactsForm";
 import NoMatch from "./pages/NoMatch";
+import { usePosition } from './fuctions/usePosition';
 import { Calendario } from "./pages/Calendario";
 import Mapa from "./components/Mapa";
+import CampoMapa from "./components/CampoMapa";
 import { Entretenimiento } from "./pages/Entretenimiento";
 import Contactos from "./components/Contactos";
 
@@ -30,55 +33,71 @@ import { sendTokenToServer, updateUIForPushEnabled, updateUIForPushPermissionReq
 const App = () => {
   const [memorenyoSelected, setMemorenyoSelected] = useState(memoSelected);
   const [userAuth, setUserAuth] = useState(user_auth);
+  const { latitude, longitude, error_position } = usePosition();
+  const ubicacion = [latitude, longitude]
+
   //Sólo se ejecutará este useEffect al principio de la aplicación
+
   useEffect(() => {
     const updateUser = async user => {
-      setUserAuth(await produce(userAuth, async(draft) => {
+      setUserAuth(await produce(userAuth, async (draft) => {
         if (user) {
-        
-          draft.photoURL = user.photoURL;
-          draft.user_id = user.uid;
-          draft.displayName = user.displayName;
-          draft.email = user.email;
-    
-          var user_result = await getDataElement('usuarios', 'email', user.email);
-    
           debugger;
-          user_result.forEach(function (doc) {
-            
-            draft.telefono =  doc.data().telefono;
-            draft.fechaNac =  doc.data().fechaNac;
-            draft.pais =  doc.data().pais;
-            draft.ciudad =  doc.data().ciudad;
-            draft.domicilio =  doc.data().domicilio;
-            draft.displayName =  doc.data().nombre;
-            draft.ubicacion =  doc.data().ubicacion;
-            draft.rol =  doc.data().rol;
+          draft.photoURL = user.photoURL;
+          //draft.user_id = user.uid; // No confundir el id de auth con el id de db 
+          //draft.nombre = user.displayName;
+          draft.email = user.email;
 
-            if (doc.data().contactos){
-              draft.contactos =  doc.data().contactos;
+          var user_result = await getDataElement('usuarios', 'email', user.email);
+
+          user_result.docs.map(doc =>{ 
+
+            draft.user_id = user_result.docs[0].id;
+            draft.telefono = doc.data().telefono;
+            draft.fechaNac = doc.data().fechaNac;
+            draft.pais = doc.data().pais;
+            draft.ciudad = doc.data().ciudad;
+            draft.domicilio = doc.data().domicilio;
+            draft.nombre = doc.data().nombre;
+            draft.ubicacion = doc.data().ubicacion;
+            draft.rol = doc.data().rol;
+            draft.casa = doc.data().casa;
+
+            if (doc.data().contactos) {
+              draft.contactos = doc.data().contactos;
             }
-          
-  
-          });
-    
-          return draft;      
-  
+            if (doc.data().cuidador) {
+              draft.cuidador = doc.data().cuidador;
+            }
+            if (doc.data().radioSeguridad) {
+              draft.radioSeguridad = doc.data().radioSeguridad;
+            }
+
+          })
+
+          return draft;
+
         } else {
           console.log('El usuario no existe');
         }
         //console.log("usuario-> " + updateUser);
-  
+
       }))
-      //función de immer que se encarga de hacer el objeto inmutable
-      ;
+        //función de immer que se encarga de hacer el objeto inmutable
+        ;
+    }
+
+    debugger;
+    if (user_auth.user_id){
+    //updateDataElement('usuarios', user_auth.user_id, 'id', user_auth.user_id);
+    updateDataElement('usuarios', user_auth.user_id, 'ubicacion', ubicacion);
     }
 
     const unsuscribe = auth.onAuthStateChanged(updateUser);
     return () => unsuscribe();
   }, [])
 
-    
+
   /*
    *
    * MENSAJERIA
@@ -138,6 +157,7 @@ const App = () => {
             <Route exact path="/sign-up" component={SignUp} />
             <Route exact path="/change-password" component={ChangePassword} />
             <Route exact path="/home" component={Home} />
+            <Route exact path="/about" component={About} />
             /** PATHS de las páginas del menú superior derecho - barra de
             navegación*/
             <Route path="/homelinks" component={HomeLinks} />
@@ -153,6 +173,8 @@ const App = () => {
             <Route path="/mapa" component={Mapa} />
             <Route path="/entretenimiento" component={Entretenimiento} />
             <Route path="/contactos" component={Contactos} />
+            /** Otros PATHS */
+            <Route path="/BuscaMapa" component={CampoMapa} />
             <Route component={NoMatch} />
           </Switch>
         </div>

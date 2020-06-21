@@ -1,4 +1,5 @@
 import React, { useState, useContext}  from 'react'
+import { UserContext } from '../context/UserContext';
 import MemorenyosActions from './MemorenyosActions';
 import BotoneraCreacion from './BotoneraCreacion';
 import  Footer from "./Footer";
@@ -15,10 +16,12 @@ import { faUser, fas} from '@fortawesome/free-solid-svg-icons';
 const Memorenyos = () => {
   
     const [memorenyos, setMemorenyos] = useState([]);
+    const { user_auth } = useContext(UserContext);
 
     React.useEffect(() => {
       const fetchData = async () => {
           const data = await getDataElement('usuarios','rol','memorenyo');
+          //const data = await getDataElement('usuarios', 'cuidador', user_auth.user_id); // Hay que hacerlo asi, pero hay que revisar porque no llega a este componente user_auth.user_id
           setMemorenyos(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
       };
       fetchData();
