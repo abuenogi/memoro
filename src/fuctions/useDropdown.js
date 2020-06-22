@@ -21,7 +21,6 @@ const useDropdown = ( options) => {
         <select
         id={1}
         value={valor}
-  
         onClick={e => setValor(e.target.value)}
         onChange={e => setValor(e.target.value)}
         onBlur={e=> setValor(e.target.value)}

@@ -33,22 +33,24 @@ export const deleteData = (id, collection_name) => {
 
 
 
-export const updateDataElement = (collection_name,id, data, value) => {
-try {
+export const updateDataElement = (collection_name, id, data) => {
+    try {
 
-        const field = `${data}`;
-        return db
-            .collection(collection_name)
-            .doc(id)
-            .update({field:value});
+        db.collection(collection_name).where('__name__', '==' ,id).get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                console.log(doc.id, " update => ", doc.data());
+                db.collection(collection_name).doc(doc.id).update(data);
+            });
+        })
     } catch (error) {
         console.log(error);
     }
 }
 
 
-export const updateData = (id, data, collection_name) => { 
-try {
+export const updateData = (id, data, collection_name) => {
+    try {
 
         return db
             .collection(collection_name)
@@ -77,8 +79,8 @@ export const getDataByID = (collection_name, id) => {
     //return db.collection(collection_name).where('__name__', '==' ,id).get()
     //return db.collection(collection_name).where(db.collection(collection_name).id, '==', id).get()
     return db.collection(collection_name).doc(id).get()
-    
-    
+
+
 }
 
 

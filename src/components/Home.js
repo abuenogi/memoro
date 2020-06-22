@@ -6,8 +6,10 @@ import  NavigationBar from "../container/CNT_NavigationBar";
 import  Jumbotron from "./Jumbotron";
 import { HomeLinks } from "../pages/HomeLinks";
 
+
 const Home = ()  =>{
- 
+
+
         return (
             <React.Fragment> 
                 <Layout>

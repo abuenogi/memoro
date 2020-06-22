@@ -34,17 +34,17 @@ const Mapa = () => {
     useEffect(() => {
 
         const fetchData = async () => {
-            debugger;
-            //updateDataElement('usuarios', user_auth.user_id, 'ubicacion', ubicacion);
+         
             if (user_auth.rol === 'memorenyo') {
                 setubiPersona([JSON.parse(JSON.stringify(user_auth))]);
                 const data = await getDataByID('usuarios', user_auth.cuidador);
                 setCuidador(data.data())
-            } else if (user_auth.rol === 'cuidador') {
 
+            } else if (user_auth.rol === 'cuidador') {
                 const data = await getDataElement('usuarios', 'cuidador', user_auth.user_id);
                 setubiPersona(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
             }
+            
         };
         fetchData();
 
@@ -70,6 +70,7 @@ const Mapa = () => {
     if (personas && user_auth.rol === 'cuidador') {
 
         obj_persona = JSON.parse(personas);
+        debugger;
         //Si eres cuidador llamas a tu memo seleccionado y buscas su ubicación 
         persona_ubicacion = [obj_persona.ubicacion.Pc, obj_persona.ubicacion.Vc];
         persona_casa = [obj_persona.casa.Pc, obj_persona.casa.Vc];
