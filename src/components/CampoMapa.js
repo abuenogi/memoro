@@ -53,7 +53,7 @@ const CampoMapa = ({ history}) => {
         <Fragment>
             <h3 className="text-center mb-5">Buscar casa en el mapa</h3>
 
-            <Map center={[center.latitude, center.longitude]} zoom={30}
+            <Map center={[center.latitude, center.longitude]} zoom={15}
                 onClick={(e) => {
                     setUbiCasa(e.latlng);
                     //setActivePoint(e.latlng);
