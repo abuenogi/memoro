@@ -18,9 +18,8 @@ h1,h2,label,span {
 
 body, html, #root {
  
-  
-  background-color: #083b66;
-  
+  background: rgb(215,227,241);
+  background: radial-gradient(circle, rgba(215,227,241,1) 18%, rgba(8,59,102,1) 95%);
   width: 100%;
   height: 100%;
   position: absolute;
@@ -221,4 +220,45 @@ a.nav-link{
   background-color: #083b66;
   border-radius: 5px;
 
+}
+
+ /* ESTILOS MODAL*/
+  
+.modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 0.5rem;
+  pointer-events: none;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+  }
+}
+
+.modal-content {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0;
+}
+
+.modal-transition-appear {
+  transition: transform 300ms;
+  transform: translateY(-100%);
+}
+
+.modal-transition-appear-active {
+  transform: translateY(0);
+  
 }

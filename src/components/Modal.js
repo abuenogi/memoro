@@ -1,8 +1,8 @@
 import React, {Fragment} from "react";
 import { createPortal } from "react-dom";
 import { CSSTransition } from "react-transition-group";
-import {  ModalBody, modalContainer} from 'reactstrap';
-import "./Modal.css";
+import {  ModalBody} from 'reactstrap';
+
 
 const modalCont = document.querySelector("#modal-root");
 

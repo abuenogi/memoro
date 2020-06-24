@@ -9,8 +9,7 @@ import { Button,} from 'reactstrap';
 const About = ({ history }) => {
 
 
-    
-  function onClickChangePass() {
+  function onClick() {
     try {
       history.push('/home');
     } catch (error) {
@@ -19,15 +18,15 @@ const About = ({ history }) => {
 
   }
 
-   
     return (
 
         <Fragment>
+            <h3 className="text-center mb-3">ABOUT</h3>
               <img src={Logo} className="rounded mx-auto d-block  mb-5  mt-3" alt="aligment" />
-                <h3 className="text-center"  >
+                <h5 className="text-center"  >
                   v 1.0.t
-                </h3>
-                <Button type="submit" className="btn-primary btn-block button1 mt-5" onClick={onClickChangePass}  >Volver</Button>
+                </h5>
+                <Button type="submit" className="btn-primary btn-block button1 mt-5" onClick={onClick}  >Volver</Button>
         </Fragment>
     );
 

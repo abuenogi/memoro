@@ -10,7 +10,10 @@ import { getDataElement, updateDataElement } from './fuctions/CRUD';
 import Login from "./container/CNT_Login";
 import SignUp from "./container/CNT_Signup";
 import ChangePassword from "./container/CNT_ChangePassword";
-import About from "./components/About";
+import About from "./components/About_info";
+import Terminos from "./components/Terminos_info";
+import Privacidad from "./components/Privacidad_info";
+import ConocerMas from "./components/Conocer_info";
 import Home from "./components/Home";
 import { HomeLinks } from "./pages/HomeLinks";
 import { MiPerfil } from "./pages/MiPerfil";
@@ -152,7 +155,11 @@ const App = () => {
             <Route exact path="/sign-up" component={SignUp} />
             <Route exact path="/change-password" component={ChangePassword} />
             <Route exact path="/home" component={Home} />
+            /** PATHS de las páginas de info*/
             <Route exact path="/about" component={About} />
+            <Route exact path="/terminos" component={Terminos} />
+            <Route exact path="/Privaciadad" component={Privacidad} />
+            <Route exact path="/ConocerMas" component={ConocerMas} />
             /** PATHS de las páginas del menú superior derecho - barra de
             navegación*/
             <Route path="/homelinks" component={HomeLinks} />
