@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { withRouter } from 'react-router-dom';
-
+import { Layout } from "./Layout";
 const style = {
   textAlign: "center",
   fontWeight: "bold",
@@ -9,7 +9,7 @@ const style = {
 
 
 // function component
-const Footer = ({history}) => {
+const Footer = ({ history }) => {
 
   function onClickAbout() {
     try {
@@ -19,15 +19,16 @@ const Footer = ({history}) => {
     }
   }
 
-    return (
-      <footer style={style}>
-        <Fragment>
+  return (
+    <footer style={style}>
+      <Layout>
+        <div className="row d-flex justify-content-around">
           <p>Memoro 2020 Copyright ©</p>
-          <p className="enlace text-center" onClick={onClickAbout} >About</p>
-        </Fragment>
-      </footer>
+        </div>
+      </Layout>
+    </footer>
 
-    )
+  )
 
-  };
-  export default withRouter(Footer);
+};
+export default withRouter(Footer);

@@ -4,7 +4,7 @@ import { Route, Switch, BrowserRouter } from "react-router-dom";
 import firebase from "firebase";
 import produce from 'immer';
 import "firebase/messaging";
-import { auth } from './services/firebase/firebaseConfig';
+import { auth, geo } from './services/firebase/firebaseConfig';
 import { getDataElement, updateDataElement } from './fuctions/CRUD';
 
 import Login from "./container/CNT_Login";
@@ -19,7 +19,7 @@ import MemorenyosForm from "./components/MemorenyosForm";
 import MemoContacts from "./components/MemoContacts";
 import MemoContactsForm from "./components/MemoContactsForm";
 import NoMatch from "./pages/NoMatch";
-import { usePosition } from './fuctions/usePosition';
+
 import { Calendario } from "./pages/Calendario";
 import Mapa from "./components/Mapa";
 import CampoMapa from "./components/CampoMapa";
@@ -33,14 +33,15 @@ import { sendTokenToServer, updateUIForPushEnabled, updateUIForPushPermissionReq
 const App = () => {
   const [memorenyoSelected, setMemorenyoSelected] = useState(memoSelected);
   const [userAuth, setUserAuth] = useState(user_auth);
-  const { latitude, longitude, error_position } = usePosition();
-  const ubicacion = [latitude, longitude]
+  
+
 
   //Sólo se ejecutará este useEffect al principio de la aplicación
 
   useEffect(() => {
     const updateUser = async user => {
       setUserAuth(await produce(userAuth, async (draft) => {
+
         if (user) {
           debugger;
           draft.photoURL = user.photoURL;
@@ -50,7 +51,7 @@ const App = () => {
 
           var user_result = await getDataElement('usuarios', 'email', user.email);
 
-          user_result.docs.map(doc =>{ 
+          user_result.docs.map(doc => {
 
             draft.user_id = user_result.docs[0].id;
             draft.telefono = doc.data().telefono;
@@ -72,31 +73,25 @@ const App = () => {
             if (doc.data().radioSeguridad) {
               draft.radioSeguridad = doc.data().radioSeguridad;
             }
-
           })
-
+ 
           return draft;
 
         } else {
           console.log('El usuario no existe');
         }
-        //console.log("usuario-> " + updateUser);
 
       }))
         //función de immer que se encarga de hacer el objeto inmutable
         ;
     }
 
-    debugger;
-    if (user_auth.user_id){
-    //updateDataElement('usuarios', user_auth.user_id, 'id', user_auth.user_id);
-    updateDataElement('usuarios', user_auth.user_id, 'ubicacion', ubicacion);
-    }
 
     const unsuscribe = auth.onAuthStateChanged(updateUser);
     return () => unsuscribe();
   }, [])
 
+ 
 
   /*
    *

@@ -44,7 +44,7 @@ const Signup_container = ({ history }) => {
   const loggerUser = (nombre, email, telefono, fechaNac, lat, lon ) => {
 
     var obj_user = {
-      "id": '',
+      
       "nombre": nombre,
       "email": email,
       "telefono": telefono,
