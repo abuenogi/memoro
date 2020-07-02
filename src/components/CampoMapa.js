@@ -14,7 +14,6 @@ const CampoMapa = ({ history}) => {
 
     const location = useLocation();
     const { latitude, longitude, error_position } = usePosition();
-    debugger;
     const center = {
         latitude: latitude,
         longitude: longitude,
@@ -105,7 +104,7 @@ const CampoMapa = ({ history}) => {
                     document.querySelector("#modal-root").style.display = 'none';
                     history.push(
                     {
-                        pathname: '/sign-up',
+                        pathname: window.location.pathname,
                         state: 1,
                         casa: ubiCasa
                       }) }}

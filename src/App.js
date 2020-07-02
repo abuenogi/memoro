@@ -16,7 +16,7 @@ import Privacidad from "./components/Privacidad_info";
 import ConocerMas from "./components/Conocer_info";
 import Home from "./components/Home";
 import { HomeLinks } from "./pages/HomeLinks";
-import { MiPerfil } from "./pages/MiPerfil";
+import MiPerfil  from "./container/CNT_MiPerfil";
 import Memorenyos from "./components/Memorenyos";
 import MemorenyosForm from "./components/MemorenyosForm";
 import MemoContacts from "./components/MemoContacts";
