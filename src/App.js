@@ -26,7 +26,7 @@ import NoMatch from "./pages/NoMatch";
 import { Calendario } from "./pages/Calendario";
 import Mapa from "./components/Mapa";
 import CampoMapa from "./components/CampoMapa";
-import { Entretenimiento } from "./pages/Entretenimiento";
+import  Entretenimiento  from "./components/Entretenimiento";
 import Contactos from "./components/Contactos";
 
 

@@ -2,11 +2,12 @@ import React, { useContext, useState, useEffect } from "react";
 import { withRouter, useLocation } from 'react-router-dom';
 import { Button, Form, Label, Input } from 'reactstrap';
 import Avatar from 'react-avatar-edit'
-//import ModalMapa from './ModalMapa'
+
 import Modal from "./Modal";
 import { UserContext } from '../context/UserContext';
 import CampoMapa from "./CampoMapa";
 import Layout from './Layout'
+import NavigationBar from "./NavigationBar";
 
 
 import useForm from "../fuctions/useFormSignUp";
@@ -77,8 +78,9 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario}) => {
 
     return (
         <Layout >
+                <NavigationBar/>
             <Form onSubmit={handleSubmit} noValidate >
-                <h3 className="text-center mb-4">Datos usuario</h3>
+                <h3 className="text-center mt-4 mb-4">Datos usuario</h3>
 
                 <div className="form-group">
                     <Label>Nombre completo</Label>
