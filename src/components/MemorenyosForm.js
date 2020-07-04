@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Button} from 'reactstrap';
 import { fas, faUser, faMobile, faEnvelope, faMapMarkedAlt, faImage, faStreetView, faKey, faGlobe, faGlobeEurope, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import Footer from "./Footer";
 import Layout  from "./Layout";
@@ -12,6 +13,9 @@ import { useLocation, useHistory} from 'react-router-dom';
 import { auth, db, geo } from '../services/firebase/firebaseConfig';
 import { UserContext, memoSelected } from '../context/UserContext';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
+import Modal from "./Modal";
+import CampoMapa from "./CampoMapa";
+import useForm from "../fuctions/useFormSignUp";
 
 
 const MemorenyosForm = (props) => {
@@ -21,7 +25,20 @@ const MemorenyosForm = (props) => {
     //var memorenyoId = '';
     //const memorenyoSelected = useContext(UserContext);
     const {user_auth, memorenyoSelected, setMemorenyoSelected} = useContext(UserContext);
+    const { handleChange } = useForm();
     var oUbicacion = new geo.GeoPoint(39.4704799,-0.3770681);
+    const [isOpened, setOpened] = useState(false);
+
+    const location = useLocation();
+    let ubicacion_casa = location.casa
+
+    const openModal = () => {
+        document.getElementById("root").disabled = true;
+        document.querySelector("#modal-root").style.display = 'block';
+       
+        setOpened(true);
+    }
+    const closeModal = () => setOpened(false);
   
         
     const initialMemoObjetValues = {
@@ -218,11 +235,34 @@ const MemorenyosForm = (props) => {
                                             <FontAwesomeIcon icon={fas, faMapMarkedAlt} />
                                         </div>
                                     </div>
-                                    <input className="form-control" name="direccion" placeholder="Dirección"
+                                    <input className="form-control" name="direccion2" placeholder="Dirección"
                                         value={values.direccion || ''}
                                         onChange={handleInputChange}
                                     />
                                 </div>
+
+
+                                <div className="form-group input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">
+                                            <FontAwesomeIcon icon={fas, faMapMarkedAlt} />
+                                        </div>
+                                    </div>
+                                    <input className="form-control" name="direccion" placeholder="Dirección"
+                                        value={values.direccion || ubicacion_casa || ''}
+                                        onChange={handleChange}
+                                    />
+
+                                        <Button className="button1 ml-3" size=""
+                                            onClick={openModal}
+                                        >Mapa </Button>
+                                        <Modal title="Mapa de ubicación" isOpened={isOpened} onClose={closeModal}>
+                                        <CampoMapa 
+                                        //onClose={closeModal}
+                                        />
+                                        </Modal>
+                                </div>
+
                             <div className="form-group">
                                 <input type="submit" value={memorenyoSelected.nombre==''? "Guardar" : "Actualizar"} className="btn btn-primary btn-block" />
         
