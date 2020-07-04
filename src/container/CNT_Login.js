@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { auth } from '../services/firebase/firebaseConfig';
 import { UserContext } from '../context/UserContext';
@@ -10,18 +10,36 @@ const Login_container = ({ history }) => {
   const user_context = useContext(UserContext);
 
 
-  function onClickBotonLogin(correo, pass) {
+  useEffect(() => {
     
+    /*
+    if (user_context) {
+      history.push('/home');
+    }
+    */
+  },
+    [user_context]
+  )
+
+
+
+  function onClickBotonLogin(credeciales) {
+
     try {
 
-      auth.signInWithEmailAndPassword(correo, pass)
+      auth.signInWithEmailAndPassword(credeciales.email, credeciales.password)
+        .then(function () {
+          history.push('/home');
+        })
         .catch(function (error) {
-          var errorCode = error.code;
-          var errorMessage = error.message;
+          history.push('/');
+          var errorCode = error.code, errorMessage = error.message;
           console.log(errorCode + " " + errorMessage);
+          if (error.code === 'auth/user-not-found') {
+            window.alert('Este usuario no existe');
+          }
         });
 
-      history.push('/home');
 
     } catch (error) {
       console.log(error);
@@ -29,12 +47,6 @@ const Login_container = ({ history }) => {
 
   }
 
-  function onLoadUser() {
-
-    if (!user_context) {
-      history.push('/home');
-    }
-  }
 
   function onClickChangePass() {
     try {
@@ -57,8 +69,8 @@ const Login_container = ({ history }) => {
 
 
   return <Login
+  
     onClickBotonLogin={onClickBotonLogin}
-    onLoadUser={onLoadUser}
     onClickChangePass={onClickChangePass}
     onClickReg={onClickReg}
 

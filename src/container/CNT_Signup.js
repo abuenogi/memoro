@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 
-import { auth } from '../services/firebase/firebaseConfig';
+import { auth, db, geo } from '../services/firebase/firebaseConfig';
 
-import {createData} from '../fuctions/CRUD';
+
+import { createData } from '../fuctions/CRUD';
 
 import Signup from '../components/Signup';
 
@@ -10,26 +11,28 @@ import Signup from '../components/Signup';
 
 const Signup_container = ({ history }) => {
 
-  
+
   debugger;
 
-  function onClickBotonCreateUser(nombre, correo, contraseya, telefono, domicilio, ciudad, pais) {
+  function onClickBotonCreateUser(nombre, email, password, telefono, fechaNac, lat, lon) {
 
     debugger;
 
     try {
 
-      auth.createUserWithEmailAndPassword(correo, contraseya)
-      .catch(function (error) {
-          debugger;
+      auth.createUserWithEmailAndPassword(email, password)
+        .catch(function (error) {
           var errorCode = error.code;
           var errorMessage = error.message;
           console.log(errorCode + " " + errorMessage);
+          alert('El usuario no se ha podido crear');
         });
+        
+        loggerUser(nombre, email, telefono, fechaNac, lat, lon);
+        history.push('/sign-in');
 
-      loggerUser(nombre, correo, telefono, domicilio, ciudad, pais);
-      history.push('/home');
-
+        debugger;
+     
     } catch (error) {
       debugger;
       console.log(error);
@@ -38,17 +41,18 @@ const Signup_container = ({ history }) => {
   }
 
 
-  const loggerUser = ( nombre, correo, telefono, domicilio, ciudad, pais) => {
+  const loggerUser = (nombre, email, telefono, fechaNac, lat, lon ) => {
 
     var obj_user = {
-
+      
       "nombre": nombre,
-      "correo": correo,
+      "email": email,
       "telefono": telefono,
-      "domicilio": domicilio,
-      "ciudad": ciudad,
-      "pais": pais,
-      "rol": "cuidador"
+      "fechaNac": fechaNac,
+      "rol": "cuidador",
+      "ubicacion": new geo.GeoPoint(1,1),
+      "casa": new geo.GeoPoint(lat, lon)
+   
     }
 
     debugger;
@@ -60,7 +64,7 @@ const Signup_container = ({ history }) => {
   function onClickVolver() {
     try {
       history.push('/sign-in');
-    } catch (error) { 
+    } catch (error) {
       console.log(error);
     }
 

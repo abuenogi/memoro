@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
-import { Footer} from "./Footer";
+import { withRouter } from 'react-router-dom';
+import  Footer from "./Footer";
+import  Info from "./Info";
 import { Layout} from "./Layout";
-import { NavigationBar} from "./NavigationBar";
-import { Jumbotron} from "./Jumbotron";
+import  NavigationBar from "../container/CNT_NavigationBar";
+import  Jumbotron from "./Jumbotron";
 import { HomeLinks } from "../pages/HomeLinks";
 
-class Home extends Component {
-    render(){
+
+const Home = ()  =>{
+
+
         return (
             <React.Fragment> 
                 <Layout>
                     <NavigationBar/> 
                     <Jumbotron/> 
                     <HomeLinks/>
-                </Layout>
                 <Footer/>
+                <Info/>
+                </Layout>
             </React.Fragment>
         );
-    }
 }
 
-
-export default Home;
+export default withRouter(Home);
