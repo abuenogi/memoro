@@ -23,11 +23,9 @@ const pantalla_tictactoe = ({ history }) => {
 
     return (
         <Layout >
-
             <NavigationBar />
             <Tictactoe />
             <Button type="submit" className="btn btn-primary btn-block mt-5 button1" onClick={onClickVolver}> Volver </Button>
-            
         </Layout>
     );
 

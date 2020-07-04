@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from 'react-router-dom';
+import  Footer from "./Footer";
 import { Button, Form } from 'reactstrap';
 
 import NavigationBar from "./NavigationBar";
@@ -25,7 +26,7 @@ const Entretenimiento = ({ history }) => {
             <NavigationBar />
             <Tictactoe />
             <Button type="submit" className="btn btn-primary btn-block mt-5 button1" onClick={onClickVolver}> Volver </Button>
-            
+            <Footer/>
         </Layout>
     );
 

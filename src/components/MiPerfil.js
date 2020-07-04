@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { withRouter, useLocation } from 'react-router-dom';
 import { Button, Form, Label, Input } from 'reactstrap';
 import Avatar from 'react-avatar-edit'
+import  Footer from "./Footer";
 
 import Modal from "./Modal";
 import { UserContext } from '../context/UserContext';
@@ -173,7 +174,7 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario}) => {
                 <Button type="submit" className="btn btn-primary btn-block mt-5 button1"> Guardar cambios</Button>
                 <Button type="submit" className="btn btn-primary btn-block button1" onClick={onClickVolver}> Volver </Button>
             </Form>
-
+            <Footer/>
         </Layout>
     );
 
