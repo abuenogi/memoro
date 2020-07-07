@@ -16,7 +16,7 @@ import Privacidad from "./components/Privacidad_info";
 import ConocerMas from "./components/Conocer_info";
 import Home from "./components/Home";
 import { HomeLinks } from "./pages/HomeLinks";
-import { MiPerfil } from "./pages/MiPerfil";
+import MiPerfil  from "./container/CNT_MiPerfil";
 import Memorenyos from "./components/Memorenyos";
 import MemorenyosForm from "./components/MemorenyosForm";
 import MemoContacts from "./components/MemoContacts";
@@ -26,7 +26,7 @@ import NoMatch from "./pages/NoMatch";
 import { Calendario } from "./pages/Calendario";
 import Mapa from "./components/Mapa";
 import CampoMapa from "./components/CampoMapa";
-import { Entretenimiento } from "./pages/Entretenimiento";
+import  Entretenimiento  from "./components/Entretenimiento";
 import Contactos from "./components/Contactos";
 
 
