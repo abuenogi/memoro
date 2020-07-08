@@ -207,39 +207,10 @@ const MemorenyosForm = (props) => {
                                         onChange={handleInputChange}
                                     />
                                 </div>
-                                <div className="form-group input-group">
-                                    <div className="input-group-prepend">
-                                        <div className="input-group-text">
-                                            <FontAwesomeIcon icon={fas, faGlobe} />
-                                        </div>
-                                    </div>
-                                    <CountryDropdown className="form-control" type="selector" name="pais" placeholder="País" 
-                                        value={values.pais || ''}
-                                        onChange={(value) => handleInputSelect('pais', value)}/>
+                                
+                               
                                 </div>
-                                <div className="form-group input-group">
-                                    <div className="input-group-prepend">
-                                        <div className="input-group-text">
-                                            <FontAwesomeIcon icon={fas, faCaretDown} />
-                                        </div>
-                                    </div>
-                                    <RegionDropdown type="selector" className="form-control" name="ciudad" placeholder="Ciudad"
-                                        country={values.pais}
-                                        value={values.ciudad}
-                                        onChange={(value) => handleInputSelect('ciudad', value)} />
-                                </div>
-                                </div>
-                                <div className="form-group input-group">
-                                    <div className="input-group-prepend">
-                                        <div className="input-group-text">
-                                            <FontAwesomeIcon icon={fas, faMapMarkedAlt} />
-                                        </div>
-                                    </div>
-                                    <input className="form-control" name="direccion2" placeholder="Dirección"
-                                        value={values.direccion || ''}
-                                        onChange={handleInputChange}
-                                    />
-                                </div>
+                               
 
 
                                 <div className="form-group input-group">
