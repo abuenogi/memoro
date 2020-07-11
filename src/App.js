@@ -23,7 +23,7 @@ import MemoContacts from "./components/MemoContacts";
 import MemoContactsForm from "./components/MemoContactsForm";
 import NoMatch from "./pages/NoMatch";
 
-import { Calendario } from "./pages/Calendario";
+import  Calendario from "./pages/Calendario";
 import Mapa from "./components/Mapa";
 import CampoMapa from "./components/CampoMapa";
 import  Entretenimiento  from "./components/Entretenimiento";
