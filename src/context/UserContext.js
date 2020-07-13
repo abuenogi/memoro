@@ -1,5 +1,7 @@
 import { createContext } from 'react';
 
+
+
 export const user_auth = {
 
   photoURL: '',
@@ -16,7 +18,9 @@ export const user_auth = {
   contactos: '',
   cuidador: '',
   casa: '',
-  radioSeguridad : ''
+  radioSeguridad : '',
+  eventos:'',
+  isLogin: false
 
 };
 

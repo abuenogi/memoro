@@ -23,7 +23,7 @@ import MemoContacts from "./components/MemoContacts";
 import MemoContactsForm from "./components/MemoContactsForm";
 import NoMatch from "./pages/NoMatch";
 
-import { Calendario } from "./pages/Calendario";
+import  Calendario  from "./components/Calendario";
 import Mapa from "./components/Mapa";
 import CampoMapa from "./components/CampoMapa";
 import  Entretenimiento  from "./components/Entretenimiento";
@@ -46,7 +46,7 @@ const App = () => {
       setUserAuth(await produce(userAuth, async (draft) => {
 
         if (user) {
-          debugger;
+        
           draft.photoURL = user.photoURL;
           //draft.user_id = user.uid; // No confundir el id de auth con el id de db 
           //draft.nombre = user.displayName;
@@ -75,6 +75,9 @@ const App = () => {
             }
             if (doc.data().radioSeguridad) {
               draft.radioSeguridad = doc.data().radioSeguridad;
+            }
+            if (doc.data().eventos) {
+              draft.eventos = doc.data().eventos;
             }
           })
  

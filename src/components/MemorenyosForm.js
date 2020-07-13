@@ -34,6 +34,7 @@ const MemorenyosForm = (props) => {
         direccion: '',
         imagen: '',
         radioSeguridad: '',
+        eventos: '',
         cuidador: user_auth.user_id,
         ubicacion: oUbicacion
     }
