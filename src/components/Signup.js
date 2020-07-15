@@ -6,6 +6,8 @@ import Avatar from 'react-avatar-edit'
 import Modal from "./Modal";
 import CampoMapa from "./CampoMapa";
 import Layout from './Layout'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { fas, faTrash, faMap } from "@fortawesome/free-solid-svg-icons";
 
 
 import useForm from "../fuctions/useFormSignUp";
@@ -117,9 +119,8 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver, history }) => {
                             value={values.casa || ubicacion_casa || ''}
                             onChange={handleChange}
                         />
-                        <Button className="button1 ml-3" size="lg"
-                            onClick={openModal}
-                        >Mapa </Button>
+                        <Button className="ml-4" onClick={openModal}><FontAwesomeIcon icon={(fas, faMap)} size="1x" /> </Button>
+                     
                         <Modal title="Welcome" isOpened={isOpened} onClose={closeModal}>
                         <CampoMapa 
                         //onClose={closeModal}

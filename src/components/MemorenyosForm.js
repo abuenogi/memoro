@@ -35,7 +35,7 @@ const MemorenyosForm = (props) => {
         imagen: '',
         radioSeguridad: '',
         eventos: '',
-        cuidador: user_auth.user_id,
+        cuidador: user_auth.id,
         ubicacion: oUbicacion
     }
 
@@ -86,8 +86,8 @@ const MemorenyosForm = (props) => {
             });
             //Se actualizan los datos del cuidador, el rol y la ubicación
             obj.rol = 'memorenyo';
-            //obj.cuidador = user_auth.user_id;
-            obj.cuidador = user_auth.user_id;
+            //obj.cuidador = user_auth.id;
+            obj.cuidador = user_auth.id;
             obj.ubicacion = oUbicacion;
             obj.contactos = '';
             delete obj.contrasenya;
@@ -113,9 +113,8 @@ const MemorenyosForm = (props) => {
             <Layout>
                 <NavigationBar />
                 <Container fluid className="form-style">
-                    <div className="divTitle">
-                        <h3>{memorenyoSelected.nombre==''? "Crear memoreño" : "Detalle del memoreño"}</h3>
-                    </div>
+                 
+                        <h3 className="text-center mb-4">{memorenyoSelected.nombre==''? "Crear memoreño" : "Detalle del memoreño"}</h3>
                     <div>
                         <form autoComplete="off" onSubmit={handleFormSubmit}>
                             <div className="form-group input-group">
@@ -225,7 +224,7 @@ const MemorenyosForm = (props) => {
                                     />
                                 </div>
                             <div className="form-group">
-                                <input type="submit" value={memorenyoSelected.nombre==''? "Guardar" : "Actualizar"} className="btn btn-primary btn-block" />
+                                <input type="submit" value={memorenyoSelected.nombre==''? "Guardar" : "Actualizar"} className="btn button1 btn-block" />
         
                             </div>
                         </form>

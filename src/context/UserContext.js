@@ -5,7 +5,7 @@ import { createContext } from 'react';
 export const user_auth = {
 
   photoURL: '',
-  user_id: '',
+  id: '',
   nombre: '',
   email: '',
   telefono: '',
