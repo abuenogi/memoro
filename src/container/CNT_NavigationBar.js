@@ -15,9 +15,6 @@ const NavigationBar_container = ({ history }) => {
     function cerrarSesion() {
 
         try {
-
-            if (window.confirm("¿Deseas cerrar sesión?")) {
-
                 auth.signOut()
                     .then(function () {
                         history.push('/sign-in');
@@ -26,10 +23,6 @@ const NavigationBar_container = ({ history }) => {
                         var errorCode = error.code, errorMessage = error.message;
                         console.log(errorCode + " " + errorMessage);
                     })
-
-            } else {
-
-            }
 
         } catch (error) {
             console.log(error);

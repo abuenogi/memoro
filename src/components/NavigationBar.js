@@ -1,10 +1,30 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import {Nav, Navbar} from 'react-bootstrap';
- 
- const NavigationBar = ({cerrarSesion}) => (
+import { confirmAlert } from 'react-confirm-alert';
 
+ const NavigationBar = ({cerrarSesion}) => {
 
+    const onClose= () => {
+   
+        confirmAlert({
+          title: 'Cerrar sesión',
+          message: '¿Quiere cerrar sesión de Memoro?',
+          buttons: [
+            {
+              label: 'No',
+            },
+            {
+              label: 'Si',
+              onClick: () => {
+                cerrarSesion()
+              }
+            }
+          ]
+        });
+    } 
+
+    return(
          <Navbar expand="lg" className="cuadro_menu">
             <Navbar.Brand href="/home">
                 <img
@@ -20,11 +40,11 @@ import {Nav, Navbar} from 'react-bootstrap';
                  <Nav className="ml-auto">
                     <Nav.Item><Nav.Link className="item_menu" href="/miperfil">Perfil</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link  className="item_menu" href="/memorenyos">Memoreños</Nav.Link></Nav.Item>
-                    <Nav.Item><Nav.Link className="item_menu" onClick={cerrarSesion}  >Desconectar</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link className="item_menu" onClick={onClose}  >Desconectar</Nav.Link></Nav.Item>
                   
                 </Nav>
              </Navbar.Collapse>
          </Navbar>
-     
- )
+    )
+    }
  export default withRouter(NavigationBar);

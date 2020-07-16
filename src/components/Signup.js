@@ -8,8 +8,7 @@ import CampoMapa from "./CampoMapa";
 import Layout from './Layout'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas, faTrash, faMap } from "@fortawesome/free-solid-svg-icons";
-
-
+import MemoAvtar from './MemoAvatar'
 import useForm from "../fuctions/useFormSignUp";
 import { validateSignUp } from "../fuctions/validateInput";
 
@@ -40,14 +39,14 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver, history }) => {
 
     }
 
-
-
-
     return (
         <Layout >
+            
             <Form onSubmit={handleSubmit} noValidate >
                 <h3 className="text-center mb-4">Crear usuario</h3>
-
+                
+                <Label>Foto de perfil</Label>
+                <MemoAvtar/>
 
                 <div className="form-group">
                     <Label>Nombre completo</Label>

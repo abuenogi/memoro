@@ -5,7 +5,7 @@ import Avatar from 'react-avatar-edit'
 import Footer from "./Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas, faTrash, faMap } from "@fortawesome/free-solid-svg-icons";
-
+import { confirmAlert } from 'react-confirm-alert';
 import Modal from "./Modal";
 import { UserContext } from '../context/UserContext';
 import CampoMapa from "./CampoMapa";
@@ -66,7 +66,25 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
     }
     const closeModal = () => setOpened(false);
 
+    const onDelete = () => {
 
+        confirmAlert({
+            title: 'Borrar usuario',
+            message: '¿Quiere eliminar el usuario ' + user_auth.nombre + '?',
+            buttons: [
+                {
+                    label: 'No',
+                },
+                {
+                    label: 'Si',
+                    onClick: () => {
+                        onClickBorrarUsuario()
+                    }
+                }
+            ]
+        });
+
+    }
     function submit() {
 
         console.log("Submitted Succesfully");
@@ -98,7 +116,7 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
                             value={values.nombre}
                             onChange={handleChange}
                         />
-                        <Button className="ml-4" onClick={onClickBorrarUsuario}><FontAwesomeIcon icon={(fas, faTrash)} size="1x" /> </Button>
+                        <Button className="ml-4" onClick={onDelete}><FontAwesomeIcon icon={(fas, faTrash)} size="1x" /> </Button>
                     </div>
 
                     {errors.nombre && <p className="error">{errors.nombre}</p>}
