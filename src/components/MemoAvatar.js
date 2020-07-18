@@ -1,66 +1,60 @@
-import React, { useContext, useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { withRouter } from 'react-router-dom';
-import { Button, Form, Label, Input } from 'reactstrap';
 import Avatar from 'react-avatar-edit'
-import imagen from '../images/foto_de_perfil.jpg'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fas, faImage , fa} from "@fortawesome/free-solid-svg-icons";
+import { storage } from '../services/firebase/firebaseConfig';
 
-const MemoAvtar = () => {
+const MemoAvtar = ({imagen_inicial, ref_storage, child_storage}) => {
 
-    const [preview, setPreview] = useState(imagen);
-    const [src, setSRC] = useState(imagen);
+  
+    const [src, setSRC] = useState(imagen_inicial);
 
     useEffect(() => {
         document.querySelector('#row_avatar').style.display = 'none';
-       
+        
+
     }, [])
 
     const onCloseAvatar = () => {
         document.querySelector('#row_avatar').style.display = 'none';
+        document.querySelector('#row_perfil').style.display = 'block';
     }
     const onOpenAvatar = () => {
         document.querySelector('#row_avatar').style.display = 'block';
+        document.querySelector('#row_perfil').style.display = 'none';
     }
 
     const onCrop = (preview) => {
-        setPreview(preview)
+        setSRC(preview)
+       
     }
 
-    const onBeforeFileLoad = (elem) => {
-        if (elem.target.files[0].size > 71680) {
-            alert("Archivo muy pesado");
-            elem.target.value = "";
-        };
+    const onFileLoad = (file) => {
+       
+        if (file) {
+            // add to image folder in firebase
+            storage.ref(ref_storage).child(child_storage).put(file);
+            
+          } else {
+            console.log('Error en la subida de la imagen');
+          }
     }
-
 
     return (
         <Fragment>
 
             <div className="form-group">
-
-                <div id='row_avatar' >  
+                <div id='row_avatar' >
                     <Avatar className="d-flex justify-center"
                         width={'100%'}
-                        height={300}
+                        height={200}
                         onCrop={onCrop}
                         onClose={onCloseAvatar}
-                        onBeforeFileLoad={onBeforeFileLoad}
-                        src={src}
+                        onFileLoad={onFileLoad}
                     />
                 </div>
-                <div className="d-flex justify-content-around mt-4 mb-4">
-
-                    <div class="row">
-
-                        <div class="col" >
-                            <img src={preview} alt="Preview" />
-                        </div>
-
-                        <div class="col" >
-                            <Button className="ml-4" onClick={onOpenAvatar}><FontAwesomeIcon className="d-flex" icon={(fas, faImage)} size="2x" /> </Button>
-                        </div>
+                <div className="d-flex justify-content-around">
+                    <div id='row_perfil' >
+                        <img onClick={onOpenAvatar} height={200}  src={src} alt=" Añadir imagen" />
 
                     </div>
 

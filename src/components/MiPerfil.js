@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { withRouter, useLocation } from 'react-router-dom';
 import { Button, Form, Label, Input } from 'reactstrap';
-import Avatar from 'react-avatar-edit'
+
 import Footer from "./Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas, faTrash, faMap } from "@fortawesome/free-solid-svg-icons";
@@ -11,8 +11,8 @@ import { UserContext } from '../context/UserContext';
 import CampoMapa from "./CampoMapa";
 import Layout from './Layout'
 import NavigationBar from "./NavigationBar";
-
-
+import usuarioImagen from '../images/foto_de_perfil.jpg';
+import MemoAvtar from './MemoAvatar'
 import useForm from "../fuctions/useFormSignUp";
 import { validateSignUp } from "../fuctions/validateInput";
 
@@ -24,6 +24,8 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
 
     const [ubi_final, setUbi_final] = useState({});
 
+    const ref_storage = 'usuarios'
+    const child_storage = user_auth.id
     let ubicacion_casa;
 
     const location = useLocation();
@@ -105,6 +107,12 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
             <Form onSubmit={handleSubmit} noValidate >
                 <h3 className="text-center mt-4 mb-4">Datos usuario</h3>
 
+                <Label>Foto de perfil</Label>
+                <MemoAvtar
+                imagen_inicial = {usuarioImagen}
+                ref_storage = {ref_storage}
+                child_storage = {child_storage}
+                />
 
                 <div className="form-group">
                     <Label>Nombre completo</Label>

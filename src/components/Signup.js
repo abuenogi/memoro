@@ -1,14 +1,13 @@
 import React, { Fragment, useState } from "react";
 import { withRouter, useLocation } from 'react-router-dom';
 import { Button, Form, Label, Input } from 'reactstrap';
-import Avatar from 'react-avatar-edit'
-//import ModalMapa from './ModalMapa'
+
 import Modal from "./Modal";
 import CampoMapa from "./CampoMapa";
 import Layout from './Layout'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas, faTrash, faMap } from "@fortawesome/free-solid-svg-icons";
-import MemoAvtar from './MemoAvatar'
+
 import useForm from "../fuctions/useFormSignUp";
 import { validateSignUp } from "../fuctions/validateInput";
 
@@ -16,6 +15,7 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver, history }) => {
 
     const location = useLocation();
     let ubicacion_casa = location.casa
+
 
     const { handleChange, handleSubmit, values, errors } = useForm(submit, validateSignUp);
     
@@ -44,9 +44,6 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver, history }) => {
             
             <Form onSubmit={handleSubmit} noValidate >
                 <h3 className="text-center mb-4">Crear usuario</h3>
-                
-                <Label>Foto de perfil</Label>
-                <MemoAvtar/>
 
                 <div className="form-group">
                     <Label>Nombre completo</Label>
