@@ -11,7 +11,7 @@ import { UserContext } from '../context/UserContext';
 import CampoMapa from "./CampoMapa";
 import Layout from './Layout'
 import NavigationBar from "./NavigationBar";
-import usuarioImagen from '../images/foto_de_perfil.jpg';
+
 import MemoAvtar from './MemoAvatar'
 import useForm from "../fuctions/useFormSignUp";
 import { validateSignUp } from "../fuctions/validateInput";
@@ -24,8 +24,8 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
 
     const [ubi_final, setUbi_final] = useState({});
 
-    const ref_storage = 'usuarios'
-    const child_storage = user_auth.id
+    var ref_storage = ''
+    var child_storage = ''
     let ubicacion_casa;
 
     const location = useLocation();
@@ -35,6 +35,9 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
     }
 
     useEffect(() => {
+
+        ref_storage = 'usuarios'
+        child_storage = user_auth.id
 
         const usuario = {
 
@@ -109,9 +112,8 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
 
                 <Label>Foto de perfil</Label>
                 <MemoAvtar
-                imagen_inicial = {usuarioImagen}
-                ref_storage = {ref_storage}
-                child_storage = {child_storage}
+                    ref_storage={ref_storage}
+                    child_storage={child_storage}
                 />
 
                 <div className="form-group">

@@ -10,6 +10,10 @@ import useDropdown from '../fuctions/useDropdown';
 import CardMemo from './CardMemo';
 import { UserContext } from '../context/UserContext';
 import { getDataElement } from '../fuctions/CRUD';
+import {
+    storage
+  } from '../services/firebase/firebaseConfig.js';
+  
 
 
 const Contactos = ({history}) => {
@@ -53,6 +57,15 @@ const Contactos = ({history}) => {
         llamar_contacto = `tel://${telefono_contacto}`
         enviar_whatsApp = `https://api.whatsapp.com/send?phone=${telefono_contacto}&text=Llamame%20por%20favor`
         
+        storage.ref('contactos').child('+34655461008.jpg').getDownloadURL().then(url => {
+            // `url` is the download URL for 'images/stars.jpg'
+            var img = document.querySelector('.foto_de_perfil');
+            img.src = url;
+      
+          }).catch(function (error) {
+            console.log(error)
+          });
+      
     }
 
     return (
