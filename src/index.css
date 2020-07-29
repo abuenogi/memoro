@@ -33,6 +33,16 @@ body, html, #root {
 	
   }
 
+  #row_avatar{
+
+    background-color: #6c757d;
+    border-radius: 5px;
+    color: ivory;
+    align-content: center;
+
+
+  }
+
 .button1{
   background:#083b66;
   color: #fff;
