@@ -1,64 +1,127 @@
-import React, { Fragment, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { withRouter, useLocation } from 'react-router-dom';
 import { Button, Form, Label, Input } from 'reactstrap';
 import Avatar from 'react-avatar-edit'
-//import ModalMapa from './ModalMapa'
-import Modal from "./Modal";
-import CampoMapa from "./CampoMapa";
-import Layout from './Layout'
+import Footer from "./Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas, faTrash, faMap } from "@fortawesome/free-solid-svg-icons";
-import MemoAvtar from './MemoAvatar'
+import { confirmAlert } from 'react-confirm-alert';
+import Modal from "./Modal";
+import { UserContext } from '../context/UserContext';
+import CampoMapa from "./CampoMapa";
+import Layout from './Layout'
+import NavigationBar from "./NavigationBar";
+
+
 import useForm from "../fuctions/useFormSignUp";
 import { validateSignUp } from "../fuctions/validateInput";
 
-const SignUp = ({ onClickBotonCreateUser, onClickVolver, history }) => {
+const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
+
+
+    const { handleChange, handleSubmit, values, setValues, errors } = useForm(submit, validateSignUp);
+    const { user_auth } = useContext(UserContext);
+
+    const [ubi_final, setUbi_final] = useState({});
+
+    let ubicacion_casa;
 
     const location = useLocation();
-    let ubicacion_casa = location.casa
 
-    const { handleChange, handleSubmit, values, errors } = useForm(submit, validateSignUp);
-    
+    if (location.casa) {
+        ubicacion_casa = location.casa
+    }
+
+    useEffect(() => {
+
+        const usuario = {
+
+            nombre: user_auth.nombre,
+            email: user_auth.email,
+            password: '******',
+            telefono: user_auth.telefono,
+            fechaNac: user_auth.fechaNac,
+            casa: '(' + user_auth.casa.latitude + ', ' + user_auth.casa.longitude + ')'
+
+        };
+
+        setValues(usuario)
+        setUbi_final({
+            casa: {
+                latitude: user_auth.casa.latitude,
+                longitude: user_auth.casa.longitude
+            }
+        })
+
+    }, [user_auth])
+
     const [isOpened, setOpened] = useState(false);
 
 
     const openModal = () => {
         document.getElementById("root").disabled = true;
         document.querySelector("#modal-root").style.display = 'block';
-       
+
         setOpened(true);
     }
     const closeModal = () => setOpened(false);
 
+    const onDelete = () => {
 
-    function submit() {
-        console.log("Submitted Succesfully");
-        debugger;
-        onClickBotonCreateUser(values.nombre, values.email, values.password, values.telefono, values.fechaNac, ubicacion_casa.lat, ubicacion_casa.lng);
-
+        confirmAlert({
+            title: 'Borrar usuario',
+            message: '¿Quiere eliminar el usuario ' + user_auth.nombre + '?',
+            buttons: [
+                {
+                    label: 'No',
+                },
+                {
+                    label: 'Si',
+                    onClick: () => {
+                        onClickBorrarUsuario()
+                    }
+                }
+            ]
+        });
 
     }
+    function submit() {
+
+        console.log("Submitted Succesfully");
+
+        debugger;
+        if (ubicacion_casa) {
+            let ubicacion = { casa: { latitude: ubicacion_casa.lat, longitude: ubicacion_casa.lng } };
+            onClickSave(values.nombre, values.email, values.password, values.telefono, values.fechaNac, ubicacion);
+        } else {
+            onClickSave(values.nombre, values.email, values.password, values.telefono, values.fechaNac, ubi_final);
+        }
+    }
+
 
     return (
         <Layout >
-            
+            <NavigationBar />
             <Form onSubmit={handleSubmit} noValidate >
-                <h3 className="text-center mb-4">Crear usuario</h3>
-                
-                <Label>Foto de perfil</Label>
-                <MemoAvtar/>
+                <h3 className="text-center mt-4 mb-4">Datos usuario</h3>
+
 
                 <div className="form-group">
                     <Label>Nombre completo</Label>
-                    <Input
-                        className={`${errors.nombre && "inputError"}`}
-                        name="nombre"
-                        type="text"
-                        value={values.nombre}
-                        onChange={handleChange}
-                    />
+                    <div className="d-flex justify-content-around">
+                        <Input
+                            className={`${errors.nombre && "inputError"}`}
+                            name="nombre"
+                            type="text"
+                            value={values.nombre}
+                            onChange={handleChange}
+                        />
+                        <Button className="ml-4" onClick={onDelete}><FontAwesomeIcon icon={(fas, faTrash)} size="1x" /> </Button>
+                    </div>
+
                     {errors.nombre && <p className="error">{errors.nombre}</p>}
                 </div>
+
 
                 <div className="form-group">
                     <Label>Correo electronico</Label>
@@ -81,7 +144,7 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver, history }) => {
                         value={values.password}
                         onChange={handleChange}
                     />
-                    {errors.password && <p className="error">{errors.password}</p>}
+
                 </div>
 
                 <div className="form-group">
@@ -115,32 +178,26 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver, history }) => {
                             className={`${errors.casa && "inputError"}`}
                             name="casa"
                             type="text"
-                            value={values.casa || ubicacion_casa || ''}
+                            value={ubicacion_casa || values.casa || ''}
                             onChange={handleChange}
                         />
                         <Button className="ml-4" onClick={openModal}><FontAwesomeIcon icon={(fas, faMap)} size="1x" /> </Button>
-                     
                         <Modal title="Welcome" isOpened={isOpened} onClose={closeModal}>
-                        <CampoMapa 
-                        //onClose={closeModal}
-                        />
+                            <CampoMapa
+                            //onClose={closeModal}
+                            />
                         </Modal>
-
-                
                     </div>
                     {errors.casa && <p className="error">{errors.casa}</p>}
                 </div>
 
-                <Button type="submit" className="btn btn-primary btn-block mt-5 button1"> Registrarse </Button>
+                <Button type="submit" className="btn btn-primary btn-block mt-4 button1"> Guardar cambios</Button>
                 <Button type="submit" className="btn btn-primary btn-block button1" onClick={onClickVolver}> Volver </Button>
             </Form>
-
-
-
-
+            <Footer />
         </Layout>
     );
 
 }
-export default withRouter(SignUp);
+export default withRouter(MiPerfil);
 

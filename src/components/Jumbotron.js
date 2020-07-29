@@ -1,33 +1,40 @@
-import React from 'react';
+import React, { useContext , useEffect} from 'react';
+import { withRouter } from 'react-router-dom';
+import FatalError from '../pages/NoMatch';
+import {  geo } from '../services/firebase/firebaseConfig';
+import {updateDataElement } from '../fuctions/CRUD';
 import { Jumbotron as Jumbo, Container } from 'react-bootstrap';
 import styled from 'styled-components';
 import boatImage from '../images/calendario.svg';
 import usuarioImagen from '../images/person.svg';
 import Imagen from './Imagen';
+import { usePosition } from '../fuctions/usePosition';
+import { UserContext } from '../context/UserContext';
 
 
 
 const Styles = styled.div`
   .jumbo {
     /**background: url(${boatImage}) no-repeat fixed bottom;*/
-    background: linear-gradient(90deg, rgb(111, 112, 190) 0%, #5082c4 100%);
+    /**background: linear-gradient(90deg, rgb(111, 112, 190) 0%, #5082c4 100%);*/
     background-size: cover;
     color: #efefef;
-    height: 175px;
-    position: relative;
-    z-index: -2;
-    width: 100%; 
+    /**height: 200px;*/
+    /**position: relative;*/
+    /*z-index: -2;*/
+    padding: 0;
   }
   .overlay {
     background-color: #083b66;
     opacity: 0.9;
-    position: absolute;
+    /**position: absolute;*/
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     z-index: -1;
     width: 100%; 
+    border-radius: 5px;
   }
   .cntNombre {
     display: inline-block;
@@ -45,13 +52,36 @@ const Styles = styled.div`
   }
 `;
 
-export const Jumbotron = () => (
-  <Styles>
-    <Jumbo fluid className="jumbo">
-      <div className="overlay">
-        <div className="cntNombre"> <h2>Bienvenido</h2><p>Pepito de los Palotes</p></div>
-        <div className="cntImg"> <Imagen src={usuarioImagen} alt="Usuario" with="100" height="140" /></div>
-    </div>
-    </Jumbo>
-  </Styles>
-)
+ const Jumbotron = () => {
+
+  const {user_auth} = useContext(UserContext);
+  console.log('Usuario => user_auth: ', user_auth);
+
+  const { latitude, longitude, error_position } = usePosition();
+  const GEOubicacion = new geo.GeoPoint(latitude, longitude)
+
+useEffect(() => {
+ 
+  if (latitude){
+    let data = {'ubicacion': GEOubicacion};
+    updateDataElement('usuarios', user_auth.id, data );
+    }
+    
+}, [latitude, longitude])
+
+if (error_position)
+    return <FatalError />
+
+  return (
+    <Styles>
+      <Jumbo fluid className="jumbo">
+        <div className="overlay">
+          <div className="cntNombre"> <h2>Hola</h2><p>{user_auth.nombre}</p></div>
+          <div className="cntImg"> <Imagen src={usuarioImagen} alt="Usuario" with="80" height="80" /></div>
+        </div>
+      </Jumbo>
+    </Styles>
+  );
+
+
+};export default withRouter(Jumbotron);

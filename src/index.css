@@ -8,16 +8,18 @@ body {
   min-height: 100vh;
   font-weight: 600;
   font-family: 'Nunito', sans-serif;
+  font-size: 14px;
 }
 
-h1,h2,h3,h4,h5,h6,label,span {
+h1,h2,label,span {
   font-weight: 500;
   font-family: 'Nunito', sans-serif;
 }
 
-body, html, .App, #root {
+body, html, #root {
  
-  background: linear-gradient(90deg, rgb(111, 112, 190) 0%, #5082c4 100%);
+  background: rgb(215,227,241);
+  background: radial-gradient(circle, rgba(215,227,241,1) 18%, rgba(8,59,102,1) 95%);
   width: 100%;
   height: 100%;
   position: absolute;
@@ -26,8 +28,14 @@ body, html, .App, #root {
   justify-content: center;
  
 }
+.btn-lg{	
+    font-size: 14px;
+	
+  }
+
 .button1{
-  background:rgb(42, 78, 133);
+  background:#083b66;
+  color: #fff;
 }
 
 .auth-inner {
@@ -35,13 +43,14 @@ body, html, .App, #root {
   margin: auto;
   background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-  padding: 40px 55px 45px 55px;
+  /**padding: 40px 55px 45px 55px;*/
+  padding: 20px 20px 20px 20px;
   border-radius: 15px;
   transition: all .3s;
 }
 
  .form-control:focus {
-  border-color:  rgb(42, 78, 133);
+  border-color: #083b66;
   box-shadow: none;
 }
 
@@ -52,7 +61,203 @@ body, html, .App, #root {
 .enlace {
   font-size: 13px;
   padding-top: 10px;
-  color:  rgb(25, 121, 169);
+  color: #083b66;
   margin: 0;
 }
+.overlay{
+ 
+  font-family: 'Nunito', sans-serif;
+  color:   rgb(255, 255, 255);
+  background: #083b66;
+}
 
+.error {
+  color:  rgba(79,148,212,1);
+  font-size: 13px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.inputError {
+  color:  rgb(202, 96, 26);
+}
+
+.cntNombre{
+
+  font-family: 'Nunito', sans-serif;
+}
+
+.cnav_item{
+
+  color: #083b66;
+  
+  
+}
+
+a.nav-link{
+  color: #083b66;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 40vh;
+}
+
+.item_menu{
+  box-shadow: 1px 1px 3pxrgba(79,148,212,1);
+  border: 2px solid #083b66;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  text-align: center;
+  margin: 2px 2px;
+  }
+
+.cuadro_menu{
+  box-shadow: 1px 1px 3px  #083b66;
+  color: rgb(255, 249, 249);
+  background-color: rgb(255, 255, 255);
+  border: 2px solid #083b66;
+  border-radius: 5px;
+  margin-bottom: 6px;
+}
+
+/* The container must be positioned relative: */
+
+.custom_select {
+  width: auto;
+  background-color:  rgb(236, 236, 236);
+  border-radius: 10px;
+}
+
+.custom_select select {
+  font-family: 'Nunito', sans-serif;
+  padding: 5px 5px;
+  border-radius: 9px;
+
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgb(119, 113, 133);
+  -moz-border-radius: 9px 9px 9px 9px;
+   -webkit-border-radius: 9px 9px 9px 9px;
+   border-radius: 9px 9px 9px 9px;
+   box-shadow: 1px 1px 5px rgba(222, 222, 226, 0.973);
+
+}
+
+.memoColList{
+  padding: 0px;
+}
+
+.memoIconList{
+  text-align: -webkit-center;
+}
+
+.memoNameList{
+  width: 65%;
+}
+
+.memoButtonsList{
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
+#iconBarUser{
+  width: 25px !important;
+    height: 25px !important;
+    color: #083b66 !important;
+}
+
+#iconBarPhone{
+  width: 25px !important;
+    height: 25px !important;
+    color: #083b66 !important;
+}
+
+
+#iconBarCalendar{
+  width: 25px !important;
+  height: 25px !important;
+    color: #083b66 !important;
+}
+
+.navBarMemoLower{
+  padding-top: 15px;
+}
+
+.divTitle{
+  padding-top:10px;
+}
+
+.card-horizontal{
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.form-style{
+  margin-top: 15px;
+  margin-bottom: 6px;
+}
+
+#modal-root{
+ 
+  width: max-content;
+  top: 25%;
+  height: 200px;
+  
+  margin-top: -100px;  /* height * -0.5 */
+  position: absolute;
+  
+}
+.color-modal{
+  
+ 
+  background-color: rgb(219, 241, 255);
+}
+
+.caja_footer{
+  
+  color: rgb(255, 249, 249);
+  background-color: #083b66;
+  border-radius: 5px;
+
+}
+
+ /* ESTILOS MODAL*/
+  
+.modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 0.5rem;
+  pointer-events: none;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+  }
+}
+
+.modal-content {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0;
+}
+
+.modal-transition-appear {
+  transition: transform 300ms;
+  transform: translateY(-100%);
+}
+
+.modal-transition-appear-active {
+  transform: translateY(0);
+  
+}
