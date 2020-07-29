@@ -799,3 +799,5 @@ Caused by: Error
 [debug] [2020-07-11T11:39:54.528Z] [worker-msg-83869123-d565-4b2d-a327-26fd20c1d568]: exited {"metadata":{"emulator":{"name":"functions"},"message":"[worker-msg-83869123-d565-4b2d-a327-26fd20c1d568]: exited"}}
 [debug] [2020-07-11T11:39:54.528Z] [worker-msg-83869123-d565-4b2d-a327-26fd20c1d568]: FINISHED {"metadata":{"emulator":{"name":"functions"},"message":"[worker-msg-83869123-d565-4b2d-a327-26fd20c1d568]: FINISHED"}}
 [debug] [2020-07-11T11:39:54.528Z] [work-queue] {"queueLength":0,"workRunningCount":0}
+[debug] [2020-07-11T12:13:58.319Z] [worker-msg-537e9899-c873-42f8-a5da-d9cd5f5261c5]: exited {"metadata":{"emulator":{"name":"functions"},"message":"[worker-msg-537e9899-c873-42f8-a5da-d9cd5f5261c5]: exited"}}
+[debug] [2020-07-11T12:13:58.321Z] [worker-msg-537e9899-c873-42f8-a5da-d9cd5f5261c5]: FINISHED {"metadata":{"emulator":{"name":"functions"},"message":"[worker-msg-537e9899-c873-42f8-a5da-d9cd5f5261c5]: FINISHED"}}
