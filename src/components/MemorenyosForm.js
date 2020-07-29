@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Button } from 'reactstrap';
-import { fas, faUser, faMobile, faEnvelope, faMapMarkedAlt, faImage, faStreetView, faKey,faMap } from '@fortawesome/free-solid-svg-icons'
+import { Button} from 'reactstrap';
+import { fas, faUser, faMobile, faEnvelope, faMapMarkedAlt, faImage, faStreetView, faKey, faGlobe, faGlobeEurope, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import Footer from "./Footer";
 import Layout from "./Layout";
 
