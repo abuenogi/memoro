@@ -35,7 +35,9 @@ body, html, #root {
 
 .button1{
   background:#083b66;
+  color: #fff;
 }
+
 .auth-inner {
   width: 500px;
   margin: auto;
@@ -192,9 +194,6 @@ a.nav-link{
 
 .form-style{
   margin-top: 15px;
-  box-shadow: 1px 1px 3px #083b66;
-  border: 1px solid #083b66;
-  border-radius: 5px;
   margin-bottom: 6px;
 }
 

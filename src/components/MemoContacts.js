@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect, useContext } from "react";
 import { withRouter, useLocation } from "react-router-dom";
-import { Container, Row, Col, Button, Nav } from "react-bootstrap";
+import { Container, Row, Col,  Nav } from "react-bootstrap";
+import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas, faUser } from "@fortawesome/free-solid-svg-icons";
 import Footer from "./Footer";
@@ -120,9 +121,9 @@ const MemoContacts = ({}) => {
       <Layout>
         <NavigationBar />
         <Container fluid>
-          <div className="divTitle">
-            <h4> Contactos de {memorenyoSelected.nombre} </h4>
-          </div>
+         
+            <h3 className="text-center mb-4 mt-4"> Contactos de {memorenyoSelected.nombre} </h3>
+          
           <Row>
             <Col className="memoColList">
               <table className="table table-borderless">
@@ -147,7 +148,7 @@ const MemoContacts = ({}) => {
           </Row>
           <Row className="justify-content-md-center">
             <Col>
-            <Button variant="primary" size="lg" onClick={() => { console.log("Clico en el botón de crear de Memocontacts: "); onCreate() }}>Crear</Button>
+            <Button className="btn btn-block button1 mt-5"  onClick={() => { console.log("Clico en el botón de crear de Memocontacts: "); onCreate() }}>Crear</Button>
             </Col>
           </Row>
         </Container>

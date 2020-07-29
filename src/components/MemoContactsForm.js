@@ -83,7 +83,7 @@ const MemoContactsForm = (props) => {
                 <NavigationBar />
                 <Container fluid className="form-style">
                     <div>
-                        <h4>{contacto.nombre==''? "Crear contacto" : "Actualizar contacto"}</h4>
+                    <h3 className="text-center mb-4">{contacto.nombre==''? "Crear contacto" : "Actualizar contacto"}</h3>
                     </div>
                     <div>
                         <form autoComplete="off" onSubmit={handleFormSubmit}>
@@ -110,7 +110,7 @@ const MemoContactsForm = (props) => {
                                     />
                             </div>
                             <div className="form-group">
-                                <input type="submit" value={contacto.nombre==''? "Guardar" : "Actualizar"} className="btn btn-primary btn-block" />
+                                <input type="submit" value={contacto.nombre==''? "Guardar" : "Actualizar"} className="btn button1 mt-4 btn-block" />
         
                             </div>
                         </form>

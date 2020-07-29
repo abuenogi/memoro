@@ -21,7 +21,7 @@ const Memorenyos = () => {
     React.useEffect(() => {
       const fetchData = async () => {
           const data = await getDataElement('usuarios','rol','memorenyo');
-          //const data = await getDataElement('usuarios', 'cuidador', user_auth.user_id); // Hay que hacerlo asi, pero hay que revisar porque no llega a este componente user_auth.user_id
+          //const data = await getDataElement('usuarios', 'cuidador', user_auth.id); // Hay que hacerlo asi, pero hay que revisar porque no llega a este componente user_auth.id
           setMemorenyos(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
       };
       fetchData();
@@ -35,7 +35,7 @@ const Memorenyos = () => {
                    <NavigationBar />
                    <Container fluid>
                        <div>
-                               <h4>Listado de memoreños</h4>
+                               <h3 className="text-center mb-4 mt-4">Listado de memoreños</h3>
                        </div>
                        <Row>
                            <Col className="memoColList">

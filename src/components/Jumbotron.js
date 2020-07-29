@@ -64,7 +64,7 @@ useEffect(() => {
  
   if (latitude){
     let data = {'ubicacion': GEOubicacion};
-    updateDataElement('usuarios', user_auth.user_id, data );
+    updateDataElement('usuarios', user_auth.id, data );
     }
     
 }, [latitude, longitude])
