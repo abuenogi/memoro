@@ -33,7 +33,6 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver, history }) => {
 
     function submit() {
         console.log("Submitted Succesfully");
-        debugger;
         onClickBotonCreateUser(values.nombre, values.email, values.password, values.telefono, values.fechaNac, ubicacion_casa.lat, ubicacion_casa.lng);
 
 

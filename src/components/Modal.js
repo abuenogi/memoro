@@ -10,17 +10,15 @@ const modalCont = document.querySelector("#modal-root");
 export default ({ children, isOpened }) =>
   isOpened
     ? createPortal(
-        <modalContainer>
-        <div >
-          <CSSTransition appear in classNames="modal-transition" unmountOnExit timeout={300}>
-            <div className="modal-dialog" role="document">
-              <div className="modal-content">
-                <ModalBody className="color-modal" >{children}</ModalBody>
+          <div >
+            <CSSTransition appear in classNames="modal-transition" unmountOnExit timeout={300}>
+              <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                  <ModalBody className="color-modal" >{children}</ModalBody>
+                </div>
               </div>
-            </div>
-          </CSSTransition>
+            </CSSTransition>
           </div>
-          </modalContainer>
         ,
         modalCont
       )

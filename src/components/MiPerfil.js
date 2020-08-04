@@ -93,8 +93,6 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
     function submit() {
 
         console.log("Submitted Succesfully");
-
-        debugger;
         if (ubicacion_casa) {
             let ubicacion = { casa: { latitude: ubicacion_casa.lat, longitude: ubicacion_casa.lng } };
             onClickSave(values.nombre, values.email, values.password, values.telefono, values.fechaNac, ubicacion);

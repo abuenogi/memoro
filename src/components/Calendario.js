@@ -55,8 +55,6 @@ const Calendario = ({ history }) => {
   const onDataBinding = (e) => {
     var items = e.result;
 
-    debugger
-
     if (e.result === []) {
       items = data
     }
@@ -67,10 +65,10 @@ const Calendario = ({ history }) => {
 
       let scheduleData = items;
       let data_items = { 'eventos': JSON.stringify(scheduleData) };
-      updateDataElement('usuarios', obj_contacto.id, data_items);
+      updateDataElement('usuarios', obj_contacto.id, data_items.eventos);
     } else {
       let data_items = { 'eventos': '' };
-      updateDataElement('usuarios', obj_contacto.id, data_items);
+      updateDataElement('usuarios', obj_contacto.id, data_items.eventos);
     }
   }
 

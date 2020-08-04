@@ -21,8 +21,11 @@ const Memorenyos = () => {
     React.useEffect(() => {
       const fetchData = async () => {
           const data = await getDataElement('usuarios','rol','memorenyo');
+          const allMemorenyos = data.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+          debugger
+          const ownMemorenyos = allMemorenyos.filter((memorenyo) => memorenyo.cuidador === user_auth.id);
           //const data = await getDataElement('usuarios', 'cuidador', user_auth.id); // Hay que hacerlo asi, pero hay que revisar porque no llega a este componente user_auth.id
-          setMemorenyos(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+          setMemorenyos(ownMemorenyos);
       };
       fetchData();
     }, []);

@@ -7,16 +7,12 @@ const useFetch = (url) => {
 
     useEffect(() => {
 
-        debugger;
-
         let error_result = false;
 
         const fetchResource = async () => {
             try {
                 let res = await fetch(url)
                 let data = await res.json()
-
-                debugger;
                 if (!error_result) {
                     setData(data)
                     setLoading(false)

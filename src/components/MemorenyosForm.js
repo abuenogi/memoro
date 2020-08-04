@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button} from 'reactstrap';
-import { fas, faUser, faMobile, faEnvelope, faMapMarkedAlt, faImage, faStreetView, faKey, faGlobe, faGlobeEurope, faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { fas, faMap, faUser, faMobile, faEnvelope, faMapMarkedAlt, faImage, faStreetView, faKey, faGlobe, faGlobeEurope, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import Footer from "./Footer";
 import Layout from "./Layout";
 
@@ -54,7 +54,8 @@ const MemorenyosForm = (props) => {
         imagen: '',
         radioSeguridad: '',
         cuidador: user_auth.user_id,
-        ubicacion: oUbicacion
+        ubicacion: oUbicacion,
+        casa: ''
     }
 
     //Variable de carga de los valores del objeto memorenyo
@@ -101,6 +102,10 @@ const MemorenyosForm = (props) => {
     const addOrEdit = (obj) => {
 
         console.log('Usuario logado  ', user_auth);
+        console.log('addOrEdit usuario a modificar ', obj);
+        let oCasa = obj.casa;
+        if (ubicacion_casa) 
+            oCasa = new geo.GeoPoint(ubicacion_casa.lat, ubicacion_casa.lng);
 
         if (!obj.id || obj.id == '') {
             auth.createUserWithEmailAndPassword(obj.correo, obj.contrasenya)
@@ -112,12 +117,14 @@ const MemorenyosForm = (props) => {
             //obj.cuidador = user_auth.user_id;
             obj.cuidador = user_auth.user_id;
             obj.ubicacion = oUbicacion;
+            obj.casa = oCasa;
             obj.contactos = '';
             delete obj.contrasenya;
             createData(obj, 'usuarios');
         }
         else {
             console.log("Voy a actualizar los datos del memoreño ", obj);
+            obj.casa = oCasa;
             updateData(obj.id, obj, 'usuarios');
         }
 
@@ -220,16 +227,14 @@ const MemorenyosForm = (props) => {
                                         <FontAwesomeIcon icon={fas, faMapMarkedAlt} />
                                     </div>
                                 </div>
-                                <input className="form-control" name="direccion" placeholder="Dirección"
-                                    value={ubicacion_casa || values.direccion   || ''}
-                                    onChange={handleChange}
+                                <input className="form-control" name="casa" placeholder="Dirección"
+                                    value={ubicacion_casa || `[${values.casa.Pc}, ${values.casa.Vc}]` || ''}
+                                    onChange={handleInputChange}
                                 />
 
                                  <Button className="ml-4" onClick={openModal}><FontAwesomeIcon icon={(fas, faMap)} size="1x" /> </Button>
-                                <Modal title="Mapa de ubicación" isOpened={isOpened} onClose={closeModal}>
-                                    <CampoMapa
-                                    //onClose={closeModal}
-                                    />
+                                <Modal title="Mapa de ubicación" isOpened={isOpened} onClose={closeModal} >
+                                    <CampoMapa/>
                                 </Modal>
                             </div>
                             </div>

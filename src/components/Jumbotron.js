@@ -68,8 +68,6 @@ const Jumbotron = () => {
 
   
   useEffect(() => {
-
-    debugger;
     const ref_storage = 'usuarios'
     const child_storage = user_auth.id
     storage.ref(ref_storage).child(child_storage).getDownloadURL().then(url => {

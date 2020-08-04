@@ -71,7 +71,6 @@ const Mapa = ({ history }) => {
     if (personas && user_auth.rol === 'cuidador') {
 
         obj_persona = JSON.parse(personas);
-        debugger;
         //Si eres cuidador llamas a tu memo seleccionado y buscas su ubicación 
         persona_ubicacion = [obj_persona.ubicacion.Pc, obj_persona.ubicacion.Vc];
         persona_casa = [obj_persona.casa.Pc, obj_persona.casa.Vc];
@@ -123,7 +122,6 @@ const Mapa = ({ history }) => {
                     icon={casaIcon}
                     onClick={() => {
                         setActivePoint(persona_casa);
-                        debugger;
                     }}
                 />
 
