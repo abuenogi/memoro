@@ -55,7 +55,7 @@ const MemorenyosForm = (props) => {
         radioSeguridad: '',
         cuidador: user_auth.user_id,
         ubicacion: oUbicacion,
-        casa: oUbicacion
+        casa: ''
     }
 
     //Variable de carga de los valores del objeto memorenyo
@@ -102,6 +102,11 @@ const MemorenyosForm = (props) => {
     const addOrEdit = (obj) => {
 
         console.log('Usuario logado  ', user_auth);
+        console.log('addOrEdit usuario a modificar ', obj);
+        debugger
+        let oCasa = obj.casa;
+        if (ubicacion_casa) 
+            oCasa = new geo.GeoPoint(ubicacion_casa.lat, ubicacion_casa.lng);
 
         if (!obj.id || obj.id == '') {
             auth.createUserWithEmailAndPassword(obj.correo, obj.contrasenya)
@@ -113,12 +118,14 @@ const MemorenyosForm = (props) => {
             //obj.cuidador = user_auth.user_id;
             obj.cuidador = user_auth.user_id;
             obj.ubicacion = oUbicacion;
+            obj.casa = oCasa;
             obj.contactos = '';
             delete obj.contrasenya;
             createData(obj, 'usuarios');
         }
         else {
             console.log("Voy a actualizar los datos del memoreño ", obj);
+            obj.casa = oCasa;
             updateData(obj.id, obj, 'usuarios');
         }
 
@@ -223,7 +230,7 @@ const MemorenyosForm = (props) => {
                                 </div>
                                 <input className="form-control" name="casa" placeholder="Dirección"
                                     value={ubicacion_casa || `[${values.casa.Pc}, ${values.casa.Vc}]` || ''}
-                                    onChange={handleChange}
+                                    onChange={handleInputChange}
                                 />
 
                                  <Button className="ml-4" onClick={openModal}><FontAwesomeIcon icon={(fas, faMap)} size="1x" /> </Button>
