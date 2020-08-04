@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button} from 'reactstrap';
-import { fas, faUser, faMobile, faEnvelope, faMapMarkedAlt, faImage, faStreetView, faKey, faGlobe, faGlobeEurope, faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { fas, faMap, faUser, faMobile, faEnvelope, faMapMarkedAlt, faImage, faStreetView, faKey, faGlobe, faGlobeEurope, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import Footer from "./Footer";
 import Layout from "./Layout";
 
@@ -54,7 +54,8 @@ const MemorenyosForm = (props) => {
         imagen: '',
         radioSeguridad: '',
         cuidador: user_auth.user_id,
-        ubicacion: oUbicacion
+        ubicacion: oUbicacion,
+        casa: oUbicacion
     }
 
     //Variable de carga de los valores del objeto memorenyo
@@ -220,16 +221,14 @@ const MemorenyosForm = (props) => {
                                         <FontAwesomeIcon icon={fas, faMapMarkedAlt} />
                                     </div>
                                 </div>
-                                <input className="form-control" name="direccion" placeholder="Dirección"
-                                    value={ubicacion_casa || values.direccion   || ''}
+                                <input className="form-control" name="casa" placeholder="Dirección"
+                                    value={ubicacion_casa || `${values.casa.Pc} ${values.casa.Vc}` || ''}
                                     onChange={handleChange}
                                 />
 
                                  <Button className="ml-4" onClick={openModal}><FontAwesomeIcon icon={(fas, faMap)} size="1x" /> </Button>
-                                <Modal title="Mapa de ubicación" isOpened={isOpened} onClose={closeModal}>
-                                    <CampoMapa
-                                    //onClose={closeModal}
-                                    />
+                                <Modal title="Mapa de ubicación" isOpened={isOpened} onClose={closeModal} >
+                                    <CampoMapa/>
                                 </Modal>
                             </div>
                             </div>

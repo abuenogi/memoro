@@ -30,7 +30,7 @@ export const memoSelected = {
   contactos: '',
   correo: '',
   cuidador: '',
-  direccion:'',
+  casa:'',
   id:'',
   imagen:'',
   nombre:'',
@@ -39,6 +39,7 @@ export const memoSelected = {
   rol: '',
   telefono:'',
   ubicacion: '' 
+
 };
 
 //Creo el contexto con los valores del usuario autenticado y el memoreño seleccionado.
