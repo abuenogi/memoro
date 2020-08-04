@@ -103,7 +103,6 @@ const MemorenyosForm = (props) => {
 
         console.log('Usuario logado  ', user_auth);
         console.log('addOrEdit usuario a modificar ', obj);
-        debugger
         let oCasa = obj.casa;
         if (ubicacion_casa) 
             oCasa = new geo.GeoPoint(ubicacion_casa.lat, ubicacion_casa.lng);

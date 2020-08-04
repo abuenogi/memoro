@@ -55,8 +55,6 @@ const Calendario = ({ history }) => {
   const onDataBinding = (e) => {
     var items = e.result;
 
-    debugger
-
     if (e.result === []) {
       items = data
     }

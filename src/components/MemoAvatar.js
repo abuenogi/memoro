@@ -17,8 +17,6 @@ const MemoAvtar = ({ ref_storage, child_storage }) => {
 
        
         document.querySelector('#row_avatar').style.display = 'none';
- 
-        //debugger;
         try {
             storage.ref(ref_storage).child(child_storage).getDownloadURL().then(url => {
                 // `url` is the download URL for 'images/stars.jpg'
