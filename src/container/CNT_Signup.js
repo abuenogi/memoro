@@ -12,11 +12,8 @@ import Signup from '../components/Signup';
 const Signup_container = ({ history }) => {
 
 
-  debugger;
 
   function onClickBotonCreateUser(nombre, email, password, telefono, fechaNac, lat, lon) {
-
-    debugger;
 
     try {
 
@@ -31,10 +28,8 @@ const Signup_container = ({ history }) => {
         loggerUser(nombre, email, telefono, fechaNac, lat, lon);
         history.push('/sign-in');
 
-        debugger;
      
     } catch (error) {
-      debugger;
       console.log(error);
     }
 
@@ -55,7 +50,6 @@ const Signup_container = ({ history }) => {
    
     }
 
-    debugger;
     createData(obj_user, 'usuarios');
   }
 
