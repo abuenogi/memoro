@@ -22,20 +22,20 @@ const NavigationBarMemoLower = ({ onClickBarMemo }) => (
 
   <Nav.Item className="navBarMemoLower">
         <FontAwesomeIcon id="iconBarUser" icon={(fas, faUsers)} 
-        onClick={() => onClickBarMemo('/memorenyos')}/>
+        onClick={() => onClickBarMemo('/memorenyos')}/> <br/>Listado
     </Nav.Item>
 
     <Nav.Item className="navBarMemoLower">
         <FontAwesomeIcon id="iconBarUser" icon={(fas, faUser)} 
-        onClick={() => onClickBarMemo('/memorenyosForm')}/>
+        onClick={() => onClickBarMemo('/memorenyosForm')}/> <br/>Detalle
     </Nav.Item>
     <Nav.Item className="navBarMemoLower">
         <FontAwesomeIcon id="iconBarPhone" icon={(fas, faPhoneAlt)} 
-        onClick={() => onClickBarMemo('/memoContacts')}/>
+        onClick={() => onClickBarMemo('/memoContacts')}/> <br/>Contactos
     </Nav.Item>
     <Nav.Item className="navBarMemoLower">
         <FontAwesomeIcon id="iconBarCalendar" icon={(fas, faCalendarDay)} 
-        onClick={() => onClickBarMemo('/calendario')}/>
+        onClick={() => onClickBarMemo('/calendario')}/> <br/>Calendario
     </Nav.Item>
   </Nav>
 );

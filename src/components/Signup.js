@@ -2,12 +2,13 @@ import React, { Fragment, useState } from "react";
 import { withRouter, useLocation } from 'react-router-dom';
 import { Button, Form, Label, Input } from 'reactstrap';
 
+
+import { Container } from 'react-bootstrap';
 import Modal from "./Modal";
 import CampoMapa from "./CampoMapa";
 import Layout from './Layout'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fas, faTrash, faMap } from "@fortawesome/free-solid-svg-icons";
-
+import { fas, faMapMarkedAlt, faMap, faUser, faMobile,faEnvelope, faCalendarAlt, faImage, faStreetView, faKey, faGlobe, faGlobeEurope, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import useForm from "../fuctions/useFormSignUp";
 import { validateSignUp } from "../fuctions/validateInput";
 
@@ -40,100 +41,126 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver, history }) => {
 
     return (
         <Layout >
-            
+            <Container fluid className="form-style">
+            <h3 className="text-center mb-4">Registro de usuario</h3>
+            <div className="form-group-4">
             <Form onSubmit={handleSubmit} noValidate >
-                <h3 className="text-center mb-4">Crear usuario</h3>
+            
+                <div className="form-group input-group">
 
-                <div className="form-group">
-                    <Label>Nombre completo</Label>
-                    <Input
-                        className={`${errors.nombre && "inputError"}`}
-                        name="nombre"
-                        type="text"
-                        value={values.nombre}
-                        onChange={handleChange}
+                    <div className="input-group-prepend">
+                        <div className="input-group-text">
+                            <FontAwesomeIcon icon={fas, faUser} />
+                        </div>
+                    </div>
+                    <input className={`form-control ${errors.nombre && "inputError"}`} 
+                            name="nombre" 
+                            placeholder="Nombre y apellidos"
+                            value={values.nombre || ''}
+                            onChange={handleChange}
                     />
                     {errors.nombre && <p className="error">{errors.nombre}</p>}
                 </div>
 
-                <div className="form-group">
-                    <Label>Correo electronico</Label>
-                    <Input
-                        className={`${errors.email && "inputError"}`}
-                        name="email"
-                        type="email"
-                        value={values.email}
-                        onChange={handleChange}
+                <div className="form-group input-group">
+                    <div className="input-group-prepend">
+                        <div className="input-group-text">
+                            <FontAwesomeIcon icon={fas, faEnvelope} />
+                        </div>
+                    </div>
+                    <input className={`form-control ${errors.email && "inputError"}`} 
+                            name="email" 
+                            placeholder="Correo electrónico"
+                            value={values.email || ''}
+                            onChange={handleChange}
                     />
                     {errors.email && <p className="error">{errors.email}</p>}
                 </div>
 
-                <div className="form-group">
-                    <Label>Contraseña</Label>
-                    <Input
-                        className={`${errors.password && "inputError"}`}
-                        name="password"
-                        type="password"
-                        value={values.password}
-                        onChange={handleChange}
+                <div className="form-group input-group">
+                    <div className="input-group-prepend">
+                        <div className="input-group-text">
+                            <FontAwesomeIcon icon={fas, faKey} />
+                        </div>
+                    </div>
+                    <input className={`form-control ${errors.password && "inputError"}`} 
+                            name="password" 
+                            placeholder="Contraseña"
+                            type="password"
+                            value={values.password || ''}
+                            onChange={handleChange}
                     />
                     {errors.password && <p className="error">{errors.password}</p>}
                 </div>
 
-                <div className="form-group">
-                    <Label>Teléfono movil</Label>
-                    <Input
-                        className={`${errors.telefono && "inputError"}`}
-                        name="telefono"
-                        type="number"
-                        value={values.telefono}
-                        onChange={handleChange}
+                <div className="form-group input-group">
+                    <div className="input-group-prepend">
+                        <div className="input-group-text">
+                            <FontAwesomeIcon icon={fas, faMobile} />
+                        </div>
+                    </div>
+                    <input className={`form-control ${errors.telefono && "inputError"}`} 
+                            name="telefono" 
+                            placeholder="Teléfono"
+                            type="number"
+                            value={values.telefono || ''}
+                            onChange={handleChange}
                     />
                     {errors.telefono && <p className="error">{errors.telefono}</p>}
                 </div>
 
-                <div className="form-group">
-                    <Label>Fecha de nacimiento</Label>
-                    <Input
-                        className={`${errors.fechaNac && "inputError"}`}
-                        name="fechaNac"
-                        type="date"
-                        value={values.fechaNac}
-                        onChange={handleChange}
+                <div className="form-group input-group">
+                    <div className="input-group-prepend">
+                        <div className="input-group-text">
+                            <FontAwesomeIcon icon={fas, faCalendarAlt} />
+                        </div>
+                    </div>
+                    <input className={`form-control ${errors.fechaNac && "inputError"}`} 
+                            name="fechaNac" 
+                            placeholder="Fecha de nacimiento"
+                            type="date"
+                            value={values.fechaNac || ''}
+                            onChange={handleChange}
                     />
                     {errors.fechaNac && <p className="error">{errors.fechaNac}</p>}
                 </div>
 
-                <div className="form-group">
-                    <Label>Dirección casa</Label>
-                    <div className="d-flex justify-content-around">
-                        <Input className="mr-3"
-                            className={`${errors.casa && "inputError"}`}
-                            name="casa"
+                <div className="form-group input-group">
+                    <div className="input-group-prepend">
+                                    <div className="input-group-text">
+                                        <FontAwesomeIcon icon={fas, faMapMarkedAlt} />
+                                    </div>
+                    </div>
+
+                    <input className={`form-control ${errors.casa && "inputError"}`} 
+                            name="casa" 
+                            placeholder="Dirección casa"
                             type="text"
                             value={values.casa || ubicacion_casa || ''}
                             onChange={handleChange}
-                        />
-                        <Button className="ml-4" onClick={openModal}><FontAwesomeIcon icon={(fas, faMap)} size="1x" /> </Button>
+                    />
+
+                        <Button className="ml-1" onClick={openModal}>
+                            <FontAwesomeIcon icon={(fas, faMap)} /> 
+                        </Button>
                      
-                        <Modal title="Welcome" isOpened={isOpened} onClose={closeModal}>
+                        <Modal title="Mapa de ubicación de casa" isOpened={isOpened} onClose={closeModal}>
                         <CampoMapa 
                         //onClose={closeModal}
                         />
                         </Modal>
-
-                
-                    </div>
-                    {errors.casa && <p className="error">{errors.casa}</p>}
+                        {errors.casa && <p className="error">{errors.casa}</p>}
                 </div>
-
-                <Button type="submit" className="btn btn-primary btn-block mt-5 button1"> Registrarse </Button>
-                <Button type="submit" className="btn btn-primary btn-block button1" onClick={onClickVolver}> Volver </Button>
+                
+                
+                <div className="form-group">
+                    <Button type="submit" className="btn btn-primary btn-block mt-5 button1"> Registrarse </Button>
+                    <Button type="submit" className="btn btn-primary btn-block button1" onClick={onClickVolver}> Volver </Button>
+                </div>
+                
             </Form>
-
-
-
-
+            </div>
+        </Container>
         </Layout>
     );
 

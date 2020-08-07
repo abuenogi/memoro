@@ -1,10 +1,7 @@
 import React, { useContext } from "react";
-
+import { confirmAlert } from 'react-confirm-alert';
 import { auth, db, geo } from '../services/firebase/firebaseConfig';
-
-
 import { createData } from '../fuctions/CRUD';
-
 import Signup from '../components/Signup';
 
 
@@ -21,8 +18,32 @@ const Signup_container = ({ history }) => {
         .catch(function (error) {
           var errorCode = error.code;
           var errorMessage = error.message;
-          console.log(errorCode + " " + errorMessage);
-          alert('El usuario no se ha podido crear');
+          console.log("createUserWithEmailAndPassword ", errorCode, errorMessage);
+          if (errorCode === 'auth/email-already-in-use') {
+              confirmAlert({
+                title: 'Error de registro',
+                message: 'Ya exite un usuario con ese email :'+ errorMessage,
+                buttons: [
+                  {
+                    label: 'Aceptar',
+                    onClick: () => {}
+                    
+                  }                  
+                ]
+              });
+          } else {
+             confirmAlert({
+              title: 'Error de registro',
+              message: 'Error de creación de usuario :'+ errorMessage,
+              buttons: [
+                {
+                  label: 'Aceptar',
+                  onClick: () => {}
+                  
+                }                  
+              ]
+            });
+          }
         });
         
         loggerUser(nombre, email, telefono, fechaNac, lat, lon);

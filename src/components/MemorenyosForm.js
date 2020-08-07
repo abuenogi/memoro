@@ -55,7 +55,7 @@ const MemorenyosForm = (props) => {
         radioSeguridad: '',
         cuidador: user_auth.user_id,
         ubicacion: oUbicacion,
-        casa: ''
+        casa: oUbicacion
     }
 
     //Variable de carga de los valores del objeto memorenyo
@@ -114,8 +114,7 @@ const MemorenyosForm = (props) => {
                 });
             //Se actualizan los datos del cuidador, el rol y la ubicación
             obj.rol = 'memorenyo';
-            //obj.cuidador = user_auth.user_id;
-            obj.cuidador = user_auth.user_id;
+            obj.cuidador = user_auth.id;
             obj.ubicacion = oUbicacion;
             obj.casa = oCasa;
             obj.contactos = '';
@@ -232,7 +231,9 @@ const MemorenyosForm = (props) => {
                                     onChange={handleInputChange}
                                 />
 
-                                 <Button className="ml-4" onClick={openModal}><FontAwesomeIcon icon={(fas, faMap)} size="1x" /> </Button>
+                                 <Button className="ml-4" onClick={openModal}>
+                                    <FontAwesomeIcon icon={(fas, faMap)} size="1x" /> 
+                                </Button>
                                 <Modal title="Mapa de ubicación" isOpened={isOpened} onClose={closeModal} >
                                     <CampoMapa/>
                                 </Modal>

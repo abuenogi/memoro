@@ -26,13 +26,15 @@ const Calendario = ({ history }) => {
         setEventosResult([info_user]);
       } else if (user_auth.rol === 'cuidador') {
 
+        console.log('useEffect user_auth.id ', user_auth.id);
         const data = await getDataElement('usuarios', 'cuidador', user_auth.id);
         setEventosResult(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
       }
       console.log('eventosResult: ', eventosResult);
 
     };
-    fetchData();
+    if(user_auth.id)
+      fetchData();
 
   }, [user_auth.id]);
 

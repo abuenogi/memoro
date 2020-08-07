@@ -6,6 +6,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import { deleteData } from '../fuctions/CRUD';
 import { db } from '../services/firebase/firebaseConfig';
 import {UserContext} from '../context/UserContext';
+import { auth } from '../services/firebase/firebaseConfig';
 
 const MemorenyosActions = ({ memorenyo }) => {
 
@@ -47,7 +48,9 @@ const MemorenyosActions = ({ memorenyo }) => {
         {
           label: 'Si',
           onClick: () => {
+            //Borramos usuario de la bbdd
             db.collection('usuarios').doc(memorenyo.id).delete();
+            //Falta que se actualice el listado de memorenyos al borrar el memorenyo
             history.push('/memorenyos');
           }
         }
