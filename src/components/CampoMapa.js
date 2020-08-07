@@ -95,7 +95,7 @@ const CampoMapa = ({ history}) => {
                 )}
 
             </Map>
-            <Button type="submit" className="btn-block mt-5 button1"
+            <Button type="submit" className="btn-block mt-2 button1"
                 onClick={e => { 
 
                     //const modalContainer = document.querySelector("#modal-root"); 
@@ -109,6 +109,11 @@ const CampoMapa = ({ history}) => {
                         casa: ubiCasa
                       }) }}
             > Volver</Button>
+            <Button type="submit" className="btn-block mt-2 button1"
+                onClick={e => {                    
+                    document.querySelector("#modal-root").style.display = 'none';
+                     }}
+            > Cancelar</Button>
         </Fragment>
     )
 
