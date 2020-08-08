@@ -2,20 +2,14 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
-// const  firebaseConfig =  {
-//     apiKey: "AIzaSyDO1lla7rlMq5zVMe--XnCH_OUr_MzRng4",
-//     authDomain: "memoro-e03d4.firebaseapp.com",
-//     databaseURL: "https://memoro-e03d4.firebaseio.com",
-//     projectId: "memoro-e03d4",
-//     storageBucket: "memoro-e03d4.appspot.com",
-//     messagingSenderId: "824261837219",
-//     appId: "1:824261837219:web:784c12a3b37a3fdecd5a16",
-//     measurementId: "G-S10E2L6T3K"
-// };
 
-// admin.initializeApp(firebaseConfig);
+var serviceAccount = require("./serviceAccountKey.json");
 
-admin.initializeApp(functions.config().firebase);
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://memoro-e03d4.firebaseio.com",
+});
+
 
 // Take the text parameter passed to this HTTP endpoint and insert it into
 // Cloud Firestore under the path /messages/:documentId/original
@@ -29,10 +23,8 @@ admin.initializeApp(functions.config().firebase);
 //   });
 
 exports.addMessage = functions.https.onRequest((req, res) => {
-  console.log("eweeee", functions.config().firebase);
   const payload = {
-    token:
-      "AAAAv-nVgaM:APA91bHpbLyNGmZK-M8JiIu4oJKFwIPxz-1Nq13-U_TQCYVXWHXVzF1D2ialPW6UrofZGEOoxEjOmXDlApFss9Uzz4Yx8doetLB6LsVwDTwkj2WyN-RULEpBcTSPNG0muIOCWqFNvFsz",
+    token: req.query.currentToken,
     notification: {
       title: "test",
       body: `test`,
@@ -40,10 +32,34 @@ exports.addMessage = functions.https.onRequest((req, res) => {
   };
   admin
     .messaging()
-    .sendAll([payload], true)
+    .sendAll([payload])
     .then(function (response) {
       console.log(response);
-      console.log(response.responses[0].error)
+      console.log(response.responses[0].error);
+      res.send("It works!");
+      return null;
+    })
+    .catch(function (error) {
+      console.log(error);
+      res.send("It doesnt works!");
+    });
+});
+
+
+exports.sendMessageTo = functions.https.onRequest((req, res) => {
+  const payload = {
+    token: req.query.currentToken,
+    notification: {
+      title: "test to someone",
+      body: `test to someone`,
+    },
+  };
+  admin
+    .messaging()
+    .sendToDevice("", payload)
+    .then(function (response) {
+      console.log(response);
+      console.log(response.responses[0].error);
       res.send("It works!");
       return null;
     })
