@@ -23,7 +23,6 @@ const Memorenyos = () => {
           ...doc.data(),
           id: doc.id,
         }));
-        debugger;
         const ownMemorenyos = allMemorenyos.filter(
           (memorenyo) => memorenyo.cuidador === user_auth.id
         );
