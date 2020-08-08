@@ -49,7 +49,6 @@ const Calendario = ({ history }) => {
   }, [usuario_selected]);
 
   useEffect(() => {
-    debugger
     if (objContacto?.eventos) {
       setData(JSON.parse(objContacto.eventos));
     }
