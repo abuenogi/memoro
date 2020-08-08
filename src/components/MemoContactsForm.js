@@ -11,6 +11,7 @@ import { Container } from 'react-bootstrap';
 import { useLocation, useHistory} from 'react-router-dom';
 import { auth } from '../services/firebase/firebaseConfig';
 import {UserContext} from '../context/UserContext';
+import MemoAvtar from './MemoAvatar'
 
 
 const MemoContactsForm = (props) => {
@@ -24,10 +25,15 @@ const MemoContactsForm = (props) => {
         telefono: ''
     } 
     var [contacto, setContacto] = useState({}); 
-
+  
+    var ref_storage = ''
+    var child_storage = ''
    
     //Variable de carga de los valores del objeto memorenyo y sus contactos
     useEffect(() => {   
+
+        ref_storage = 'usuarios'
+        child_storage = 'A0nmyOnqmMDnPqcbSVkd'
         //Se trata de una creación
         if(!location.contacto || location.contacto.nombre==''){
             setContacto({...initialContactObjetValues})
@@ -83,10 +89,14 @@ const MemoContactsForm = (props) => {
                 <NavigationBar />
                 <Container fluid className="form-style">
                     <div>
-                        <h4>{contacto.nombre==''? "Crear contacto" : "Actualizar contacto"}</h4>
+                    <h3 className="text-center mb-4">{contacto.nombre==''? "Crear contacto" : "Actualizar contacto"}</h3>
                     </div>
                     <div>
                         <form autoComplete="off" onSubmit={handleFormSubmit}>
+                        <MemoAvtar
+                    ref_storage={ref_storage}
+                    child_storage={child_storage}
+                />
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <div className="input-group-text">
@@ -110,7 +120,7 @@ const MemoContactsForm = (props) => {
                                     />
                             </div>
                             <div className="form-group">
-                                <input type="submit" value={contacto.nombre==''? "Guardar" : "Actualizar"} className="btn btn-primary btn-block" />
+                                <input type="submit" value={contacto.nombre==''? "Guardar" : "Actualizar"} className="btn button1 mt-4 btn-block" />
         
                             </div>
                         </form>

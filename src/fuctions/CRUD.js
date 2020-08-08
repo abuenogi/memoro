@@ -86,7 +86,6 @@ export const getDataByID = (collection_name, id) => {
 
 
 export function getDataElement(collection_name, data, value) {
-    //debugger;
     return db.collection(collection_name).where(data, "==", value).get();
 }
 

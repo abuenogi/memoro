@@ -1,8 +1,9 @@
-import React, { useContext , useEffect} from 'react';
+import React, { useContext, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import FatalError from '../pages/NoMatch';
-import {  geo } from '../services/firebase/firebaseConfig';
-import {updateDataElement } from '../fuctions/CRUD';
+import { geo } from '../services/firebase/firebaseConfig';
+import { updateDataElement } from '../fuctions/CRUD';
+import { func_getDownloadURL } from '../fuctions/CRUD_img';
 import { Jumbotron as Jumbo, Container } from 'react-bootstrap';
 import styled from 'styled-components';
 import boatImage from '../images/calendario.svg';
@@ -10,6 +11,9 @@ import usuarioImagen from '../images/person.svg';
 import Imagen from './Imagen';
 import { usePosition } from '../fuctions/usePosition';
 import { UserContext } from '../context/UserContext';
+import {
+  storage
+} from '../services/firebase/firebaseConfig.js';
 
 
 
@@ -52,36 +56,53 @@ const Styles = styled.div`
   }
 `;
 
- const Jumbotron = () => {
+const Jumbotron = () => {
 
-  const {user_auth} = useContext(UserContext);
+
+
+  const { user_auth } = useContext(UserContext);
   console.log('Usuario => user_auth: ', user_auth);
 
   const { latitude, longitude, error_position } = usePosition();
   const GEOubicacion = new geo.GeoPoint(latitude, longitude)
 
-useEffect(() => {
- 
-  if (latitude){
-    let data = {'ubicacion': GEOubicacion};
-    updateDataElement('usuarios', user_auth.user_id, data );
-    }
-    
-}, [latitude, longitude])
+  
+  useEffect(() => {
+    const ref_storage = 'usuarios'
+    const child_storage = user_auth.id
+    storage.ref(ref_storage).child(child_storage).getDownloadURL().then(url => {
+      // `url` is the download URL for 'images/stars.jpg'
+      var img = document.querySelector('.foto_de_perfil');
+      img.src = url;
 
-if (error_position)
+    }).catch(function (error) {
+      console.log(error)
+    });
+
+
+    if (latitude) {
+      let data = { 'ubicacion': GEOubicacion };
+      updateDataElement('usuarios', user_auth.id, data);
+    }
+
+  }, [latitude, longitude, user_auth])
+
+  if (error_position)
     return <FatalError />
 
   return (
+
+//src={usuarioImagen} 
+
     <Styles>
       <Jumbo fluid className="jumbo">
         <div className="overlay">
           <div className="cntNombre"> <h2>Hola</h2><p>{user_auth.nombre}</p></div>
-          <div className="cntImg"> <Imagen src={usuarioImagen} alt="Usuario" with="80" height="80" /></div>
+          <div className="cntImg"> <Imagen  alt="Usuario" with="80" height="80" /></div>
         </div>
       </Jumbo>
     </Styles>
   );
 
 
-};export default withRouter(Jumbotron);
+}; export default withRouter(Jumbotron);

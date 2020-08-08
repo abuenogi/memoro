@@ -51,9 +51,9 @@ const Login = ({ onClickBotonLogin, onLoadUser, onClickChangePass, onClickReg })
                 </div>
 
 
-                <Button type="submit" className="btn btn-primary btn-block button1 mt-5" >Iniciar sesión </Button>
+                <Button type="submit" className="btn btn-block button1 mt-5" >Iniciar sesión </Button>
 
-                <Button type="submit" className="btn btn-primary btn-block button1" onClick={onClickReg}  >Registrate</Button>
+                <Button type="submit" className="btn btn-block button1" onClick={onClickReg}  >Registrate</Button>
 
                 <p className="enlace text-right mt-4" onClick={onClickChangePass} >
                     ¿Has olvidado tu Contraseña?

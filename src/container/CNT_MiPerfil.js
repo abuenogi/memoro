@@ -16,7 +16,6 @@ const MiPerfil_container = ({ history }) => {
 
     try {
       cambiarDatosUsuario(nombre, email, telefono, fechaNac, ubicacion);
-      cambiarCorreo(email);
 
       if(password!='******'){
         cambiarPassword(password);
@@ -63,24 +62,19 @@ const MiPerfil_container = ({ history }) => {
 
   const cambiarDatosUsuario = (nombre, email, telefono, fechaNac, ubicacion) => {
 
-    console.log('ubi: ' , ubicacion)
 
     const GEOubicacion = new geo.GeoPoint(ubicacion.casa.latitude, ubicacion.casa.longitude)
 
-    let data_nombre = {'nombre': nombre};
-    updateDataElement('usuarios', user_auth.user_id, data_nombre);
-
-    let data_email = {'email': email};
-    updateDataElement('usuarios', user_auth.user_id, data_email);
-
-    let data_telefono = {'telefono': telefono};
-    updateDataElement('usuarios', user_auth.user_id, data_telefono);
-
-    let data_fechaNac = {'fechaNac': fechaNac};
-    updateDataElement('usuarios', user_auth.user_id, data_fechaNac);
-
-    let data_ubi = {'casa': GEOubicacion};
-    updateDataElement('usuarios', user_auth.user_id, data_ubi);
+    let data = {
+      'nombre': nombre,
+      'email': email,
+      'telefono': telefono,
+      'fechaNac': fechaNac,
+      'casa': GEOubicacion
+    };
+    updateDataElement('usuarios', user_auth.id, data);
+    
+    cambiarCorreo(email);
   }
 
 
@@ -98,7 +92,7 @@ const MiPerfil_container = ({ history }) => {
 
     try {
 
-      deleteData(user_auth.user_id, 'usuarios');
+      deleteData(user_auth.id, 'usuarios');
 
       var user = auth.currentUser;
 

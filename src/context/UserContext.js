@@ -1,9 +1,11 @@
 import { createContext } from 'react';
 
+
+
 export const user_auth = {
 
   photoURL: '',
-  user_id: '',
+  id: '',
   nombre: '',
   email: '',
   telefono: '',
@@ -16,7 +18,9 @@ export const user_auth = {
   contactos: '',
   cuidador: '',
   casa: '',
-  radioSeguridad : ''
+  radioSeguridad : '',
+  eventos:'',
+  isLogin: false
 
 };
 
@@ -26,7 +30,7 @@ export const memoSelected = {
   contactos: '',
   correo: '',
   cuidador: '',
-  direccion:'',
+  casa:'',
   id:'',
   imagen:'',
   nombre:'',
@@ -35,6 +39,7 @@ export const memoSelected = {
   rol: '',
   telefono:'',
   ubicacion: '' 
+
 };
 
 //Creo el contexto con los valores del usuario autenticado y el memoreño seleccionado.
