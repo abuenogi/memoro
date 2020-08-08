@@ -35,7 +35,6 @@ export const deleteData = (id, collection_name) => {
 
 export const updateDataElement = (collection_name, id, data) => {
     try {
-
         db.collection(collection_name).where('__name__', '==' ,id).get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
