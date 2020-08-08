@@ -7,6 +7,8 @@ import {
   Week,
   Month,
   Agenda,
+  ViewsDirective,
+  ViewDirective
 } from "@syncfusion/ej2-react-schedule";
 import * as numberingSystems from 'cldr-data/supplemental/numberingSystems.json';
 import * as gregorian from 'cldr-data/main/es/ca-gregorian.json';
@@ -20,6 +22,8 @@ import NavigationBar from "../container/CNT_NavigationBar";
 import useDropdown from "../fuctions/useDropdown";
 import { UserContext } from "../context/UserContext";
 import { getDataElement, updateDataElement } from "../fuctions/CRUD";
+// import { L10n } from "@syncfusion/ej2-base";
+
 
 loadCldr(numberingSystems, gregorian, numbers, timeZoneNames);
 
@@ -54,8 +58,8 @@ const Calendario = ({ history }) => {
   }, [usuario_selected]);
 
   useEffect(() => {
-    if (objContacto?.eventos?.eventos) {
-      setData(JSON.parse(objContacto.eventos.eventos));
+    if (objContacto?.eventos) {
+      setData(JSON.parse(objContacto.eventos));
     }
   }, [objContacto]);
 
@@ -63,7 +67,7 @@ const Calendario = ({ history }) => {
     var items = e.result;
 
     if (Array.isArray(e.result) && e.result.length === 0) {
-      items = data || JSON.parse(objContacto?.eventos?.eventos);
+      items = data || JSON.parse(objContacto?.eventos);
     }
 
     if (items.length > 0) {
@@ -90,6 +94,7 @@ const Calendario = ({ history }) => {
       <UsuarioDropdown />
       
       <ScheduleComponent
+        locale="es"
         timezone="Europe/Madrid"
         currentView="Month"
         width="100%"
@@ -102,6 +107,12 @@ const Calendario = ({ history }) => {
         }}
         cssClass="schedule-cell-dimension"
       >
+        <ViewsDirective>
+          <ViewDirective option="Day" />
+          <ViewDirective option="Week" />
+          <ViewDirective option="Month" />
+          <ViewDirective option="Agenda" />
+        </ViewsDirective>
         <Inject services={[Day, Week, Month, Agenda]} />
       </ScheduleComponent>
       <Button
