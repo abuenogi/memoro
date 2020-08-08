@@ -227,7 +227,7 @@ const MemorenyosForm = (props) => {
                                     </div>
                                 </div>
                                 <input className="form-control" name="casa" placeholder="Dirección"
-                                    value={ubicacion_casa || `[${values.casa.Pc}, ${values.casa.Vc}]` || ''}
+                                    value={ubicacion_casa || `LatLng(${values.casa.Pc}, ${values.casa.Vc})` || ''}
                                     onChange={handleInputChange}
                                 />
 

@@ -51,8 +51,8 @@ const Calendario = ({ history }) => {
 
   }
 
-
-  console.log('usuario_selected =>', obj_contacto)
+  console.log('usuario_selected =>', usuario_selected)
+  console.log('obj_contacto =>', obj_contacto)
 
   const onDataBinding = (e) => {
     var items = e.result;
