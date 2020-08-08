@@ -66,7 +66,6 @@ const CampoMapa = ({ history}) => {
                     onClick={() => {
                         //console.log([ latitude, longitude]);
                         //setActivePoint(data);
-                        debugger;
                     }}
                 />
                 <Marker
@@ -75,7 +74,6 @@ const CampoMapa = ({ history}) => {
                     onClick={(e) => {
                         console.log(ubiCasa);
                         //setActivePoint(ubiCasa);
-                        debugger;
                     }}
                 />
 
