@@ -26,15 +26,15 @@ exports.addMessage = functions.https.onRequest((req, res) => {
   const payload = {
     token: req.query.currentToken,
     notification: {
-      title: "test",
-      body: `test`,
+      title: req.query.title,
+      body: req.query.body,
     },
   };
   admin
     .messaging()
     .sendAll([payload])
     .then(function (response) {
-      console.log(response);
+      console.log("Función firebase add Message ",response);
       console.log(response.responses[0].error);
       res.send("It works!");
       return null;
@@ -56,7 +56,7 @@ exports.sendMessageTo = functions.https.onRequest((req, res) => {
   };
   admin
     .messaging()
-    .sendToDevice("", payload)
+    .sendToDevice("vuyCQasukgSVTwLj7vZv", payload)
     .then(function (response) {
       console.log(response);
       console.log(response.responses[0].error);

@@ -10,6 +10,12 @@ import {
   ViewsDirective,
   ViewDirective
 } from "@syncfusion/ej2-react-schedule";
+import * as numberingSystems from 'cldr-data/supplemental/numberingSystems.json';
+import * as gregorian from 'cldr-data/main/es/ca-gregorian.json';
+import * as numbers from 'cldr-data/main/es/numbers.json';
+import * as timeZoneNames from 'cldr-data/main/es/timeZoneNames.json';
+import { loadCldr } from '@syncfusion/ej2-base';
+
 import { Button } from "reactstrap";
 import Footer from "./Footer";
 import NavigationBar from "../container/CNT_NavigationBar";
@@ -17,6 +23,9 @@ import useDropdown from "../fuctions/useDropdown";
 import { UserContext } from "../context/UserContext";
 import { getDataElement, updateDataElement } from "../fuctions/CRUD";
 // import { L10n } from "@syncfusion/ej2-base";
+
+
+loadCldr(numberingSystems, gregorian, numbers, timeZoneNames);
 
 
 const Calendario = ({ history }) => {
@@ -83,7 +92,7 @@ const Calendario = ({ history }) => {
     <Fragment>
       <NavigationBar />
       <UsuarioDropdown />
-
+      
       <ScheduleComponent
         locale="es"
         timezone="Europe/Madrid"
@@ -91,7 +100,8 @@ const Calendario = ({ history }) => {
         width="100%"
         height="500px"
         selectedDate={new Date().toUTCString("UTC+2")}
-        eventSettings={{ dataSource: data }}
+        locale="es" 
+        eventSettings={{ dataSource: data }} 
         dataBinding={(e) => {
           onDataBinding(e);
         }}

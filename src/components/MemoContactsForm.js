@@ -67,6 +67,7 @@ const MemoContactsForm = (props) => {
 
     //Se actualizan los datos del contacto para el memoreño
     const addOrEdit = (contactValue) => {
+        console.log('addOrEdit contacto de memorenyo ',contactValue)
          if (contactValue) {
            const clave = Object.keys(memorenyoSelected.contactos).length;
            setMemorenyoSelected({...memorenyoSelected, contactos: {...memorenyoSelected.contactos, [clave]: contactValue}});

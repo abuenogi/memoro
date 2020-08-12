@@ -6,7 +6,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "react-big-scheduler/lib/css/style.css";
 import "./index.css";
-
 import App from "./App";
 
 
