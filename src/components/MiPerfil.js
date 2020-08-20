@@ -23,9 +23,9 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
     const { user_auth } = useContext(UserContext);
 
     const [ubi_final, setUbi_final] = useState({});
+    const [ref_storage, setRef_storage] = useState('');
+    const [child_storage, setChild_storage] = useState('');
 
-    var ref_storage = ''
-    var child_storage = ''
     let ubicacion_casa;
 
     const location = useLocation();
@@ -36,8 +36,10 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
 
     useEffect(() => {
 
-        ref_storage = 'usuarios'
-        child_storage = user_auth.id
+        debugger;
+
+        setRef_storage('usuarios');
+        setChild_storage(user_auth.id);
 
         const usuario = {
 

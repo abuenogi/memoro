@@ -21,6 +21,7 @@ messaging.onMessage((payload) => {
   confirmAlert({
     title: payload.notification.title,
     message: payload.notification.body,
+    childrenElement: () => <div><li>Custom 1</li><li>Custom 2</li></div>, 
     buttons: [
       {
         label: 'Vale',
@@ -58,7 +59,7 @@ const Home = () => {
       console.log("distanciaKM  ",distanciaKM);
       
       if ((distanciaKM) > memorenyo.radioSeguridad) {
-        listaMemorenyos.push(memorenyo.nombre +' a una distancia de '+distanciaKM + '\r\n');
+        listaMemorenyos.push('\r\n' + memorenyo.nombre +' a una distancia de '+distanciaKM + ' metros ');
       }
 
     });
@@ -82,7 +83,7 @@ const Home = () => {
           .then((currentToken) => {
             if (currentToken) {
               let titulo = 'Alerta memoreñ@s';
-              let cuerpo = 'El/los memoreñ@s \n' + listaMemorenyos.join() + ' está fuera se su perímetro de seguridad \r\n';
+              let cuerpo = 'El/los memoreñ@s ' + listaMemorenyos.join() + ' está fuera se su perímetro de seguridad';
               sendTokenToServer(currentToken, titulo, cuerpo);
               // updateUIForPushEnabled(currentToken);
             } else {

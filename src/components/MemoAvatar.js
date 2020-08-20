@@ -13,10 +13,15 @@ const MemoAvtar = ({ ref_storage, child_storage }) => {
 
     const [src, setSRC] = useState(null);
 
+   
     useEffect(() => {
 
-       
-        document.querySelector('#row_avatar').style.display = 'none';
+         debugger;
+
+        if (ref_storage!= '' &&  child_storage != '' ) {
+
+            document.querySelector('#row_avatar').style.display = 'none';
+            
         try {
             storage.ref(ref_storage).child(child_storage).getDownloadURL().then(url => {
                 // `url` is the download URL for 'images/stars.jpg'
@@ -31,10 +36,11 @@ const MemoAvtar = ({ ref_storage, child_storage }) => {
             setSRC(usuarioImagen)
             console.log(error)
         }
-        
+        }
+       
 
 
-    }, [])
+    }, [ref_storage, child_storage ])
 
     const onCloseAvatar = () => {
         document.querySelector('#row_avatar').style.display = 'none';
