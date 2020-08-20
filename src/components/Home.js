@@ -8,7 +8,7 @@ import Jumbotron from "./Jumbotron";
 import { HomeLinks } from "../pages/HomeLinks";
 import firebase from "firebase";
 import { UserContext } from '../context/UserContext';
-import { Dist } from '../fuctions/calculaDistancias';
+import { distance } from '../fuctions/calculaDistancias';
 import { confirmAlert } from 'react-confirm-alert';
 import { getDataElement } from '../fuctions/CRUD';
 
@@ -41,64 +41,68 @@ const Home = () => {
   const [memorenyos, setMemorenyos] = useState([]);
 
   useEffect(() => {
-
-    debugger;
-
     const fetchData = async () => {
       if (user_auth.rol === 'cuidador') {
         const data = await getDataElement('usuarios', 'cuidador', user_auth.id);
+        console.log("set memore data : ",data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
         setMemorenyos(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
       }
     };
-  
+    fetchData();
+  }, [user_auth]);
+
+  useEffect(()=> {
+    let listaMemorenyos = [];
     memorenyos.map((memorenyo) => {
-
-      var distanciaKM = Dist(memorenyo.casa.Pc, memorenyo.casa.Vc, memorenyo.ubicacion.Pc, memorenyo.ubicacion.Vc);
-
-      if ((distanciaKM * 1000) >= memorenyo.radioSeguridad) {
-
-        //Solicita permiso para recibir notificaciones
-        Notification.requestPermission().then((permission) => {
-          if (permission === "granted") {
-            debugger
-            console.log("Notification permission granted.");
-            // TODO(developer): Retrieve an Instance ID token for use with FCM.
-            // ...
-            // Get Instance ID token. Initially this makes a network call, once retrieved
-            // subsequent calls to getToken will return from cache.
-            messaging
-              .getToken()
-              .then((currentToken) => {
-                if (currentToken) {
-                  debugger;
-                  let titulo = 'Alerta memoreño';
-                  let cuerpo = 'El memoreño' + memorenyo.nombre + ' está fuera se su perímetro de seguriada';
-                  sendTokenToServer(currentToken, titulo, cuerpo);
-                  // updateUIForPushEnabled(currentToken);
-                } else {
-                  // Show permission request.
-                  console.log("No Instance ID token available. Request permission to generate one.");
-                  // Show permission UI.
-                  // updateUIForPushPermissionRequired();
-                  // setTokenSentToServer(false);
-                }
-              })
-              .catch((err) => {
-                console.log("An error occurred while retrieving token. ", err);
-                // showToken("Error retrieving Instance ID token. ", err);
-                // setTokenSentToServer(false);
-              });
-          } else {
-            console.log("Unable to get permission to notify.");
-          }
-        });
-
+      var distanciaKM = distance(memorenyo.casa.Pc, memorenyo.casa.Vc, memorenyo.ubicacion.Pc, memorenyo.ubicacion.Vc);
+      console.log("distanciaKM  ",distanciaKM);
+      
+      if ((distanciaKM) > memorenyo.radioSeguridad) {
+        listaMemorenyos.push(memorenyo.nombre +' a una distancia de '+distanciaKM + '\r\n');
       }
 
     });
-    fetchData();
+    if(listaMemorenyos.length>0)
+      enviarMensaje(listaMemorenyos);
+  }, [memorenyos]);
 
-  }, [user_auth]);
+
+  const enviarMensaje = (listaMemorenyos) =>  {
+     //Solicita permiso para recibir notificaciones
+     Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        
+        console.log("Notification permission granted.");
+        // TODO(developer): Retrieve an Instance ID token for use with FCM.
+        // ...
+        // Get Instance ID token. Initially this makes a network call, once retrieved
+        // subsequent calls to getToken will return from cache.
+        messaging
+          .getToken()
+          .then((currentToken) => {
+            if (currentToken) {
+              let titulo = 'Alerta memoreñ@s';
+              let cuerpo = 'El/los memoreñ@s \n' + listaMemorenyos.join() + ' está fuera se su perímetro de seguridad \r\n';
+              sendTokenToServer(currentToken, titulo, cuerpo);
+              // updateUIForPushEnabled(currentToken);
+            } else {
+              // Show permission request.
+              console.log("No Instance ID token available. Request permission to generate one.");
+              // Show permission UI.
+              // updateUIForPushPermissionRequired();
+              // setTokenSentToServer(false);
+            }
+          })
+          .catch((err) => {
+            console.log("An error occurred while retrieving token. ", err);
+            // showToken("Error retrieving Instance ID token. ", err);
+            // setTokenSentToServer(false);
+          });
+      } else {
+        console.log("Unable to get permission to notify.");
+      }
+    });
+  }
 
   const sendTokenToServer = (currentToken, titulo, cuerpo) => {
     const url = `https://us-central1-memoro-e03d4.cloudfunctions.net/addMessage?currentToken=${currentToken}&title=${titulo}&body=${cuerpo}`
