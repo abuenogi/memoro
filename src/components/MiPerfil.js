@@ -12,7 +12,7 @@ import CampoMapa from "./CampoMapa";
 import Layout from './Layout'
 import NavigationBar from "./NavigationBar";
 
-import MemoAvtar from './MemoAvatar'
+import MemoAvatar from './MemoAvatar'
 import useForm from "../fuctions/useFormSignUp";
 import { validateSignUp } from "../fuctions/validateInput";
 
@@ -111,7 +111,7 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
                 <h3 className="text-center mt-4 mb-4">Datos usuario</h3>
 
                 <Label>Foto de perfil</Label>
-                <MemoAvtar
+                <MemoAvatar
                     ref_storage={ref_storage}
                     child_storage={child_storage}
                 />

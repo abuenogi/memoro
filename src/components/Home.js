@@ -14,14 +14,16 @@ import { getDataElement } from '../fuctions/CRUD';
 
 const messaging = firebase.messaging();
 
+let myTable= "<ul>";
+
 messaging.onMessage((payload) => {
 
   console.log('Message received. notification ', payload.notification);
   
   confirmAlert({
     title: payload.notification.title,
-    message: payload.notification.body,
-    childrenElement: () => <div><li>Custom 1</li><li>Custom 2</li></div>, 
+    message: '',
+    childrenElement: () => <div id='tabla_memo'></div>, 
     buttons: [
       {
         label: 'Vale',
@@ -29,6 +31,8 @@ messaging.onMessage((payload) => {
       }
     ]
   });
+
+  document.getElementById('tabla_memo').innerHTML = myTable;
 
 });
 
@@ -54,15 +58,26 @@ const Home = () => {
 
   useEffect(()=> {
     let listaMemorenyos = [];
+    let distanciaKM = ''
+
+    if (memorenyos[0]) {
+    myTable+= `<ul><h5>Los memoreñ@s :</h5></br>`;
     memorenyos.map((memorenyo) => {
-      var distanciaKM = distance(memorenyo.casa.Pc, memorenyo.casa.Vc, memorenyo.ubicacion.Pc, memorenyo.ubicacion.Vc);
+     
+      distanciaKM = distance(memorenyo.casa.Pc, memorenyo.casa.Vc, memorenyo.ubicacion.Pc, memorenyo.ubicacion.Vc);
       console.log("distanciaKM  ",distanciaKM);
+
       
       if ((distanciaKM) > memorenyo.radioSeguridad) {
-        listaMemorenyos.push('\r\n' + memorenyo.nombre +' a una distancia de '+distanciaKM + ' metros ');
-      }
+        listaMemorenyos.push(memorenyo.nombre +' está a una distancia de '+ distanciaKM + ' km');
 
+        myTable+=  `<li>${memorenyo.nombre} está a una distancia de ${Math.round(distanciaKM)} km.</li>`;
+      }
     });
+
+    myTable+= `</br><p>Fuera de su perímetro de seguridad.</p>`;
+    myTable+="</ul>";
+  }
     if(listaMemorenyos.length>0)
       enviarMensaje(listaMemorenyos);
   }, [memorenyos]);

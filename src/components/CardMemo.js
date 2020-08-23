@@ -12,20 +12,17 @@ const CardMemo = ({ memo, telefono }) => {
     
     var text = ''
     if (telefono){
-    var text = 'Teléfono: ' + telefono
+    var text = telefono
     }
     
     return (
-        <div>
-            <Card>
-                <CardBody>
-                    <CardTitle>{memo}</CardTitle>
-                </CardBody>
-                <Imagen src={usuarioImagen} alt="Usuario" with="80" height="80" />
-                <CardBody>
-                    <CardText>{text}</CardText>
-                </CardBody>
-            </Card>
+        <div className='CardMemo'>
+            
+                    <h2 className="m-3">{memo}</h2>
+              
+                <Imagen className="d-flex justify-content-around" src={usuarioImagen} alt="Usuario" with="200" height="200" />
+               <h3 className="m-3">{text}</h3>
+              
         </div>
     );
 };

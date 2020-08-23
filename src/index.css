@@ -112,8 +112,19 @@ a.nav-link{
   height: 40vh;
 }
 
+.CardMemo{
+
+  font-family: 'Nunito', sans-serif;
+  border: 1px solid  rgb(119, 113, 133);
+  padding: 2px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 2px 2px;
+  
+}
+
 .item_menu{
-  box-shadow: 1px 1px 3pxrgba(79,148,212,1);
+  box-shadow: 1px 1px 1px rgba(79,148,212,1);
   border: 2px solid #083b66;
   background-color: rgb(255, 255, 255);
   border-radius: 5px;

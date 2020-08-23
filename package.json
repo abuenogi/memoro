@@ -16,6 +16,7 @@
     "bootstrap": "^4.4.1",
     "cldr-data": "^36.0.0",
     "firebase": "^7.14.2",
+    "firebase-functions": "^3.10.0",
     "font-awesome": "^4.7.0",
     "immer": "^6.0.9",
     "jquery": "^3.5.1",

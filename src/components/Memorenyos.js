@@ -11,6 +11,7 @@ import { getDataElement } from "../fuctions/CRUD";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, fas } from "@fortawesome/free-solid-svg-icons";
 
+
 const Memorenyos = () => {
   const [memorenyos, setMemorenyos] = useState([]);
   const { user_auth } = useContext(UserContext);

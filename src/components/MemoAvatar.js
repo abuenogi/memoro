@@ -57,6 +57,7 @@ const MemoAvtar = ({ ref_storage, child_storage }) => {
         if (files) {
             setSRC(files.src)
             // add to image folder in firebase
+            debugger;
             storage.ref(ref_storage).child(child_storage).put(files);
 
         } else {
@@ -67,7 +68,7 @@ const MemoAvtar = ({ ref_storage, child_storage }) => {
     return (
         <Fragment>
 
-            <div className="form-group">
+            <div className="form-group" id='MemoAvatar'>
                 <div id='row_avatar' >
                     <Button className='mr-10' onClick={onCloseAvatar}>X</Button>
                     <input
