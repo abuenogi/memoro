@@ -12,7 +12,7 @@ import CampoMapa from "./CampoMapa";
 import Layout from './Layout'
 import NavigationBar from "./NavigationBar";
 
-import MemoAvtar from './MemoAvatar'
+import MemoAvatar from './MemoAvatar'
 import useForm from "../fuctions/useFormSignUp";
 import { validateSignUp } from "../fuctions/validateInput";
 
@@ -23,9 +23,9 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
     const { user_auth } = useContext(UserContext);
 
     const [ubi_final, setUbi_final] = useState({});
+    const [ref_storage, setRef_storage] = useState('');
+    const [child_storage, setChild_storage] = useState('');
 
-    var ref_storage = ''
-    var child_storage = ''
     let ubicacion_casa;
 
     const location = useLocation();
@@ -36,8 +36,10 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
 
     useEffect(() => {
 
-        ref_storage = 'usuarios'
-        child_storage = user_auth.id
+        debugger;
+
+        setRef_storage('usuarios');
+        setChild_storage(user_auth.id);
 
         const usuario = {
 
@@ -109,7 +111,7 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
                 <h3 className="text-center mt-4 mb-4">Datos usuario</h3>
 
                 <Label>Foto de perfil</Label>
-                <MemoAvtar
+                <MemoAvatar
                     ref_storage={ref_storage}
                     child_storage={child_storage}
                 />

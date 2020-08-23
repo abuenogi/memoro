@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 
 import { auth } from '../services/firebase/firebaseConfig';
 import { UserContext } from '../context/UserContext';
+import { confirmAlert } from 'react-confirm-alert';
 
 import Login from '../components/Login';
 
@@ -36,8 +37,34 @@ const Login_container = ({ history }) => {
           var errorCode = error.code, errorMessage = error.message;
           console.log(errorCode + " " + errorMessage);
           if (error.code === 'auth/user-not-found') {
-            window.alert('Este usuario no existe');
+
+            confirmAlert({
+              title: 'Usuario incorrecto',
+              message: 'Compruebe sus credenciales, si no tiene usuario puede crearlo.',
+             
+              buttons: [
+                {
+                  label: 'Vale',
+          
+                }
+              ]
+            });
+          }else if (error.code === 'auth/wrong-password') {
+
+            confirmAlert({
+              title: 'Contraseña incorrecto',
+              message: 'Puede intentarlo de nuevo.',
+             
+              buttons: [
+                {
+                  label: 'Vale',
+          
+                }
+              ]
+            });
           }
+
+          
         });
 
 

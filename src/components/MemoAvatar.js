@@ -13,10 +13,15 @@ const MemoAvtar = ({ ref_storage, child_storage }) => {
 
     const [src, setSRC] = useState(null);
 
+   
     useEffect(() => {
 
-       
-        document.querySelector('#row_avatar').style.display = 'none';
+         debugger;
+
+        if (ref_storage!= '' &&  child_storage != '' ) {
+
+            document.querySelector('#row_avatar').style.display = 'none';
+            
         try {
             storage.ref(ref_storage).child(child_storage).getDownloadURL().then(url => {
                 // `url` is the download URL for 'images/stars.jpg'
@@ -31,10 +36,11 @@ const MemoAvtar = ({ ref_storage, child_storage }) => {
             setSRC(usuarioImagen)
             console.log(error)
         }
-        
+        }
+       
 
 
-    }, [])
+    }, [ref_storage, child_storage ])
 
     const onCloseAvatar = () => {
         document.querySelector('#row_avatar').style.display = 'none';
@@ -51,6 +57,7 @@ const MemoAvtar = ({ ref_storage, child_storage }) => {
         if (files) {
             setSRC(files.src)
             // add to image folder in firebase
+            debugger;
             storage.ref(ref_storage).child(child_storage).put(files);
 
         } else {
@@ -61,7 +68,7 @@ const MemoAvtar = ({ ref_storage, child_storage }) => {
     return (
         <Fragment>
 
-            <div className="form-group">
+            <div className="form-group" id='MemoAvatar'>
                 <div id='row_avatar' >
                     <Button className='mr-10' onClick={onCloseAvatar}>X</Button>
                     <input

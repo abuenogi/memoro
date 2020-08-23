@@ -11,7 +11,7 @@ import { Container } from 'react-bootstrap';
 import { useLocation, useHistory} from 'react-router-dom';
 import { auth } from '../services/firebase/firebaseConfig';
 import {UserContext} from '../context/UserContext';
-import MemoAvtar from './MemoAvatar'
+import MemoAvatar from './MemoAvatar'
 
 
 const MemoContactsForm = (props) => {
@@ -26,23 +26,30 @@ const MemoContactsForm = (props) => {
     } 
     var [contacto, setContacto] = useState({}); 
   
-    var ref_storage = ''
-    var child_storage = ''
+    const [ref_storage, setRef_storage] = useState('');
+    const [child_storage, setChild_storage] = useState('');
    
     //Variable de carga de los valores del objeto memorenyo y sus contactos
     useEffect(() => {   
 
-        ref_storage = 'usuarios'
-        child_storage = 'A0nmyOnqmMDnPqcbSVkd'
         //Se trata de una creación
         if(!location.contacto || location.contacto.nombre==''){
             setContacto({...initialContactObjetValues})
+            document.querySelector('#MemoAvatar').style.display = 'none';
         } 
         //Se trata de una actualización
         else{
             setContacto({...location.contacto})
         }         
     },[])
+
+    useEffect(() => {   
+
+        setRef_storage('contactos');
+        setChild_storage(contacto.telefono);
+        
+              
+    },[contacto.telefono])
 
     //Cada vez que se informa algo en los campos del formulario
     const handleInputChange = e => {
@@ -94,7 +101,7 @@ const MemoContactsForm = (props) => {
                     </div>
                     <div>
                         <form autoComplete="off" onSubmit={handleFormSubmit}>
-                        <MemoAvtar
+                        <MemoAvatar
                     ref_storage={ref_storage}
                     child_storage={child_storage}
                 />

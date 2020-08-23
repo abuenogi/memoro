@@ -12,11 +12,11 @@ import { UserContext } from '../context/UserContext';
 import { getDataElement } from '../fuctions/CRUD';
 import {
     storage
-  } from '../services/firebase/firebaseConfig.js';
-  
+} from '../services/firebase/firebaseConfig.js';
 
 
-const Contactos = ({history}) => {
+
+const Contactos = ({ history }) => {
 
 
     const { user_auth } = useContext(UserContext);
@@ -45,9 +45,9 @@ const Contactos = ({history}) => {
 
     }, [user_auth.id]);
 
-    const [contacto_selected, ContactoDropdown] = useDropdown( contactosResult);
+    const [contacto_selected, ContactoDropdown] = useDropdown(contactosResult);
 
-    let obj_contacto ,llamar_contacto, enviar_whatsApp, nombre_contacto ,telefono_contacto;
+    let obj_contacto, llamar_contacto, enviar_whatsApp, nombre_contacto, telefono_contacto;
 
     if (contacto_selected) {
         obj_contacto = JSON.parse(contacto_selected);
@@ -55,38 +55,51 @@ const Contactos = ({history}) => {
         nombre_contacto = obj_contacto.nombre
         telefono_contacto = obj_contacto.telefono
         llamar_contacto = `tel://${telefono_contacto}`
-        enviar_whatsApp = `https://api.whatsapp.com/send?phone=${telefono_contacto}&text=Llamame%20por%20favor`
-        
-        storage.ref('contactos').child('+34655461008.jpg').getDownloadURL().then(url => {
+        enviar_whatsApp = `https://api.whatsapp.com/send?phone=+34${telefono_contacto}&text=Llamame%20por%20favor`
+
+        let ref_storage = ''
+        let child_storage = ''
+
+        if (user_auth.rol === 'memorenyo') {
+
+            ref_storage = 'contactos'
+            child_storage = obj_contacto.telefono
+
+        } else {
+
+            ref_storage = 'usuarios'
+            child_storage = obj_contacto.id
+        }
+
+        storage.ref(ref_storage).child(child_storage).getDownloadURL().then(url => {
             // `url` is the download URL for 'images/stars.jpg'
             var img = document.querySelector('.foto_de_perfil');
             img.src = url;
-      
-          }).catch(function (error) {
+
+        }).catch(function (error) {
             console.log(error)
-          });
-      
+        });
     }
 
-    return (
+        return (
 
-        <Fragment>
-            <NavigationBar />
-            <ContactoDropdown />
-            <CardMemo
-                memo={nombre_contacto}
-                telefono = {telefono_contacto}
-            />
-            <div className="d-flex justify-content-around mt-4">
-            
-                <Button href={llamar_contacto}><FontAwesomeIcon  icon={(fas, faPhone)}  size="2x"   /> </Button>
-                <Button href={enviar_whatsApp}><FontAwesomeIcon  icon={(fas, faSms)}  size="2x"   /> </Button>
-            </div>
-            <Button className="btn btn-block mt-4 button1" onClick={e=> history.push('/home')}>Volver</Button>
-            <Footer />
-        </Fragment>
-    )
+            <Fragment>
+                <NavigationBar />
+                <ContactoDropdown />
+                <CardMemo
+                    memo={nombre_contacto}
+                    telefono={telefono_contacto}
+                />
+                <div className="d-flex justify-content-around mt-4">
 
-};
-export default withRouter(Contactos);
+                    <Button href={llamar_contacto}><FontAwesomeIcon icon={(fas, faPhone)} size="2x" /> </Button>
+                    <Button href={enviar_whatsApp}><FontAwesomeIcon icon={(fas, faSms)} size="2x" /> </Button>
+                </div>
+                <Button className="btn btn-block mt-4 button1" onClick={e => history.push('/home')}>Volver</Button>
+                <Footer />
+            </Fragment>
+        )
+
+    };
+    export default withRouter(Contactos);
 

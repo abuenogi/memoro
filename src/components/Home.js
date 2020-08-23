@@ -14,13 +14,16 @@ import { getDataElement } from '../fuctions/CRUD';
 
 const messaging = firebase.messaging();
 
+let myTable= "<ul>";
+
 messaging.onMessage((payload) => {
 
   console.log('Message received. notification ', payload.notification);
   
   confirmAlert({
     title: payload.notification.title,
-    message: payload.notification.body,
+    message: '',
+    childrenElement: () => <div id='tabla_memo'></div>, 
     buttons: [
       {
         label: 'Vale',
@@ -28,6 +31,8 @@ messaging.onMessage((payload) => {
       }
     ]
   });
+
+  document.getElementById('tabla_memo').innerHTML = myTable;
 
 });
 
@@ -53,15 +58,26 @@ const Home = () => {
 
   useEffect(()=> {
     let listaMemorenyos = [];
+    let distanciaKM = ''
+
+    if (memorenyos[0]) {
+    myTable+= `<ul><h5>Los memoreñ@s :</h5></br>`;
     memorenyos.map((memorenyo) => {
-      var distanciaKM = distance(memorenyo.casa.Pc, memorenyo.casa.Vc, memorenyo.ubicacion.Pc, memorenyo.ubicacion.Vc);
+     
+      distanciaKM = distance(memorenyo.casa.Pc, memorenyo.casa.Vc, memorenyo.ubicacion.Pc, memorenyo.ubicacion.Vc);
       console.log("distanciaKM  ",distanciaKM);
+
       
       if ((distanciaKM) > memorenyo.radioSeguridad) {
-        listaMemorenyos.push(memorenyo.nombre +' a una distancia de '+distanciaKM + '\r\n');
-      }
+        listaMemorenyos.push(memorenyo.nombre +' está a una distancia de '+ distanciaKM + ' km');
 
+        myTable+=  `<li>${memorenyo.nombre} está a una distancia de ${Math.round(distanciaKM)} km.</li>`;
+      }
     });
+
+    myTable+= `</br><p>Fuera de su perímetro de seguridad.</p>`;
+    myTable+="</ul>";
+  }
     if(listaMemorenyos.length>0)
       enviarMensaje(listaMemorenyos);
   }, [memorenyos]);
@@ -82,7 +98,7 @@ const Home = () => {
           .then((currentToken) => {
             if (currentToken) {
               let titulo = 'Alerta memoreñ@s';
-              let cuerpo = 'El/los memoreñ@s \n' + listaMemorenyos.join() + ' está fuera se su perímetro de seguridad \r\n';
+              let cuerpo = 'El/los memoreñ@s ' + listaMemorenyos.join() + ' está fuera se su perímetro de seguridad';
               sendTokenToServer(currentToken, titulo, cuerpo);
               // updateUIForPushEnabled(currentToken);
             } else {

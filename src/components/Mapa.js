@@ -74,8 +74,8 @@ const Mapa = ({ history }) => {
         //Si eres cuidador llamas a tu memo seleccionado y buscas su ubicación 
         persona_ubicacion = [obj_persona.ubicacion.Pc, obj_persona.ubicacion.Vc];
         persona_casa = [obj_persona.casa.Pc, obj_persona.casa.Vc];
-        radio_distancia = obj_persona.radioSeguridad;
-        llamar_contacto = `tel://${obj_persona.telefono}`
+        radio_distancia = parseInt(obj_persona.radioSeguridad)*1000;
+        llamar_contacto = `tel://${obj_persona.telefono}`;
         buscar_ubicacion = `https://maps.google.com/?q=${obj_persona.ubicacion.Pc}` + ',' + `${obj_persona.ubicacion.Vc}`
     }
 

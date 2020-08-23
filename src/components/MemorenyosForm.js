@@ -17,7 +17,7 @@ import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import Modal from "./Modal";
 import CampoMapa from "./CampoMapa";
 import useForm from "../fuctions/useFormSignUp";
-import MemoAvtar from './MemoAvatar'
+import MemoAvatar from './MemoAvatar'
 
 
 const MemorenyosForm = (props) => {
@@ -61,17 +61,21 @@ const MemorenyosForm = (props) => {
     //Variable de carga de los valores del objeto memorenyo
     var [values, setValues] = useState(initialMemoObjetValues);
     var [memoObject, setMemoObject] = useState({})
-    var ref_storage = ''
-    var child_storage = ''
+
+    const [ref_storage, setRef_storage] = useState('');
+    const [child_storage, setChild_storage] = useState('');
 
     useEffect(() => {
 
-        ref_storage = 'usuarios'
-        child_storage = 'id del memoreño'
+
+        setRef_storage('usuarios');
+        setChild_storage(memorenyoSelected.id);
+
         //Preguntar a Mateo si puede recogerse de otra forma
         //Para saber si mostrar o no la contraseña
         if (memorenyoSelected.nombre == '') {
             setValues({ ...initialMemoObjetValues })
+            document.querySelector('#MemoAvatar').style.display = 'none';
         }
         else {
             setValues({ ...memorenyoSelected })
@@ -147,7 +151,7 @@ const MemorenyosForm = (props) => {
                     <div>
                         <form autoComplete="off" onSubmit={handleFormSubmit}>
 
-                            <MemoAvtar
+                            <MemoAvatar 
                                 ref_storage={ref_storage}
                                 child_storage={child_storage}
                             />
