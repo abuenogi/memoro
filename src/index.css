@@ -238,9 +238,23 @@ a.nav-link{
   
   color: rgb(255, 249, 249);
   background-color: #083b66;
-  border-radius: 5px;
+  margin-bottom: -35px;
+  margin-right: -35px;
+  margin-left: -35px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 
 }
+.cuadro_menu {
+
+  margin-top: -35px;
+  margin-right: -35px;
+  margin-left: -35px;
+  margin-bottom: 20px;
+ 
+}
+
+
 
  /* ESTILOS MODAL*/
   

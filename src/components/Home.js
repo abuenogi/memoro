@@ -133,7 +133,7 @@ const Home = () => {
         <Jumbotron />
         <HomeLinks />
         <Footer />
-        <Info />
+        <Info/>
       </Layout>
     </React.Fragment>
   );

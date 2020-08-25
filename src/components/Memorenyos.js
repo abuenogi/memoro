@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext , useEffect} from "react";
 import { UserContext } from "../context/UserContext";
 import MemorenyosActions from "./MemorenyosActions";
 import BotoneraCreacion from "./BotoneraCreacion";
@@ -16,7 +16,7 @@ const Memorenyos = () => {
   const [memorenyos, setMemorenyos] = useState([]);
   const { user_auth } = useContext(UserContext);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (user_auth.id) {
       const fetchData = async () => {
         const data = await getDataElement("usuarios", "rol", "memorenyo");

@@ -16,7 +16,7 @@ const MemoAvtar = ({ ref_storage, child_storage }) => {
    
     useEffect(() => {
 
-         debugger;
+          
 
         if (ref_storage!= '' &&  child_storage != '' ) {
 
@@ -57,7 +57,7 @@ const MemoAvtar = ({ ref_storage, child_storage }) => {
         if (files) {
             setSRC(files.src)
             // add to image folder in firebase
-            debugger;
+             
             storage.ref(ref_storage).child(child_storage).put(files);
 
         } else {

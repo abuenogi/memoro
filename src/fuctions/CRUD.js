@@ -88,6 +88,23 @@ export function getDataElement(collection_name, data, value) {
     return db.collection(collection_name).where(data, "==", value).get();
 }
 
+export function fetch_data(url) {
+
+   return fetch(url)
+    .then(function (response) {
+        return response.text();
+    })
+    .then(function (data) {
+        console.log('data = ', data)
+        let data_object = JSON.parse(data);
+        return data_object
+    })
+    .catch(function (err) {
+        console.error(err);
+    });
+
+}
+
 /*
 export function getDataWithRef_original (colection_name, doc_id, colection_name_ref, field_ref ){
 

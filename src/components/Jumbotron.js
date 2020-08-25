@@ -79,13 +79,17 @@ const Jumbotron = () => {
       console.log(error)
     });
 
+  }, [ user_auth.id])
 
+  useEffect(() => {
+  
     if (latitude) {
       let data = { 'ubicacion': GEOubicacion };
       updateDataElement('usuarios', user_auth.id, data);
     }
 
-  }, [latitude, longitude, user_auth])
+  }, [ user_auth.id])
+  
 
   if (error_position)
     return <FatalError />

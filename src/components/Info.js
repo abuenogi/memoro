@@ -6,7 +6,7 @@ import { Layout } from "./Layout";
 // function component
 const Info = ({ history }) => {
 
-  
+
   function onClickTerYCon() {
     try {
       history.push('/terminos');
@@ -14,13 +14,7 @@ const Info = ({ history }) => {
       console.log(error);
     }
   }
-  function onClickConoceMas() {
-    try {
-      history.push('/ConocerMas');
-    } catch (error) {
-      console.log(error);
-    }
-  }
+
 
   function onClickPrivacidad() {
     try {
@@ -38,30 +32,16 @@ const Info = ({ history }) => {
     }
   }
 
-
   return (
-    
-      <Fragment>
-   
-        <div class="caja_footer pt-3">
 
-          <div class="row">
+    <Fragment>
+      <div class="caja_footer row  pt-3">
+        <p className="text-center col p-0 ml-2" onClick={onClickTerYCon} >Terminos y condiciones</p>
+        <p className="text-center col p-0 m-0" onClick={onClickAbout} >About</p>
+        <p className="text-center col p-0 mr-2" onClick={onClickPrivacidad} >Politicas de privacidad</p>
+      </div>
+    </Fragment>
 
-            <div class="col" expand="lg">
-              <p className="text-center" onClick={onClickTerYCon} >Terminos y condiciones</p>
-              <p className="text-center" onClick={onClickConoceMas} >Conocer más</p>
-            </div>
-
-            <div class="col">
-              <p className="text-center" onClick={onClickPrivacidad} >Politicas de privacidad</p>
-              <p className="text-center" onClick={onClickAbout} >About</p>
-            </div>
-
-          </div>
-
-        </div>
-      </Fragment>
-  
 
   )
 
