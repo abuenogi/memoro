@@ -1,14 +1,11 @@
 import React, { useContext } from "react";
 
-import { UserContext } from '../context/UserContext';
 import {auth} from '../services/firebase/firebaseConfig';
 
 import ChangePassword from '../components/ChangePassword';
 
 
 const ChangePassword_container = ({ history }) => {
-
-    //const user = useContext(UserContext);
 
 
     function onClickBotonChangePassword(correo) {

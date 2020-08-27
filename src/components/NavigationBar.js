@@ -21,7 +21,7 @@ const NavigationBar = ({ cerrarSesion }) => {
 
     confirmAlert({
       title: 'Cerrar sesión',
-      message: '¿Quiere cerrar sesión de Memoro?',
+      message: '¿Quiere cerrar sesión?',
       buttons: [
         {
           label: 'No',

@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useHistory  }from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { fas, faUser, faMobile, faEnvelope, faMapMarkedAlt, faImage, faStreetView, faKey, faGlobe, faGlobeEurope, faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { fas, faUser, faMobile} from '@fortawesome/free-solid-svg-icons'
+
 import Footer from "./Footer";
 import Layout  from "./Layout";
 import NavigationBar  from "../container/CNT_NavigationBar";
 import NavigationBarMemoLower  from "./NavigationBarMemoLower";
-import { createData, updateData } from '../fuctions/CRUD';
-import { Container } from 'react-bootstrap';
-import { useLocation, useHistory} from 'react-router-dom';
-import { auth } from '../services/firebase/firebaseConfig';
+import MemoAvatar from './MemoAvatar';
+
 import {UserContext} from '../context/UserContext';
-import MemoAvatar from './MemoAvatar'
+import {updateData } from '../functions/CRUD';
 
 
 const MemoContactsForm = (props) => {

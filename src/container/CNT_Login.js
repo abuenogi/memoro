@@ -1,23 +1,25 @@
 import React, { useContext, useEffect } from "react";
-
-import { auth } from '../services/firebase/firebaseConfig';
-import { UserContext } from '../context/UserContext';
 import { confirmAlert } from 'react-confirm-alert';
 
 import Login from '../components/Login';
 
+import { auth } from '../services/firebase/firebaseConfig';
+import { UserContext } from '../context/UserContext';
+
 const Login_container = ({ history }) => {
 
-  const user_context = useContext(UserContext);
+  const {user_context} = useContext(UserContext);
 
 
   useEffect(() => {
-    
-    /*
-    if (user_context) {
-      history.push('/home');
+   
+
+   if (!user_context) {
+      
+    }else{
+      //history.push('/home');
     }
-    */
+ 
   },
     [user_context]
   )
@@ -30,7 +32,10 @@ const Login_container = ({ history }) => {
 
       auth.signInWithEmailAndPassword(credeciales.email, credeciales.password)
         .then(function () {
+         // status_Sesion(true);
           history.push('/home');
+          
+
         })
         .catch(function (error) {
           history.push('/');

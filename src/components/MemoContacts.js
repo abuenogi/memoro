@@ -1,19 +1,17 @@
 import React, { Fragment, useState, useEffect, useContext } from "react";
-import { withRouter, useLocation } from "react-router-dom";
-import { Container, Row, Col,  Nav } from "react-bootstrap";
+import { withRouter, useLocation, useHistory } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
+import { confirmAlert } from 'react-confirm-alert';
 import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas, faUser } from "@fortawesome/free-solid-svg-icons";
+
 import Footer from "./Footer";
 import NavigationBar from "../container/CNT_NavigationBar";
 import CNT_NavigationBarMemoLower from "../container/CNT_NavigationBarMemoLower";
 import Layout from "./Layout";
 import MemoContactsActions from "./MemoContactsActions";
-import BotoneraCreacion from "./BotoneraCreacion";
-import { getDataWithRef } from "../fuctions/CRUD";
-import { memoSelected } from "../context/UserContext";
-import { useHistory } from 'react-router-dom';
-import { confirmAlert } from 'react-confirm-alert';
+
 import {UserContext} from '../context/UserContext';
 
 

@@ -1,23 +1,23 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { withRouter } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { withRouter,useLocation, useHistory } from 'react-router-dom';
 import { Button} from 'reactstrap';
+import { Container } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fas, faMap, faUser, faMobile, faEnvelope, faMapMarkedAlt, faStreetView, faKey } from '@fortawesome/free-solid-svg-icons'
+
 import Footer from "./Footer";
 import Layout from "./Layout";
-
 import NavigationBar from "../container/CNT_NavigationBar";
 import CNT_NavigationBarMemoLower from "../container/CNT_NavigationBarMemoLower";
-import { createData, updateData } from '../fuctions/CRUD';
-import { Container } from 'react-bootstrap';
-import { useLocation, useHistory } from 'react-router-dom';
-import { auth, geo } from '../services/firebase/firebaseConfig';
-import { UserContext } from '../context/UserContext';
 import Modal from "./Modal";
 import CampoMapa from "./CampoMapa";
-import useForm from "../fuctions/useFormSignUp";
+import useForm from "../functions/hooks/useFormSignUp";
 import MemoAvatar from './MemoAvatar';
-import { fetch_data } from '../fuctions/CRUD';
+
+import { auth, geo } from '../services/firebase/firebaseConfig';
+import { UserContext } from '../context/UserContext';
+
+import { fetch_data,createData, updateData } from '../functions/CRUD';
 
 
 
@@ -82,7 +82,7 @@ const MemorenyosForm = (props) => {
         setRef_storage('usuarios');
         setChild_storage(memorenyoSelected.id);
 
-        //Preguntar a Mateo si puede recogerse de otra forma
+        //Preguntar  si puede recogerse de otra forma
         //Para saber si mostrar o no la contraseña
         if (memorenyoSelected.nombre == '') {
             setValues({ ...initialMemoObjetValues })

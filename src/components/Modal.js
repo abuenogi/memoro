@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React  from "react";
 import { createPortal } from "react-dom";
 import { CSSTransition } from "react-transition-group";
 import {  ModalBody} from 'reactstrap';
@@ -25,26 +25,3 @@ export default ({ children, isOpened }) =>
     : null;
 
 
-/*
-<div className="modal" tabIndex="-1" role="dialog">
-          <CSSTransition
-            appear
-            in
-            classNames="modal-transition"
-            unmountOnExit
-            timeout={300}
-          >
-            <div className="modal-dialog" role="document">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title">{title}</h5>
-                  <button onClick={onClose}>
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div className="modal-body">{children}</div>
-              </div>
-            </div>
-          </CSSTransition>
-        </div>
-*/

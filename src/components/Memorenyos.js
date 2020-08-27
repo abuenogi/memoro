@@ -1,15 +1,18 @@
 import React, { useState, useContext , useEffect} from "react";
-import { UserContext } from "../context/UserContext";
+import { withRouter } from "react-router-dom";
+import { Container, Row, Col } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, fas } from "@fortawesome/free-solid-svg-icons";
+
 import MemorenyosActions from "./MemorenyosActions";
 import BotoneraCreacion from "./BotoneraCreacion";
 import Footer from "./Footer";
 import Layout from "./Layout";
 import NavigationBar from "../container/CNT_NavigationBar";
-import { withRouter } from "react-router-dom";
-import { Container, Row, Col } from "reactstrap";
-import { getDataElement } from "../fuctions/CRUD";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, fas } from "@fortawesome/free-solid-svg-icons";
+
+import { UserContext } from "../context/UserContext";
+import { getDataElement }from '../functions/CRUD';
+
 
 
 const Memorenyos = () => {

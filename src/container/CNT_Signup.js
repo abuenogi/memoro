@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { confirmAlert } from 'react-confirm-alert';
 import { auth, db, geo } from '../services/firebase/firebaseConfig';
-import { createData } from '../fuctions/CRUD';
+import { createData } from '../functions/CRUD';
 import Signup from '../components/Signup';
 
 

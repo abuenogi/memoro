@@ -1,10 +1,12 @@
 import React from 'react'
 import { Container, Nav, Navbar} from 'react-bootstrap';
-import Imagen from '../components/Imagen';
+
 import calendarioImagen from '../images/calendario.svg';
 import mapaImagen from '../images/mapa.svg';
 import rompecabezasImagen from '../images/rompecabezas.svg';
 import telefonoImagen from '../images/telefono.svg';
+
+import Imagen from './Imagen';
 
 export const HomeLinks = () => (
 
@@ -17,3 +19,17 @@ export const HomeLinks = () => (
         </Navbar>
     </Container>
 );
+
+
+/*
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { fas, faPhone, faMap ,faCalendar , faPlay} from "@fortawesome/free-solid-svg-icons";
+
+
+    <Nav.Item><Nav.Link className='mb-4' href="/calendario"><FontAwesomeIcon icon={(fas, faCalendar)} color="#6c757d" size="8x"  /></Nav.Link></Nav.Item>
+    <Nav.Item><Nav.Link  className='mb-4' href="/mapa"><FontAwesomeIcon icon={(fas, faMap)} size="8x" color="#6c757d"  /></Nav.Link></Nav.Item>
+    <Nav.Item><Nav.Link href="/entretenimiento"><FontAwesomeIcon icon={(fas, faPlay)} size="8x"color="#6c757d"   /></Nav.Link></Nav.Item>
+    <Nav.Item><Nav.Link href="/contactos"><FontAwesomeIcon icon={(fas, faPhone)} size="8x" color="#6c757d"  /></Nav.Link></Nav.Item>
+
+*/

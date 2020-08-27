@@ -13,28 +13,27 @@ import Layout from './Layout'
 import NavigationBar from "./NavigationBar";
 
 import MemoAvatar from './MemoAvatar'
-import useForm from "../fuctions/useFormSignUp";
-import { validateSignUp } from "../fuctions/validateInput";
-import { fetch_data } from '../fuctions/CRUD';
+import useForm from "../functions/hooks/useFormSignUp";
+import { validateSignUp } from "../functions/hooks/validateInput";
+import { fetch_data } from '../functions/CRUD';
 
 
 const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
 
 
+    const location = useLocation();
+
     const { handleChange, handleSubmit, values, setValues, errors } = useForm(submit, validateSignUp);
     const { user_auth } = useContext(UserContext);
-
     const [ubi_final, setUbi_final] = useState({});
     const [ref_storage, setRef_storage] = useState('');
     const [child_storage, setChild_storage] = useState('');
+    const [isOpened, setOpened] = useState(false);
     var [nombre_direccion, setNombre_direccion] = useState('');
     var [url, setURL] = useState('');
 
     let ubicacion_casa;
   
-
-
-    const location = useLocation();
 
     if (location.casa) {
         ubicacion_casa = location.casa
@@ -66,7 +65,6 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
         })
 
 
-
         setURL(`https://eu1.locationiq.com/v1/reverse.php?key=c7392af2aaffbc&lat=${user_auth.casa.latitude}&lon=${user_auth.casa.longitude}&format=json`);
 
     }, [user_auth])
@@ -89,7 +87,7 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
     }, [url])
 
 
-    const [isOpened, setOpened] = useState(false);
+    
 
     const openModal = () => {
         document.getElementById("root").disabled = true;

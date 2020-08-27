@@ -1,6 +1,18 @@
 import { createContext } from 'react';
 
 
+/*
+export function status_Sesion(boolean_value) {
+  
+  if(boolean_value){
+     user_auth.isLogin=true;
+  }else if (!boolean_value){
+    user_auth.isLogin=false;
+  }
+  return user_auth.isLogin;
+
+}
+*/
 
 export const user_auth = {
 
@@ -20,7 +32,7 @@ export const user_auth = {
   casa: '',
   radioSeguridad : '',
   eventos:'',
-  isLogin: false
+  isLogin: ''
 
 };
 

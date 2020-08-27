@@ -4,7 +4,7 @@ import  Footer from "./Footer";
 import { Button, Form } from 'reactstrap';
 
 import NavigationBar from "./NavigationBar";
-import Tictactoe from "./juego_tictactoe/Tictactoe";
+import Tictactoe from "./Tictactoe";
 
 import Layout from './Layout'
 

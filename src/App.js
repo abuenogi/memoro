@@ -1,11 +1,11 @@
 
 import React, { useState,  useEffect } from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
-
 import produce from 'immer';
+
 import "firebase/messaging";
 import { auth} from './services/firebase/firebaseConfig';
-import { getDataElement } from './fuctions/CRUD';
+import { getDataElement } from '../src/functions/CRUD';
 
 import Login from "./container/CNT_Login";
 import SignUp from "./container/CNT_Signup";
@@ -14,14 +14,13 @@ import About from "./components/About_info";
 import Terminos from "./components/Terminos_info";
 import Privacidad from "./components/Privacidad_info";
 import Home from "./components/Home";
-import { HomeLinks } from "./pages/HomeLinks";
+import { HomeLinks } from "./components/HomeLinks";
 import MiPerfil  from "./container/CNT_MiPerfil";
 import Memorenyos from "./components/Memorenyos";
 import MemorenyosForm from "./components/MemorenyosForm";
 import MemoContacts from "./components/MemoContacts";
 import MemoContactsForm from "./components/MemoContactsForm";
-import NoMatch from "./pages/NoMatch";
-
+import NoMatch from "./components/NoMatch";
 import  Calendario  from "./components/Calendario";
 import Mapa from "./components/Mapa";
 import CampoMapa from "./components/CampoMapa";
@@ -33,10 +32,10 @@ import { user_auth, memoSelected, UserContext } from "./context/UserContext";
 
 
 const App = () => {
+
   const [memorenyoSelected, setMemorenyoSelected] = useState(memoSelected);
   const [userAuth, setUserAuth] = useState(user_auth);
-  
-
+ 
 
   //Sólo se ejecutará este useEffect al principio de la aplicación
 
@@ -46,9 +45,6 @@ const App = () => {
 
         if (user) {
         
-          draft.photoURL = user.photoURL;
-          //draft.id = user.uid; // No confundir el id de auth con el id de db 
-          //draft.nombre = user.displayName;
           draft.email = user.email;
 
           var user_result = await getDataElement('usuarios', 'email', user.email);
@@ -65,6 +61,7 @@ const App = () => {
             draft.ubicacion = doc.data().ubicacion;
             draft.rol = doc.data().rol;
             draft.casa = doc.data().casa;
+            draft.isLogin = doc.data().isLogin=true;
 
             if (doc.data().contactos) {
               draft.contactos = doc.data().contactos;
@@ -102,7 +99,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <UserContext.Provider
-        value={{ user_auth: userAuth, memorenyoSelected, setMemorenyoSelected }}
+        value={{ user_auth: userAuth, setUserAuth , memorenyoSelected, setMemorenyoSelected }}
       >
         <div className="auth-inner">
           <Switch>
