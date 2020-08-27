@@ -1,5 +1,5 @@
 import {
-    db, geo
+    db
 } from '../services/firebase/firebaseConfig';
 
 export const createData = (data, collection_name) => {
@@ -30,7 +30,6 @@ export const deleteData = (id, collection_name) => {
     }
 
 }
-
 
 
 export const updateDataElement = (collection_name, id, data) => {
@@ -105,18 +104,6 @@ export function fetch_data(url) {
 
 }
 
-/*
-export function getDataWithRef_original (colection_name, doc_id, colection_name_ref, field_ref ){
-
-    const docRef = db.collection(colection_name)
-    .doc(doc_id); 
-   
-    return db.collection(colection_name_ref)
-        .where(field_ref, '==', docRef)
-        .get();
-}
- */
-
 /**
  * Función que devuelve los objetos referenciados de un objeto  que 
  * están relacionados y almacenados en la Database de firebase
@@ -135,3 +122,16 @@ export function getDataWithRef(colection_name_ref, array_ref) {
 
 
 }
+
+
+/*
+export function getDataWithRef_original (colection_name, doc_id, colection_name_ref, field_ref ){
+
+    const docRef = db.collection(colection_name)
+    .doc(doc_id); 
+   
+    return db.collection(colection_name_ref)
+        .where(field_ref, '==', docRef)
+        .get();
+}
+ */
