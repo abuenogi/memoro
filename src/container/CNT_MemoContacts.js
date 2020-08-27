@@ -1,14 +1,6 @@
-import React, { useState}  from 'react'
-import MemorenyosActions from './MemorenyosActions';
-import BotoneraCreacion from './BotoneraCreacion';
-import  Footer from "./Footer";
-import  Layout from "./Layout";
-import  NavigationBar from "./CNT_NavigationBar";
+import React from 'react'
 import { withRouter } from 'react-router-dom';
-import { Container, Row, Col } from 'reactstrap';
-import { getDataElement } from '../fuctions/CRUD';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, fas} from '@fortawesome/free-solid-svg-icons'
+
 import MemoContacts from '../components/MemoContacts';
 
 

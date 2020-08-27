@@ -3,8 +3,8 @@ import { withRouter } from 'react-router-dom';
 import Logo from '../images/logo192.png';
 import { Button, Form, Label, Input } from 'reactstrap';
 
-import useForm from "../fuctions/useFormLogin";
-import {validateLogin} from "../fuctions/validateInput";
+import useForm from "../functions/hooks/useFormLogin";
+import {validateLogin} from "../functions/hooks/validateInput";
 
 
 const Login = ({ onClickBotonLogin, onLoadUser, onClickChangePass, onClickReg }) => {

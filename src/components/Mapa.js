@@ -1,24 +1,22 @@
 
 import React, { useState, Fragment, useEffect, useContext } from "react";
-import { Map, Marker, Popup, TileLayer, Circle } from "react-leaflet";
-
-import L from 'leaflet';
-import { Button, } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-
-import NavigationBar from "../container/CNT_NavigationBar";
-import FatalError from '../pages/NoMatch';
-import Footer from "./Footer";
+import { Button } from 'reactstrap';
+import { Map, Marker, TileLayer, Circle } from "react-leaflet";
+import L from 'leaflet';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas, faPhone, faMap } from "@fortawesome/free-solid-svg-icons";
+
+import NavigationBar from "../container/CNT_NavigationBar";
+import FatalError from './NoMatch';
+import Footer from "./Footer";
+
 import { UserContext } from '../context/UserContext';
+import { usePosition } from '../functions/hooks/usePosition';
+import useDropdown from "../functions/hooks/useDropdown";
 
-import { usePosition } from '../fuctions/usePosition';
-import useDropdown from '../fuctions/useDropdown';
-
-import { getDataByID, getDataElement } from '../fuctions/CRUD';
-//import { Dist} from '../fuctions/calculaDistancias';
+import { getDataByID, getDataElement } from '../functions/CRUD';
 
 
 const Mapa = ({ history }) => {
@@ -27,10 +25,11 @@ const Mapa = ({ history }) => {
     const { user_auth } = useContext(UserContext);
     const [ubiPersona, setubiPersona] = useState([]);
     const [cuidador, setCuidador] = useState({});
-    const [activePoint, setActivePoint] = useState(null);
-
     const { latitude, longitude, error_position } = usePosition();
     const ubicacion = [latitude, longitude]
+    const [personas, PersonaDropdown] = useDropdown(ubiPersona);
+
+    var obj_persona, persona_ubicacion, persona_casa, llamar_contacto, buscar_ubicacion, radio_distancia;
 
     useEffect(() => {
 
@@ -52,17 +51,14 @@ const Mapa = ({ history }) => {
 
     }, [user_auth]);
 
-    console.log('cuidador-> ', cuidador);
-    const [personas, PersonaDropdown] = useDropdown(ubiPersona);
-
-    var obj_persona, persona_ubicacion, persona_casa, llamar_contacto, buscar_ubicacion, radio_distancia;
-    //var distanciaKM = Dist(data[0].lat ,data[0].lon, personas.ubicacion.Pc, personas.ubicacion.Vc);
+   
+    
 
     if (cuidador && user_auth.rol === 'memorenyo') {
         //Si eres memo llamar a tu cuidador y tu casa
         persona_ubicacion = ubicacion;
         persona_casa = [user_auth.casa.Pc, user_auth.casa.Vc];
-        radio_distancia = user_auth.radioSeguridad;
+        radio_distancia = parseInt(obj_persona.radioSeguridad)*1000;
         llamar_contacto = `tel://${cuidador.telefono}`
         buscar_ubicacion = `https://maps.google.com/?q=${user_auth.casa.Pc}` + ',' + `${user_auth.casa.Vc}`
 
@@ -120,9 +116,7 @@ const Mapa = ({ history }) => {
                 <Marker
                     position={persona_casa}
                     icon={casaIcon}
-                    onClick={() => {
-                        setActivePoint(persona_casa);
-                    }}
+                    
                 />
 
                 <Marker
@@ -132,20 +126,7 @@ const Mapa = ({ history }) => {
 
                 <Circle center={persona_casa} fillColor="#4f94d4" radius={radio_distancia} fillColor='blue' />
 
-                {activePoint && (
-                    <Popup
-                        position={
-                            activePoint
-                        }
-                        onClose={() => {
-                            setActivePoint(null);
-                        }}
-                    >
-                        <div>
-                            <p>{activePoint}</p>
-                        </div>
-                    </Popup>
-                )}
+            
             </Map>
 
             <div className="d-flex justify-content-around mt-4">

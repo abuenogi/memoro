@@ -6,10 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas, faSms, faPhone } from "@fortawesome/free-solid-svg-icons";
 import Footer from "./Footer";
 import NavigationBar from "../container/CNT_NavigationBar";
-import useDropdown from '../fuctions/useDropdown';
+import useDropdown from "../functions/hooks/useDropdown";
 import CardMemo from './CardMemo';
 import { UserContext } from '../context/UserContext';
-import { getDataElement } from '../fuctions/CRUD';
+import { getDataElement } from '../functions/CRUD';
 import {
     storage
 } from '../services/firebase/firebaseConfig.js';
@@ -20,8 +20,10 @@ const Contactos = ({ history }) => {
 
 
     const { user_auth } = useContext(UserContext);
-
     const [contactosResult, setContactosResult] = useState([]);
+    const [contacto_selected, ContactoDropdown] = useDropdown(contactosResult);
+
+    let obj_contacto, llamar_contacto, enviar_whatsApp, nombre_contacto, telefono_contacto;
 
 
     useEffect(() => {
@@ -45,9 +47,7 @@ const Contactos = ({ history }) => {
 
     }, [user_auth.id]);
 
-    const [contacto_selected, ContactoDropdown] = useDropdown(contactosResult);
-
-    let obj_contacto, llamar_contacto, enviar_whatsApp, nombre_contacto, telefono_contacto;
+   
 
     if (contacto_selected) {
         obj_contacto = JSON.parse(contacto_selected);

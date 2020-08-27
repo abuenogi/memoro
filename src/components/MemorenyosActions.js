@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faEdit, fas } from '@fortawesome/free-solid-svg-icons'
+import React, {useContext } from 'react'
 import { useHistory } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
-import { deleteData } from '../fuctions/CRUD';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt, faEdit, fas } from '@fortawesome/free-solid-svg-icons'
+
 import { db } from '../services/firebase/firebaseConfig';
 import {UserContext} from '../context/UserContext';
-import { auth } from '../services/firebase/firebaseConfig';
+
 
 const MemorenyosActions = ({ memorenyo }) => {
 

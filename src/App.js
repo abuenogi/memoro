@@ -1,11 +1,11 @@
 
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState,  useEffect } from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
-import firebase from "firebase";
 import produce from 'immer';
+
 import "firebase/messaging";
-import { auth, geo } from './services/firebase/firebaseConfig';
-import { getDataElement, updateDataElement } from './fuctions/CRUD';
+import { auth} from './services/firebase/firebaseConfig';
+import { getDataElement } from '../src/functions/CRUD';
 
 import Login from "./container/CNT_Login";
 import SignUp from "./container/CNT_Signup";
@@ -13,16 +13,14 @@ import ChangePassword from "./container/CNT_ChangePassword";
 import About from "./components/About_info";
 import Terminos from "./components/Terminos_info";
 import Privacidad from "./components/Privacidad_info";
-import ConocerMas from "./components/Conocer_info";
 import Home from "./components/Home";
-import { HomeLinks } from "./pages/HomeLinks";
+import { HomeLinks } from "./components/HomeLinks";
 import MiPerfil  from "./container/CNT_MiPerfil";
 import Memorenyos from "./components/Memorenyos";
 import MemorenyosForm from "./components/MemorenyosForm";
 import MemoContacts from "./components/MemoContacts";
 import MemoContactsForm from "./components/MemoContactsForm";
-import NoMatch from "./pages/NoMatch";
-
+import NoMatch from "./components/NoMatch";
 import  Calendario  from "./components/Calendario";
 import Mapa from "./components/Mapa";
 import CampoMapa from "./components/CampoMapa";
@@ -31,13 +29,13 @@ import Contactos from "./components/Contactos";
 
 
 import { user_auth, memoSelected, UserContext } from "./context/UserContext";
-import { sendTokenToServer, updateUIForPushEnabled, updateUIForPushPermissionRequired, showToken, setTokenSentToServer } from './fuctions/messageUtilities';
+
 
 const App = () => {
+
   const [memorenyoSelected, setMemorenyoSelected] = useState(memoSelected);
   const [userAuth, setUserAuth] = useState(user_auth);
-  
-
+ 
 
   //Sólo se ejecutará este useEffect al principio de la aplicación
 
@@ -47,9 +45,6 @@ const App = () => {
 
         if (user) {
         
-          draft.photoURL = user.photoURL;
-          //draft.id = user.uid; // No confundir el id de auth con el id de db 
-          //draft.nombre = user.displayName;
           draft.email = user.email;
 
           var user_result = await getDataElement('usuarios', 'email', user.email);
@@ -66,6 +61,7 @@ const App = () => {
             draft.ubicacion = doc.data().ubicacion;
             draft.rol = doc.data().rol;
             draft.casa = doc.data().casa;
+            draft.isLogin = doc.data().isLogin=true;
 
             if (doc.data().contactos) {
               draft.contactos = doc.data().contactos;
@@ -99,56 +95,11 @@ const App = () => {
 
  
 
-  /*
-   *
-   * MENSAJERIA
-   *
-   */
-
-  // Retrieve Firebase Messaging object.
-  /*
-
-  const messaging = firebase.messaging();
-  // Add the public key generated from the console here.
-  messaging.usePublicVapidKey(
-    "BFteR1CX2goeMojHT_3fdkwFiXEVCvNLU1FEoTRIzGOG3U443eVRhTX37WSccYaa05riXIu94HqOzlbF__GSItY"
-  );
-  //Solicita permiso para recibir notificaciones
-  Notification.requestPermission().then((permission) => {
-    if (permission === "granted") {
-      console.log("Notification permission granted.");
-      // TODO(developer): Retrieve an Instance ID token for use with FCM.
-      // ...
-      // Get Instance ID token. Initially this makes a network call, once retrieved
-      // subsequent calls to getToken will return from cache.
-      messaging
-        .getToken()
-        .then((currentToken) => {
-          if (currentToken) {
-            sendTokenToServer(currentToken);
-            updateUIForPushEnabled(currentToken);
-          } else {
-            // Show permission request.
-            console.log("No Instance ID token available. Request permission to generate one.");
-            // Show permission UI.
-            updateUIForPushPermissionRequired();
-            setTokenSentToServer(false);
-          }
-        })
-        .catch((err) => {
-          console.log("An error occurred while retrieving token. ", err);
-          showToken("Error retrieving Instance ID token. ", err);
-          setTokenSentToServer(false);
-        });
-    } else {
-      console.log("Unable to get permission to notify.");
-    }
-  });
-*/
+  
   return (
     <BrowserRouter>
       <UserContext.Provider
-        value={{ user_auth: userAuth, memorenyoSelected, setMemorenyoSelected }}
+        value={{ user_auth: userAuth, setUserAuth , memorenyoSelected, setMemorenyoSelected }}
       >
         <div className="auth-inner">
           <Switch>
@@ -162,7 +113,6 @@ const App = () => {
             <Route exact path="/about" component={About} />
             <Route exact path="/terminos" component={Terminos} />
             <Route exact path="/Privaciadad" component={Privacidad} />
-            <Route exact path="/ConocerMas" component={ConocerMas} />
             /** PATHS de las páginas del menú superior derecho - barra de
             navegación*/
             <Route path="/homelinks" component={HomeLinks} />

@@ -1,28 +1,20 @@
 import React, { useState, Fragment, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
-import {
-  Inject,
-  ScheduleComponent,
-  Day,
-  Week,
-  Month,
-  Agenda,
-  ViewsDirective,
-  ViewDirective
-} from "@syncfusion/ej2-react-schedule";
+import { Button } from "reactstrap";
+
+import {Inject, ScheduleComponent, Day, Week,Month, Agenda, ViewsDirective, ViewDirective} from "@syncfusion/ej2-react-schedule";
 import * as numberingSystems from 'cldr-data/supplemental/numberingSystems.json';
 import * as gregorian from 'cldr-data/main/es/ca-gregorian.json';
 import * as numbers from 'cldr-data/main/es/numbers.json';
 import * as timeZoneNames from 'cldr-data/main/es/timeZoneNames.json';
 import { loadCldr } from '@syncfusion/ej2-base';
 
-import { Button } from "reactstrap";
 import Footer from "./Footer";
 import NavigationBar from "../container/CNT_NavigationBar";
-import useDropdown from "../fuctions/useDropdown";
+import useDropdown from "../functions/hooks/useDropdown";
 import { UserContext } from "../context/UserContext";
-import { getDataElement, updateDataElement } from "../fuctions/CRUD";
-// import { L10n } from "@syncfusion/ej2-base";
+import { getDataElement, updateDataElement } from '../functions/CRUD';
+
 
 
 loadCldr(numberingSystems, gregorian, numbers, timeZoneNames);

@@ -1,38 +1,51 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { withRouter } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { withRouter,useLocation, useHistory } from 'react-router-dom';
 import { Button} from 'reactstrap';
-import { fas, faMap, faUser, faMobile, faEnvelope, faMapMarkedAlt, faImage, faStreetView, faKey, faGlobe, faGlobeEurope, faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { Container } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { fas, faMap, faUser, faMobile, faEnvelope, faMapMarkedAlt, faStreetView, faKey } from '@fortawesome/free-solid-svg-icons'
+
 import Footer from "./Footer";
 import Layout from "./Layout";
-
 import NavigationBar from "../container/CNT_NavigationBar";
 import CNT_NavigationBarMemoLower from "../container/CNT_NavigationBarMemoLower";
-import { createData, updateData } from '../fuctions/CRUD';
-import { Container } from 'react-bootstrap';
-import { useLocation, useHistory } from 'react-router-dom';
-import { auth, db, geo } from '../services/firebase/firebaseConfig';
-import { UserContext, memoSelected } from '../context/UserContext';
-import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import Modal from "./Modal";
 import CampoMapa from "./CampoMapa";
-import useForm from "../fuctions/useFormSignUp";
-import MemoAvatar from './MemoAvatar'
+import useForm from "../functions/hooks/useFormSignUp";
+import MemoAvatar from './MemoAvatar';
+
+import { auth, geo } from '../services/firebase/firebaseConfig';
+import { UserContext } from '../context/UserContext';
+
+import { fetch_data,createData, updateData } from '../functions/CRUD';
+
 
 
 const MemorenyosForm = (props) => {
 
-    //const location = useLocation();
     const history = useHistory();
-    //var memorenyoId = '';
-    //const memorenyoSelected = useContext(UserContext);
+   
     const { user_auth, memorenyoSelected, setMemorenyoSelected } = useContext(UserContext);
     const { handleChange } = useForm();
-    var oUbicacion = new geo.GeoPoint(39.4704799, -0.3770681);
+   
     const [isOpened, setOpened] = useState(false);
+    var [nombre_direccion, setNombre_direccion] = useState('');
+    var [url, setURL] = useState('');
 
+    let ubicacion_casa;
+  
     const location = useLocation();
-    let ubicacion_casa = location.casa
+
+    useEffect(() => {
+
+        if (location.casa) {
+            ubicacion_casa = location.casa;
+            setURL(`https://eu1.locationiq.com/v1/reverse.php?key=c7392af2aaffbc&lat=${location.casa.lat}&lon=${location.casa.lng}&format=json`)
+        }
+
+    }, [location.casa])
+
+    
 
     const openModal = () => {
         document.getElementById("root").disabled = true;
@@ -42,11 +55,10 @@ const MemorenyosForm = (props) => {
     }
     const closeModal = () => setOpened(false);
 
-
     const initialMemoObjetValues = {
         nombre: '',
         telefono: '',
-        correo: '',
+        email: '',
         contrasenya: '',
         pais: '',
         ciudad: '',
@@ -54,24 +66,23 @@ const MemorenyosForm = (props) => {
         imagen: '',
         radioSeguridad: '',
         cuidador: user_auth.user_id,
-        ubicacion: oUbicacion,
-        casa: oUbicacion
+        ubicacion: '',
+        casa: ''
     }
 
     //Variable de carga de los valores del objeto memorenyo
     var [values, setValues] = useState(initialMemoObjetValues);
-    var [memoObject, setMemoObject] = useState({})
+
 
     const [ref_storage, setRef_storage] = useState('');
     const [child_storage, setChild_storage] = useState('');
 
     useEffect(() => {
 
-
         setRef_storage('usuarios');
         setChild_storage(memorenyoSelected.id);
 
-        //Preguntar a Mateo si puede recogerse de otra forma
+        //Preguntar  si puede recogerse de otra forma
         //Para saber si mostrar o no la contraseña
         if (memorenyoSelected.nombre == '') {
             setValues({ ...initialMemoObjetValues })
@@ -81,6 +92,31 @@ const MemorenyosForm = (props) => {
             setValues({ ...memorenyoSelected })
         }
     }, [memorenyoSelected])
+
+    
+    useEffect(() => {
+         
+        if (values.casa) {
+            setURL(`https://eu1.locationiq.com/v1/reverse.php?key=c7392af2aaffbc&lat=${values.casa.Pc}&lon=${values.casa.Vc}&format=json`)
+        }
+    }, [values.casa.Pc])
+
+
+    useEffect(() => {
+
+        let data = {}
+       
+        const fetchData = async () => {
+    
+            if (url)
+            data = await fetch_data(url);
+            if(data)
+            setNombre_direccion(data.display_name);
+        };
+
+        fetchData();
+
+    }, [url])
 
     const handleInputChange = e => {
         var { name, value } = e.target;
@@ -108,18 +144,19 @@ const MemorenyosForm = (props) => {
         console.log('Usuario logado  ', user_auth);
         console.log('addOrEdit usuario a modificar ', obj);
         let oCasa = obj.casa;
-        if (ubicacion_casa) 
-            oCasa = new geo.GeoPoint(ubicacion_casa.lat, ubicacion_casa.lng);
+        debugger;
+        if (location.casa) 
+            oCasa = new geo.GeoPoint(location.casa.lat, location.casa.lng);
 
         if (!obj.id || obj.id == '') {
-            auth.createUserWithEmailAndPassword(obj.correo, obj.contrasenya)
+            auth.createUserWithEmailAndPassword(obj.email, obj.contrasenya)
                 .catch(function (error) {
                     console.log('Error añadiendo el memorenyo en auth addOrEdit ', error);
                 });
             //Se actualizan los datos del cuidador, el rol y la ubicación
             obj.rol = 'memorenyo';
             obj.cuidador = user_auth.id;
-            obj.ubicacion = oUbicacion;
+            obj.ubicacion = '';
             obj.casa = oCasa;
             obj.contactos = '';
             delete obj.contrasenya;
@@ -174,8 +211,8 @@ const MemorenyosForm = (props) => {
                                             <FontAwesomeIcon icon={fas, faEnvelope} />
                                         </div>
                                     </div>
-                                    <input type="email" className="form-control" name="correo" placeholder="Correo electrónico"
-                                        value={values.correo || ''}
+                                    <input type="email" className="form-control" name="email" placeholder="Correo electrónico"
+                                        value={values.email || ''}
                                         onChange={handleInputChange}
                                     />
                                 </div>
@@ -231,7 +268,7 @@ const MemorenyosForm = (props) => {
                                     </div>
                                 </div>
                                 <input className="form-control" name="casa" placeholder="Dirección"
-                                    value={ubicacion_casa || `LatLng(${values.casa.Pc}, ${values.casa.Vc})` || ''}
+                                    value={nombre_direccion || ubicacion_casa || `LatLng(${values.casa.Pc}, ${values.casa.Vc})` || ''}
                                     onChange={handleInputChange}
                                 />
 

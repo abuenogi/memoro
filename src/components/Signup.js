@@ -1,27 +1,53 @@
-import React, { Fragment, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter, useLocation } from 'react-router-dom';
 import { Button, Form, Label, Input } from 'reactstrap';
-
-
 import { Container } from 'react-bootstrap';
 import Modal from "./Modal";
-import CampoMapa from "./CampoMapa";
-import Layout from './Layout'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas, faMapMarkedAlt, faMap, faUser, faMobile,faEnvelope, faCalendarAlt, faImage, faStreetView, faKey, faGlobe, faGlobeEurope, faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import useForm from "../fuctions/useFormSignUp";
-import { validateSignUp } from "../fuctions/validateInput";
+
+import CampoMapa from "./CampoMapa";
+import Layout from './Layout'
+import useForm from "../functions/hooks/useFormSignUp";
+import { validateSignUp } from "../functions/hooks/validateInput";
+
+import { fetch_data } from '../functions/CRUD';
 
 const SignUp = ({ onClickBotonCreateUser, onClickVolver, history }) => {
 
+    var [nombre_direccion, setNombre_direccion] = useState('');
+
+    let ubicacion_casa;
+    let url = '';
+  
     const location = useLocation();
-    let ubicacion_casa = location.casa
+
+    if (location.casa) {
+        ubicacion_casa = location.casa
+        url = `https://eu1.locationiq.com/v1/reverse.php?key=c7392af2aaffbc&lat=${ubicacion_casa.lat}&lon=${ubicacion_casa.lng}&format=json`;
+    }
+
+    useEffect(() => {
+
+        let data = {}
+       
+        const fetchData = async () => {
+    
+            if (url)
+            data = await fetch_data(url);
+            if(data)
+            setNombre_direccion(data.display_name);
+        };
+
+        fetchData();
+
+    }, [url])
 
 
+    
     const { handleChange, handleSubmit, values, errors } = useForm(submit, validateSignUp);
     
     const [isOpened, setOpened] = useState(false);
-
 
     const openModal = () => {
         document.getElementById("root").disabled = true;
@@ -35,8 +61,6 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver, history }) => {
     function submit() {
         console.log("Submitted Succesfully");
         onClickBotonCreateUser(values.nombre, values.email, values.password, values.telefono, values.fechaNac, ubicacion_casa.lat, ubicacion_casa.lng);
-
-
     }
 
     return (
@@ -136,7 +160,7 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver, history }) => {
                             name="casa" 
                             placeholder="Dirección casa"
                             type="text"
-                            value={values.casa || ubicacion_casa || ''}
+                            value={nombre_direccion || values.casa || ubicacion_casa || ''}
                             onChange={handleChange}
                     />
 

@@ -1,12 +1,10 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { withRouter } from 'react-router-dom';
-import Avatar from 'react-avatar-edit'
-import { Button, } from 'reactstrap';
+import { Button } from 'reactstrap';
+
+import usuarioImagen from '../images/foto_de_perfil.jpg';
 
 import { storage } from '../services/firebase/firebaseConfig';
-import usuarioImagen from '../images/foto_de_perfil.jpg';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fas, faUpload } from "@fortawesome/free-solid-svg-icons";
 
 const MemoAvtar = ({ ref_storage, child_storage }) => {
 
@@ -16,15 +14,14 @@ const MemoAvtar = ({ ref_storage, child_storage }) => {
    
     useEffect(() => {
 
-         debugger;
-
+        
         if (ref_storage!= '' &&  child_storage != '' ) {
 
             document.querySelector('#row_avatar').style.display = 'none';
             
         try {
             storage.ref(ref_storage).child(child_storage).getDownloadURL().then(url => {
-                // `url` is the download URL for 'images/stars.jpg'
+                // `url` is the download URL for storage
                 var img = document.querySelector('.foto_de_perfil');
                 img.src = url;
     
@@ -38,7 +35,6 @@ const MemoAvtar = ({ ref_storage, child_storage }) => {
         }
         }
        
-
 
     }, [ref_storage, child_storage ])
 
@@ -57,7 +53,6 @@ const MemoAvtar = ({ ref_storage, child_storage }) => {
         if (files) {
             setSRC(files.src)
             // add to image folder in firebase
-            debugger;
             storage.ref(ref_storage).child(child_storage).put(files);
 
         } else {

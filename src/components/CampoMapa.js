@@ -1,13 +1,13 @@
 
 import React, { useState, Fragment} from "react";
-import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+import { withRouter, useLocation } from 'react-router-dom';
 import { Button } from 'reactstrap';
+
+import { Map, Marker, TileLayer } from "react-leaflet";
 import L from 'leaflet';
 
-import { withRouter, useLocation } from 'react-router-dom';
-import { usePosition } from '../fuctions/usePosition';
-import FatalError from '../pages/NoMatch';
-
+import { usePosition } from '../functions/hooks/usePosition';
+import FatalError from './NoMatch';
 
 
 const CampoMapa = ({ history}) => {
@@ -19,7 +19,7 @@ const CampoMapa = ({ history}) => {
         longitude: longitude,
     }
     const [ubiCasa, setUbiCasa] = useState([center.latitude,center.longitude]);
-    const [activePoint, setActivePoint] = useState(null);
+   
 
     const personIcon = new L.Icon({
         iconUrl: require('../images/walking-solid.svg'),
@@ -55,7 +55,7 @@ const CampoMapa = ({ history}) => {
             <Map center={[center.latitude, center.longitude]} zoom={15}
                 onClick={(e) => {
                     setUbiCasa(e.latlng);
-                    //setActivePoint(e.latlng);
+       
                 }} >
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -64,8 +64,7 @@ const CampoMapa = ({ history}) => {
                     position={[center.latitude, center.longitude]}
                     icon={personIcon}
                     onClick={() => {
-                        //console.log([ latitude, longitude]);
-                        //setActivePoint(data);
+              
                     }}
                 />
                 <Marker
@@ -73,31 +72,14 @@ const CampoMapa = ({ history}) => {
                     icon={casaIcon}
                     onClick={(e) => {
                         console.log(ubiCasa);
-                        //setActivePoint(ubiCasa);
+                      
                     }}
                 />
 
-                {activePoint && (
-                    <Popup
-                        position={
-                            activePoint
-                        }
-                        onClose={() => {
-                            setActivePoint(null);
-                        }}
-                    >
-                        <div>
-                            <p>{activePoint}</p>
-                        </div>
-                    </Popup>
-                )}
-
             </Map>
             <Button type="submit" className="btn-block mt-2 button1"
+                
                 onClick={e => { 
-
-                    //const modalContainer = document.querySelector("#modal-root"); 
-                    //modalContainer.removeChild(modalContainer.childNodes[0]);
                    
                     document.querySelector("#modal-root").style.display = 'none';
                     history.push(

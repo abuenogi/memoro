@@ -1,8 +1,8 @@
  
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import {Nav,} from 'react-bootstrap';
-import { Button, } from 'reactstrap';
+import {Nav} from 'react-bootstrap';
+import { Button} from 'reactstrap';
 
  
   const BotoneraCreacion = (props) => (

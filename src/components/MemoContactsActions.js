@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { withRouter,useHistory} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, fas } from '@fortawesome/free-solid-svg-icons'
-import { withRouter } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
-import { deleteData } from '../fuctions/CRUD';
-import { db } from '../services/firebase/firebaseConfig';
 
 
 const MemoContactsActions = ({contacto}) => {
