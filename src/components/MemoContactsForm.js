@@ -8,7 +8,7 @@ import Footer from "./Footer";
 import Layout  from "./Layout";
 import NavigationBar  from "../container/CNT_NavigationBar";
 import NavigationBarMemoLower  from "./NavigationBarMemoLower";
-import MemoAvatar from './MemoAvatar';
+import MemoAvatar from '../container/CNT_MemoAvatar';
 
 import {UserContext} from '../context/UserContext';
 import {updateData } from '../functions/CRUD';

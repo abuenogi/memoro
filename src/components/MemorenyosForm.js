@@ -12,7 +12,7 @@ import CNT_NavigationBarMemoLower from "../container/CNT_NavigationBarMemoLower"
 import Modal from "./Modal";
 import CampoMapa from "./CampoMapa";
 import useForm from "../functions/hooks/useFormSignUp";
-import MemoAvatar from './MemoAvatar';
+import MemoAvatar from '../container/CNT_MemoAvatar';
 
 import { auth, geo } from '../services/firebase/firebaseConfig';
 import { UserContext } from '../context/UserContext';

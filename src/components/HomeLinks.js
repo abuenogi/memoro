@@ -8,7 +8,7 @@ import telefonoImagen from '../images/telefono.svg';
 
 import Imagen from './Imagen';
 
-export const HomeLinks = () => (
+const HomeLinks = () => (
 
     <Container>
         <Navbar expand="sl">
@@ -19,6 +19,7 @@ export const HomeLinks = () => (
         </Navbar>
     </Container>
 );
+export default HomeLinks;
 
 
 /*
