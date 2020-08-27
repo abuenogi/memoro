@@ -4,11 +4,11 @@ import { confirmAlert } from 'react-confirm-alert';
 import firebase from "firebase";
 
 import Footer from "./Footer";
-import Info from "./Info";
-import { Layout } from "./Layout";
+import Info from "../container/CNT_Info";
+import Layout from "./Layout";
 import NavigationBar from "../container/CNT_NavigationBar";
-import Jumbotron from "./Jumbotron";
-import { HomeLinks } from "./HomeLinks";
+import Jumbotron from "../container/CNT_Jumbotron";
+import  HomeLinks  from "./HomeLinks";
 
 import { UserContext } from '../context/UserContext';
 import { distance } from '../functions/calculaDistancias';

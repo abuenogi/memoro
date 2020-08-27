@@ -4,33 +4,8 @@ import { Layout } from "./Layout";
 
 
 // function component
-const Info = ({ history }) => {
+const Info = ({onClickTerYCon,onClickPrivacidad,onClickAbout}) => {
 
-
-  function onClickTerYCon() {
-    try {
-      history.push('/terminos');
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-
-  function onClickPrivacidad() {
-    try {
-      history.push('/Privaciadad');
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  function onClickAbout() {
-    try {
-      history.push('/about');
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   return (
 

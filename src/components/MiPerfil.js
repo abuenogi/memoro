@@ -12,7 +12,7 @@ import CampoMapa from "./CampoMapa";
 import Layout from './Layout'
 import NavigationBar from "./NavigationBar";
 
-import MemoAvatar from './MemoAvatar'
+import MemoAvatar from '../container/CNT_MemoAvatar';
 import useForm from "../functions/hooks/useFormSignUp";
 import { validateSignUp } from "../functions/hooks/validateInput";
 import { fetch_data } from '../functions/CRUD';
