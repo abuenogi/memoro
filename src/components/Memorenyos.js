@@ -34,7 +34,7 @@ const Memorenyos = () => {
       };
       fetchData();
     }
-  }, [user_auth]);
+  }, [user_auth,memorenyos]);
 
   return (
     <>
