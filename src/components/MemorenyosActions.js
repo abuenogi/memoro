@@ -12,9 +12,8 @@ const MemorenyosActions = ({ memorenyo }) => {
 
   //Constantes necesarias en el componente
    const history = useHistory();   
-   //let [memorenyoSelected, setMemorenyoSelected] = useContext(UserContext);  
-   const {memorenyoSelected, setMemorenyoSelected} = useContext(UserContext);
    
+   const {memorenyoSelected, setMemorenyoSelected} = useContext(UserContext);
    
    /*
   Se redirige a la pantalla del formuario de actualización/creación del memoreño

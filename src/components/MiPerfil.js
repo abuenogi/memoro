@@ -37,6 +37,7 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
 
     if (location.casa) {
         ubicacion_casa = location.casa
+        debugger;
         setURL(`https://eu1.locationiq.com/v1/reverse.php?key=c7392af2aaffbc&lat=${ubicacion_casa.lat}&lon=${ubicacion_casa.lng}&format=json`);
     }
 
@@ -72,14 +73,14 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
 
     useEffect(() => {
 
-        let data = {}
+        let data = ''
        
-        const fetchData = async () => {
-    
+         const fetchData = async () => {
+
             if (url)
             data = await fetch_data(url);
-            if(data)
-            setNombre_direccion(data.display_name);
+            if(data !=='')
+            setNombre_direccion(JSON.parse(data).display_name);
         };
 
         fetchData();
