@@ -8,7 +8,7 @@ const CardMemo = ({ memo, telefono }) => {
     
     var text = ''
     if (telefono){
-    var text = telefono
+     text = telefono
     }
     
     return (
