@@ -1,6 +1,9 @@
 {
   "name": "memoro",
   "version": "0.1.0",
+  "description": "Aplicación React para enfermos de Alzheimer (memoreños) y cuidadores",
+  "autor": "Memoro React memoro.react@gmail.com",
+  "license": "GLP",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
