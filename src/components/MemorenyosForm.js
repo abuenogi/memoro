@@ -58,7 +58,6 @@ const MemorenyosForm = (props) => {
     const initialMemoObjetValues = {
         nombre: '',
         telefono: '',
-        correo:'',
         contrasenya: '',
         eventos:'',
         contactos:'',
@@ -147,6 +146,7 @@ const MemorenyosForm = (props) => {
 
         if (!obj.id || obj.id == '') {
             /*
+            //A modificar por una funcion.
             auth.createUserWithEmailAndPassword(obj.email, obj.contrasenya)
                 .catch(function (error) {
                     console.log('Error añadiendo el memorenyo en auth addOrEdit ', error);
