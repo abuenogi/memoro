@@ -135,21 +135,24 @@ const MemorenyosForm = ({history}) => {
         console.log('Usuario logado  ', user_auth);
         console.log('addOrEdit usuario a modificar ', obj);
         let oCasa = obj.casa;
-        
-        if (location.casa)
+
+        if (location.casa) 
             oCasa = new geo.GeoPoint(location.casa.lat, location.casa.lng);
 
         if (!obj.id || obj.id == '') {
+            /*
             auth.createUserWithEmailAndPassword(obj.email, obj.contrasenya)
                 .catch(function (error) {
                     console.log('Error añadiendo el memorenyo en auth addOrEdit ', error);
                 });
+                */
             //Se actualizan los datos del cuidador, el rol y la ubicación
             obj.rol = 'memorenyo';
             obj.cuidador = user_auth.id;
             obj.ubicacion = '';
             obj.casa = oCasa;
             obj.contactos = '';
+            obj.correo = obj.email;
             delete obj.contrasenya;
             createData(obj, 'usuarios');
         }

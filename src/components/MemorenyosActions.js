@@ -8,7 +8,7 @@ import { db } from '../services/firebase/firebaseConfig';
 import {UserContext} from '../context/UserContext';
 
 
-const MemorenyosActions = ({ memorenyo }) => {
+const MemorenyosActions = ({ memorenyo}) => {
 
   //Constantes necesarias en el componente
    const history = useHistory();   
