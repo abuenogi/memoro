@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { withRouter, useLocation, useHistory } from 'react-router-dom';
+import { withRouter, useLocation } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import { Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -20,9 +20,9 @@ import { fetch_data, createData, updateData } from '../functions/CRUD';
 
 
 
-const MemorenyosForm = (props) => {
+const MemorenyosForm = ({history}) => {
 
-    const history = useHistory();
+    const location = useLocation();
 
     const { user_auth, memorenyoSelected, setMemorenyoSelected } = useContext(UserContext);
     const [isOpened, setOpened] = useState(false);
@@ -30,8 +30,6 @@ const MemorenyosForm = (props) => {
     var [url, setURL] = useState('');
 
     let ubicacion_casa;
-
-    const location = useLocation();
 
     useEffect(() => {
 
@@ -57,10 +55,6 @@ const MemorenyosForm = (props) => {
         telefono: '',
         email: '',
         contrasenya: '',
-        pais: '',
-        ciudad: '',
-        direccion: '',
-        imagen: '',
         radioSeguridad: '',
         cuidador: user_auth.user_id,
         ubicacion: '',
@@ -141,7 +135,7 @@ const MemorenyosForm = (props) => {
         console.log('Usuario logado  ', user_auth);
         console.log('addOrEdit usuario a modificar ', obj);
         let oCasa = obj.casa;
-        debugger;
+        
         if (location.casa)
             oCasa = new geo.GeoPoint(location.casa.lat, location.casa.lng);
 

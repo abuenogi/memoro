@@ -6,10 +6,6 @@ import Imagen from './Imagen';
 
 const CardMemo = ({ memo, telefono }) => {
     
-    var text = ''
-    if (telefono){
-    var text = telefono
-    }
     
     return (
         <div className='CardMemo'>
@@ -17,7 +13,7 @@ const CardMemo = ({ memo, telefono }) => {
                     <h2 className="m-3">{memo}</h2>
               
                 <Imagen className="d-flex justify-content-around" src={usuarioImagen} alt="Usuario" with="200" height="200" />
-               <h3 className="m-3">{text}</h3>
+               <h3 className="m-3">{telefono}</h3>
               
         </div>
     );

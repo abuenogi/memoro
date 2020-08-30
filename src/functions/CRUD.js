@@ -1,5 +1,5 @@
 import {
-    db
+    db, geo
 } from '../services/firebase/firebaseConfig';
 
 export const createData = (data, collection_name) => {
@@ -29,6 +29,12 @@ export const deleteData = (id, collection_name) => {
         console.log(error);
     }
 
+}
+
+export function deleteDataElement(collection_name, id , value) {
+   
+    var ref = db.collection(collection_name).doc(id);
+    ref.update({contactos: geo.FieldValue.arrayRemove(value)})
 }
 
 

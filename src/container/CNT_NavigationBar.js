@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
-import { withRouter } from 'react-router-dom';
-import produce from 'immer';
+import React from "react";
+import {useDispatch} from 'react-redux'
 
-import { UserContext } from '../context/UserContext';
+import { withRouter } from 'react-router-dom';
+
+import allActions from '../actions'
 import { auth } from '../services/firebase/firebaseConfig';
 
 import NavigationBar from '../components/NavigationBar';
@@ -10,8 +11,8 @@ import NavigationBar from '../components/NavigationBar';
 
 const NavigationBar_container = ({ history }) => {
 
-   
-    const {user_context, setUserAuth} = useContext(UserContext);
+  
+    const dispatch = useDispatch()
 
     async function cerrarSesion() {
 
@@ -19,29 +20,9 @@ const NavigationBar_container = ({ history }) => {
 
                 auth.signOut()
                     .then(function () {
-                        history.push('/');
-                        /*
-                        const updateUser = async user => {
-
-                            setUserAuth(await produce(user_context, async (draft) => {
                     
-                                if (user) {
-                                
-                                  //draft.isLogin = user.isLogin= false;
-                                  
-                                  return draft;
-                        
-                                } else {
-                                  console.log('Error setUserAuth');
-                                }
-                        
-                              }))
-                                //función de immer que se encarga de hacer el objeto inmutable
-                                ;
-                            }   
-                        const unsuscribe = auth.onAuthStateChanged(updateUser);
-                        return () => unsuscribe();
-                        */
+                        dispatch(allActions.userActions.logOut())
+                        history.push('/');
                         
                     })
                     .catch(function (error) {

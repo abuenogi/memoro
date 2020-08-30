@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { withRouter, useHistory  }from 'react-router-dom';
+import { withRouter  }from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fas, faUser, faMobile} from '@fortawesome/free-solid-svg-icons'
@@ -14,10 +14,9 @@ import {UserContext} from '../context/UserContext';
 import {updateData } from '../functions/CRUD';
 
 
-const MemoContactsForm = (props) => {
+const MemoContactsForm = ({history}) => {
 
     const {memorenyoSelected, setMemorenyoSelected} = useContext(UserContext);
-    const history = useHistory();
     const location = history.location;
 
     const initialContactObjetValues = {

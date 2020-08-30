@@ -16,7 +16,7 @@ export function validateLogin(values) {
 
 
 
-  export function validateSignUp(values, casa) {
+  export function validateSignUp(values) {
     let errors = {};
 
     if (!values.nombre) {

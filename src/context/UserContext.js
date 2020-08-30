@@ -16,37 +16,31 @@ export function status_Sesion(boolean_value) {
 
 export const user_auth = {
 
-  photoURL: '',
   id: '',
   nombre: '',
   email: '',
   telefono: '',
   fechaNac: '',
-  pais: '',
-  ciudad: '',
-  domicilio: '',
   rol: '',
   ubicacion: '',
   contactos: '',
   cuidador: '',
   casa: '',
   radioSeguridad : '',
-  eventos:'',
-  isLogin: ''
+  eventos:''
+ 
 
 };
 
 //Valores por defecto del memoreño seleccionado, la primera vez que entra en la aplicación no tiene valores.
 export const memoSelected = {
-  ciudad: '',
+  
   contactos: '',
-  correo: '',
+  email: '',
   cuidador: '',
   casa:'',
   id:'',
-  imagen:'',
   nombre:'',
-  pais:'',
   radioSeguridad:'',
   rol: '',
   telefono:'',

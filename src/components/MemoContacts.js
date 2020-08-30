@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useContext } from "react";
-import { withRouter, useLocation, useHistory } from "react-router-dom";
+import { withRouter, useLocation } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { confirmAlert } from 'react-confirm-alert';
 import { Button } from 'reactstrap';
@@ -16,10 +16,10 @@ import {UserContext} from '../context/UserContext';
 
 
 
-const MemoContacts = ({}) => {
+const MemoContacts = ({history}) => {
+  
   const location = useLocation();
-  const history = useHistory();
-  //var memorenyo = location.memorenyo;
+  
   const [contactos, setContactos] = useState([]);
   const {memorenyoSelected, setMemorenyoSelected} = useContext(UserContext);
   
@@ -146,7 +146,7 @@ const MemoContacts = ({}) => {
           </Row>
           <Row className="justify-content-md-center">
             <Col>
-            <Button className="btn btn-block button1 mt-5"  onClick={() => { console.log("Clico en el botón de crear de Memocontacts: "); onCreate() }}>Crear</Button>
+            <Button className="btn btn-block button1 mt-5"  onClick={() => { onCreate() }}>Crear</Button>
             </Col>
           </Row>
         </Container>
