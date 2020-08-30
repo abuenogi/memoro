@@ -7,7 +7,7 @@ const PrivateRoute = ({component: Component, ...rest}) => {
 
 
     const { user_auth } = useContext(UserContext);
-    const isLogin =  user_auth.isLogin
+   
 
     return (
 

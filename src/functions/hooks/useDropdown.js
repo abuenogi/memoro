@@ -7,12 +7,10 @@ const useDropdown = ( options) => {
   const [valor, setValor] = useState('');
 
 
-  if (options[0] != null ){
+  if (options[0] != null  && valor === ""){
 
-    if (valor === ""){
       setValor(JSON.stringify(options[0]))
-    }
-
+  
   }
   
   const Dropdownmaker = () => (
