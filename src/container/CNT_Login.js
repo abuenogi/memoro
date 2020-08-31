@@ -1,29 +1,27 @@
 import React, { useContext, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux'
 import { confirmAlert } from 'react-confirm-alert';
 
 import Login from '../components/Login';
 
 import { auth } from '../services/firebase/firebaseConfig';
-import { UserContext } from '../context/UserContext';
+import allActions from '../actions'
 
 const Login_container = ({ history }) => {
 
-  const {user_context} = useContext(UserContext);
+ 
+  const currentUser = useSelector(store => store.currentUser)
 
+  const dispatch = useDispatch()
 
   useEffect(() => {
-   
 
-   if (!user_context) {
-      
-    }else{
-      //history.push('/home');
+    if (currentUser.loggedIn) {
+      history.push('/home')
     }
- 
   },
-    [user_context]
+    [currentUser]
   )
-
 
 
   function onClickBotonLogin(credeciales) {
@@ -32,9 +30,9 @@ const Login_container = ({ history }) => {
 
       auth.signInWithEmailAndPassword(credeciales.email, credeciales.password)
         .then(function () {
-         // status_Sesion(true);
-          history.push('/home');
-          
+         
+          dispatch(allActions.userActions.setUser(credeciales))
+          history.push('/home')
 
         })
         .catch(function (error) {
@@ -46,30 +44,30 @@ const Login_container = ({ history }) => {
             confirmAlert({
               title: 'Usuario incorrecto',
               message: 'Compruebe sus credenciales, si no tiene usuario puede crearlo.',
-             
+
               buttons: [
                 {
                   label: 'Vale',
-          
+
                 }
               ]
             });
-          }else if (error.code === 'auth/wrong-password') {
+          } else if (error.code === 'auth/wrong-password') {
 
             confirmAlert({
               title: 'Contraseña incorrecto',
               message: 'Puede intentarlo de nuevo.',
-             
+
               buttons: [
                 {
                   label: 'Vale',
-          
+
                 }
               ]
             });
           }
 
-          
+
         });
 
 
@@ -101,7 +99,7 @@ const Login_container = ({ history }) => {
 
 
   return <Login
-  
+
     onClickBotonLogin={onClickBotonLogin}
     onClickChangePass={onClickChangePass}
     onClickReg={onClickReg}

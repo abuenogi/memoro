@@ -32,13 +32,15 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
     var [nombre_direccion, setNombre_direccion] = useState('');
     var [url, setURL] = useState('');
 
-    let ubicacion_casa;
-  
+    var ubicacion_casa = location.casa;
 
-    if (location.casa) {
-        ubicacion_casa = location.casa
+    useEffect(() => {
+
+        if (ubicacion_casa)
         setURL(`https://eu1.locationiq.com/v1/reverse.php?key=c7392af2aaffbc&lat=${ubicacion_casa.lat}&lon=${ubicacion_casa.lng}&format=json`);
-    }
+
+    }, [location.casa])
+
 
     useEffect(() => {
 
@@ -72,14 +74,14 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
 
     useEffect(() => {
 
-        let data = {}
-       
+        let data = ''
+
         const fetchData = async () => {
-    
+
             if (url)
-            data = await fetch_data(url);
-            if(data)
-            setNombre_direccion(data.display_name);
+                data = await fetch_data(url);
+            if (data !== '')
+                setNombre_direccion(JSON.parse(data).display_name);
         };
 
         fetchData();
@@ -87,7 +89,8 @@ const MiPerfil = ({ onClickSave, onClickVolver, onClickBorrarUsuario }) => {
     }, [url])
 
 
-    
+
+
 
     const openModal = () => {
         document.getElementById("root").disabled = true;

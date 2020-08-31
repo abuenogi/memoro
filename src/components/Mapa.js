@@ -58,7 +58,7 @@ const Mapa = ({ history }) => {
         //Si eres memo llamar a tu cuidador y tu casa
         persona_ubicacion = ubicacion;
         persona_casa = [user_auth.casa.Pc, user_auth.casa.Vc];
-        radio_distancia = parseInt(obj_persona.radioSeguridad)*1000;
+        radio_distancia = parseInt(user_auth.radioSeguridad)*1000;
         llamar_contacto = `tel://${cuidador.telefono}`
         buscar_ubicacion = `https://maps.google.com/?q=${user_auth.casa.Pc}` + ',' + `${user_auth.casa.Vc}`
 

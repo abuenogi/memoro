@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, fas } from '@fortawesome/free-solid-svg-icons'
 import { confirmAlert } from 'react-confirm-alert';
 
+import { deleteDataElement } from '../functions/CRUD';
+
 
 const MemoContactsActions = ({contacto}) => {
 
@@ -19,7 +21,7 @@ const MemoContactsActions = ({contacto}) => {
 
   //Delete objet
   const onDelete = () => {
-    console.log("Borrar contacto " + contacto);
+    console.log("Borrar contacto " , contacto);
     confirmAlert({
       title: 'Borrar contacto',
       message: '¿Realmente quiere eliminar los datos del contacto? ',
@@ -33,6 +35,7 @@ const MemoContactsActions = ({contacto}) => {
           label: 'Si',
           onClick: () => {
             //Tengo que borrar el contacto del array
+            //deleteDataElement('usuarios', 'A0nmyOnqmMDnPqcbSVkd' , '1'); borra todos  los contactos
             history.push('/memoContacts');
           }
         }
