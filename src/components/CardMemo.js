@@ -6,6 +6,11 @@ import Imagen from './Imagen';
 
 const CardMemo = ({ memo, telefono }) => {
     
+    var text = ''
+    if (telefono){
+     text = telefono
+    }
+
     
     return (
         <div className='CardMemo'>

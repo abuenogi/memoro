@@ -21,7 +21,7 @@ const MemorenyosActions = ({ memorenyo}) => {
   */
   const onUpdate  = () => {
     
-    console.log("Datos del memoreyo a actualizar: ", memorenyo);
+    //console.log("Datos del memoreyo a actualizar: ", memorenyo);
 
     setMemorenyoSelected(memorenyo);
     

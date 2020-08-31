@@ -141,6 +141,7 @@ const MemorenyosForm = ({history}) => {
 
         if (!obj.id || obj.id == '') {
             /*
+            //A modificar por una funcion.
             auth.createUserWithEmailAndPassword(obj.email, obj.contrasenya)
                 .catch(function (error) {
                     console.log('Error añadiendo el memorenyo en auth addOrEdit ', error);

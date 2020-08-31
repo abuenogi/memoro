@@ -12,7 +12,6 @@ import FatalError from './NoMatch';
 
 const CampoMapa = ({ history}) => {
 
-    const location = useLocation();
     const { latitude, longitude, error_position } = usePosition();
     const center = {
         latitude: latitude,

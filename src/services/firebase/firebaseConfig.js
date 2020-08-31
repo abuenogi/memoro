@@ -12,7 +12,7 @@ const  firebaseConfig =  {
     measurementId: "G-S10E2L6T3K"
 };
 
-
+// Initialize Firebase
 var firebaseDB = firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
@@ -20,6 +20,9 @@ export const authSession = firebase.auth;
 export const db = firebase.firestore();
 export const geo = firebase.firestore;
 export const storage = firebase.storage();
+
+// Initialize Performance Monitoring and get a reference to the service
+var perf = firebase.performance();
 /*
 db.settings({
     timestampsInSnapshots: true,
