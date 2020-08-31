@@ -2,7 +2,7 @@ import React, { useState, Fragment, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { Button } from "reactstrap";
 
-import {Inject, ScheduleComponent, Day, Week,Month, Agenda, ViewsDirective, ViewDirective} from "@syncfusion/ej2-react-schedule";
+import { Inject, ScheduleComponent, Day, Week, Month, Agenda, ViewsDirective, ViewDirective } from "@syncfusion/ej2-react-schedule";
 import * as numberingSystems from 'cldr-data/supplemental/numberingSystems.json';
 import * as gregorian from 'cldr-data/main/es/ca-gregorian.json';
 import * as numbers from 'cldr-data/main/es/numbers.json';
@@ -21,14 +21,17 @@ loadCldr(numberingSystems, gregorian, numbers, timeZoneNames);
 
 
 const Calendario = ({ history }) => {
+
   const { user_auth } = useContext(UserContext);
 
   const [eventosResult, setEventosResult] = useState([]);
   const [objContacto, setObjetoContacto] = useState();
   const [data, setData] = useState();
 
+
   useEffect(() => {
     const fetchData = async () => {
+
       if (user_auth.rol === "memorenyo") {
         setEventosResult([user_auth]);
       } else if (user_auth.rol === "cuidador") {
@@ -51,18 +54,27 @@ const Calendario = ({ history }) => {
 
   useEffect(() => {
     if (objContacto?.eventos) {
+      debugger
       setData(JSON.parse(objContacto.eventos));
+      
     }
   }, [objContacto]);
 
-  const onDataBinding = (e) => {
-    var items = e.result;
+  useEffect(() => {
+    
+  }, [data]);
 
-    if (Array.isArray(e.result) && e.result.length === 0) {
-      items = data || JSON.parse(objContacto?.eventos);
+  const onDataBinding = (e) => {
+
+    var items= '';
+    
+    if(e.result.length > 0){
+      items = e.result
+    }else{
+      items = data
     }
 
-    if (items.length > 0) {
+    if (items) {
       let scheduleData = items;
       let data_items = { eventos: JSON.stringify(scheduleData) };
       updateDataElement("usuarios", objContacto.id, data_items);
@@ -84,7 +96,7 @@ const Calendario = ({ history }) => {
     <Fragment>
       <NavigationBar />
       <UsuarioDropdown />
-      
+
       <ScheduleComponent
         locale="es"
         timezone="Europe/Madrid"
@@ -92,8 +104,8 @@ const Calendario = ({ history }) => {
         width="100%"
         height="500px"
         selectedDate={new Date().toUTCString("UTC+2")}
-        locale="es" 
-        eventSettings={{ dataSource: data }} 
+        locale="es"
+        eventSettings={{ dataSource: data }}
         dataBinding={(e) => {
           onDataBinding(e);
         }}

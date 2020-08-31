@@ -29,14 +29,14 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver, history }) => {
 
     useEffect(() => {
 
-        let data = {}
+        let data = ''
        
-        const fetchData = async () => {
-    
+         const fetchData = async () => {
+
             if (url)
             data = await fetch_data(url);
-            if(data)
-            setNombre_direccion(data.display_name);
+            if(data !=='')
+            setNombre_direccion(JSON.parse(data).display_name);
         };
 
         fetchData();

@@ -1,5 +1,6 @@
-import React, { Fragment , useEffect } from "react";
+import React, { Fragment } from "react";
 import { withRouter } from 'react-router-dom';
+
 import Logo from '../images/logo192.png';
 import { Button, Form, Label, Input } from 'reactstrap';
 
@@ -7,10 +8,11 @@ import useForm from "../functions/hooks/useFormLogin";
 import {validateLogin} from "../functions/hooks/validateInput";
 
 
-const Login = ({ onClickBotonLogin, onLoadUser, onClickChangePass, onClickReg }) => {
+const Login = ({ onClickBotonLogin, onClickChangePass, onClickReg }) => {
 
 
     const { handleChange, handleSubmit, values, errors } = useForm(submit, validateLogin);
+    
 
     function submit() {
         console.log("Submitted Succesfully");
@@ -21,7 +23,7 @@ const Login = ({ onClickBotonLogin, onLoadUser, onClickChangePass, onClickReg })
     return (
 
         <Fragment>
-            <Form onLoad={e => onLoadUser} onSubmit={handleSubmit} noValidate >
+            <Form onSubmit={handleSubmit} noValidate >
 
                 <h3 className="text-center mb-4">Iniciar sesión</h3>
                 <img src={Logo} className="rounded mx-auto d-block  mb-5  mt-3" alt="aligment" />

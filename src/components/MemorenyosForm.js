@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { withRouter,useLocation, useHistory } from 'react-router-dom';
-import { Button} from 'reactstrap';
+import { withRouter, useLocation } from 'react-router-dom';
+import { Button } from 'reactstrap';
 import { Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fas, faMap, faUser, faMobile, faEnvelope, faMapMarkedAlt, faStreetView, faKey } from '@fortawesome/free-solid-svg-icons'
@@ -11,30 +11,25 @@ import NavigationBar from "../container/CNT_NavigationBar";
 import CNT_NavigationBarMemoLower from "../container/CNT_NavigationBarMemoLower";
 import Modal from "./Modal";
 import CampoMapa from "./CampoMapa";
-import useForm from "../functions/hooks/useFormSignUp";
 import MemoAvatar from '../container/CNT_MemoAvatar';
 
 import { auth, geo } from '../services/firebase/firebaseConfig';
 import { UserContext } from '../context/UserContext';
 
-import { fetch_data,createData, updateData } from '../functions/CRUD';
+import { fetch_data, createData, updateData } from '../functions/CRUD';
 
 
 
-const MemorenyosForm = (props) => {
+const MemorenyosForm = ({history}) => {
 
-    const history = useHistory();
-   
+    const location = useLocation();
+
     const { user_auth, memorenyoSelected, setMemorenyoSelected } = useContext(UserContext);
-    const { handleChange } = useForm();
-   
     const [isOpened, setOpened] = useState(false);
     var [nombre_direccion, setNombre_direccion] = useState('');
     var [url, setURL] = useState('');
 
     let ubicacion_casa;
-  
-    const location = useLocation();
 
     useEffect(() => {
 
@@ -45,7 +40,7 @@ const MemorenyosForm = (props) => {
 
     }, [location.casa])
 
-    
+
 
     const openModal = () => {
         document.getElementById("root").disabled = true;
@@ -58,9 +53,8 @@ const MemorenyosForm = (props) => {
     const initialMemoObjetValues = {
         nombre: '',
         telefono: '',
+        email: '',
         contrasenya: '',
-        eventos:'',
-        contactos:'',
         radioSeguridad: '',
         cuidador: user_auth.user_id,
         ubicacion: '',
@@ -90,9 +84,9 @@ const MemorenyosForm = (props) => {
         }
     }, [memorenyoSelected])
 
-    
+
     useEffect(() => {
-         
+
         if (values.casa) {
             setURL(`https://eu1.locationiq.com/v1/reverse.php?key=c7392af2aaffbc&lat=${values.casa.Pc}&lon=${values.casa.Vc}&format=json`)
         }
@@ -101,14 +95,14 @@ const MemorenyosForm = (props) => {
 
     useEffect(() => {
 
-        let data = {}
-       
+        let data = ''
+
         const fetchData = async () => {
-    
+
             if (url)
-            data = await fetch_data(url);
-            if(data)
-            setNombre_direccion(data.display_name);
+                data = await fetch_data(url);
+            if (data !== '')
+                setNombre_direccion(JSON.parse(data).display_name);
         };
 
         fetchData();
@@ -141,6 +135,7 @@ const MemorenyosForm = (props) => {
         console.log('Usuario logado  ', user_auth);
         console.log('addOrEdit usuario a modificar ', obj);
         let oCasa = obj.casa;
+
         if (location.casa) 
             oCasa = new geo.GeoPoint(location.casa.lat, location.casa.lng);
 
@@ -188,7 +183,7 @@ const MemorenyosForm = (props) => {
                     <div>
                         <form autoComplete="off" onSubmit={handleFormSubmit}>
 
-                            <MemoAvatar 
+                            <MemoAvatar
                                 ref_storage={ref_storage}
                                 child_storage={child_storage}
                             />
@@ -259,29 +254,29 @@ const MemorenyosForm = (props) => {
 
                                 </div>
 
-                            
 
-                            <div className="form-group input-group">
-                                <div className="input-group-prepend">
-                                    <div className="input-group-text">
-                                        <FontAwesomeIcon icon={fas, faMapMarkedAlt} />
+
+                                <div className="form-group input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">
+                                            <FontAwesomeIcon icon={fas, faMapMarkedAlt} />
+                                        </div>
                                     </div>
-                                </div>
-                                <input className="form-control" name="casa" placeholder="Dirección"
-                                    value={nombre_direccion || ubicacion_casa || `LatLng(${values.casa.Pc}, ${values.casa.Vc})` || ''}
-                                    onChange={handleInputChange}
-                                />
+                                    <input className="form-control" name="casa" placeholder="Dirección"
+                                        value={nombre_direccion || ubicacion_casa || `LatLng(${values.casa.Pc}, ${values.casa.Vc})` || ''}
+                                        onChange={handleInputChange}
+                                    />
 
-                                 <Button className="ml-4" onClick={openModal}>
-                                    <FontAwesomeIcon icon={(fas, faMap)} size="1x" /> 
-                                </Button>
-                                <Modal title="Mapa de ubicación" isOpened={isOpened} onClose={closeModal} >
-                                    <CampoMapa/>
-                                </Modal>
-                            </div>
+                                    <Button className="ml-4" onClick={openModal}>
+                                        <FontAwesomeIcon icon={(fas, faMap)} size="1x" />
+                                    </Button>
+                                    <Modal title="Mapa de ubicación" isOpened={isOpened} onClose={closeModal} >
+                                        <CampoMapa />
+                                    </Modal>
+                                </div>
                             </div>
                             <div className="form-group">
-                                <input type="submit" value={memorenyoSelected.nombre == '' ? "Guardar" : "Actualizar"} className="btn button1 mt-4 btn-block"  />
+                                <input type="submit" value={memorenyoSelected.nombre == '' ? "Guardar" : "Actualizar"} className="btn button1 mt-4 btn-block" />
 
                             </div>
                         </form>

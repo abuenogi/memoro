@@ -1,5 +1,5 @@
 import {
-    db
+    db, geo
 } from '../services/firebase/firebaseConfig';
 
 export const createData = (data, collection_name) => {
@@ -29,6 +29,12 @@ export const deleteData = (id, collection_name) => {
         console.log(error);
     }
 
+}
+
+export function deleteDataElement(collection_name, id , value) {
+   
+    var ref = db.collection(collection_name).doc(id);
+    ref.update({contactos: geo.FieldValue.arrayRemove(value)})
 }
 
 
@@ -78,7 +84,6 @@ export const getDataByID = (collection_name, id) => {
     //return db.collection(collection_name).where(db.collection(collection_name).id, '==', id).get()
     return db.collection(collection_name).doc(id).get()
 
-
 }
 
 
@@ -87,21 +92,13 @@ export function getDataElement(collection_name, data, value) {
     return db.collection(collection_name).where(data, "==", value).get();
 }
 
-export function fetch_data(url) {
+ export function fetch_data(url) {
 
-   return fetch(url)
-    .then(function (response) {
-        return response.text();
+    return fetch (url)
+    .then( function (response) {
+         return response.text();
     })
-    .then(function (data) {
-        console.log('data = ', data)
-        let data_object = JSON.parse(data);
-        return data_object
-    })
-    .catch(function (err) {
-        console.error(err);
-    });
-
+    
 }
 
 /**
