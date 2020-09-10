@@ -4,20 +4,15 @@ import { withRouter } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import { Map, Marker, TileLayer, Circle } from "react-leaflet";
 import L from 'leaflet';
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas, faPhone, faMap } from "@fortawesome/free-solid-svg-icons";
-
 import NavigationBar from "../container/CNT_NavigationBar";
 import FatalError from './NoMatch';
 import Footer from "./Footer";
-
 import { UserContext } from '../context/UserContext';
 import { usePosition } from '../functions/hooks/usePosition';
 import useDropdown from "../functions/hooks/useDropdown";
-
 import { getDataByID, getDataElement } from '../functions/CRUD';
-
 
 const Mapa = ({ history }) => {
 

@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useContext } from "react";
-import { withRouter, useLocation } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { confirmAlert } from 'react-confirm-alert';
 import { Button } from 'reactstrap';
@@ -17,8 +17,6 @@ import {UserContext} from '../context/UserContext';
 
 
 const MemoContacts = ({history}) => {
-  
-  const location = useLocation();
   
   const [contactos, setContactos] = useState([]);
   const {memorenyoSelected, setMemorenyoSelected} = useContext(UserContext);

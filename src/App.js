@@ -103,7 +103,7 @@ const App = () => {
       >
         <div className="auth-inner">
           <Switch>
-            /** PATHS de las páginas del inicio de sesion/registro*/
+            /** PATHS de las páginas del inicio de sesion/registro**/
             <Route exact path="/" component={Login} />
             <Route exact path="/sign-in" component={Login} />
             <Route exact path="/sign-up" component={SignUp} />

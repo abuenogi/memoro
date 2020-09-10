@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { withRouter, useLocation } from 'react-router-dom';
-import { Button, Form, Label, Input } from 'reactstrap';
+import { Button, Form } from 'reactstrap';
 import { Container } from 'react-bootstrap';
 import Modal from "./Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fas, faMapMarkedAlt, faMap, faUser, faMobile,faEnvelope, faCalendarAlt, faImage, faStreetView, faKey, faGlobe, faGlobeEurope, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { fas, faMapMarkedAlt, faMap, faUser, faMobile,faEnvelope, faCalendarAlt, faKey } from "@fortawesome/free-solid-svg-icons";
 
 import CampoMapa from "./CampoMapa";
 import Layout from './Layout'

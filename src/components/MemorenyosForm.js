@@ -13,7 +13,7 @@ import Modal from "./Modal";
 import CampoMapa from "./CampoMapa";
 import MemoAvatar from '../container/CNT_MemoAvatar';
 
-import { auth, geo } from '../services/firebase/firebaseConfig';
+import {  geo } from '../services/firebase/firebaseConfig';
 import { UserContext } from '../context/UserContext';
 
 import { fetch_data, createData, updateData } from '../functions/CRUD';
@@ -75,7 +75,7 @@ const MemorenyosForm = ({history}) => {
 
         //Preguntar  si puede recogerse de otra forma
         //Para saber si mostrar o no la contraseña
-        if (memorenyoSelected.nombre == '') {
+        if (memorenyoSelected.nombre === '') {
             setValues({ ...initialMemoObjetValues })
             document.querySelector('#MemoAvatar').style.display = 'none';
         }
@@ -139,7 +139,7 @@ const MemorenyosForm = ({history}) => {
         if (location.casa) 
             oCasa = new geo.GeoPoint(location.casa.lat, location.casa.lng);
 
-        if (!obj.id || obj.id == '') {
+        if (!obj.id || obj.id === '') {
             /*
             //A modificar por una funcion.
             auth.createUserWithEmailAndPassword(obj.email, obj.contrasenya)
@@ -179,7 +179,7 @@ const MemorenyosForm = ({history}) => {
                 <NavigationBar />
                 <Container fluid className="form-style">
 
-                    <h3 className="text-center mb-4">{memorenyoSelected.nombre == '' ? "Crear memoreño" : "Detalle del memoreño"}</h3>
+                    <h3 className="text-center mb-4">{memorenyoSelected.nombre === '' ? "Crear memoreño" : "Detalle del memoreño"}</h3>
                     <div>
                         <form autoComplete="off" onSubmit={handleFormSubmit}>
 
@@ -213,7 +213,7 @@ const MemorenyosForm = ({history}) => {
                                 </div>
 
 
-                                {memorenyoSelected.nombre == '' && (
+                                {memorenyoSelected.nombre === '' && (
                                     <div className="form-group input-group">
                                         <div className="input-group-prepend">
                                             <div className="input-group-text">
@@ -276,7 +276,7 @@ const MemorenyosForm = ({history}) => {
                                 </div>
                             </div>
                             <div className="form-group">
-                                <input type="submit" value={memorenyoSelected.nombre == '' ? "Guardar" : "Actualizar"} className="btn button1 mt-4 btn-block" />
+                                <input type="submit" value={memorenyoSelected.nombre === '' ? "Guardar" : "Actualizar"} className="btn button1 mt-4 btn-block" />
 
                             </div>
                         </form>

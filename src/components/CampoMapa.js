@@ -1,6 +1,6 @@
 
 import React, { useState, Fragment} from "react";
-import { withRouter, useLocation } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Button } from 'reactstrap';
 
 import { Map, Marker, TileLayer } from "react-leaflet";

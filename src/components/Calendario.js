@@ -54,7 +54,6 @@ const Calendario = ({ history }) => {
 
   useEffect(() => {
     if (objContacto?.eventos) {
-      debugger
       setData(JSON.parse(objContacto.eventos));
       
     }
@@ -104,7 +103,6 @@ const Calendario = ({ history }) => {
         width="100%"
         height="500px"
         selectedDate={new Date().toUTCString("UTC+2")}
-        locale="es"
         eventSettings={{ dataSource: data }}
         dataBinding={(e) => {
           onDataBinding(e);

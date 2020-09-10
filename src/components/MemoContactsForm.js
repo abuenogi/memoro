@@ -32,7 +32,7 @@ const MemoContactsForm = ({history}) => {
     useEffect(() => {   
 
         //Se trata de una creación
-        if(!location.contacto || location.contacto.nombre==''){
+        if(!location.contacto || location.contacto.nombre  === ''){
             setContacto({...initialContactObjetValues})
             document.querySelector('#MemoAvatar').style.display = 'none';
         } 
@@ -96,7 +96,7 @@ const MemoContactsForm = ({history}) => {
                 <NavigationBar />
                 <Container fluid className="form-style">
                     <div>
-                    <h3 className="text-center mb-4">{contacto.nombre==''? "Crear contacto" : "Actualizar contacto"}</h3>
+                    <h3 className="text-center mb-4">{contacto.nombre===''? "Crear contacto" : "Actualizar contacto"}</h3>
                     </div>
                     <div>
                         <form autoComplete="off" onSubmit={handleFormSubmit}>
@@ -127,7 +127,7 @@ const MemoContactsForm = ({history}) => {
                                     />
                             </div>
                             <div className="form-group">
-                                <input type="submit" value={contacto.nombre==''? "Guardar" : "Actualizar"} className="btn button1 mt-4 btn-block" />
+                                <input type="submit" value={contacto.nombre===''? "Guardar" : "Actualizar"} className="btn button1 mt-4 btn-block" />
         
                             </div>
                         </form>
