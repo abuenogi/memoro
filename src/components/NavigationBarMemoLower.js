@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { Nav, Navbar } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas, faCalendarDay, faPhoneAlt, faUser, faUsers} from "@fortawesome/free-solid-svg-icons";
 

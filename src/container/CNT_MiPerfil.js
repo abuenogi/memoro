@@ -17,7 +17,7 @@ const MiPerfil_container = ({ history }) => {
     try {
       cambiarDatosUsuario(nombre, email, telefono, fechaNac, ubicacion);
 
-      if(password!='******'){
+      if(password!=='******'){
         cambiarPassword(password);
       }
       history.push('/home');

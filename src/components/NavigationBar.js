@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
 import { confirmAlert } from 'react-confirm-alert';

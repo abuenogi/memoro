@@ -4,14 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, fas } from '@fortawesome/free-solid-svg-icons'
 import { confirmAlert } from 'react-confirm-alert';
 
-import { deleteDataElement } from '../functions/CRUD';
-
-
 const MemoContactsActions = ({contacto}) => {
 
   const history = useHistory();
   const onUpdate =  () => {
-
     history.push({
       pathname: '/memoContactsForm',
       contacto: contacto

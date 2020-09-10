@@ -13,7 +13,7 @@ const MemoAvtar_container = ({ ref_storage, child_storage }) => {
    
     useEffect(() => {
 
-        if (ref_storage!= '' &&  child_storage != '' ) {
+        if (ref_storage!== '' &&  child_storage !== '' ) {
 
             document.querySelector('#row_avatar').style.display = 'none';
             
