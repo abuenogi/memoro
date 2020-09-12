@@ -1,12 +1,8 @@
 import React, { useContext } from "react";
-
 import { auth, geo } from '../services/firebase/firebaseConfig';
 import { UserContext } from '../context/UserContext';
-
 import MiPerfil from '../components/MiPerfil';
-
 import { deleteData, updateDataElement} from '../functions/CRUD';
-
 
 const MiPerfil_container = ({ history }) => {
 
