@@ -31,6 +31,7 @@ const MemorenyosForm = ({history}) => {
 
     let ubicacion_casa;
 
+    /*
     useEffect(() => {
 
         if (location.casa) {
@@ -40,6 +41,30 @@ const MemorenyosForm = ({history}) => {
 
     }, [location.casa])
 
+    useEffect(() => {
+        if (values.casa) {
+            setURL(`https://eu1.locationiq.com/v1/reverse.php?key=c7392af2aaffbc&lat=${values.casa.Pc}&lon=${values.casa.Vc}&format=json`)
+        }
+    }, [values.casa.Pc])
+
+    */
+
+    if (location.casa) {
+        ubicacion_casa = location.casa
+        url = `https://eu1.locationiq.com/v1/reverse.php?key=c7392af2aaffbc&lat=${ubicacion_casa.lat}&lon=${ubicacion_casa.lng}&format=json`;
+    }
+
+    useEffect(() => {
+        let data = ''
+        const fetchData = async () => {
+
+            if (url)
+                data = await fetch_data(url);
+            if(data !=='')
+                setNombre_direccion(JSON.parse(data).display_name); 
+        };
+        fetchData();
+    }, [url])
 
 
     const openModal = () => {
@@ -83,31 +108,6 @@ const MemorenyosForm = ({history}) => {
             setValues({ ...memorenyoSelected })
         }
     }, [memorenyoSelected])
-
-
-    useEffect(() => {
-
-        if (values.casa) {
-            setURL(`https://eu1.locationiq.com/v1/reverse.php?key=c7392af2aaffbc&lat=${values.casa.Pc}&lon=${values.casa.Vc}&format=json`)
-        }
-    }, [values.casa.Pc])
-
-
-    useEffect(() => {
-
-        let data = ''
-
-        const fetchData = async () => {
-
-            if (url)
-                data = await fetch_data(url);
-            if (data !== '')
-                setNombre_direccion(JSON.parse(data).display_name);
-        };
-
-        fetchData();
-
-    }, [url])
 
     const handleInputChange = e => {
         var { name, value } = e.target;
@@ -263,7 +263,7 @@ const MemorenyosForm = ({history}) => {
                                         </div>
                                     </div>
                                     <input className="form-control" name="casa" placeholder="Dirección"
-                                        value={nombre_direccion || ubicacion_casa || `LatLng(${values.casa.Pc}, ${values.casa.Vc})` || ''}
+                                        value={nombre_direccion || values.casa || ubicacion_casa || ''}
                                         onChange={handleInputChange}
                                     />
 

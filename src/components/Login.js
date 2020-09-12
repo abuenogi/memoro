@@ -1,18 +1,13 @@
 import React, { Fragment } from "react";
 import { withRouter } from 'react-router-dom';
-
 import Logo from '../images/logo192.png';
 import { Button, Form, Label, Input } from 'reactstrap';
-
 import useForm from "../functions/hooks/useFormLogin";
 import {validateLogin} from "../functions/hooks/validateInput";
 
-
 const Login = ({ onClickBotonLogin, onClickChangePass, onClickReg }) => {
-
-
-    const { handleChange, handleSubmit, values, errors } = useForm(submit, validateLogin);
     
+    const { handleChange, handleSubmit, values, errors } = useForm(submit, validateLogin);    
 
     function submit() {
         console.log("Submitted Succesfully");

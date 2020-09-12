@@ -54,9 +54,9 @@ const App = () => {
             draft.id = user_result.docs[0].id;
             draft.telefono = doc.data().telefono;
             draft.fechaNac = doc.data().fechaNac;
-            draft.pais = doc.data().pais;
-            draft.ciudad = doc.data().ciudad;
-            draft.domicilio = doc.data().domicilio;
+            //draft.pais = doc.data().pais;
+            //draft.ciudad = doc.data().ciudad;
+            //draft.domicilio = doc.data().domicilio;
             draft.nombre = doc.data().nombre;
             draft.ubicacion = doc.data().ubicacion;
             draft.rol = doc.data().rol;
@@ -82,12 +82,10 @@ const App = () => {
         } else {
           console.log('El usuario no existe');
         }
-
       }))
         //función de immer que se encarga de hacer el objeto inmutable
         ;
     }
-
 
     const unsuscribe = auth.onAuthStateChanged(updateUser);
     return () => unsuscribe();
@@ -115,21 +113,21 @@ const App = () => {
             <Route exact path="/Privaciadad" component={Privacidad} />
             /** PATHS de las páginas del menú superior derecho - barra de
             navegación*/
-            <Route path="/homelinks" component={HomeLinks} />
-            <Route path="/miperfil" component={MiPerfil} />
-            <Route path="/memorenyos" component={Memorenyos} />
+            <Route exact path="/homelinks" component={HomeLinks} />
+            <Route exact path="/miperfil" component={MiPerfil} />
+            <Route exact path="/memorenyos" component={Memorenyos} />
             /** PATHS relacionados con la configuración y datos del memoreño */
-            <Route path="/memoContacts" component={MemoContacts} />
+            <Route exact path="/memoContacts" component={MemoContacts} />
             /** PATHS formularios */
-            <Route path="/memorenyosForm" component={MemorenyosForm} />
-            <Route path="/memoContactsForm" component={MemoContactsForm} />
+            <Route exact path="/memorenyosForm" component={MemorenyosForm} />
+            <Route exact path="/memoContactsForm" component={MemoContactsForm} />
             /** PATHS de las páginas del menú del Home */
-            <Route path="/calendario" component={Calendario} />
-            <Route path="/mapa" component={Mapa} />
-            <Route path="/entretenimiento" component={Entretenimiento} />
-            <Route path="/contactos" component={Contactos} />
+            <Route exact path="/calendario" component={Calendario} />
+            <Route exact path="/mapa" component={Mapa} />
+            <Route exact path="/entretenimiento" component={Entretenimiento} />
+            <Route exact path="/contactos" component={Contactos} />
             /** Otros PATHS */
-            <Route path="/BuscaMapa" component={CampoMapa} />
+            <Route exact path="/BuscaMapa" component={CampoMapa} />
             <Route component={NoMatch} />
           </Switch>
         </div>

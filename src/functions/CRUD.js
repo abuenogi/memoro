@@ -4,35 +4,33 @@ import {
 
 export const createData = (data, collection_name) => {
 
-    console.log("CREATEDATA del CRUD data: ", data);
-    console.log("CREATEDATA del CRUD collection_name: ", collection_name);
+    console.log(" === > CREATEDATA del CRUD data: ", data, "CREATEDATA del CRUD collection_name: ", collection_name);
     try {
         return db
             .collection(collection_name)
             .doc()
             .set(data);
     } catch (error) {
-        console.log(error);
+        console.log("error creando datos en createData CRUD ", error);
     }
 }
 
 
 export const deleteData = (id, collection_name) => {
 
-
+    console.log(" === > DELETEDATA del CRUD id: ", id, "DELETEDATA del CRUD collection_name: ", collection_name);
     try {
         return db
             .collection(collection_name)
             .doc(id)
             .delete();
     } catch (error) {
-        console.log(error);
+        console.log("error borrando datos en deleteData CRUD ",error);
     }
 
 }
 
-export function deleteDataElement(collection_name, id , value) {
-   
+export function deleteDataElement(collection_name, id , value) {   
     var ref = db.collection(collection_name).doc(id);
     ref.update({contactos: geo.FieldValue.arrayRemove(value)})
 }
@@ -40,6 +38,7 @@ export function deleteDataElement(collection_name, id , value) {
 
 export const updateDataElement = (collection_name, id, data) => {
     try {
+        console.log(" === > UPDATEDATAELELEMT del CRUD id: ", id, "UPDATEDATAELELEMT del CRUD collection_name: ", collection_name);
         db.collection(collection_name).where('__name__', '==' ,id).get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
@@ -48,20 +47,20 @@ export const updateDataElement = (collection_name, id, data) => {
             });
         })
     } catch (error) {
-        console.log(error);
+        console.log("error actualizando datos en updateDataElement CRUD ",error);
     }
 }
 
 
 export const updateData = (id, data, collection_name) => {
     try {
-
+        console.log(" === > UPDATEDATA del CRUD id: ", id, "UPDATEDATA del CRUD data: ", data, "UPDATEDATA del CRUD collection_name: ", collection_name);
         return db
             .collection(collection_name)
             .doc(id)
             .update(data);
     } catch (error) {
-        console.log(error);
+        console.log("error actualizando datos en updateData CRUD ",error);
     }
 
 }
@@ -119,16 +118,3 @@ export function getDataWithRef(colection_name_ref, array_ref) {
 
 
 }
-
-
-/*
-export function getDataWithRef_original (colection_name, doc_id, colection_name_ref, field_ref ){
-
-    const docRef = db.collection(colection_name)
-    .doc(doc_id); 
-   
-    return db.collection(colection_name_ref)
-        .where(field_ref, '==', docRef)
-        .get();
-}
- */

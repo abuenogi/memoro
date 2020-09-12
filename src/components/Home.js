@@ -21,23 +21,18 @@ const messaging = firebase.messaging();
 let memo_lista = "<ul>";
 
 messaging.onMessage((payload) => {
-
-  console.log('Message received. notification ', payload.notification);
-
   confirmAlert({
     title: payload.notification.title,
     message: '',
     childrenElement: () => <div id='tabla_memo'></div>,
     buttons: [
       {
-        label: 'Vale',
+        label: 'Aceptar',
 
       }
     ]
   });
-
   document.getElementById('tabla_memo').innerHTML = memo_lista;
-
 });
 
 // Add the public key generated from the console here.
@@ -65,7 +60,7 @@ const Home = () => {
     let distanciaKM = ''
 
     if (memorenyos[0]) {
-      memo_lista += `<ul><h5>Los memoreñ@s :</h5></br>`;
+      memo_lista = `<ul>`;
       memorenyos.map((memorenyo) => {
 
         distanciaKM = distance(memorenyo.casa.Pc, memorenyo.casa.Vc, memorenyo.ubicacion.Pc, memorenyo.ubicacion.Vc);
@@ -78,9 +73,9 @@ const Home = () => {
           memo_lista += `<li>${memorenyo.nombre} está a una distancia de ${Math.round(distanciaKM)} km.</li>`;
         }
       });
-
-      memo_lista += `</br><p>Fuera de su perímetro de seguridad.</p>`;
       memo_lista += "</ul>";
+      memo_lista += "<p>Fuera de su perímetro de seguridad.</p>";
+     
     }
     if (listaMemorenyos.length > 0)
       enviarMensaje(listaMemorenyos);
@@ -92,15 +87,13 @@ const Home = () => {
     //Solicita permiso para recibir notificaciones
     Notification.requestPermission().then((permission) => {
       if (permission === "granted") {
-
         console.log("Notification permission granted.");
-     
         messaging
           .getToken()
           .then((currentToken) => {
             if (currentToken) {
-              let titulo = 'Alerta memoreñ@s';
-              let cuerpo = 'El/los memoreñ@s ' + listaMemorenyos.join() + ' está fuera se su perímetro de seguridad';
+              let titulo = 'Alerta';
+              let cuerpo = "" //'El/los memoreñ@s ' + listaMemorenyos.join() + ' está fuera se su perímetro de seguridad';
               sendTokenToServer(currentToken, titulo, cuerpo);
             } else {
               console.log("No Instance ID token available. Request permission to generate one.");

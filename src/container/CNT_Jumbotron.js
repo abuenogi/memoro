@@ -6,6 +6,7 @@ import { UserContext } from '../context/UserContext';
 
 import { geo, storage } from '../services/firebase/firebaseConfig';
 import { updateDataElement } from '../functions/CRUD';
+import usuarioImagen from '../images/person.svg';
 
 import Jumbotron from '../components/Jumbotron';
 
@@ -24,13 +25,12 @@ const Jumbotron_container = () => {
   useEffect(() => {
     const ref_storage = 'usuarios'
     const child_storage = user_auth.id
+    let img = document.querySelector('.foto_de_perfil');
     storage.ref(ref_storage).child(child_storage).getDownloadURL().then(url => {
-      // `url` is the download URL for 'images/stars.jpg'
-      var img = document.querySelector('.foto_de_perfil');
       img.src = url;
-
     }).catch(function (error) {
-      console.log(error)
+      console.log("no se ha podido recuperar la imagen, se añade la ganérica ",error.message);
+      img.src = usuarioImagen;
     });
 
   }, [ user_auth.id])
