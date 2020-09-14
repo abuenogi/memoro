@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { withRouter, useLocation } from 'react-router-dom';
-import { Button, Form, Label, Input } from 'reactstrap';
+import { Button, Form } from 'reactstrap';
 
 import Footer from "./Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fas, faMapMarkedAlt, faMap, faUser, faMobile,faEnvelope, faCalendarAlt, faKey } from "@fortawesome/free-solid-svg-icons";
+import { fas, faMapMarkedAlt, faMap, faUser, faMobile, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 
 import { confirmAlert } from 'react-confirm-alert';
 import Modal from "./Modal";

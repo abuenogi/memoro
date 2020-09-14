@@ -20,23 +20,25 @@ const NavigationBarMemoLower = ({ onClickBarMemo }) => (
     </Nav.Item>
   */}
 
-  <Nav.Item className="navBarMemoLower">
+  <Nav.Item className="navBarMemoLower" id="divListMemo">
         <FontAwesomeIcon id="iconBarUser" icon={(fas, faUsers)} 
-        onClick={() => onClickBarMemo('/memorenyos')}/> <br/>Listado
+        onClick={() => onClickBarMemo('/memorenyos', 'divListMemo')}/> <br/>Listado
     </Nav.Item>
 
-    <Nav.Item className="navBarMemoLower">
+    <Nav.Item className="navBarMemoLower" id="divFormMemo">
         <FontAwesomeIcon id="iconBarUser" icon={(fas, faUser)} 
-        onClick={() => onClickBarMemo('/memorenyosForm')}/> <br/>Detalle
+        onClick={() => onClickBarMemo('/memorenyosForm', 'divFormMemo')}/> <br/>Detalle
     </Nav.Item>
-    <Nav.Item className="navBarMemoLower">
+    <Nav.Item className="navBarMemoLower" id="divContactsMemo">
         <FontAwesomeIcon id="iconBarPhone" icon={(fas, faPhoneAlt)} 
-        onClick={() => onClickBarMemo('/memoContacts')}/> <br/>Contactos
+        onClick={() => onClickBarMemo('/memoContacts', 'divContactsMemo')}/> <br/>Contactos
     </Nav.Item>
-    <Nav.Item className="navBarMemoLower">
+    {/*
+    <Nav.Item className="navBarMemoLower" id="divCalendarMemo">
         <FontAwesomeIcon id="iconBarCalendar" icon={(fas, faCalendarDay)} 
-        onClick={() => onClickBarMemo('/calendario')}/> <br/>Calendario
+        onClick={() => onClickBarMemo('/calendario', 'divCalendarMemo')}/> <br/>Calendario
     </Nav.Item>
+  */}
   </Nav>
 );
 export default withRouter(NavigationBarMemoLower);

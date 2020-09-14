@@ -201,6 +201,12 @@ a.nav-link{
   padding-top: 15px;
 }
 
+.navBarMemoLowerSelected{
+  /*border: 2px solid #083b66;*/
+  padding-top: 15px;
+	border: 2px solid #dee2e6;
+}
+
 .divTitle{
   padding-top:10px;
 }

@@ -6,11 +6,14 @@ import NavigationBarMemoLower from '../components/NavigationBarMemoLower';
 
 const CNT_NavigationBarMemoLower = ({history}) => {
 
-    const memorenyoSelected = useContext(UserContext);
-    
-    console.log ('memorenyoSelected en CNT_NavigationBarMemoLower vale ', memorenyoSelected);
+    //const memorenyoSelected = useContext(UserContext);
+    //console.log ('memorenyoSelected en CNT_NavigationBarMemoLower vale ', memorenyoSelected);
+    console.log ('CNT_NavigationBarMemoLower ');
 
-      function onClickBarMemo (pathname) {
+      function onClickBarMemo (pathname, divId) {
+        let divSelected = document.getElementById(divId)
+        console.log(" CNT_NavigationBarMemoLower  ", divSelected)
+        divSelected.setAttribute("class", "navBarMemoLowerSelected nav-item")
         history.push({
             pathname: pathname,
           });

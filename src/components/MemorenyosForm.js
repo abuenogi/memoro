@@ -12,6 +12,8 @@ import CNT_NavigationBarMemoLower from "../container/CNT_NavigationBarMemoLower"
 import Modal from "./Modal";
 import CampoMapa from "./CampoMapa";
 import MemoAvatar from '../container/CNT_MemoAvatar';
+import useForm from "../functions/hooks/useFormSignUp";
+import { validateSignUp } from "../functions/hooks/validateInput";
 
 import {  geo } from '../services/firebase/firebaseConfig';
 import { UserContext } from '../context/UserContext';
@@ -23,13 +25,12 @@ import { fetch_data, createData, updateData } from '../functions/CRUD';
 const MemorenyosForm = ({history}) => {
 
     const location = useLocation();
-
+    const { errors } = useForm();
     const { user_auth, memorenyoSelected, setMemorenyoSelected } = useContext(UserContext);
     const [isOpened, setOpened] = useState(false);
     var [nombre_direccion, setNombre_direccion] = useState('');
     var [url, setURL] = useState('');
-
-    let ubicacion_casa;
+    var ubicacion_casa = location.casa;
 
     /*
     useEffect(() => {
@@ -49,7 +50,17 @@ const MemorenyosForm = ({history}) => {
 
     */
 
+   
+
+   useEffect(() => {
+
+       if (ubicacion_casa)
+       setURL(`https://eu1.locationiq.com/v1/reverse.php?key=c7392af2aaffbc&lat=${ubicacion_casa.lat}&lon=${ubicacion_casa.lng}&format=json`);
+
+   }, [location.casa])
+
     if (location.casa) {
+        console.log ("location.casa:.==> ",location.casa )
         ubicacion_casa = location.casa
         url = `https://eu1.locationiq.com/v1/reverse.php?key=c7392af2aaffbc&lat=${ubicacion_casa.lat}&lon=${ubicacion_casa.lng}&format=json`;
     }
@@ -189,6 +200,8 @@ const MemorenyosForm = ({history}) => {
                             />
 
                             <div className="form-group input-group">
+
+                            <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <div className="input-group-text">
                                         <FontAwesomeIcon icon={fas, faUser} />
@@ -198,8 +211,10 @@ const MemorenyosForm = ({history}) => {
                                     value={values.nombre || ''}
                                     onChange={handleInputChange}
                                 />
+                                </div>
 
 
+                                {memorenyoSelected.nombre === '' && (       
                                 <div className="form-group input-group mt-3">
                                     <div className="input-group-prepend">
                                         <div className="input-group-text">
@@ -211,6 +226,7 @@ const MemorenyosForm = ({history}) => {
                                         onChange={handleInputChange}
                                     />
                                 </div>
+                                )}
 
 
                                 {memorenyoSelected.nombre === '' && (
@@ -245,7 +261,7 @@ const MemorenyosForm = ({history}) => {
                                                 <FontAwesomeIcon icon={fas, faStreetView} />
                                             </div>
                                         </div>
-                                        <input className="form-control" name="radioSeguridad" placeholder="Radio de Seguridad"
+                                        <input className="form-control" name="radioSeguridad" placeholder="Radio de seguridad en kilómetros"
                                             value={values.radioSeguridad || ''}
                                             onChange={handleInputChange}
                                         />
@@ -262,19 +278,27 @@ const MemorenyosForm = ({history}) => {
                                             <FontAwesomeIcon icon={fas, faMapMarkedAlt} />
                                         </div>
                                     </div>
-                                    <input className="form-control" name="casa" placeholder="Dirección"
-                                        value={nombre_direccion || values.casa || ubicacion_casa || ''}
-                                        onChange={handleInputChange}
+                                    <input className={`form-control ${errors.casa && "inputError"}`} 
+                                            name="casa" 
+                                            placeholder="Dirección casa"
+                                            type="text"
+                                            value={nombre_direccion || values.casa || ubicacion_casa || ''}
+                                            onChange={handleInputChange}
                                     />
 
-                                    <Button className="ml-4" onClick={openModal}>
-                                        <FontAwesomeIcon icon={(fas, faMap)} size="1x" />
+                                    <Button className="ml-1" onClick={openModal}>
+                                        <FontAwesomeIcon icon={(fas, faMap)} /> 
                                     </Button>
-                                    <Modal title="Mapa de ubicación" isOpened={isOpened} onClose={closeModal} >
-                                        <CampoMapa />
+                                
+                                    <Modal title="Mapa de ubicación de casa" isOpened={isOpened} onClose={closeModal}>
+                                    <CampoMapa 
+                                    //onClose={closeModal}
+                                    />
                                     </Modal>
+                                    {errors.casa && <p className="error">{errors.casa}</p>}
+
                                 </div>
-                            </div>
+                                </div>
                             <div className="form-group">
                                 <input type="submit" value={memorenyoSelected.nombre === '' ? "Guardar" : "Actualizar"} className="btn button1 mt-4 btn-block" />
 
