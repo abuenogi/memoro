@@ -35,12 +35,10 @@ const Info_container = ({ history }) => {
 
   return (
 
-    <Info
-    
+    <Info     
     onClickTerYCon = {onClickTerYCon}
     onClickPrivacidad = {onClickPrivacidad}
-    onClickAbout = {onClickAbout}
-
+    onClickAbout = {onClickAbout} 
     />
 
 

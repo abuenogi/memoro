@@ -21,7 +21,7 @@ const MemoAvtar = ({src,onOpenAvatar, onCloseAvatar, uploadImage}) => {
                 </div>
                 <div className="d-flex justify-content-around">
                     <div id='row_perfil' >
-                        <img onClick={onOpenAvatar} className='foto_de_perfil' height={200} src={src} alt=" Añadir imagen" />
+                        <img onClick={onOpenAvatar} className='foto_de_perfil' witht="100" height="100" src={src} alt="Añadir imagen" />
 
                     </div>
 

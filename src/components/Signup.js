@@ -28,9 +28,7 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver, history }) => {
     }
 
     useEffect(() => {
-
-        let data = ''
-       
+        let data = ''       
          const fetchData = async () => {
 
             if (url)
@@ -38,9 +36,7 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver, history }) => {
             if(data !=='')
             setNombre_direccion(JSON.parse(data).display_name);
         };
-
         fetchData();
-
     }, [url])
 
 
@@ -59,7 +55,7 @@ const SignUp = ({ onClickBotonCreateUser, onClickVolver, history }) => {
 
 
     function submit() {
-        console.log("Submitted Succesfully");
+        console.log("Submitted Succesfully onClickBotonCreateUser ");
         onClickBotonCreateUser(values.nombre, values.email, values.password, values.telefono, values.fechaNac, ubicacion_casa.lat, ubicacion_casa.lng);
     }
 

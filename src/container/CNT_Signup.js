@@ -58,7 +58,6 @@ const Signup_container = ({ history }) => {
 
 
   const loggerUser = (nombre, email, telefono, fechaNac, lat, lon ) => {
-
     var obj_user = {
       
       "nombre": nombre,
@@ -70,7 +69,7 @@ const Signup_container = ({ history }) => {
       "casa": new geo.GeoPoint(lat, lon)
    
     }
-
+    
     createData(obj_user, 'usuarios');
   }
 
@@ -78,7 +77,8 @@ const Signup_container = ({ history }) => {
 
   function onClickVolver() {
     try {
-      history.push('/sign-in');
+      //history.push('/sign-in');
+      history.push('/');
     } catch (error) {
       console.log(error);
     }

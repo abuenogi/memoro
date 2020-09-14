@@ -1,22 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { confirmAlert } from 'react-confirm-alert';
-
 import Login from '../components/Login';
-
 import { auth } from '../services/firebase/firebaseConfig';
 import allActions from '../actions'
+import { UserContext } from '../context/UserContext';
 
 const Login_container = ({ history }) => {
 
  
   const currentUser = useSelector(store => store.currentUser)
-
+  const { user_auth } = useContext(UserContext);
   const dispatch = useDispatch()
 
   useEffect(() => {
-
-    if (currentUser.loggedIn) {
+    console.log("CNT_Login user_auth: [", user_auth.id, "] currentUser.loggedIn: ",currentUser.loggedIn)
+    //if (currentUser.loggedIn) {
+    if (user_auth.id!=='') {
       history.push('/home')
     }
   },
@@ -55,7 +55,7 @@ const Login_container = ({ history }) => {
           } else if (error.code === 'auth/wrong-password') {
 
             confirmAlert({
-              title: 'Contraseña incorrecto',
+              title: 'Contraseña incorrecta',
               message: 'Puede intentarlo de nuevo.',
 
               buttons: [

@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import { confirmAlert } from 'react-confirm-alert';
+//import { confirmAlert } from 'react-confirm-alert';
 import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -72,7 +72,7 @@ const MemoContacts = ({history}) => {
 
   }
 
-
+/*
 
   const onUpdate = value => () => {
     //Se almacena el memoreño seleccionado del listado en el contexto del usuario
@@ -86,7 +86,9 @@ const MemoContacts = ({history}) => {
     });
 
   }
+*/
 
+/*
 
   const onDelete = () => {
     console.log("Borrar memorenyo " + memorenyoSelected.id);
@@ -111,7 +113,7 @@ const MemoContacts = ({history}) => {
     //db.collection('memorenyos').doc(memorenyo.id).delete();
     //{deleteData(memorenyo.id,'usuarios')}
   }
-
+*/
   return (
     <Fragment>
       <Layout>
