@@ -2,14 +2,12 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
-
 var serviceAccount = require("./serviceAccountKey.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://memoro-e03d4.firebaseio.com",
 });
-
 
 // Take the text parameter passed to this HTTP endpoint and insert it into
 // Cloud Firestore under the path /messages/:documentId/original
@@ -34,7 +32,7 @@ exports.addMessage = functions.https.onRequest((req, res) => {
     .messaging()
     .sendAll([payload])
     .then(function (response) {
-      console.log("Función firebase add Message ",response);
+      console.log("Función firebase add Message ", response);
       console.log(response.responses[0].error);
       res.send("It works!");
       return null;
@@ -44,7 +42,6 @@ exports.addMessage = functions.https.onRequest((req, res) => {
       res.send("It doesnt works!");
     });
 });
-
 
 exports.sendMessageTo = functions.https.onRequest((req, res) => {
   const payload = {
@@ -69,25 +66,20 @@ exports.sendMessageTo = functions.https.onRequest((req, res) => {
     });
 });
 
-// exports.msg = functions.https.onRequest((request, response) => {
-//     const payload = {
-//         notification: {
-//                 title: 'You have been invited to a trip.',
-//                  body: 'Tap here to check it out!'
-//              }
-//         };
-
-//     const msgAsync = async () => {
-//         var rdo = await admin.messaging().sendToDevice('SYMpni36HafmWoq0HR29ZMAPSul1', payload);
-//         //var rdo = admin.messaging().sendToDevice('SYMpni36HafmWoq0HR29ZMAPSul1', payload);
-//         response.send("It works!: "+ rdo);
-//     }
-//     //SYMpni36HafmWoq0HR29ZMAPSul1 (UID de lolo)
-//     //xhBYIheWEad0FGKfmao38J2dd6j1  (UID de isabel católica)
-//     //tJx17ygCZuN1bbj2xjiHe0QhUZg1 (UID de fernando católica)
-//     //msgAsync();
-
-//     var rdo =  admin.messaging().sendToDevice('SYMpni36HafmWoq0HR29ZMAPSul1', payload);
-//         //var rdo = admin.messaging().sendToDevice('SYMpni36HafmWoq0HR29ZMAPSul1', payload);
-//     response.send("It works!: "+ rdo);
-// });
+exports.createUserAuth = functions.https.onRequest((req, res) => {
+  console.log("createUserAuth ==> ", req.body);
+  const data = JSON.parse(req.body)
+  admin
+    .auth()
+    .createUser({email:data.user, password:data.pass, emailVerified:false, disabled:false})
+    //.createUserWithEmailAndPassword(req.body.user, req.body.pass)
+    .then((response) => {
+      console.log("createUserAuth response ==> ", response);
+      res.send("User created!");
+      return null;
+    })
+    .catch((error) => {
+      console.log("Error creando usuario ",error);
+      throw new functions.https.HttpsError("internal", error.message);
+    });
+});

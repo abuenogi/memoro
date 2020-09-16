@@ -4,13 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, fas } from '@fortawesome/free-solid-svg-icons'
 import { confirmAlert } from 'react-confirm-alert';
 
-const MemoContactsActions = ({contacto}) => {
+const MemoContactsActions = ({contacto,id}) => {
 
   const history = useHistory();
   const onUpdate =  () => {
     history.push({
       pathname: '/memoContactsForm',
-      contacto: contacto
+      contacto: contacto,
+      id: id
     });
 
   }
@@ -32,6 +33,7 @@ const MemoContactsActions = ({contacto}) => {
           onClick: () => {
             //Tengo que borrar el contacto del array
             //deleteDataElement('usuarios', 'A0nmyOnqmMDnPqcbSVkd' , '1'); borra todos  los contactos
+            window.location.reload(false);
             history.push('/memoContacts');
           }
         }
