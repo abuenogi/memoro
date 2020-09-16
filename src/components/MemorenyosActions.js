@@ -1,4 +1,4 @@
-import React, {useContext } from 'react'
+import React, {useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,6 +14,7 @@ const MemorenyosActions = ({ memorenyo}) => {
    const history = useHistory();   
    
    const {memorenyoSelected, setMemorenyoSelected} = useContext(UserContext);
+   const [memorenyos, setMemorenyos] = useState([]);
    
    /*
   Se redirige a la pantalla del formuario de actualización/creación del memoreño
@@ -47,9 +48,11 @@ const MemorenyosActions = ({ memorenyo}) => {
         {
           label: 'Si',
           onClick: () => {
+            console.log("memoreños en el borrado",memorenyos)
             //Borramos usuario de la bbdd
             db.collection('usuarios').doc(memorenyo.id).delete();
             //Falta que se actualice el listado de memorenyos al borrar el memorenyo
+            window.location.reload(false);
             history.push('/memorenyos');
           }
         }

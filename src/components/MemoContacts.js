@@ -136,7 +136,7 @@ const MemoContacts = ({history}) => {
                       <td> {contacto.nombre} </td>
                       <td> {contacto.telefono} </td>
                       <td>
-                        <MemoContactsActions contacto={contacto} />
+                        <MemoContactsActions contacto={contacto} id={index} />
                       </td>
                     </tr>
                   ))}

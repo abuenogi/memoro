@@ -19,6 +19,7 @@ const Memorenyos = () => {
   const [memorenyos, setMemorenyos] = useState([]);
   const { user_auth } = useContext(UserContext);
 
+  //se ejecutará cada vez que se modifique user_auth y buscará sus memoreños
   useEffect(() => {
     if (user_auth.id) {
       const fetchData = async () => {
@@ -35,7 +36,7 @@ const Memorenyos = () => {
       fetchData();
     }
 
-  }, [user_auth, memorenyos]);
+  }, [user_auth]);
 
 
   return (
