@@ -32,7 +32,9 @@ const Contactos = ({ history }) => {
 
             if (user_auth.rol === 'memorenyo') {
                 //setContactosResult(data.docs.map(doc => ({ ...doc.data().contactos })));
-                setContactosResult(Object.values(user_auth.contactos));
+               // setContactosResult(Object.values(user_auth.contactos));
+                const data = await getDataElement('contactos', 'id_memo', user_auth.id);
+               setContactosResult(data.docs.map(doc => ({ ...doc.data() }))); 
             } else if (user_auth.rol === 'cuidador') {
 
                 const data = await getDataElement('usuarios', 'cuidador', user_auth.id);

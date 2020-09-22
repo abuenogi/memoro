@@ -20,6 +20,7 @@ export const authSession = firebase.auth;
 export const db = firebase.firestore();
 export const geo = firebase.firestore;
 export const storage = firebase.storage();
+export const db_ref =  firebase.database();
 
 // Initialize Performance Monitoring and get a reference to the service
 var perf = firebase.performance();

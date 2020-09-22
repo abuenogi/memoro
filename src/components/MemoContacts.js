@@ -13,6 +13,7 @@ import Layout from "./Layout";
 import MemoContactsActions from "./MemoContactsActions";
 
 import {UserContext} from '../context/UserContext';
+import { updateData , createData , updateDataWhen, getDataElement} from "../functions/CRUD";
 
 
 
@@ -37,6 +38,7 @@ const MemoContacts = ({history}) => {
      * ****************
      */
     //Recuperamos los contactos del memoreño en forma de objeto y lo recorremos (El memoreño tiene un array de contactos)
+    /*
     if(memorenyoSelected.contactos){
       const contactosData = Object.keys(memorenyoSelected.contactos).map(
         (key) => memorenyoSelected.contactos[key]
@@ -48,6 +50,16 @@ const MemoContacts = ({history}) => {
         }))      
       );
     }
+*/
+
+  const fetchData = async () => {
+    
+     
+     const data = await getDataElement('contactos', 'id_memo', memorenyoSelected.id);
+     setContactos(data.docs.map(doc => ({ ...doc.data() ,id: doc.id }))); 
+  };
+  fetchData();
+
 
     console.log("setContactos en useEffect ", contactos);
     //opcion recuperar datos en tabla de referencia (El memoreño tiene un array de referencias a otra tabla)
@@ -58,13 +70,17 @@ const MemoContacts = ({history}) => {
               setContactos(data.map(doc => ({ ...doc.data()}))); };
          fetchData();
          */
-  }, []);
+  }, [memorenyoSelected]);
 
 
   const onCreate = (value) => {
     //Se almacena el memoreño seleccionado del listado en el contexto del usuario
     console.log("onCreate => memoreño seleccionado y pasado al componente: ",value);
     //Se redirige a la página de detalle del memoreño y modificación
+    setMemorenyoSelected({
+          ...memorenyoSelected,
+          contactos: { ...memorenyoSelected.contactos },
+        });
     history.push({
       pathname: '/memoContactsForm',
       //memorenyo: memorenyo //> Se va a almacenar en el contexto del usuario para evitar problemas de seguirdad ya que puede accederse al location y ver la información del memoreño

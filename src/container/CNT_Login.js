@@ -15,9 +15,9 @@ const Login_container = ({ history }) => {
 
   useEffect(() => {
     console.log("CNT_Login user_auth: [", user_auth.id, "] currentUser.loggedIn: ",currentUser.loggedIn)
-    //if (currentUser.loggedIn) {
-    if (user_auth.id!=='') {
-      history.push('/home')
+    if (currentUser.loggedIn) {
+   // if (user_auth.id!=='') {
+     history.push('/home')
     }
   },
     [currentUser]

@@ -11,7 +11,7 @@ import NavigationBarMemoLower from "./NavigationBarMemoLower";
 import MemoAvatar from "../container/CNT_MemoAvatar";
 
 import { UserContext } from "../context/UserContext";
-import { updateData } from "../functions/CRUD";
+import { updateData , createData , updateDataWhen, deleteDataWhen} from "../functions/CRUD";
 
 const MemoContactsForm = ({ history }) => {
   const { memorenyoSelected, setMemorenyoSelected } = useContext(UserContext);
@@ -27,6 +27,8 @@ const MemoContactsForm = ({ history }) => {
   const [child_storage, setChild_storage] = useState("");
 
   //Variable de carga de los valores del objeto memorenyo y sus contactos
+  
+
   useEffect(() => {
     //Se trata de una creación
     if (!location.contacto || location.contacto.nombre === "") {
@@ -69,14 +71,20 @@ const MemoContactsForm = ({ history }) => {
     console.log("addOrEdit contacto de memorenyo ", contactValue, " MAP? ",memorenyoSelected.contactos, " location.id ",location.id);
     if (contactValue) {
     //Si el contacto existe actualizo
-      if (location.id) {
+      if (location.contacto) {
         const contactosTemp = {...memorenyoSelected.contactos,[location.id]:contactValue}  
         console.log(" contactosTemp ==> ",contactosTemp)       
         setMemorenyoSelected({
           ...memorenyoSelected,
           contactos:contactosTemp,
         });
-
+        
+        let  data  = { id_memo: memorenyoSelected.id,
+          nombre : contactValue.nombre,
+          telefono : contactValue.telefono
+        }
+         
+        updateDataWhen( contactValue.telefono ,data, 'contactos')
       }
       //si no existe el contacto, se crea 
       else {
@@ -85,6 +93,14 @@ const MemoContactsForm = ({ history }) => {
           ...memorenyoSelected,
           contactos: { ...memorenyoSelected.contactos, [clave]: contactValue },
         });
+
+        
+        let  data  = { id_memo: memorenyoSelected.id,
+          nombre : contactValue.nombre,
+          telefono : contactValue.telefono
+        }
+         
+        createData(data, 'contactos') 
       }
     } else {
       console.log("No existen contacto que actualizar/añadir ", contactValue);

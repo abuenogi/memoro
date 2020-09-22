@@ -1,6 +1,7 @@
 import {
-    db, geo
+    db, geo, db_ref
 } from '../services/firebase/firebaseConfig';
+
 
 export const createData = (data, collection_name) => {
 
@@ -116,5 +117,90 @@ export function getDataWithRef(colection_name_ref, array_ref) {
     // Se devuelve la colección de promesas obtenidas en la búsqueda anterior
     return Promise.all(collectionPromises)
 
+
+}
+
+export  const  updateDataWhen = (value, data, collection_name) => {
+    try {
+
+            db.collection(collection_name).where('telefono', '==', value).get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    console.log(doc.id, " update => ", doc.data());
+                    db.collection(collection_name).doc(doc.id).update(data);
+                });
+            })
+        /*
+        .then(function(querySnapshot) {
+
+            querySnapshot.forEach(function(doc) {
+                console.log(doc.id, " => ", doc.data());
+                doc.update(data)
+                
+            });
+    
+       })
+
+       .then(querySnapshot => {
+        querySnapshot.forEach(doc => 
+          doc.update({
+            "active": false
+          })
+        })
+      })
+      */
+    } catch (error) {
+        console.log("error actualizando datos en updateData CRUD ", error);
+    }
+}
+
+
+export const deleteDataWhen = (value, collection_name) => {
+
+    try {
+         
+        db.collection(collection_name).where('telefono', '==', value).get()
+            .then(function (querySnapshot) {
+                // Once we get the results, begin a batch
+                var batch = db.batch();
+
+                querySnapshot.forEach(function (doc) {
+                    // For each doc, add a delete operation to the batch
+                    batch.delete(doc.ref);
+                });
+
+                // Commit the batch
+                return batch.commit();
+            }).then(function () {
+                // Delete completed!
+                // ...
+            });
+    } catch (error) {
+        console.log("error borrando datos en deleteData CRUD ", error);
+    }
+
+}
+
+// new data
+export const pushData = (collection_name, id, child_ref, data) => {
+    try {
+         
+        return db_ref.ref(collection_name).child(id).child(child_ref).push(data).key
+
+    } catch (error) {
+        console.log("error actualizando datos en updateData CRUD ", error);
+    }
+
+}
+
+// update data
+export const setData = (collection_name, id, child_ref, data) => {
+    try {
+         
+        return db_ref.ref(collection_name).child(id).child(child_ref).set(data)
+
+    } catch (error) {
+        console.log("error actualizando datos en updateData CRUD ", error);
+    }
 
 }

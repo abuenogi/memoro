@@ -25,7 +25,7 @@ const MemorenyosActions = ({ memorenyo}) => {
     //console.log("Datos del memoreyo a actualizar: ", memorenyo);
 
     setMemorenyoSelected(memorenyo);
-    
+  
     history.push({
       pathname: '/memorenyosForm'
       });
